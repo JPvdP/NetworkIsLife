@@ -28,7 +28,7 @@ website:
           text: "Git ignore tips"
 format:
   html:
-    theme: cosmo
+    theme: Litera
     extra_dependencies: ['amsmath', 'fontawesome5', 'tikz-network', 'xkeyval']
     css: styles.css
     toc: true
