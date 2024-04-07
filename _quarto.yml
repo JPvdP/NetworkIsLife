@@ -18,12 +18,19 @@ website:
         contents:
         - href: Intro_programming_basic_operations.qmd
         - href: Intro_programming_DataImportAndPrep.qmd
-        - href: feature_extraction.qmd
         - href: Intro_programming_Databasemanip.qmd
         - href: Intro_programming_functions.qmd
         - href: Intro_programming_loops_ifelse.qmd
         - href: Intro_programming_random.qmd
         - href: Intro_programming_visualisation.qmd
+      - section: "Text Mining"
+        contents:
+        - href: feature_extraction.qmd
+        - href: Network_analysis_basics.qmd
+        - href: Topic_modelling.qmd
+        - href: NER.qmd
+        - href: Text_networks.qmd
+
 
 format:
   html:

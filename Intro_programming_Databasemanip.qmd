@@ -22,18 +22,17 @@ In this chapter we look into database manipulation with R. We will use a combina
 
 ## Data manipulation with R
 
-
 ### Data formats
+
 When working with data, we face different data object types. In practice we will mainly use the following formats:
 
 ![](data_formats)
 
-A scalar is just a numerical value. 
+A scalar is just a numerical value.
 
 ```{r}
 scalar_example <- 4
 ```
-
 
 When we combine multiple of these values, we can create a vector. The **c()** function is used to combine different values into a vector:
 
@@ -42,8 +41,7 @@ vector_example <- as.vector(c(4,2,3,1,6))
 print(vector_example)
 ```
 
-A matrix, just as the mathematical object, is an aggregation of vectors. 
-
+A matrix, just as the mathematical object, is an aggregation of vectors.
 
 ```{r}
 matrix_example = matrix(c(1,2,3,4,5,6,7,8,9,10,11,12), nrow = 3, ncol = 4, byrow = T)
@@ -62,16 +60,13 @@ dataframe_example <- data.frame(
 print(dataframe_example)
 ```
 
-
-
 ![](Example_data_formats)
 
 ### Selecting rows and columns
 
-The selection of rows and columns can be achieved in two ways in base-R. Either by selecting the name of the column using the **$** operator. Or by referencing the column number using **[,]**.
+The selection of rows and columns can be achieved in two ways in base-R. Either by selecting the name of the column using the **\$** operator. Or by referencing the column number using **\[,\]**.
 
-The brackets have as first argument the row number(s) and as second argument the column umber(s). For example if you want to select the first row you would use **[1,]**. When no argument is supplied (as is the case here for the columns) then all columns are selected. For this reason **[1,]** gives the first row for all the columns. We can go further and search for the first row and only the first two columns, then we would write **[1,c(1,2)]**.
-
+The brackets have as first argument the row number(s) and as second argument the column umber(s). For example if you want to select the first row you would use **\[1,\]**. When no argument is supplied (as is the case here for the columns) then all columns are selected. For this reason **\[1,\]** gives the first row for all the columns. We can go further and search for the first row and only the first two columns, then we would write **\[1,c(1,2)\]**.
 
 ```{r}
 # select the column by its name: "Name"
@@ -82,7 +77,7 @@ dataframe_example[1]
 dataframe_example[,1]
 ```
 
-The **\$** operator only works when the column has a header. Matrices do not have a header and therefor cannot be subsetted with the **\$** operator, only the **[,]** method works.
+The **\$** operator only works when the column has a header. Matrices do not have a header and therefor cannot be subsetted with the **\$** operator, only the **\[,\]** method works.
 
 ```{r}
 # select the column by its index:
@@ -95,14 +90,13 @@ matrix_example[c(1,3),]
 matrix_example[,c(2,4)]
 ```
 
-
 Using the tidyverse, we can accomplish similar tasks, often in a more efficient manner (in terms of computation time).
 
 ::: {.callout-note appearance="simple"}
 ## Pay Attention
+
 The functions we expect you to know here are **select()** and **slice()**.
 :::
-
 
 ```{r}
 # Load the tidyverse package
@@ -199,7 +193,6 @@ matrix_example[-c(1,3),]
 matrix_example[,-c(2,4)]
 ```
 
-
 With the use of the **dplyr** package:
 
 ```{r}
@@ -226,6 +219,7 @@ print(selected_columns)
 With real data we often need to regroup observations by year, organisation, region, or any other entity. For example if we have a set of scientific publications and we want to know how many publications we have per author per year, we need to regroup the observations in both those dimensions. In R we will do this using the **tidyverse** which will build upon the **dplyr** package. Mainly we will focus on three functions, **group_by**, **summarise** and **reframe**.
 
 **group_by** focuses on grouping observations according to a specific value. We can the compute values based on the created groups. For example, if we have a database with researchers and their publications, if we want to know how many publications each of them has, we would first have to create a subset per researcher, count how many publications he/she has, store this information, then move to the next one and so on. **group_by** allows us to create these subsets and **summarise** allows us to compute on these sets:
+
 ```{r}
 data <- data.frame(
   Pat_num = c("WO200214562", "WO2023738962", "EP2023778962", "FR2019272698", "FR201922671"),
@@ -254,14 +248,11 @@ data <- data.frame(
 data %>% group_by(Domain) %>% summarise("frequency" = n())
 ```
 
-
-
-
-
 ## Data manipulation with Python
 
 ### Selecting columns and rows
-Just as in R, Python allows for the extraction of columns both by their name and by their index. Locations in dataframes are accessed by the use of **[[]]**, the first argument between brackets will refer to the rows, the second to the columns. If you want to extract all rows for a given column (or simply put, you want to extract a specific column), you would write **[["column_name"]]**.
+
+Just as in R, Python allows for the extraction of columns both by their name and by their index. Locations in dataframes are accessed by the use of **\[\[\]\]**, the first argument between brackets will refer to the rows, the second to the columns. If you want to extract all rows for a given column (or simply put, you want to extract a specific column), you would write **\[\["column_name"\]\]**.
 
 ```{python}
 import pandas as pd
@@ -285,9 +276,7 @@ print(selected_columns)
 
 ```
 
-
-Using the index of the columns is also a possibility. For this case we will need to use the **.iloc** function. **.iloc** is used when we are addressing a dataframe by the index of the rows and columns, *i.e* by the number corresponding to the location in the dataframe. 
-We need to provide two arguments for this function, the rows we want to select and the columns we want to select. On the contrary of the previous example, we need to specify rows when we use **.iloc**. If we want to extract all rows for a given column, we can do so by using **:**.
+Using the index of the columns is also a possibility. For this case we will need to use the **.iloc** function. **.iloc** is used when we are addressing a dataframe by the index of the rows and columns, *i.e* by the number corresponding to the location in the dataframe. We need to provide two arguments for this function, the rows we want to select and the columns we want to select. On the contrary of the previous example, we need to specify rows when we use **.iloc**. If we want to extract all rows for a given column, we can do so by using **:**.
 
 If we want to use a combination of both names and indexes, we need to use the **.loc** function which does not expect numbers as arguments.
 
@@ -320,8 +309,7 @@ print(row3)
 
 ### Filtering your dataframe
 
-We will use filtering on a pandas dataframe. As discussed in the chapter about basic operations, the logic operators will change compared to the base logic operators. Mainly:
-we will use **&** for **and**, **|** for **or** and **~** for **not**. 
+We will use filtering on a pandas dataframe. As discussed in the chapter about basic operations, the logic operators will change compared to the base logic operators. Mainly: we will use **&** for **and**, **\|** for **or** and **\~** for **not**.
 
 ```{python}
 import pandas as pd
@@ -348,7 +336,6 @@ subset = df[~(df['Domain'] == "B60C")]
 print(subset)
 ```
 
-
 ### Further actions: grouping and summarising
 
 With real data we often need to regroup observations by year, organisation, region, or any other entity. For example if we have a set of scientific publications and we want to know how many publications we have per author per year, we need to regroup the observations in both those dimensions. In Python we will do this using the **pandas** package. Mainly we will focus on four functions, **groupby**, **agg**, **count** and **reset_index**.
@@ -371,6 +358,3 @@ print(grouped_set)
 grouped_set = df.groupby('Domain').count().reset_index()
 print(grouped_set)
 ```
-
-
-
