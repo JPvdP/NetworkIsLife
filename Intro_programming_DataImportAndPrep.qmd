@@ -1,0 +1,634 @@
+## Data Import and preparation
+
+How to import different dataformats in python and R.
+
+# Importing in R
+
+## TXT, CSV, TSV
+
+For the import of data from *txt*, *csv* or *tsv* formats we will use the **read_delim()** function from the readr package. The main difference between these data formats resides in the separator of the data. For txt data, this is often undefined and needs to be specified by the user. The main arguments of the **read_delim()** are the file and the separator. The separator is the character string that defines where a line should be cut. For example, if our raw data looks like this:
+
+Year;Class;Value<br> 2002;B60C;42<br> 2003;B29K;21<br> 2009;C08K;12<br>
+
+Then we see that each column is separated by a ";". By splitting the data whenever there is a ";" we create the following dataframe:
+
+| Year | Class | Value |
+|:----:|:-----:|:-----:|
+| 2002 | B60C  |  42   |
+| 2003 | B29K  |  21   |
+| 2009 | C08K  |  12   |
+
+Seperators that we commonly find in data are the semicolon: **";"**, the comma: **","**, the vertical bar (or pipe) **"\|"**, the space \*\*" ", and tabs which are coded with\*\*"\\t".
+
+::: {.callout-note appearance="simple"}
+## Pay Attention
+
+Even though csv stands for Comma Separated Values, this does not mean that the separator is always a comma, often enough it is in fact a semicolon. Always check your data to make sure you have the right one.
+:::
+
+```{r, eval=FALSE}
+library(readr)
+# csv and various other separators
+data <- read_delim(file, sep = ",")
+
+data <- read_delim(file, sep = "|")
+
+data <- read_delim(file, sep = ";")
+
+# txt (space separated values)
+data <- read_delim(file, sep = " ")
+
+# tsv (tab separated values)
+data <- read_delim(file, sep = "\t")
+```
+
+## XLS, XLSX
+
+Excel files can also easily be importanted into R with the the **readxl** package.
+
+```{r}
+library(readxl)
+read_excel("sample_data.xlsx")
+```
+
+## rdata
+
+![](Open_rdata_file)
+
+```{r}
+# use import function in rstudio, or double click
+```
+
+## Bib
+
+.bib files are a popular bibliographic data format. This data can be imported and transformed into a dataframe using the **bibliometrix** package.
+
+```{r, eval=FALSE}
+library(bibliometrix)
+convert2df(file, dbsource = "scopus", format = "bibtex")
+```
+
+::: {.callout-note appearance="simple"}
+## Pay Attention
+
+The **bibliometrix** package is designed for bibliometic analysis, it might change the names of the columns and the format of some of the data to adjust to what it is supped to do.
+:::
+
+## json
+
+```{r}
+
+library(jsonlite)
+
+# Specify the path to the JSON file
+json_file <- "example_1.json"
+
+# Import the JSON file
+data <- fromJSON(json_file)
+
+# Display the imported JSON data
+print(data)
+
+```
+
+## jsonl
+
+jsonl files are a list of json files. We find this format for exampl in the lens.org database. Since each row is a json, we first read the files as text files and then apply the fromJSON function to extract the information. The result is a list of data objects.
+
+```{r}
+library(jsonlite)
+tmp<-readLines("data_test.jsonl")
+tmp <- lapply(tmp, jsonlite::fromJSON)
+```
+
+<details>
+
+<summary>Click here to see output</summary>
+
+```{r, class.source = 'foldable'}
+print(tmp)
+```
+
+</details>
+
+# Importing in Python
+
+## TXT, CSV, TSV
+
+package required **openpyxl**, **pandas**
+
+```{python, eval = FALSE}
+import pandas as pd
+
+# Import CSV File
+csv_file = "sample_data.csv"
+df_csv = pd.read_csv(csv_file, sep = ";")
+
+
+# Import TXT File (Space-Separated)
+txt_file = "sample_data.txt"
+df_txt = pd.read_csv(txt_file, sep=" ")
+
+# Import TSV File (Tab-Separated)
+tsv_file = "sample_data.tsv"
+df_tsv = pd.read_csv(tsv_file, sep="\t")
+
+
+# Import XLS (Excel) File
+xls_file = "sample_data.xlsx"
+df_xls = pd.read_excel(xls_file)
+print(df_xls)
+
+# Import JSON File
+#json_file = "sample_data.json"
+#df_json = pd.read_json(json_file)
+
+```
+
+## XLS/XLSX (excel data format)
+
+Excel files can be imported with help from the pandas package. If you do not specify a sheet to import, the first sheet will be taken. You can specify the sheet with the argument: *sheet_name='Sheet1'*
+
+```{python, eval = FALSE}
+import pandas as pd
+# Import XLS (Excel) File
+df_xls = pd.read_excel("sample_data.xlsx")
+print(df_xls)
+```
+
+## Json and jsonl
+
+```{python, eval = FALSE}
+# Import JSON File
+#json_file = "sample_data.json"
+#df_json = pd.read_json(json_file)
+```
+
+```{python, eval = FALSE}
+# import jsonl
+import jsonlines
+
+# First we open the file and provide it with a name (data_from_jsonl)
+with jsonlines.open('data_test.jsonl', 'r') as data_from_jsonl:
+      # extract the information from each row and put into object
+     results = [row for row in data_from_jsonl] 
+data_from_jsonl.close() # close the file again
+```
+
+# Data conformity and preparation
+
+## Data conformity in R
+
+Before you start working on your analysis, you want to make sure the data is conform to your expectations. This means:
+
+-   The number of observation is correct, and the variables you need are included.
+
+-   Making sure each column is of the right type (years are dates, text are factors, numbers are integers or reals, ...)
+
+-   There are no trailing spaces
+
+-   **"."** and **","** aren't mixed up
+
+-   The units of measurement are correct (km vs. miles, K€ vs 1.000, celsius vs fahrenheit etc.)
+
+-   Any missing values have been dealt with, or you have a valid reason to ignore them
+
+-   headers are easy to use (no spaces or other characters that will make your life difficult).
+
+In this section we will look into checking your data and adjusting it in preparation of your analysis.
+
+### Checking data types
+
+There are many different data formats. Most frequently we encounter numbers, strings, factors, dates and booleans. Consider the following dataset:
+
+| ID  | Year | Cool Domain | Frequency | Alive |
+|:---:|:----:|:-----------:|:---------:|:-----:|
+| ID1 | 2002 |    B60C     |    42     | TRUE  |
+| ID2 | 2003 |    B29K     |    21     | FALSE |
+| ID3 | 2009 |    C08K     |    12     | TRUE  |
+
+The first column has textual data that is used as a key for each row. The Year should be considered either as an integer or a date. This will depend upon the type of analysis you want to perform. Specifically time series analysis will require this to be a date, while it's enough for other analyses to ensure that it is an integer. The most common issue with this type of observation is that the year is considered as text instead of a number. If you see any """ next to your numbers this is a bad sign which indicates that it is in fact, text.
+
+The "Cool Domain" contains classifications which we want to be textual values. "Frequency" will need to be an integer while "Alive" we want to be a boolean. For each of the formats there is a function to test whether or not the format is the one we expect. These functions are usually in the form of **is.numerical()**, **is.logical()**, **is.character()**. The argument is then simply the column of the dataframe or an observation. Suppose we create the previous dataframe in R:
+
+```{r}
+data <- data.frame(ID = c("ID1", "ID2", "ID3"), Year = c(2002, 2003, 2009), `Cool Domain` = c("B60C", "B29K","B29K"), Frequency = c(42, 21, 12),Alive = c(TRUE, FALSE, TRUE))
+
+
+print(data)
+```
+
+We can then check the format of each variables:
+
+```{r}
+is.numeric(data$Frequency)
+
+is.character(data$ID)
+
+is.logical(data$Alive)
+```
+
+This can also be done in a more consise way with the **summary()** function. This compute, for each of the columns, some statistics and provides the class of the class of the variables. This comes in handy as it allows us verify not only the class of the variables but also the distribution:
+
+```{r}
+summary(data)
+```
+
+When the variable is a character, the output shows the length (number of observations) and the class. For numeric variables the output shows the distribution of the data (min, max, etc.). Not all text variables are created equal. It is possible to ensure that text is considered as a factor. A factor is basically a category, dummy variables in regressions are usually programmed as factors.
+
+```{r}
+data2 <- data.frame(ID = c("ID1", "ID2", "ID3", "ID4"), Year = c(2002, 2003, 2009, 2010), `Cool Domain` = c("B60C", "B29K","B29K", "B60C"), Frequency = c(42, 21, 12, NA),Alive = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands")))
+
+summary(data2)
+```
+
+In this output we see that the **NA** is taken into account and counted separedly in the date. It also shows that *"Country"* is considered as a factor. The summary then shows how many observations we have for each of the factors.
+
+Given that we created the dataframe ourselves we can be relatively sure that the data was is the right format. However, often enough when we download data from online sources, we run into issues. If the format is not as expected there are different functions that allows us to transform the format of the data. Mainly we use **as.numeric()**, **as.character()** and **as.logical()**. These functions require only one argument which is the column we are trying to convert:
+
+```{r}
+# transform into a numeric value
+data$Frequency <- as.numeric(data$Frequency)
+
+# transform in to a character string
+data$Frequency <- as.character(data$ID)
+
+# transform into a boolean
+data$Frequency <- as.logical(data$Alive)
+```
+
+As an example consider we will create a dataframe that mimics data that was not imported correctly:
+
+```{r}
+Messy_data <- data.frame(ID = c("ID1", "ID2", "ID3", "ID4"), Year = c("2002", "2003", "2009", "2010"), `Cool Domain` = c("B60C", "B29K","B29K", "B60C"), Frequency = c("42", "21", "12", "NA"),Alive = c("TRUE", "FALSE", "FALSE", "FALSE"), Country = c("France", "France", "Germany", "Netherlands"))
+
+summary(Messy_data)
+```
+
+The output clearly shows that all variables are considered as characters which we do not want. We cannot comput the average on the Frequency while R thinks that it is text. This also shows that there is a difference between the string NA ("NA") and the operator NA.
+
+```{r}
+# transform into a numerical value
+Messy_data$Year <- as.numeric(Messy_data$Year)
+Messy_data$Frequency <- as.numeric(Messy_data$Frequency)
+# transform into a boolean
+Messy_data$Alive <- as.logical(Messy_data$Alive)
+# transform into a factor (category)
+Messy_data$Country <- as.factor(Messy_data$Country)
+
+summary(Messy_data)
+```
+
+Now that our data has the right format and we are sure we have all the observations we might want to do some work to normalise the column names. This is done to make programming and refercing the columns easier. Whenever the is a space in the name of the column, we need to refer to the column using **\`Column name with spaces\`** which is not ideal. It's generally good practice to not have any spaces. We can use the **colnames()** function to change some (or all of the column names).
+
+```{r}
+
+# change on column name:
+colnames(Messy_data)[3] <- "Domain"
+
+# change multiple names:
+colnames(Messy_data)[c(1,2,5)] <- c("Identifier", "Date", "Active")
+
+# check
+summary(Messy_data)
+```
+
+The **Janitor** package offers an automated solution for many header issues.
+
+```{r}
+library(janitor)
+Messy_data <- data.frame(ID = c("ID1", "ID2", "ID3", "ID4"), Year = c("2002", "2003", "2009", "2010"), `Cool Domain` = c("B60C", "B29K","B29K", "B60C"), Frequency = c("42", "21", "12", "NA"),Alive = c("TRUE", "FALSE", "FALSE", "FALSE"), Country = c("France", "France", "Germany", "Netherlands"))
+# the column names from the initial dataframe
+print(colnames(Messy_data))
+
+# Cleaning the column names
+Messy_data <- clean_names(Messy_data)
+print(colnames(Messy_data))
+```
+
+You can see that capital letter have been adjusted, some characters (µ, ")" ) have been replaced, spaces have been removed and replaced with "\_". This makes it easier and faster to refer to the columns and the dataframes when manipulating the data on a day-to-day basis.
+
+Once we are happy with the data formats we can move on take care of other issues.
+
+#### Data transformation
+
+It often happens that we are not fully happy with the data that we receive or simply that we need apply some modifications to suit our needs. The most frequent of these operations are
+
+-   Mathematical transformation of numerical data (multiplication, rounding up)
+-   Extract years, days or months from dates
+-   Trim whitespaces from data
+-   Rename categories within the data
+
+The main difficulty with the actions is to identify how to apply the functions. Some functions can be applied directly to a whole column while other nedd to be applied using mapping functions. Let's start with mathematical transformations:
+
+```{r}
+# we start by creating a dataset to work with
+data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands")))
+
+# The Distance is given in miles in this data, we would like to have kilometers. The formula to transform a mile to kilometers is a multiplication by 1.609.
+
+data$KM <- data$Distance * 1.609344
+
+print(data)
+```
+
+We can also round this up. The **round()** function takes two arguments, a first will be the data, the second will be the number of decimals:
+
+```{r}
+data$KM <- round(data$KM, 2)
+print(data)
+```
+
+We notice that for some of the domains there is a trailing whitespace, for example we have "B29K" in the data. These can be removed with the **trimws()** function. These whitespaces can also be created when we split data. It's good practise to always check this and remove any space to avoid unnecessary mistakes.
+
+```{r}
+data$Domain <- trimws(data$Domain)
+print(data)
+```
+
+Suppose that we want to change the labels for the countries. It's much more common to use ISO-2 level codes for countries. The **gsub()** function for the replacement of text. The **gsub()** function requires three arguments: the patter to search, the pattern to replace with and the data. Caution while using this function since it searches for the pattern even withing words. If one searches for the string "land" to replace it with "country", then the string "netherlands" will become "nethercountrys".
+
+```{r}
+library(tidyverse)
+  data$Country <- gsub("France", "FR", data$Country)
+  data$Country <- gsub("Netherlands" , "NL",data$Country)
+  data$Country <- gsub("Germany" ,"DE",data$Country)
+
+print(data)
+```
+
+In the special case of categorical variables, we can also use the **dplyr** package to replace strings using the **case_when** function. It is a flexible and powerful function that allows you to perform conditional operations on a vector or data frame, similar to a series of nested if-else statements. It's especially useful when you need to create or modify variables in your data based on specific conditions. The syntax follows:
+
+```{r, eval = FALSE}
+case_when(
+  condition1 ~ result1,
+  condition2 ~ result2,
+  condition3 ~ result3,
+  ...
+)
+```
+
+In the case of changing categories, if we want to switch the name of the country for the ISO identifyers of the countries:
+
+```{r}
+library(tidyverse)
+data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands")))
+
+data$Country <- case_when(
+  data$Country == "France" ~ "FR",
+  data$Country == "Netherlands" ~ "NL",
+  data$Country == "Germany" ~ "DE"
+)
+
+print(data)
+```
+
+### Extract substrings
+
+### Missing values
+
+It is common to encounter missing values in your data. There are multiple methods to deal with missing data ranging for simply removing them to using statistical methods to replace the missing values with other values. Whatever you decide to do with your missing data, think thoroughly about the consequences. Always consider why the data is missing, are the missing observations random or is there a pattern to the missing observations? For example if, suppose we are working on a dataset with pollution measurements around the world. It's possible that missing values come from countries in a specific region of the world. Removing these observations will result in excluding a whole region from the analysis. If the missing observations are more randomly dispersed over different regions in the world this might be less of an issue. The first step to take when dealing with missing values is to check for patterns in the data. Based on the type of missing values you are dealing with, you can decide to on the most efficient method to treat them:
+
+-   Remove the missing values
+-   Linear interpolation
+-   K-means
+
+[This book on missing values](https://tmb.njtierney.com/missing-gotchyas) and [This book with a chapter on how to handle this king of data](https://bookdown.org/mike/data_analysis/imputation-missing-data.html)
+
+## Data conformity in Python
+
+Before you start working on your analysis, you want to make sure the data is conform to your expectations. This means:
+
+-   The number of observation is correct, and the variables you need are included.
+
+-   Making sure each column is of the right type (years are dates, text are factors, numbers are integers or reals, ...)
+
+-   There are no trailing spaces
+
+-   **"."** and **","** aren't mixed up
+
+-   The units of measurement are correct (km vs. miles, K€ vs 1.000, celsius vs fahrenheit etc.)
+
+-   Any missing values have been dealt with, or you have a valid reason to ignore them
+
+-   headers are easy to use (no spaces or other characters that will make your life difficult).
+
+In this section we will look into checking your data and adjusting it in preparation of your analysis.
+
+### Checking data types
+
+There are many different data formats. Most frequently we encounter numbers, strings, factors, dates and booleans. Consider the following dataset:
+
+| ID  | Year | Cool Domain | Frequency | Alive |
+|:---:|:----:|:-----------:|:---------:|:-----:|
+| ID1 | 2002 |    B60C     |    42     | TRUE  |
+| ID2 | 2003 |    B29K     |    21     | FALSE |
+| ID3 | 2009 |    C08K     |    12     | TRUE  |
+
+The first column has textual data that is used as a key for each row. The Year should be considered either as an integer or a date. This will depend upon the type of analysis you want to perform. Specifically time series analysis will require this to be a date, while it's enough for other analyses to ensure that it is an integer. The most common issue with this type of observation is that the year is considered as text instead of a number. If you see any """ next to your numbers this is a bad sign which indicates that it is in fact, text.
+
+The "Cool Domain" contains classifications which we want to be textual values. "Frequency" will need to be an integer while "Alive" we want to be a boolean. For each of the formats there is a function to test whether or not the format is the one we expect. These functions are usually in the form of **is_numeric_dtype()**, **is_bool_dtype()**, **is_string_dtype()**. The argument is then simply the column of the dataframe or an observation. Suppose we create the previous dataframe in Python:
+
+```{python}
+import pandas as pd
+data = {
+  'ID' : ["ID1", "ID2", "ID3"], 
+  'Year' : [2002, 2003, 2009], 
+  'Cool Domain' : ["B60C", "B29K","B29K"], 
+  'Frequency' : [42, 21, 12],
+  'Alive' : [True, False, True]
+}
+
+dataframe = pd.DataFrame(data)
+# check if the information in the column Year is numeric
+pd.api.types.is_numeric_dtype(dataframe['Year'])
+# check if the information in the column is logic
+pd.api.types.is_bool_dtype(dataframe['Alive'])
+# check if the information in the column is character
+pd.api.types.is_string_dtype(dataframe['ID'])
+```
+
+-   pd: This is an alias for the pandas library, which is a popular data manipulation library in Python. The alias is used for convenience.
+-   api: This is the namespace within the pandas library where various utility functions and types are organized. It's considered part of the public API of the library, which means that it's stable and can be used by developers without concerns about major changes between different versions of pandas.
+-   types: This is a subnamespace within the api namespace that provides functions and types related to data types and data type checking.
+-   is_numeric_dtype(): This is a function provided by the pandas library in the types subnamespace. It's used to check if a given data type is numeric.
+
+This can also be done in a more consise way with the **dataframe.describe()** function. This compute, for each of the columns, some statistics and provides the class of the class of the variables. This comes in handy as it allows us verify not only the class of the variables but also the distribution:
+
+```{python , eval = TRUE}
+data = {
+  'ID' : ["ID1", "ID2", "ID3"], 
+  'Year' : [2002, 2003, 2009], 
+  'Cool Domain' : ["B60C", "B29K","B29K"], 
+  'Frequency' : [42, 21, 12],
+  'Alive' : [True, False, True]
+}
+dataframe = pd.DataFrame(data)
+dataframe.describe()
+```
+
+Missing values in a dataframe will be automatically ignored. We can also check the types of each variable to ensure that it corresponds to what we want (integers are integers, text is text, etc). The latter can be done with the **.dftypes** function.
+
+```{python, eval = FALSE}
+import pandas as pd
+data = {
+  'ID' : ["ID1", "ID2", "ID3", "ID4"], 
+  'Year' : [2002, 2003, 2009, 2010], 
+  'Cool Domain' : ["B60C", "B29K","B29K", "B60C"], 
+  'Frequency' : [42, 21, 12, None],
+  'Weight' : [12.1, 34.2, 21.3, 93.2],
+  'Alive' : [True, False, False, False],
+  'Country' : ["France", "France", "Germany", "Netherlands"]
+}
+df = pd.DataFrame(data)
+df.describe()
+df.dtypes
+```
+
+In this output we can see that the **None** value is ignored and the statistics are computed. The format of the variables is shown: ID is considered "object" signifying that has no specific nature (object is a generic format for anything used in Python). *int64* represents an integer, *float64* represents a reel number, *bool* is a boolean operator.
+
+Given that we created the dataframe ourselves we can be relatively sure that the data was is the right format. However, often enough when we download data from online sources, we run into issues. If the format is not as expected there are different functions that allows us to transform the format of the data. Mainly we use **.astype(float)**, **.astype(int)** and **.astype(str)**.
+
+```{python, eval = TRUE}
+data = {
+  'ID' : ["ID1", "ID2", "ID3", "ID4"], 
+  'Year' : [2002, 2003, 2009, 2010], 
+  'Cool Domain' : ["B60C", "B29K","B29K", "B60C"], 
+  'Frequency' : [42, 21, 12, 12],
+  'Weight' : [12.1, 34.2, 21.3, 93.2],
+  'Alive' : [True, False, False, False],
+  'Country' : ["France", "France", "Germany", "Netherlands"]
+}
+df = pd.DataFrame(data)
+# Change the data type of 'ID' to string
+df['ID'] = df['ID'].astype(str)
+
+# Change the data type of 'Weight' to uppercase string
+df['Weight'] = df['Weight'].astype(float)
+
+# Change the data type of 'Frequency' to int
+# We first need to take care of the missing value
+df['Frequency'] = df['Frequency'].astype(int)
+df.dtypes
+```
+
+Now that our data has the right format and we are sure we have all the observations we might want to do some work to normalise the column names. This is done to make programming and refercing the columns easier. Whenever the is a space in the name of the column, we need to refer to the column using **\`Column name with spaces\`** which is not ideal. It's generally good practice to not have any spaces. We can use the **pyjanitor** package to automate this process:
+
+```{python}
+import pandas as pd
+import janitor
+
+data = {'Column 1': [1, 2, None, 4],
+        'Column (2)': [None, 6, 7, 8],
+        'PM(µ >3)': [9, 10, 11, 12]}
+df = pd.DataFrame(data)
+print(df)
+# Using clean_pandas
+df = df.clean_names()
+print(df)
+
+```
+
+### Data transformation
+
+<!-- It often happens that we are not fully happy with the data that we receive or simply that we need apply some modifications to suit our needs. The most frequent of these operations are -->
+
+<!-- -   Mathematical transformation of numerical data (multiplication, rounding up) -->
+
+<!-- -   Extract years, days or months from dates -->
+
+<!-- -   Trim whitespaces from data -->
+
+<!-- -   Rename categories within the data -->
+
+<!-- The main difficulty with the actions is to identify how to apply the functions. Some functions can be applied directly to a whole column while other nedd to be applied using mapping functions. Let's start with mathematical transformations: -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- # we start by creating a dataset to work with -->
+
+<!-- data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands"))) -->
+
+<!-- # The Distance is given in miles in this data, we would like to have kilometers. The formula to transform a mile to kilometers is a multiplication by 1.609. -->
+
+<!-- data$KM <- data$Distance * 1.609344 -->
+
+<!-- print(data) -->
+
+<!-- ``` -->
+
+<!-- We can also round this up. The **round()** function takes two arguments, a first will be the data, the second will be the number of decimals: -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- data$KM <- round(data$KM, 2) -->
+
+<!-- print(data) -->
+
+<!-- ``` -->
+
+<!-- We notice that for some of the domains there is a trailing whitespace, for example we have "B29K" in the data. These can be removed with the **trimws()** function. These whitespaces can also be created when we split data. It's good practise to always check this and remove any space to avoid unnecessary mistakes. -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- data$Domain <- trimws(data$Domain) -->
+
+<!-- print(data) -->
+
+<!-- ``` -->
+
+<!-- Suppose that we want to change the labels for the countries. It's much more common to use ISO-2 level codes for countries. The **gsub()** function for the replacement of text. The **gsub()** function requires three arguments: the patter to search, the pattern to replace with and the data. Caution while using this function since it searches for the pattern even withing words. If one searches for the string "land" to replace it with "country", then the string "netherlands" will become "nethercountrys". -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- library(tidyverse) -->
+
+<!--   data$Country <- gsub("France", "FR", data$Country) -->
+
+<!--   data$Country <- gsub("Netherlands" , "NL",data$Country) -->
+
+<!--   data$Country <- gsub("Germany" ,"DE",data$Country) -->
+
+<!-- print(data) -->
+
+<!-- ``` -->
+
+<!-- In the special case of categorical variables, we can also use the **dplyr** package to replace strings using the **case_when** function. It is a flexible and powerful function that allows you to perform conditional operations on a vector or data frame, similar to a series of nested if-else statements. It's especially useful when you need to create or modify variables in your data based on specific conditions. The syntax follows: -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- case_when( -->
+
+<!--   condition1 ~ result1, -->
+
+<!--   condition2 ~ result2, -->
+
+<!--   condition3 ~ result3, -->
+
+<!--   ... -->
+
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- In the case of changing categories, if we want to switch the name of the country for the ISO identifyers of the countries: -->
+
+<!-- ```{r, eval = FALSE} -->
+
+<!-- library(tidyverse) -->
+
+<!-- data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands"))) -->
+
+<!-- data$Country <- case_when( -->
+
+<!--   data$Country == "France" ~ "FR", -->
+
+<!--   data$Country == "Netherlands" ~ "NL", -->
+
+<!--   data$Country == "Germany" ~ "DE" -->
+
+<!-- ) -->
+
+<!-- print(data) -->
+
+<!-- ``` -->

@@ -9,9 +9,27 @@ website:
         text: Home
       - about.qmd
 
+  sidebar:
+    style: "docked"
+    #logo: images/ofce_m.png
+    search: true
+    contents:
+      - section: "R Technical guides"
+        contents:
+        - href: Intro_programming_basic_operations.qmd
+          text: "How to use the fittarget function"
+      - section: "Quarto Technical guides"
+        contents:
+        - href: Intro_programming_DataImportAndPrep.qmd
+          text: "Build a quarto website"
+      - section: "GitHub Technical guides"
+        contents:
+        - href: feature_extraction.qmd
+          text: "Git ignore tips"
 format:
   html:
     theme: cosmo
+    extra_dependencies: ['amsmath', 'fontawesome5', 'tikz-network', 'xkeyval']
     css: styles.css
     toc: true
 
