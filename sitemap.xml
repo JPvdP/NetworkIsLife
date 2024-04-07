@@ -2,22 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://JPvdP.github.io/NetworkIsLife/feature_extraction.html</loc>
-    <lastmod>2024-04-07T20:27:31.328Z</lastmod>
+    <lastmod>2024-04-07T20:45:34.032Z</lastmod>
   </url>
   <url>
-    <loc>https://JPvdP.github.io/NetworkIsLife/index.html</loc>
-    <lastmod>2024-04-07T20:27:27.470Z</lastmod>
-  </url>
-  <url>
-    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_DataImportAndPrep.html</loc>
-    <lastmod>2024-04-07T20:27:23.869Z</lastmod>
+    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_Databasemanip.html</loc>
+    <lastmod>2024-04-07T20:45:30.140Z</lastmod>
   </url>
   <url>
     <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_basic_operations.html</loc>
-    <lastmod>2024-04-07T20:27:26.683Z</lastmod>
+    <lastmod>2024-04-07T20:45:25.584Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_DataImportAndPrep.html</loc>
+    <lastmod>2024-04-07T20:45:19.849Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_visualisation.html</loc>
+    <lastmod>2024-04-07T20:45:13.651Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_functions.html</loc>
+    <lastmod>2024-04-07T20:45:14.467Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JPvdP.github.io/NetworkIsLife/Intro_programming_loops_ifelse.html</loc>
+    <lastmod>2024-04-07T20:45:23.072Z</lastmod>
+  </url>
+  <url>
+    <loc>https://JPvdP.github.io/NetworkIsLife/index.html</loc>
+    <lastmod>2024-04-07T20:45:26.380Z</lastmod>
   </url>
   <url>
     <loc>https://JPvdP.github.io/NetworkIsLife/about.html</loc>
-    <lastmod>2024-04-07T20:27:28.294Z</lastmod>
+    <lastmod>2024-04-07T20:45:30.974Z</lastmod>
   </url>
 </urlset>
