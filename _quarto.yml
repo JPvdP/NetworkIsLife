@@ -14,18 +14,18 @@ website:
     #logo: images/ofce_m.png
     search: true
     contents:
-      - section: "R Technical guides"
+      - section: "Intro to Programming"
         contents:
         - href: Intro_programming_basic_operations.qmd
-          text: "How to use the fittarget function"
-      - section: "Quarto Technical guides"
+          text: "Some basic operations"
+      - section: "Import data"
         contents:
         - href: Intro_programming_DataImportAndPrep.qmd
-          text: "Build a quarto website"
-      - section: "GitHub Technical guides"
+          text: "How to import dat"
+      - section: "Feature extraction"
         contents:
         - href: feature_extraction.qmd
-          text: "Git ignore tips"
+          text: "How to extract words of value"
 format:
   html:
     theme: Litera
