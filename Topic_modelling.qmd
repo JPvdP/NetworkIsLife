@@ -20,15 +20,13 @@ The aims are:
 
 The datasets can be found on blackboard. If, howerver, you prefer working on your own data/topic we will first start with a quick brief on how to export data from LexisNexis and import this data into R.
 
-
 ## Exporting and Importing LexisUni data
 
 ### Export LexisUni data
 
 Even though exporting data from LexisUni is quite straightforward, if we want to export in a format that can be directly read by R and used for textmining, we need to tick the right boxes. We will go through those steps now:
 
-Start with building a query in the advances query section. Make sure you check the AND and OR operators.
-![](LN_Tutorial_1.png)
+Start with building a query in the advances query section. Make sure you check the AND and OR operators. ![](LN_Tutorial_1.png)
 
 Below the text elements you can adapt the data range if required.
 
@@ -36,10 +34,7 @@ Below the text elements you can adapt the data range if required.
 
 Then click on search to launch the search process. Once the results are shown, make sure to click the switch to remove Group Duplicates (this should be on "On"). At this point adjust any other filter. Be particulary cautious with the language. Many language models are trained for one language so remove any document not in that language if you use a mono-lingual model.
 
-![](LN_Tutorial_3.png)
-Once you're happy with the dataset, go to the "download button":
-![](LN_Tutorial_4.png)
-A window will appear, this is were you need to be sure to click the same boxes as in the following screenshots. Ensure that the format is Word (docx) and that the documents are grouped into one.
+![](LN_Tutorial_3.png) Once you're happy with the dataset, go to the "download button": ![](LN_Tutorial_4.png) A window will appear, this is were you need to be sure to click the same boxes as in the following screenshots. Ensure that the format is Word (docx) and that the documents are grouped into one.
 
 ![](LN_Tutorial_5.png)
 
@@ -49,34 +44,35 @@ The second screen should look like this: (these should be the basic options):
 
 You can then click on "download".
 
-Do this as many times are required to download all the articles (100 per 100). Creating an account with your uu email will make this process slightly more streamlined and faster. 
+Do this as many times are required to download all the articles (100 per 100). Creating an account with your uu email will make this process slightly more streamlined and faster.
 
-Put all the files into one folder. We will then use the **LexisNexisTools** package to import and format this data to make it directly usable. 
+Put all the files into one folder. We will then use the **LexisNexisTools** package to import and format this data to make it directly usable.
 
 First we need to search for all the documents, using the *list.files()* function we create a list of all the *.docx* documents in the "LN" folder. Note that the LN folder is created by me to store the files, replace LN with the name of the folder in which you store the files. If the files are stored directly at the root of the current WD, use "".
-```{r}
+
+```{r, eval=FALSE}
 my_files <- list.files(pattern = ".docx", path = "LN", full.names = TRUE, recursive = TRUE, ignore.case = TRUE)
 ```
 
-At this stage the data is not yet imported, we merely created a list with paths to the files. We will now load those files into R with the **lnt_read()** function. This will load the data into a specific object with a specific format that we cannot use directly. We therefore transform this object with the **lnt_convent()** function. We specify "to = "data.frame" so that the result is a dataframe that we can use. 
+At this stage the data is not yet imported, we merely created a list with paths to the files. We will now load those files into R with the **lnt_read()** function. This will load the data into a specific object with a specific format that we cannot use directly. We therefore transform this object with the **lnt_convent()** function. We specify "to ="data.frame" so that the result is a dataframe that we can use.
 
-```{r}
+```{r, eval=FALSE}
 library(LexisNexisTools)
 dat <- lnt_read(my_files) #Object of class 'LNT output'
 LN_dataframe = lnt_convert(dat, to = "data.frame")
 ```
 
-We now have the data loaded in R and ready for use. We will perform two extra actions before we continue to ensure that we don't run into trouble later on. We start with the removal of identical articles (even though the switch is on, there are still some left...) and we remove the articles that are too short for the analysis. We use the **nchar()** function to count the number of characters in each article and remove those with less than 200 characters. 
+We now have the data loaded in R and ready for use. We will perform two extra actions before we continue to ensure that we don't run into trouble later on. We start with the removal of identical articles (even though the switch is on, there are still some left...) and we remove the articles that are too short for the analysis. We use the **nchar()** function to count the number of characters in each article and remove those with less than 200 characters.
 
-```{r}
+```{r, eval=FALSE}
 LN_dataframe = unique(LN_dataframe)
 LN_dataframe$length = nchar(LN_dataframe$Article)
 LN_dataframe = subset(LN_dataframe, LN_dataframe$length >= 200)
 ```
 
-The dataset is now ready for use. 
+The dataset is now ready for use.
 
-```{r}
+```{r, eval=FALSE}
 # loading our custom functions
 library(tm)
 library(udpipe)
@@ -171,8 +167,9 @@ ud_model <- udpipe::udpipe_load_model(ud_model)
 
 We start by prepping the text as we did in the first tutorial. We use a loop since it is likely that errors occur in this process that will push us to adjust parameters. The use of a loop makes it easier to pause and continue where we left of. Once the code is stabilised you can use the **map()** function from **tidyverse** to make this more efficient and run faster. Or even use multi-threading with the **foreach** package.
 
-Column 11 contains the text, we start by lemmatizing the text. 
-```{r}
+Column 11 contains the text, we start by lemmatizing the text.
+
+```{r, eval=FALSE}
 library(textstem)
 LN_dataframe = LN_dataframe[-c(382,431, 464, 1087),]
 for(i in 1:dim(LN_dataframe)[1]){
@@ -194,7 +191,7 @@ save(LN_dataframe, file = "LN_dataframe_POS_lemmcleaning.rdata")
 
 Now that we have the text prepared, we need to create a document-term matrix for the topic modelling function. The document-term matrix specifies for each document which terms are contained within it. We use the **DocumentTermMatrix()** function from the **tm** package. This function has one argument which is a dataframe with the text of the corpus.
 
-```{r}
+```{r, eval=FALSE}
 library(tm)
 # create the document-Term-matrix
 dtm <- DocumentTermMatrix(LN_dataframe$Article)
@@ -206,13 +203,13 @@ The **FindTopicsNumber** functions takes several arguments. The first is directl
 
 We then specify the metrics we want to compute, we have discussed these in the lecture.
 
-::: {.callout-warning}
-For an unknown reason, the "Griffiths2004" function does not work on mac OSX. It should work for windows users. 
+::: callout-warning
+For an unknown reason, the "Griffiths2004" function does not work on mac OSX. It should work for windows users.
 :::
 
-The mc.cores option specifies on how many cores you want the algorithm to run, this depends on your laptop, adjust to suit your needs. The verbose argument defines whether or not you want the algorithm to provide some information on which stage it is working. This will reduce the anxiety of not knowing whether the algo is stuck, still running or finished. 
+The mc.cores option specifies on how many cores you want the algorithm to run, this depends on your laptop, adjust to suit your needs. The verbose argument defines whether or not you want the algorithm to provide some information on which stage it is working. This will reduce the anxiety of not knowing whether the algo is stuck, still running or finished.
 
-```{r}
+```{r, eval=FALSE}
 library(ldatuning)
 topic_num <- FindTopicsNumber(
   dtm,
@@ -226,7 +223,7 @@ FindTopicsNumber_plot(topic_num)
 
 Now that we have an idea of how many topics we need, so let's extract the topics. We will use the **LDA** function from the **topicmodels** package.
 
-```{r}
+```{r, eval=FALSE}
 library(topicmodels)
 library(tidytext)
 # perform topic modelling
@@ -239,7 +236,7 @@ betas2<- subset(betas, betas$topic %in% c(2,3,4,5,7))
 
 We now have the topics and the betas for each topic-term couple. We only keep the highest values for each topic:
 
-```{r}
+```{r, eval=FALSE}
 ap_top_terms <- betas2 %>%
   group_by(topic) %>%
   slice_max(beta, n = 10) %>% 
@@ -249,7 +246,7 @@ ap_top_terms <- betas2 %>%
 
 And now we visualise some of the results:
 
-```{r}
+```{r, eval=FALSE}
 library(ggplot2)
 ap_top_terms %>%
   mutate(term = reorder_within(term, beta, topic)) %>%
@@ -261,9 +258,8 @@ ap_top_terms %>%
 
 ### Exercice 2
 
-Adjust the parameters of the previous text cleaning functions. Adjust the dictionnary, maybe switch the noun phrases option ((A|N)\*N(P+D\*(A|N)\*N)\*) to an equivalent that includes actions. 
+Adjust the parameters of the previous text cleaning functions. Adjust the dictionnary, maybe switch the noun phrases option ((A\|N)\*N(P+D\*(A\|N)\*N)\*) to an equivalent that includes actions.
 
 ### Exercice 3
 
 Now try the same logic on patent data. Check the results step by step. Adjust the dictionary etc. to suit patent data. What do you look for in the case of patent data, how is this different from news data?
-
