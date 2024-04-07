@@ -2,6 +2,7 @@
 
 This chapter shows how to use basic operations in both R and Python. We will focus on operations that we encounter in a data analysis setting: arithmetic, comparisons, logic.
 
+
 You are expected to be able to use all the operations described in this chapter.
 
 ### Basic Mathematical operations
@@ -9,11 +10,10 @@ You are expected to be able to use all the operations described in this chapter.
 In both R and Python, basic mathematical operations can be written directly in the
 
 #### Arithmetic operators
+:::: {.columns}
 
-::: columns
 ::: {.column width="45%"}
 ![](Rlogo.png)
-
 ```{r}
 # In R
 1 + 1
@@ -28,7 +28,6 @@ In both R and Python, basic mathematical operations can be written directly in t
 
 ::: {.column width="45%"}
 ![](Pythonlogo.png)
-
 ```{python}
 # In python
 1 + 1
@@ -36,18 +35,19 @@ In both R and Python, basic mathematical operations can be written directly in t
 4 / 2
 ```
 :::
-:::
+
+::::
+
 
 ::: {.callout-note appearance="simple"}
 ## Pay Attention
-
 For more complex mathematical operators we might need some functions that are not provided in the base version of the software we use. For instance, the ***ln()*** function and ***exp()*** function are not available in base python. We therefore need to load a package which contains these functions, this will be the **maths** package in Python. For R, both the ***ln()*** and ***exp()*** functions are part of the base package, we therefor do not need to load an additional package, we can use these functions right away.
 :::
 
-::: columns
+:::: {.columns}
+
 ::: {.column width="45%"}
 ![](Rlogo.png)
-
 ```{r}
 # Base R
 log(12)
@@ -62,7 +62,6 @@ sqrt(12) # square root
 
 ::: {.column width="45%"}
 ![](Pythonlogo.png)
-
 ```{python}
 import math
 math.log(12)
@@ -70,20 +69,24 @@ math.exp(12)
 math.sqrt(12)
 ```
 :::
-:::
+
+::::
 
 #### Comparison Operators
 
-Comparison operations function in the same way in both languages. The only difference we note is in the assignment of the values to a variable in which it is recommended in R to use **\<-**.
+Comparison operations function in the same way in both languages. The only difference we note is in the assignment of the values to a variable in which it is recommended in R to use **<-**.
 
-::: callout-warning
-Even though **=** works for simple operations in R, you might run into trouble with more complex code. For a detailed explanation see [this post](https://www.r-bloggers.com/2014/01/difference-between-assignment-operators-in-r/). We recommend you to always use the \<- operator when programming in R.
+::: {.callout-warning}
+Even though **=** works for simple operations in R, you might run into trouble with more complex code. For a detailed explanation see [this post](https://www.r-bloggers.com/2014/01/difference-between-assignment-operators-in-r/). We recommend you to always use the <- operator when programming in R.
 :::
 
-::: columns
+
+
+
+:::: {.columns}
+
 ::: {.column width="45%"}
 ![](Rlogo.png)
-
 ```{r}
 # R
 x <- 5
@@ -115,7 +118,6 @@ x <= y
 
 ::: {.column width="45%"}
 ![](Pythonlogo.png)
-
 ```{python}
 # Python
 x = 5
@@ -139,7 +141,8 @@ x >= y
 x <= y
 ```
 :::
-:::
+
+::::
 
 #### Logic Operators
 
@@ -147,14 +150,16 @@ Logical operators are commonly used in data analysis, especially when sub-settin
 
 ::: {.callout-note appearance="simple"}
 ## Pay Attention
-
 Some differences between R and Python become apparent here. In R, **TRUE** and **FALSE** must be written in all caps to be recognised as the logical operator. In Python, **True** and **False** must start with a capitalized letter. **or**, **and**, **not** should also be written exactly in this manner.If these operators are written differently, they will be recognized as objects.
 :::
 
-::: columns
+
+
+
+:::: {.columns}
+
 ::: {.column width="45%"}
 ![](Rlogo.png)
-
 ```{r}
 x <- 4
 y <- 8
@@ -181,7 +186,6 @@ x == 4 & (y == 8 | z == "plop")
 
 ::: {.column width="45%"}
 ![](Pythonlogo.png)
-
 ```{python}
 x = 4
 y = 8
@@ -201,6 +205,7 @@ z = "plop"
 x == 4 and (y == 8 or z == "plop")
 ```
 :::
-:::
 
-In data analysis, we usually use operators to subset data. This means that we compare a variable to a value to check if it fits our criteria. For example, if we have a column that contains a year, and we only want observations with the year 2003, we will search for year == 2003. In this setting the R operators we just described will be the same. It is possible that these operators varie when different packages are used in python. For instance, in the context of the pandas package, **and** becomes **&**, **or** becomes **\|**, **not** becomes **\~**. We will adress these variations in the database manipulation chapter.
+::::
+
+In data analysis, we usually use operators to subset data. This means that we compare a variable to a value to check if it fits our criteria. For example, if we have a column that contains a year, and we only want observations with the year 2003, we will search for year == 2003. In this setting the R operators we just described will be the same. It is possible that these operators varie when different packages are used in python. For instance, in the context of the pandas package, **and** becomes **&**, **or** becomes **|**, **not** becomes **~**. We will adress these variations in the database manipulation chapter.  

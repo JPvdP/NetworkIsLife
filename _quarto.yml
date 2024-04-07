@@ -17,15 +17,14 @@ website:
       - section: "Intro to Programming"
         contents:
         - href: Intro_programming_basic_operations.qmd
-          text: "Some basic operations"
-      - section: "Import data"
-        contents:
         - href: Intro_programming_DataImportAndPrep.qmd
-          text: "How to import dat"
-      - section: "Feature extraction"
-        contents:
         - href: feature_extraction.qmd
-          text: "How to extract words of value"
+        - href: Intro_programming_Databasemanip.qmd
+        - href: Intro_programming_functions.qmd
+        - href: Intro_programming_loops_ifelse.qmd
+        - href: Intro_programming_random.qmd
+        - href: Intro_programming_visualisation.qmd
+
 format:
   html:
     theme: Litera

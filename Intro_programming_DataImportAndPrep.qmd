@@ -77,7 +77,6 @@ The **bibliometrix** package is designed for bibliometic analysis, it might chan
 ## json
 
 ```{r}
-
 library(jsonlite)
 
 # Specify the path to the JSON file
@@ -176,7 +175,6 @@ data_from_jsonl.close() # close the file again
 ```
 
 # Data conformity and preparation
-
 ## Data conformity in R
 
 Before you start working on your analysis, you want to make sure the data is conform to your expectations. This means:
@@ -196,6 +194,7 @@ Before you start working on your analysis, you want to make sure the data is con
 -   headers are easy to use (no spaces or other characters that will make your life difficult).
 
 In this section we will look into checking your data and adjusting it in preparation of your analysis.
+
 
 ### Checking data types
 
@@ -306,7 +305,7 @@ Messy_data <- clean_names(Messy_data)
 print(colnames(Messy_data))
 ```
 
-You can see that capital letter have been adjusted, some characters (µ, ")" ) have been replaced, spaces have been removed and replaced with "\_". This makes it easier and faster to refer to the columns and the dataframes when manipulating the data on a day-to-day basis.
+You can see that capital letter have been adjusted, some characters (µ, ")" ) have been replaced, spaces have been removed and replaced with "_". This makes it easier and faster to refer to the columns and the dataframes when manipulating the data on a day-to-day basis. 
 
 Once we are happy with the data formats we can move on take care of other issues.
 
@@ -385,6 +384,9 @@ print(data)
 
 ### Extract substrings
 
+
+
+
 ### Missing values
 
 It is common to encounter missing values in your data. There are multiple methods to deal with missing data ranging for simply removing them to using statistical methods to replace the missing values with other values. Whatever you decide to do with your missing data, think thoroughly about the consequences. Always consider why the data is missing, are the missing observations random or is there a pattern to the missing observations? For example if, suppose we are working on a dataset with pollution measurements around the world. It's possible that missing values come from countries in a specific region of the world. Removing these observations will result in excluding a whole region from the analysis. If the missing observations are more randomly dispersed over different regions in the world this might be less of an issue. The first step to take when dealing with missing values is to check for patterns in the data. Based on the type of missing values you are dealing with, you can decide to on the most efficient method to treat them:
@@ -394,6 +396,7 @@ It is common to encounter missing values in your data. There are multiple method
 -   K-means
 
 [This book on missing values](https://tmb.njtierney.com/missing-gotchyas) and [This book with a chapter on how to handle this king of data](https://bookdown.org/mike/data_analysis/imputation-missing-data.html)
+
 
 ## Data conformity in Python
 
@@ -448,10 +451,10 @@ pd.api.types.is_bool_dtype(dataframe['Alive'])
 pd.api.types.is_string_dtype(dataframe['ID'])
 ```
 
--   pd: This is an alias for the pandas library, which is a popular data manipulation library in Python. The alias is used for convenience.
--   api: This is the namespace within the pandas library where various utility functions and types are organized. It's considered part of the public API of the library, which means that it's stable and can be used by developers without concerns about major changes between different versions of pandas.
--   types: This is a subnamespace within the api namespace that provides functions and types related to data types and data type checking.
--   is_numeric_dtype(): This is a function provided by the pandas library in the types subnamespace. It's used to check if a given data type is numeric.
+* pd: This is an alias for the pandas library, which is a popular data manipulation library in Python. The alias is used for convenience.
+* api: This is the namespace within the pandas library where various utility functions and types are organized. It's considered part of the public API of the library, which means that it's stable and can be used by developers without concerns about major changes between different versions of pandas.
+* types: This is a subnamespace within the api namespace that provides functions and types related to data types and data type checking.
+* is_numeric_dtype(): This is a function provided by the pandas library in the types subnamespace. It's used to check if a given data type is numeric.
 
 This can also be done in a more consise way with the **dataframe.describe()** function. This compute, for each of the columns, some statistics and provides the class of the class of the variables. This comes in handy as it allows us verify not only the class of the variables but also the distribution:
 
@@ -484,7 +487,6 @@ df = pd.DataFrame(data)
 df.describe()
 df.dtypes
 ```
-
 In this output we can see that the **None** value is ignored and the statistics are computed. The format of the variables is shown: ID is considered "object" signifying that has no specific nature (object is a generic format for anything used in Python). *int64* represents an integer, *float64* represents a reel number, *bool* is a boolean operator.
 
 Given that we created the dataframe ourselves we can be relatively sure that the data was is the right format. However, often enough when we download data from online sources, we run into issues. If the format is not as expected there are different functions that allows us to transform the format of the data. Mainly we use **.astype(float)**, **.astype(int)** and **.astype(str)**.
@@ -511,7 +513,6 @@ df['Weight'] = df['Weight'].astype(float)
 df['Frequency'] = df['Frequency'].astype(int)
 df.dtypes
 ```
-
 Now that our data has the right format and we are sure we have all the observations we might want to do some work to normalise the column names. This is done to make programming and refercing the columns easier. Whenever the is a space in the name of the column, we need to refer to the column using **\`Column name with spaces\`** which is not ideal. It's generally good practice to not have any spaces. We can use the **pyjanitor** package to automate this process:
 
 ```{python}
@@ -534,19 +535,14 @@ print(df)
 <!-- It often happens that we are not fully happy with the data that we receive or simply that we need apply some modifications to suit our needs. The most frequent of these operations are -->
 
 <!-- -   Mathematical transformation of numerical data (multiplication, rounding up) -->
-
 <!-- -   Extract years, days or months from dates -->
-
 <!-- -   Trim whitespaces from data -->
-
 <!-- -   Rename categories within the data -->
 
 <!-- The main difficulty with the actions is to identify how to apply the functions. Some functions can be applied directly to a whole column while other nedd to be applied using mapping functions. Let's start with mathematical transformations: -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- # we start by creating a dataset to work with -->
-
 <!-- data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands"))) -->
 
 <!-- # The Distance is given in miles in this data, we would like to have kilometers. The formula to transform a mile to kilometers is a multiplication by 1.609. -->
@@ -554,81 +550,55 @@ print(df)
 <!-- data$KM <- data$Distance * 1.609344 -->
 
 <!-- print(data) -->
-
 <!-- ``` -->
 
 <!-- We can also round this up. The **round()** function takes two arguments, a first will be the data, the second will be the number of decimals: -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- data$KM <- round(data$KM, 2) -->
-
 <!-- print(data) -->
-
 <!-- ``` -->
 
 <!-- We notice that for some of the domains there is a trailing whitespace, for example we have "B29K" in the data. These can be removed with the **trimws()** function. These whitespaces can also be created when we split data. It's good practise to always check this and remove any space to avoid unnecessary mistakes. -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- data$Domain <- trimws(data$Domain) -->
-
 <!-- print(data) -->
-
 <!-- ``` -->
 
 <!-- Suppose that we want to change the labels for the countries. It's much more common to use ISO-2 level codes for countries. The **gsub()** function for the replacement of text. The **gsub()** function requires three arguments: the patter to search, the pattern to replace with and the data. Caution while using this function since it searches for the pattern even withing words. If one searches for the string "land" to replace it with "country", then the string "netherlands" will become "nethercountrys". -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- library(tidyverse) -->
-
 <!--   data$Country <- gsub("France", "FR", data$Country) -->
-
 <!--   data$Country <- gsub("Netherlands" , "NL",data$Country) -->
-
 <!--   data$Country <- gsub("Germany" ,"DE",data$Country) -->
 
 <!-- print(data) -->
-
 <!-- ``` -->
 
 <!-- In the special case of categorical variables, we can also use the **dplyr** package to replace strings using the **case_when** function. It is a flexible and powerful function that allows you to perform conditional operations on a vector or data frame, similar to a series of nested if-else statements. It's especially useful when you need to create or modify variables in your data based on specific conditions. The syntax follows: -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- case_when( -->
-
 <!--   condition1 ~ result1, -->
-
 <!--   condition2 ~ result2, -->
-
 <!--   condition3 ~ result3, -->
-
 <!--   ... -->
-
 <!-- ) -->
-
 <!-- ``` -->
 
 <!-- In the case of changing categories, if we want to switch the name of the country for the ISO identifyers of the countries: -->
 
 <!-- ```{r, eval = FALSE} -->
-
 <!-- library(tidyverse) -->
-
 <!-- data <- data.frame(Identifier = c("ID1", "ID2", "ID3", "ID4 "), Date = c(2002, 2003, 2009, 2010), Domain = c("B60C", "B29K","B29K ", "B60C"), Distance = c(62.1371, 124.274, 93.2057, 186.411), Active = c(TRUE, FALSE, FALSE, FALSE), Country = as.factor(c("France", "France", "Germany", "Netherlands"))) -->
 
 <!-- data$Country <- case_when( -->
-
 <!--   data$Country == "France" ~ "FR", -->
-
 <!--   data$Country == "Netherlands" ~ "NL", -->
-
 <!--   data$Country == "Germany" ~ "DE" -->
-
 <!-- ) -->
 
 <!-- print(data) -->
-
 <!-- ``` -->
