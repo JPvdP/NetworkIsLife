@@ -27,7 +27,8 @@ website:
         contents:
         - href: feature_extraction.qmd
         - href: Network_analysis_basics.qmd
-        - href: Topic_modelling.qmd
+        - href: Topic_modelling_lda.qmd
+        - href: Topic_modelling_bertopic.qmd
         - href: NER.qmd
         - href: Text_networks.qmd
 

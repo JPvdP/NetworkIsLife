@@ -1,4 +1,4 @@
-## Database Manipulation
+# Database Manipulation
 
 In this chapter we look into database manipulation with R. We will use a combination of base-R functions and functions from the tidyverse. From this chapter you are expected to know how to:
 

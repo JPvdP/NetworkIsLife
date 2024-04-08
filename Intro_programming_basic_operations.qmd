@@ -1,4 +1,4 @@
-## Basic Operations
+# Basic Operations
 
 This chapter shows how to use basic operations in both R and Python. We will focus on operations that we encounter in a data analysis setting: arithmetic, comparisons, logic.
 
