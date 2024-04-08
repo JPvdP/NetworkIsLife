@@ -224,8 +224,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling.html" class="sidebar-item-text sidebar-link">
+  <a href="./Topic_modelling_lda.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topic Modelling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic modelling with Bertopic</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -246,7 +252,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#database-manipulation" id="toc-database-manipulation" class="nav-link active" data-scroll-target="#database-manipulation">Database Manipulation</a></li>
+  <li><a href="#database-manipulation" id="toc-database-manipulation" class="nav-link active" data-scroll-target="#database-manipulation">Database Manipulation</a>
+  <ul class="collapse">
   <li><a href="#data-manipulation-with-r" id="toc-data-manipulation-with-r" class="nav-link" data-scroll-target="#data-manipulation-with-r">Data manipulation with R</a>
   <ul class="collapse">
   <li><a href="#data-formats" id="toc-data-formats" class="nav-link" data-scroll-target="#data-formats">Data formats</a></li>
@@ -261,6 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filtering-your-dataframe-1" id="toc-filtering-your-dataframe-1" class="nav-link" data-scroll-target="#filtering-your-dataframe-1">Filtering your dataframe</a></li>
   <li><a href="#further-actions-grouping-and-summarising-1" id="toc-further-actions-grouping-and-summarising-1" class="nav-link" data-scroll-target="#further-actions-grouping-and-summarising-1">Further actions: grouping and summarising</a></li>
   </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -269,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="database-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="database-manipulation">Database Manipulation</h2>
+<section id="database-manipulation" class="level1">
+<h1>Database Manipulation</h1>
 <p>In this chapter we look into database manipulation with R. We will use a combination of base-R functions and functions from the tidyverse. From this chapter you are expected to know how to:</p>
 <ul>
 <li><p>Subset a dataframe, matrix or dictionnary (specific to Python)</p></li>
@@ -285,7 +293,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>substr()</p></li>
 </ul></li>
 </ul>
-</section>
 <section id="data-manipulation-with-r" class="level2">
 <h2 class="anchored" data-anchor-id="data-manipulation-with-r">Data manipulation with R</h2>
 <section id="data-formats" class="level3">
@@ -821,6 +828,7 @@ Pay Attention
 </div>
 
 
+</section>
 </section>
 </section>
 

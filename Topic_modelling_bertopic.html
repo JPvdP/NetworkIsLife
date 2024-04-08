@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NetworkIsLife</title>
+<title>NetworkIsLife – topic_modelling_bertopic</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -116,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -134,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NetworkIsLife</li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./feature_extraction.html">Text Mining</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic modelling with Bertopic</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -230,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Topic modelling with Bertopic</span></a>
   </div>
 </li>
@@ -248,38 +214,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#topic-modelling-with-bertopic" id="toc-topic-modelling-with-bertopic" class="nav-link active" data-scroll-target="#topic-modelling-with-bertopic">Topic modelling with Bertopic</a>
+  <ul class="collapse">
+  <li><a href="#installing-bertopic" id="toc-installing-bertopic" class="nav-link" data-scroll-target="#installing-bertopic">Installing Bertopic</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-virtual-environment-with-anaconda" id="toc-creating-a-virtual-environment-with-anaconda" class="nav-link" data-scroll-target="#creating-a-virtual-environment-with-anaconda">Creating a virtual environment with anaconda</a></li>
+  <li><a href="#installig-required-packages" id="toc-installig-required-packages" class="nav-link" data-scroll-target="#installig-required-packages">Installig required packages</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">NetworkIsLife</h1>
-</div>
 
 
+<section id="topic-modelling-with-bertopic" class="level1">
+<h1>Topic modelling with Bertopic</h1>
+<section id="installing-bertopic" class="level2">
+<h2 class="anchored" data-anchor-id="installing-bertopic">Installing Bertopic</h2>
+<section id="creating-a-virtual-environment-with-anaconda" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-virtual-environment-with-anaconda">Creating a virtual environment with anaconda</h3>
+<p>Imagine you have a toolbox where you keep all your tools. Each tool has a specific purpose: a hammer for nails, a screwdriver for screws, etc. Now, think of your computer as a large workshop where you can undertake various projects (like building software or analyzing data). For each project, you might need a different set of tools. Some projects might require a hammer and a saw, while others might need a screwdriver and a wrench.</p>
+<p>In the world of programming, especially when working with Python, the “tools” are the various libraries and packages that you use to write your programs (like NumPy for mathematical operations, Pandas for data manipulation, etc.). Just like in a real workshop, using the right tools can make your work much easier.</p>
+<p>However, there’s a catch. Sometimes, different projects require different versions of the same tool. Maybe one project needs a hammer with a wooden handle, but another requires one with a fiberglass handle. If you tried to use the wrong version, it might not work as well or could even mess up your project.</p>
+<p>This is where Anaconda environments come in. An Anaconda environment is like having a separate, smaller toolbox for each project. You can put exactly the tools (libraries and packages) you need for a project into its toolbox, including the right versions. This way, when you work on that project, you know you have all the right tools handy, and they won’t interfere with the tools needed for other projects. It keeps everything organized and ensures that your projects run smoothly without conflicts between different versions of your tools.</p>
+<p>In technical terms, an Anaconda environment is a virtual space on your computer where you can install specific versions of libraries and packages needed for a particular project. This isolation prevents conflicts and makes it easier to manage dependencies, ensuring that you can reproduce your work on another machine without issues.</p>
+<p>Let’s create an anaconda environment for topic modelling with bertopic. Start by downloading anaconda from this website: Once it’s done downloading install and launch the program. You should be greeted by a window that looks like this:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_1.png" class="img-fluid"></p>
+<p>Now we start by creating the environment. Click on “Environments” on the left and then on the “create” button on the bottom:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_2.png" class="img-fluid"></p>
+<p>In this window, all the existing environments are listed. As you can see in this image I already have a multitude of environments. Each environment was created for specific projects or tools I wanted to test without risking creating conflicts with other projects. On the right there is a list with packages that allows you to check what is installed in each environment.</p>
+<p>Once you click on the “create” button, you will be prompted to provide some information. First you will have to fill in a name, this is the name that will appear in the list. Second you will need to pick a version of python to use. Any version between 3.9.19 and 3.12.2 should work (I have not tested the previous versions). We will proceed with version 3.12.2.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_3.png" class="img-fluid"></p>
+<p>After a while, the window should load and a creen play button should appear next to the enviroment you just created. For the purpose of this tutorial I’ve called the environment “test”, it now has the play button next to it meaning it’s now the active environment. The packages on the right are the packages installed by default in the environment.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_4.png" class="img-fluid"></p>
+<p>Click on the home button on the top left to go back to the home screen:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_5.png" class="img-fluid"></p>
+<p>You now have the option to install different interfaces to interact with python. For the puropose of this tutorial we will use jupyter. Click the install button below the logo to install.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_6.png" class="img-fluid"></p>
+<p>After a while the window should reload and you should now have a “launch” button below jupyter. Jupyter allows you to program in python in your internet browser of choice. This will work even if you’re not connected to the internet.</p>
+</section>
+<section id="installig-required-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installig-required-packages">Installig required packages</h3>
+<p>need to install bertopic, ipywidgets space and pandas</p>
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-
-
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
