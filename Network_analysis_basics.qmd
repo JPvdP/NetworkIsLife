@@ -1,6 +1,6 @@
-# The basics of Network Analysis
+## The basics of Network Analysis
 
-## Introduction
+### Introduction
 
 We are familiar with the statistical processing of object data (sum, mean, variance, histograms, etc.). However, there is a different kind of data with a high informational value: relational data. We are referring here to data that indicates a relationship, *e.g* a collaborative relationship, a citation link, a financial investment, a social link, etc. Relational data is rich in information. Relational data show their informational richness with different tools and methods. In fact, in relational data we're mainly interested in the structure of these relationships and the role that entities play in this structure. This idea is illustrated in Figure 1.
 
@@ -22,7 +22,7 @@ Particular attention is paid to the explanation of citation analysis in patents,
 
 This manual is aimed at Masters students and intelligence professionals who wish to include network analysis in their toolbox.
 
-## Theory - Network Analysis
+### Theory - Network Analysis
 
 In its most basic form, a network is an object based on a set of nodes and links. The nature of the nodes and links is unlimited. A network can be created from any type of object with an interaction link. Network analysis can be applied to the analysis of social interactions: social interactions between cows, interactions between brain areas, equity investment links between firms, financial exposures between banks, collaborations between firms, links between criminals - the list goes on.
 
@@ -71,9 +71,9 @@ Un réseau est la somme d'objets et d'interactions entre ces objets.
 
 The concept is relatively simple, and we may be tempted to create networks from any kind of data. In order to avoid errors and misinterpretations, it is important to be able to identify the type of network we are creating and how this impacts on the validity or choice of indicators for analysis. In this section, we present the different types of networks and introduce a few vocabulary elements that will serve as a basis for the cases applied in the following.
 
-### The network types
+#### The network types
 
-#### The undirected, or bilateral, network
+##### The undirected, or bilateral, network
 
 In the simplest cases, an interaction between two objects can go either way. Suppose a collaborative link between two researchers: if $\textit{A}$ collaborates with $\textit{B}$, then $\textit{B}$ collaborates with $\textit{A}$. Another example is a network of criminals, a network based on participants in conferences or projects.
 
@@ -137,7 +137,7 @@ It is possible to quantify the link between objects, in which case we speak of a
 
 It's possible to observe a link in a network that points from a node to itself. This is called a $\textbf{loop}$ and is represented in figure \ref{nw_simple_non_dirige_pondere} by a red broken line. Let's assume that each node in the illustrated network represents a country, and each link represents collaboration between players in the territory. The network shows us that two actors from country $\textit{A}$ collaborate with actors from country $\textit{C}$. In this context, the loop indicates that actors in country $\textit{C}$ are also working together.
 
-#### The directed, or unilateral, network
+##### The directed, or unilateral, network
 
 When the interaction goes from one node to another, the network is $\textbf{directed}$. A financial transaction is directed from one account to another. Quotations are another example: a document quoting a pre-existing document. So is the infection of one person by another. The virus spreads from the infected individual to the healthy one. The direction must be unilateral for the network to be considered directed. Figure \ref{nw_simple_dirige} shows an example of a directed network. By convention, to indicate the direction of interaction, the link is represented by an arrow.
 
@@ -205,7 +205,7 @@ The fact that a network is directed does not prevent two-way interaction. The di
 
 As in an undirected network, a loop on a node is possible, with the difference that this loop is directed.
 
-#### Multiple types of nodes: The bi-modal, or bipartite, network.
+##### Multiple types of nodes: The bi-modal, or bipartite, network.
 
 It is possible to create a network containing different types of objects. Suppose we want to analyze the career of inventors by mapping the companies they have worked for. This implies having two types of nodes: inventors and companies. When two types of nodes are interconnected in the same network, this network is called a $\textit{bi-modal}$ network.
 
@@ -264,7 +264,7 @@ The first network is a simple link between the two firms, with a weight of two b
 
 This type of transformation facilitates analysis and, above all, the calculation of indicators that are more complex to calculate in an n-modal network.
 
-#### The Multigraphe
+##### The Multigraphe
 
 Let's suppose we want to represent different types of interaction in the same network. This translates into the possible existence of two (or more) links between two objects in the same network. Figure \ref{Network_two_types_of_links} visualizes this idea with two links between nodes $\textit{C}$ and $\textit{D}$. The first link is shown in black, the second in red. A network containing different types of links is called a $\textbf{multi-graph}$.
 
@@ -299,7 +299,7 @@ Let's assume that the nodes in this network are companies, with black links repr
 
 More effective than the multigraph are multiplex networks and interconnected networks, which we will describe in detail below.
 
-#### Muli-layered Networks
+##### Muli-layered Networks
 
 A different approach to multigraphs and bi-modal graphs is to consider each typology of links or nodes as a specific network, and to create links between networks. There are two types of multi-layer network, the multiplex network and the interconnected network.
 
@@ -317,13 +317,13 @@ Unlike multi-layer networks, which assign a layer to each type of interaction, t
 
 Both the multiplex and the interconnected network require specific algorithms for calculating indicators, and few software packages are able to manage this type of network.
 
-### Paths, distance and loops
+#### Paths, distance and loops
 
 The analysis of connections between nodes often raises the question of distance. A node that is close to all the nodes in the network is, a priori, an important node. Many centrality indicators are based on notions of distance between a node and other nodes in the network. By the same token, to judge the size of a network, we'd like to know the distance separating the most outlying nodes. In other cases, it may be important to know whether it's simply possible to navigate from one node to another in a network.
 
 To answer these questions, we first need to introduce the notion of "path".
 
-#### The path
+##### The path
 
 In network analysis, a \textbf{path} is a sequence of nodes through which you must pass to reach a given node from a given node. Suppose we're looking for a path between node \textit{G} and node \textit{A} in the network shown in figure \ref{Notion_de_chemin_bilat}. As the network is undirected, we can take the direction of the link as we wish. Thus, we start from node \textit{G} to node \textit{F}, then continue from node \textit{F} to node \textit{A}. The path connecting nodes G and A is therefore G, F, A.
 
@@ -525,9 +525,9 @@ Theoretically, there are an infinite number of paths between A and C, as we coul
 :::
 :::
 
-### Network indicators
+#### Network indicators
 
-#### The degree
+##### The degree
 
 In this section, we'll start by presenting a number of indicators. Initially, we'll focus on indicators at node level.
 
@@ -662,7 +662,7 @@ The weights of interactions can be included in the degree calculation, so we spe
 
 ```
 
-### Centrality measures
+#### Centrality measures
 
 One of the aims of network analysis is to identify nodes with an important position in the network structure. Important can be defined in different ways: in the case of degree, it's the number of links, but we can also look at things in a more structural way. If we take the network shown in figure \refref{nw_fil_rouge_degre}, it's clear that the position of Orange and CEA differ. The role of these two players is therefore different from a structural point of view. Orange has a more \textbf{central} position than CEA. Intuitively, we can consider that the centrality of a node is linked to its importance in a network, as it reflects a higher level of interconnectivity than a node positioned more on the periphery. In other words, the smaller the distance between a node and all the other nodes in the network, the more central the node is in the network.
 
@@ -725,7 +725,7 @@ Let's take an example of calculation using the network in figure \ref{reseau_BC_
 Let's calculate the BC of node $C$. We need to start by identifying the shortest paths between all the nodes and then count how many of these paths node $C$ is positioned on. In the table \ref{table_example_BC}, the first column lists each pair of nodes. There's only one path between $A$ and $B$ ($A \mapsto C \mapsto B$). There is therefore a single shortest path ($P(AB) = 1$) and node $C$ is positioned on this path ($P_C(AB)$). This calculation is repeated for every other pair of nodes as shown in the table below:
 
 | Link | Number of shortest paths with C $P_i(kj)$ | Number of shortest paths $P(kj)$ |
-|:-------------:|:-------------------------------:|:-----------------------:|
+|:---------------:|:-----------------------------:|:----------------------:|
 | A-B  |                     1                     |                1                 |
 | A-J  |                     1                     |                1                 |
 | B-J  |                     1                     |                1                 |

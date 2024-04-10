@@ -14,8 +14,8 @@ This is where Anaconda environments come in. An Anaconda environment is like hav
 
 In technical terms, an Anaconda environment is a virtual space on your computer where you can install specific versions of libraries and packages needed for a particular project. This isolation prevents conflicts and makes it easier to manage dependencies, ensuring that you can reproduce your work on another machine without issues.
 
-Let's create an anaconda environment for topic modelling with bertopic. Start by downloading anaconda from this website: https://www.anaconda.com/download
-Once it's done downloading install and launch the program. You should be greated by a window that looks like this:
+Let's create an anaconda environment for topic modelling with bertopic. Start by downloading anaconda from this website:
+Once it's done downloading install and launch the program. You should be greeted by a window that looks like this:
 
 ![](imgs/bertopic/Anaconda_bertopic_1.png)
 
@@ -45,9 +45,5 @@ After a while the window should reload and you should now have a "launch" button
 
 ### Installig required packages
 
-```{python, eval = FALSE}
-pip install bertopic
-pip install ipywidgets
-pip install spacy
-pip install pandas
-```
+need to install bertopic, ipywidgets space and pandas
+

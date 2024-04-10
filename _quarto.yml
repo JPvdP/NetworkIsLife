@@ -14,6 +14,10 @@ website:
     #logo: images/ofce_m.png
     search: true
     contents:
+      - section: "Network Analysis"
+        contents:
+        - href: Network_analysis_basics.qmd
+        - href: Text_networks.qmd
       - section: "Intro to Programming"
         contents:
         - href: Intro_programming_basic_operations.qmd
@@ -26,7 +30,6 @@ website:
       - section: "Text Mining"
         contents:
         - href: feature_extraction.qmd
-        - href: Network_analysis_basics.qmd
         - href: Topic_modelling_lda.qmd
         - href: Topic_modelling_bertopic.qmd
         - href: NER.qmd
