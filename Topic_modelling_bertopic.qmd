@@ -104,7 +104,7 @@ We should now be good to go!
 
 We start by loading required packages
 
-```{python, eval == FALSE}
+```{python, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 import pandas as pd
