@@ -1,3 +1,4 @@
+
 # Topic modelling with Bertopic
 
 ## Installing Bertopic
@@ -85,9 +86,9 @@ To install bertopic in our environment use pip as shown below, between brackets 
 ```{python, eval=FALSE}
 #| eval: false #
 # now do the same for other packages:
-pip install ipywidgets
-pip install pandas
-pip install space
+# pip install ipywidgets
+# pip install pandas
+# pip install space
 ```
 
 
