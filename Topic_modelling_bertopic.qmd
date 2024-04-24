@@ -84,6 +84,7 @@ To install bertopic in our environment, we simply write *pip install bertopic*, 
 
 ```{python, eval=FALSE}
 #| eval: false #
+#| echo: fenced #
 # now do the same for other packages:
 pip install ipywidgets
 pip install pandas
@@ -105,6 +106,7 @@ We start by loading required packages
 
 ```{python, eval == FALSE}
 #| eval: false #
+#| echo: fenced #
 import pandas as pd
 from bertopic import BERTopic
 ```
@@ -114,6 +116,7 @@ Once the packages have loaded correctly we need to import some data. For the pur
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
 ```
 
@@ -121,6 +124,7 @@ The input data for bertopic needs to have a specific format: it need to be a lis
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 data = data[['abstract']] # we first select only the column with the text
 data = data(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() # transform the df into a list
 ```
@@ -134,6 +138,7 @@ For this tutorial we pick a small, low-weight embedding model to not waste too m
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 # 1. Get the embeddings
 from sentence_transformers import SentenceTransformer
 embed_model = SentenceTransformer("all-MiniLM-L6-V2")
@@ -166,6 +171,7 @@ This dimensionality reduction relies on different parameters that heavily influe
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 # 2. Reduce the dimensions of the embeddings
 from umap import UMAP
 umap_model = UMAP(n_neighbors = 30, n_components = 5, min_dist = 0.0, metric = "cosine", random_state = 42)
@@ -185,6 +191,7 @@ Once we have reduced the dimensions of the data, we need to cluster the terms to
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 # 3. Control for the number of topics
 from hdbscan import HDBSCAN
 hdbscan_model = HDBSCAN(min_cluster_size = 7, metric = "euclidean", cluster_selection_method = 'eom', prediction_data = True)
@@ -193,6 +200,7 @@ hdbscan_model = HDBSCAN(min_cluster_size = 7, metric = "euclidean", cluster_sele
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 # 4. prep the text
 from sklearn.feature_extraction.text import CountVectorizer
 vect_model = CountVectorizer(stop_words = "english", min_df = 2, ngram_range = (1,1)) 
@@ -200,23 +208,22 @@ vect_model = CountVectorizer(stop_words = "english", min_df = 2, ngram_range = (
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 # 5. representation
 from bertopic.representation import KeyBERTInspired, MaximalMarginalRelevance, PartOfSpeech
 import spacy
 keybert_model = KeyBERTInspired()
-#pos_model = PartOfSpeech("en_core_web_sm")
 mmr_model = MaximalMarginalRelevance(diversity = 0.3)
-
 ```
 
 ```{python, eval = FALSE}
 #| eval: false #
+#| echo: fenced #
 representation_model = {
     "keyBERT": keybert_model,
     "MMR": mmr_model,
  #  "POS": pos_model
 }
-
 ```
 
 
