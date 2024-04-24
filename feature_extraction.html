@@ -420,6 +420,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In R this can done with the <strong>tm</strong> package. The <strong>tm</strong> package has a <em>removeWords</em> function that takes two arguments, a first is the text from which we want to remove words, the second argument is an object that contains the words to remove. This can either be a simple list of words (made with the <em>c()</em> function), or stopword lists supplied by different packages. At this stage we are mostly interested in removing stopwords which implies that we need to also specify the language of the text. Using the <em>kind</em> argument allows for the specification of the language <em>en</em> for english, <em>nl</em> for dutch, <em>fr</em> for french and so on. In the code below we remove english stopwords from <em>text_object</em> which has the format of a character string.</p>
 <p>Let’s use as an example the abstract of a patent on water desalination:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>text_object <span class="ot">=</span> <span class="st">"Provided is a separation membrane for seawater desalination</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">and a method for manufacturing the same, and more particularly, a separation</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">membrane for seawater desalination with excellent water permeability and salt</span></span>
@@ -431,13 +433,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">seawater desalination with improved performance in comparison to an existing</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">separation membrane for seawater desalination. As a result, water resources</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">may be widely utilized."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We remove the stopwords from this text:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  text_object_nostopwords <span class="ot">=</span> <span class="fu">removeWords</span>(text_object, <span class="fu">stopwords</span>(<span class="at">kind =</span> <span class="st">"en"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Provided   separation membrane  seawater desalination   method </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">manufacturing  ,   particularly,  separation membrane  seawater</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">desalination  excellent water permeability  salt rejection   method </span></span>
@@ -447,6 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">separation membrane  seawater desalination  improved performance </span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">comparison   existing separation membrane  seawater desalination. </span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">As  result, water resources may  widely utilized."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Provided   separation membrane  seawater desalination   method \nmanufacturing  ,   particularly,  separation membrane  seawater\ndesalination  excellent water permeability  salt rejection   method \nmanufacturing  . If  separation membrane  seawater desalination \nmethod  manufacturing   according   present disclosure  applied,   possible  provide  separation membrane  seawater desalination  excellent\nwater permeability  salt rejection. Therefore,   possible  provide \nseparation membrane  seawater desalination  improved performance \ncomparison   existing separation membrane  seawater desalination. \nAs  result, water resources may  widely utilized."</code></pre>
 </div>
@@ -547,6 +556,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="stemming-and-lemmatization-in-r">Stemming and Lemmatization in R</h4>
 <p>For the implementation of lemmatization we will use the <strong>textstem</strong> package. Lemmatization is done in two steps, first a dictionnary is created based on the text. Basically this means that all terms in the provided text are identified and for these terms lemmas are identified. In a second step this dictionary is then applied to the text. The main reason for this two-step approach is to reduce computation time since we don’t have to search through words that are not in the text.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variations on a word as an example:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>)</span>
@@ -556,12 +567,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(Example_text, <span class="at">dictionary =</span> My_dico)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "desalinate"  "desalinate"  "desalinate"  "desalinator" "desalinate" </code></pre>
 </div>
 </div>
 <p>The function has changed the words in the vector to their dictionary reference form. Not that “desalinator” has not been changed. This is because the word has no reference form in the underlying dictionary. We can address this issue by fist making our own dictionary and applying it before using the more generic ones. Actually, let’s go a step further. Suppose we are aiming for an analysis that aims at technologies. In this case all the conjugated forms of the word are actually relating to the “desalinator” as a technology. We could decide to replace all these words with “desalinator”. Lets’ see how we could do this:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first we create a dictionary that contains the variations of the word and the reference form:</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>My_dico <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">term =</span> <span class="fu">c</span>(<span class="st">"Desalination"</span>, <span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>), <span class="at">lemma =</span><span class="fu">c</span>(<span class="st">"Desalinator"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalinator"</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
@@ -578,22 +592,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Lemmatized_tokens <span class="ot">=</span> <span class="fu">unlist</span>(Lemmatized_tokens)</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ... and recombine the words</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(Lemmatized_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>In certain cases we would want to keep the library from replacing specific terms, we can do this by explicitly excluding them from the set</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lexicon)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we are looking to implement our own cleaning in this scenario, we have a particular vision of what we want to do, so we want to make sure changes is text follow our own definitions and not those of a dictionary which would not reflect our aim.</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># excluding specific words: </span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>my_lex <span class="ot">&lt;-</span> lexicon<span class="sc">::</span>hash_lemmas[<span class="sc">!</span>token <span class="sc">==</span> <span class="st">"Desalinator"</span>, ]</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df_lemmatized <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(text_object, <span class="at">dictionary =</span> my_lex)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df_lemmatized</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Stemming is a more straightforward approach, it reduces the word to their stems with specific algorithms. Different algorithms have different approaches used to define the stem of a word.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we use the tm package and the stemDocument function</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>text_object_nostopwords <span class="ot">&lt;-</span> tm<span class="sc">::</span><span class="fu">stemDocument</span>(Example_text)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>text_object_nostopwords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Desalin" "Desalin" "Desalin" "Desalin" "Desalin"</code></pre>
 </div>
@@ -604,11 +625,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="the-dictionary">The dictionary</h3>
 <p>In many case there are word that we want to remove from the text because they appear in a high frequency but do not contain any value of the analysis. We can create a vector of words that we want to remove:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>My_dictionnary <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"project"</span>, <span class="st">"invention"</span>, <span class="st">"aim"</span>, <span class="st">"goal"</span>, <span class="st">"paper"</span>, <span class="st">"water desalination"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We can then remove these words using the <strong>removeWords</strong> function from the <em>tm</em> package.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> tm<span class="sc">::</span><span class="fu">removeWords</span>(tmp, My_dictionnary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>This approach breaks the structure of a sentence and should be used carefully. Later on we will search for specific sentence structures.</p>
 </section>
@@ -616,11 +643,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="the-regex-language">The Regex language</h3>
 <p>In many cases, text cleaning can require us to search and replace, remove or extract specific patterns in the text. For example in twitter data, we want to extract the # that are used in the tweets, when working with geo data we might want to extract postal codes which have specific patterns. For chemical solutions we might want to search specifically for µg, mg or numbers, in other cases the text contains errors or formatting that is creating noise in the text. All this and more can be done with a specific language called RegEx which stands for <strong>Regular Expressions</strong>. Using this language we can search for very specific patterns in the text, or indeed in any chain of characters. For example if we have the task of extracting postcodes from a character chain that contains a full address, we need to search for a chain that contains four numbers followed by two letters (at least in the Netherlands):</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>address <span class="ot">&lt;-</span> <span class="st">"Straatweg 42, 9942AA, dorpstad"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We can search for this pattern using the following regex:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="st">"\d[0-9]{3}[A-Z]{2}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <ul>
 <li>earches for digits, we specify that we search for any number between 0 and 9 by using the brackets.</li>
@@ -629,8 +662,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>We can use this type of expression directly in most functions in R. However we often need to adjust some of the “\” in the text. In the example below we need to add a “\”:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(<span class="st">"Straatweg 42, 9942AA, dorpstad"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">d[0-9]{3}[A-Z]{2}"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "9942AA"</code></pre>
 </div>
@@ -645,6 +681,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>“Provided is a <span style="color: red;">separation membrane for seawater desalination</span> and a method for manufacturing the same, and more particularly, a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">excellent</span> <span style="color: red;">water permeability and salt rejection</span> and a <span style="color: green;">method for manufacturing</span> the same. If the <span style="color: red;">separation membrane for seawater desalination</span> and the <span style="color: green;">method for manufacturing</span> the same according to the present disclosure are applied, it is possible to provide a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">excellent</span> <span style="color: red;">water permeability and salt rejection</span>. Therefore, it is possible to provide a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">improved performance</span> in comparison to an existing <span style="color: red;">separation membrane for seawater desalination</span>. As a result, <span style="color: red;">water resources</span> may be <span style="color: orange;">widely utilized</span>.”</p>
 <p>Let’s start with the analysis of this text. Start with downloading a language model that we will use for the tagging of the words in the text. The language can be changed according to the language of the text you are trying to analyse.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("udpipe")</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(udpipe)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ud_model <span class="ot">&lt;-</span> udpipe<span class="sc">::</span><span class="fu">udpipe_download_model</span>(<span class="at">language =</span> <span class="st">"english"</span>)</span>
@@ -653,6 +691,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">udpipe_annotate</span>(ud_model, <span class="at">x =</span> text_object, <span class="at">doc_id =</span> <span class="dv">1</span>)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x)</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div id="fig-POS_output" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -721,6 +760,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Now let’s do the same for a text that’s less about technologies but more about social issues with climate change:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>text2 <span class="ot">=</span> <span class="st">"Climate anxiety, an emotional response to the growing threat of climate change, </span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">has become a prevalent concern in today's society. As global temperatures rise and extreme</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">weather events escalate, individuals grapple with a sense of helplessness, fear, and </span></span>
@@ -730,11 +771,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">involve activism, eco-conscious lifestyle changes, and fostering resilience. </span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">Addressing climate anxiety necessitates global cooperation, sustainable </span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">policies, and a collective commitment to mitigating the impacts of climate change."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">udpipe_annotate</span>(ud_model, <span class="at">x =</span> text2, <span class="at">doc_id =</span> <span class="dv">1</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p><img src="POS_tagging_english_2.png" class="img-fluid" alt="Example of POS tagging"> This example shows more clearly the effects of lemmatization on the text and all the different elements that are identified by the tagging system, punctuation included. Treating the text in this way allows us to identify specific phrases within the text that can be of value for an analysis. When we focus on the analysis of technologies, we are mainly interested in the nouns which would extract the technological terms from the text. If we want to identify social aspects, or emotions we can focus on nouns, verbs and adjectives. According to the question we are trying to answer, we can search for different elements within the text itself. The advantage of Part-Of-Speech tagging is that we can chose these patterns ourselves. These patterns are referred to as “word phrases”. Using the <em>keywords_phrases</em> function from the <strong>udpipe</strong> package we can search them directly.</p>
 <ul>
@@ -743,10 +788,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>(P+D*(A|N)*N)*: This part represents a sequence that includes a preposition (P) followed by zero or more determiners (D) and then followed by the same pattern as described earlier for adjectives and nouns.</li>
 </ul>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>phrase_tag <span class="ot">&lt;-</span> <span class="fu">as_phrasemachine</span>(x<span class="sc">$</span>upos, <span class="at">type =</span> <span class="st">"upos"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">keywords_phrases</span>(<span class="at">x =</span> x<span class="sc">$</span>phrase_tag, <span class="at">term =</span> <span class="fu">tolower</span>(x<span class="sc">$</span>token), </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pattern =</span> <span class="st">"(A|N)*N(P+D*(A|N)*N)*"</span>, </span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">is_regex =</span> <span class="cn">TRUE</span>, <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

@@ -371,6 +371,8 @@ Pay Attention
 </div>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># csv and various other separators</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(file, <span class="at">sep =</span> <span class="st">","</span>)</span>
@@ -384,14 +386,18 @@ Pay Attention
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># tsv (tab separated values)</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(file, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="xls-xlsx" class="level2">
 <h2 class="anchored" data-anchor-id="xls-xlsx">XLS, XLSX</h2>
 <p>Excel files can also easily be importanted into R with the the <strong>readxl</strong> package.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"sample_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   Pat_num       Year Domain
@@ -408,15 +414,21 @@ Pay Attention
 <h2 class="anchored" data-anchor-id="rdata">rdata</h2>
 <p><img src="Open_rdata_file.png" class="img-fluid"></p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use import function in rstudio, or double click</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="bib" class="level2">
 <h2 class="anchored" data-anchor-id="bib">Bib</h2>
 <p>.bib files are a popular bibliographic data format. This data can be imported and transformed into a dataframe using the <strong>bibliometrix</strong> package.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bibliometrix)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">convert2df</span>(file, <span class="at">dbsource =</span> <span class="st">"scopus"</span>, <span class="at">format =</span> <span class="st">"bibtex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -435,6 +447,8 @@ Pay Attention
 <section id="json" class="level2">
 <h2 class="anchored" data-anchor-id="json">json</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the path to the JSON file</span></span>
@@ -445,6 +459,7 @@ Pay Attention
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the imported JSON data</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>$fruit
 [1] "Apple"
@@ -461,20 +476,29 @@ $color
 <h2 class="anchored" data-anchor-id="jsonl">jsonl</h2>
 <p>jsonl files are a list of json files. We find this format for exampl in the lens.org database. Since each row is a json, we first read the files as text files and then apply the fromJSON function to extract the information. The result is a list of data objects.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tmp<span class="ot">&lt;-</span><span class="fu">readLines</span>(<span class="st">"data_test.jsonl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines("data_test.jsonl"): incomplete final line found on
 'data_test.jsonl'</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(tmp, jsonlite<span class="sc">::</span>fromJSON)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <details>
 <summary>
 Click here to see output
 </summary>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r foldable code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tmp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [[1]]$lens_id
@@ -825,6 +849,8 @@ Click here to see output
 <h2 class="anchored" data-anchor-id="txt-csv-tsv-1">TXT, CSV, TSV</h2>
 <p>package required <strong>openpyxl</strong>, <strong>pandas</strong></p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import CSV File</span></span>
@@ -849,26 +875,35 @@ Click here to see output
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co">#json_file = "sample_data.json"</span></span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="co">#df_json = pd.read_json(json_file)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="xlsxlsx-excel-data-format" class="level2">
 <h2 class="anchored" data-anchor-id="xlsxlsx-excel-data-format">XLS/XLSX (excel data format)</h2>
 <p>Excel files can be imported with help from the pandas package. If you do not specify a sheet to import, the first sheet will be taken. You can specify the sheet with the argument: <em>sheet_name=‘Sheet1’</em></p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import XLS (Excel) File</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df_xls <span class="op">=</span> pd.read_excel(<span class="st">"sample_data.xlsx"</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_xls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="json-and-jsonl" class="level2">
 <h2 class="anchored" data-anchor-id="json-and-jsonl">Json and jsonl</h2>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#json_file = "sample_data.json"</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df_json = pd.read_json(json_file)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import jsonl</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jsonlines</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -877,6 +912,7 @@ Click here to see output
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>      <span class="co"># extract the information from each row and put into object</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>     results <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> data_from_jsonl] </span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>data_from_jsonl.close() <span class="co"># close the file again</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -935,10 +971,13 @@ Click here to see output
 <p>The first column has textual data that is used as a key for each row. The Year should be considered either as an integer or a date. This will depend upon the type of analysis you want to perform. Specifically time series analysis will require this to be a date, while it’s enough for other analyses to ensure that it is an integer. The most common issue with this type of observation is that the year is considered as text instead of a number. If you see any ““” next to your numbers this is a bad sign which indicates that it is in fact, text.</p>
 <p>The “Cool Domain” contains classifications which we want to be textual values. “Frequency” will need to be an integer while “Alive” we want to be a boolean. For each of the formats there is a function to test whether or not the format is the one we expect. These functions are usually in the form of <strong>is.numerical()</strong>, <strong>is.logical()</strong>, <strong>is.character()</strong>. The argument is then simply the column of the dataframe or an observation. Suppose we create the previous dataframe in R:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>), <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>), <span class="st">`</span><span class="at">Cool Domain</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K"</span>), <span class="at">Frequency =</span> <span class="fu">c</span>(<span class="dv">42</span>, <span class="dv">21</span>, <span class="dv">12</span>),<span class="at">Alive =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ID Year Cool.Domain Frequency Alive
 1 ID1 2002        B60C        42  TRUE
@@ -948,22 +987,34 @@ Click here to see output
 </div>
 <p>We can then check the format of each variables:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(data<span class="sc">$</span>Frequency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(data<span class="sc">$</span>ID)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>(data<span class="sc">$</span>Alive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>This can also be done in a more consise way with the <strong>summary()</strong> function. This compute, for each of the columns, some statistics and provides the class of the class of the variables. This comes in handy as it allows us verify not only the class of the variables but also the distribution:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      ID                 Year      Cool.Domain          Frequency   
  Length:3           Min.   :2002   Length:3           Min.   :12.0  
@@ -983,9 +1034,12 @@ Click here to see output
 </div>
 <p>When the variable is a character, the output shows the length (number of observations) and the class. For numeric variables the output shows the distribution of the data (min, max, etc.). Not all text variables are created equal. It is possible to ensure that text is considered as a factor. A factor is basically a category, dummy variables in regressions are usually programmed as factors.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>), <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>, <span class="dv">2010</span>), <span class="st">`</span><span class="at">Cool Domain</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K"</span>, <span class="st">"B60C"</span>), <span class="at">Frequency =</span> <span class="fu">c</span>(<span class="dv">42</span>, <span class="dv">21</span>, <span class="dv">12</span>, <span class="cn">NA</span>),<span class="at">Alive =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">Country =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Netherlands"</span>)))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      ID                 Year      Cool.Domain          Frequency   
  Length:4           Min.   :2002   Length:4           Min.   :12.0  
@@ -1008,6 +1062,8 @@ Click here to see output
 <p>In this output we see that the <strong>NA</strong> is taken into account and counted separedly in the date. It also shows that <em>“Country”</em> is considered as a factor. The summary then shows how many observations we have for each of the factors.</p>
 <p>Given that we created the dataframe ourselves we can be relatively sure that the data was is the right format. However, often enough when we download data from online sources, we run into issues. If the format is not as expected there are different functions that allows us to transform the format of the data. Mainly we use <strong>as.numeric()</strong>, <strong>as.character()</strong> and <strong>as.logical()</strong>. These functions require only one argument which is the column we are trying to convert:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a numeric value</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Frequency <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>Frequency)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1016,12 +1072,16 @@ Click here to see output
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a boolean</span></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Frequency <span class="ot">&lt;-</span> <span class="fu">as.logical</span>(data<span class="sc">$</span>Alive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>As an example consider we will create a dataframe that mimics data that was not imported correctly:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Messy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>), <span class="at">Year =</span> <span class="fu">c</span>(<span class="st">"2002"</span>, <span class="st">"2003"</span>, <span class="st">"2009"</span>, <span class="st">"2010"</span>), <span class="st">`</span><span class="at">Cool Domain</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K"</span>, <span class="st">"B60C"</span>), <span class="at">Frequency =</span> <span class="fu">c</span>(<span class="st">"42"</span>, <span class="st">"21"</span>, <span class="st">"12"</span>, <span class="st">"NA"</span>),<span class="at">Alive =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span>, <span class="st">"FALSE"</span>, <span class="st">"FALSE"</span>, <span class="st">"FALSE"</span>), <span class="at">Country =</span> <span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Netherlands"</span>))</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Messy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      ID                Year           Cool.Domain         Frequency        
  Length:4           Length:4           Length:4           Length:4          
@@ -1035,18 +1095,24 @@ Click here to see output
 </div>
 <p>The output clearly shows that all variables are considered as characters which we do not want. We cannot comput the average on the Frequency while R thinks that it is text. This also shows that there is a difference between the string NA (“NA”) and the operator NA.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a numerical value</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Messy_data<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Messy_data<span class="sc">$</span>Year)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>Messy_data<span class="sc">$</span>Frequency <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(Messy_data<span class="sc">$</span>Frequency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs introduced by coercion</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a boolean</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Messy_data<span class="sc">$</span>Alive <span class="ot">&lt;-</span> <span class="fu">as.logical</span>(Messy_data<span class="sc">$</span>Alive)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a factor (category)</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>Messy_data<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(Messy_data<span class="sc">$</span>Country)</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Messy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      ID                 Year      Cool.Domain          Frequency   
  Length:4           Min.   :2002   Length:4           Min.   :12.0  
@@ -1068,6 +1134,8 @@ Click here to see output
 </div>
 <p>Now that our data has the right format and we are sure we have all the observations we might want to do some work to normalise the column names. This is done to make programming and refercing the columns easier. Whenever the is a space in the name of the column, we need to refer to the column using <strong>`Column name with spaces`</strong> which is not ideal. It’s generally good practice to not have any spaces. We can use the <strong>colnames()</strong> function to change some (or all of the column names).</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change on column name:</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Messy_data)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"Domain"</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1076,6 +1144,7 @@ Click here to see output
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Messy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier             Date         Domain            Frequency   
  Length:4           Min.   :2002   Length:4           Min.   :12.0  
@@ -1097,7 +1166,10 @@ Click here to see output
 </div>
 <p>The <strong>Janitor</strong> package offers an automated solution for many header issues.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'janitor'</code></pre>
@@ -1107,16 +1179,22 @@ Attaching package: 'janitor'</code></pre>
 
     chisq.test, fisher.test</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>Messy_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>), <span class="at">Year =</span> <span class="fu">c</span>(<span class="st">"2002"</span>, <span class="st">"2003"</span>, <span class="st">"2009"</span>, <span class="st">"2010"</span>), <span class="st">`</span><span class="at">Cool Domain</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K"</span>, <span class="st">"B60C"</span>), <span class="at">Frequency =</span> <span class="fu">c</span>(<span class="st">"42"</span>, <span class="st">"21"</span>, <span class="st">"12"</span>, <span class="st">"NA"</span>),<span class="at">Alive =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span>, <span class="st">"FALSE"</span>, <span class="st">"FALSE"</span>, <span class="st">"FALSE"</span>), <span class="at">Country =</span> <span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Netherlands"</span>))</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the column names from the initial dataframe</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(Messy_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "ID"          "Year"        "Cool.Domain" "Frequency"   "Alive"      
 [6] "Country"    </code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning the column names</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>Messy_data <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(Messy_data)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">colnames</span>(Messy_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "id"          "year"        "cool_domain" "frequency"   "alive"      
 [6] "country"    </code></pre>
@@ -1135,6 +1213,8 @@ Attaching package: 'janitor'</code></pre>
 </ul>
 <p>The main difficulty with the actions is to identify how to apply the functions. Some functions can be applied directly to a whole column while other nedd to be applied using mapping functions. Let’s start with mathematical transformations:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we start by creating a dataset to work with</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Identifier =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4 "</span>), <span class="at">Date =</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>, <span class="dv">2010</span>), <span class="at">Domain =</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K "</span>, <span class="st">"B60C"</span>), <span class="at">Distance =</span> <span class="fu">c</span>(<span class="fl">62.1371</span>, <span class="fl">124.274</span>, <span class="fl">93.2057</span>, <span class="fl">186.411</span>), <span class="at">Active =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">Country =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Netherlands"</span>)))</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1143,6 +1223,7 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>KM <span class="ot">&lt;-</span> data<span class="sc">$</span>Distance <span class="sc">*</span> <span class="fl">1.609344</span></span>
 <span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier Date Domain Distance Active     Country        KM
 1        ID1 2002   B60C  62.1371   TRUE      France  99.99997
@@ -1153,8 +1234,11 @@ Attaching package: 'janitor'</code></pre>
 </div>
 <p>We can also round this up. The <strong>round()</strong> function takes two arguments, a first will be the data, the second will be the number of decimals:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>KM <span class="ot">&lt;-</span> <span class="fu">round</span>(data<span class="sc">$</span>KM, <span class="dv">2</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier Date Domain Distance Active     Country  KM
 1        ID1 2002   B60C  62.1371   TRUE      France 100
@@ -1165,8 +1249,11 @@ Attaching package: 'janitor'</code></pre>
 </div>
 <p>We notice that for some of the domains there is a trailing whitespace, for example we have “B29K” in the data. These can be removed with the <strong>trimws()</strong> function. These whitespaces can also be created when we split data. It’s good practise to always check this and remove any space to avoid unnecessary mistakes.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Domain <span class="ot">&lt;-</span> <span class="fu">trimws</span>(data<span class="sc">$</span>Domain)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier Date Domain Distance Active     Country  KM
 1        ID1 2002   B60C  62.1371   TRUE      France 100
@@ -1177,7 +1264,10 @@ Attaching package: 'janitor'</code></pre>
 </div>
 <p>Suppose that we want to change the labels for the countries. It’s much more common to use ISO-2 level codes for countries. The <strong>gsub()</strong> function for the replacement of text. The <strong>gsub()</strong> function requires three arguments: the patter to search, the pattern to replace with and the data. Caution while using this function since it searches for the pattern even withing words. If one searches for the string “land” to replace it with “country”, then the string “netherlands” will become “nethercountrys”.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.4
@@ -1191,11 +1281,14 @@ Attaching package: 'janitor'</code></pre>
 ✖ dplyr::lag()     masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"France"</span>, <span class="st">"FR"</span>, data<span class="sc">$</span>Country)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Netherlands"</span> , <span class="st">"NL"</span>,data<span class="sc">$</span>Country)</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  data<span class="sc">$</span>Country <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Germany"</span> ,<span class="st">"DE"</span>,data<span class="sc">$</span>Country)</span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier Date Domain Distance Active Country  KM
 1        ID1 2002   B60C  62.1371   TRUE      FR 100
@@ -1206,15 +1299,20 @@ Attaching package: 'janitor'</code></pre>
 </div>
 <p>In the special case of categorical variables, we can also use the <strong>dplyr</strong> package to replace strings using the <strong>case_when</strong> function. It is a flexible and powerful function that allows you to perform conditional operations on a vector or data frame, similar to a series of nested if-else statements. It’s especially useful when you need to create or modify variables in your data based on specific conditions. The syntax follows:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  condition1 <span class="sc">~</span> result1,</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  condition2 <span class="sc">~</span> result2,</span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  condition3 <span class="sc">~</span> result3,</span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  ...</span>
 <span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>In the case of changing categories, if we want to switch the name of the country for the ISO identifyers of the countries:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Identifier =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4 "</span>), <span class="at">Date =</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>, <span class="dv">2010</span>), <span class="at">Domain =</span> <span class="fu">c</span>(<span class="st">"B60C"</span>, <span class="st">"B29K"</span>,<span class="st">"B29K "</span>, <span class="st">"B60C"</span>), <span class="at">Distance =</span> <span class="fu">c</span>(<span class="fl">62.1371</span>, <span class="fl">124.274</span>, <span class="fl">93.2057</span>, <span class="fl">186.411</span>), <span class="at">Active =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>), <span class="at">Country =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">"France"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Netherlands"</span>)))</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1225,6 +1323,7 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Identifier Date Domain Distance Active Country
 1        ID1 2002   B60C  62.1371   TRUE      FR
@@ -1302,6 +1401,8 @@ Attaching package: 'janitor'</code></pre>
 <p>The first column has textual data that is used as a key for each row. The Year should be considered either as an integer or a date. This will depend upon the type of analysis you want to perform. Specifically time series analysis will require this to be a date, while it’s enough for other analyses to ensure that it is an integer. The most common issue with this type of observation is that the year is considered as text instead of a number. If you see any ““” next to your numbers this is a bad sign which indicates that it is in fact, text.</p>
 <p>The “Cool Domain” contains classifications which we want to be textual values. “Frequency” will need to be an integer while “Alive” we want to be a boolean. For each of the formats there is a function to test whether or not the format is the one we expect. These functions are usually in the form of <strong>is_numeric_dtype()</strong>, <strong>is_bool_dtype()</strong>, <strong>is_string_dtype()</strong>. The argument is then simply the column of the dataframe or an observation. Suppose we create the previous dataframe in Python:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'ID'</span> : [<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>], </span>
@@ -1314,16 +1415,23 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the information in the column Year is numeric</span></span>
 <span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>pd.api.types.is_numeric_dtype(dataframe[<span class="st">'Year'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the information in the column is logic</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>pd.api.types.is_bool_dtype(dataframe[<span class="st">'Alive'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the information in the column is character</span></span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>pd.api.types.is_string_dtype(dataframe[<span class="st">'ID'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
@@ -1336,6 +1444,8 @@ Attaching package: 'janitor'</code></pre>
 </ul>
 <p>This can also be done in a more consise way with the <strong>dataframe.describe()</strong> function. This compute, for each of the columns, some statistics and provides the class of the class of the variables. This comes in handy as it allows us verify not only the class of the variables but also the distribution:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'ID'</span> : [<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>], </span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span> : [<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>], </span>
@@ -1345,6 +1455,7 @@ Attaching package: 'janitor'</code></pre>
 <span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>dataframe <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>dataframe.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              Year  Frequency
 count     3.000000   3.000000
@@ -1359,6 +1470,8 @@ max    2009.000000  42.000000</code></pre>
 </div>
 <p>Missing values in a dataframe will be automatically ignored. We can also check the types of each variable to ensure that it corresponds to what we want (integers are integers, text is text, etc). The latter can be done with the <strong>.dftypes</strong> function.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'ID'</span> : [<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>], </span>
@@ -1372,10 +1485,13 @@ max    2009.000000  42.000000</code></pre>
 <span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>df.describe()</span>
 <span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>In this output we can see that the <strong>None</strong> value is ignored and the statistics are computed. The format of the variables is shown: ID is considered “object” signifying that has no specific nature (object is a generic format for anything used in Python). <em>int64</em> represents an integer, <em>float64</em> represents a reel number, <em>bool</em> is a boolean operator.</p>
 <p>Given that we created the dataframe ourselves we can be relatively sure that the data was is the right format. However, often enough when we download data from online sources, we run into issues. If the format is not as expected there are different functions that allows us to transform the format of the data. Mainly we use <strong>.astype(float)</strong>, <strong>.astype(int)</strong> and <strong>.astype(str)</strong>.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'ID'</span> : [<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>], </span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span> : [<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>, <span class="dv">2010</span>], </span>
@@ -1396,6 +1512,7 @@ max    2009.000000  42.000000</code></pre>
 <span id="cb67-18"><a href="#cb67-18" aria-hidden="true" tabindex="-1"></a><span class="co"># We first need to take care of the missing value</span></span>
 <span id="cb67-19"><a href="#cb67-19" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Frequency'</span>] <span class="op">=</span> df[<span class="st">'Frequency'</span>].astype(<span class="bu">int</span>)</span>
 <span id="cb67-20"><a href="#cb67-20" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>ID              object
 Year             int64
@@ -1409,6 +1526,8 @@ dtype: object</code></pre>
 </div>
 <p>Now that our data has the right format and we are sure we have all the observations we might want to do some work to normalise the column names. This is done to make programming and refercing the columns easier. Whenever the is a space in the name of the column, we need to refer to the column using <strong>`Column name with spaces`</strong> which is not ideal. It’s generally good practice to not have any spaces. We can use the <strong>pyjanitor</strong> package to automate this process:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> janitor</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1417,6 +1536,7 @@ dtype: object</code></pre>
 <span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'PM(µ &gt;3)'</span>: [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]}</span>
 <span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Column 1  Column (2)  PM(µ &gt;3)
 0       1.0         NaN         9
@@ -1424,9 +1544,12 @@ dtype: object</code></pre>
 2       NaN         7.0        11
 3       4.0         8.0        12</code></pre>
 </div>
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using clean_pandas</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.clean_names()</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>   column_1  column_2_  pm_µ_&gt;3_
 0       1.0        NaN         9

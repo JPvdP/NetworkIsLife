@@ -311,12 +311,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="step-1.-we-install-python-for-r.">Step 1. We install python for R.</h3>
 <p>We are going to install a light version of python to run from R. We will not use the python language but an R interface. It will however be possible to program in Python from Rstudio if you want to do this for another reason. The <strong>reticulate</strong> package allows this R-Python interface.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"reticulate"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># for windows users, install GIT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We now install python from R in addition to a light version of anaconda. The combination of these installs allow you to create an environment from which to work. R will be able to find all that is required since it standardises all the information it needs in this environment. You only have to run the <strong>virtualenv_create(“DAFS”)</strong> once to create the environment. Later on you only have to use the <strong>use_virtualenv(“DAFS”)</strong> to load the environment when you want to use it. Note that <em>DAFS</em> is the name of the environment, you can change this to whatever you want.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_python</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart R manually</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_miniconda</span>()</span>
@@ -327,12 +332,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">use_virtualenv</span>(<span class="st">"DAFS"</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># note that when you start this script the virtualenv_create function is no longer required. You only run it once to create the environment.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="step-2.-we-install-an-interface-for-huggingface." class="level3">
 <h3 class="anchored" data-anchor-id="step-2.-we-install-an-interface-for-huggingface.">Step 2. We install an interface for huggingface.</h3>
 <p>We now install the interface to the huggingface website. We then need to install some python dependencies. It’s best to restart R when this is done.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"usethis"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cli"</span>)</span>
@@ -341,12 +349,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"hfhub"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>huggingfaceR<span class="sc">::</span><span class="fu">hf_python_depends</span>()</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We now install a couple of important Python packages that will allow us to load and use the models we want to use from huggingface:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_install</span>(<span class="st">"transformers"</span>) <span class="co"># so we can use the models that are trained on tensorflow</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">py_install</span>(<span class="st">"torch"</span>) <span class="co"># so we can use the models that are trained on pytorch</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -354,40 +366,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="now-we-install-the-models-and-perform-ner">Now we install the models and perform NER!</h2>
 <p>Now we can start downloading the models. Let’s start by loading a bert model trained for NER. We add the argument <em>aggregation_strategy= “simple</em> to get an output that inclused readable tokens and not a list of syllable level tokens (cf.&nbsp;slides from the lecture). For NER, we will use the following model: <a href="https://huggingface.co/dslim/bert-base-NER">bert-base-NER</a>. If you have more patience and computation power <a href="https://huggingface.co/dslim/bert-large-NER">bert-large-NER</a> is also an option. The <strong>hf_load_pipeline</strong> will download the models directly and put them to use.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>NER_extract <span class="ot">&lt;-</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"dslim/bert-large-NER"</span>, <span class="at">task =</span> <span class="st">"ner"</span>, <span class="at">aggregation_strategy =</span> <span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Let’s get a sample text and try it out.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"The 2024 edition of The European 5G Conference will take place on 30-31 January at the Hotel nhow Brussels Bloom. Now, in its 8th year, the conference has an established reputation as Brussels’ leading meeting place for discussion on 5G policy. Registration is now available – secure your place today. The event will, once again, provide the opportunity to hear from high-level policymakers and industry stakeholders on key themes such as investment, security, sustainability, emerging business models, and connectivity. It will provide an update on progress that has been made towards the 2030 ‘Path to the Digital Decade’ targets, as well as offering a first opportunity to examine the outcomes from WRC-23 and at what this may mean for the future connectivity environment around 5G and future technologies. By looking back at the lessons learnt to date and forward to the path towards 5G Advanced and 6G, the event will provide a comprehensive insight into all the key policy aspects that are shaping the 5G ecosystem in Europe."</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> <span class="fu">NER_extract</span>(text)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#transform output into something readable:</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(extracted_NE, data.frame)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>extracted_NE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We can do the same with a different model that is capable of treating multiple languages. The basic structure is the same. We change the links to the models, and adjust what we download (tensor or pytorch):</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multilanguage_NER <span class="ot">=</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">tokenizer =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">task =</span> <span class="st">"ner"</span>, <span class="at">aggregation_strategy=</span><span class="st">"simple"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> <span class="fu">multilanguage_NER</span>(text)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(test_multi, data.frame)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>test_multi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="and-now-sentiment-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="and-now-sentiment-analysis">And now Sentiment analysis</h2>
 <p>The workflow is the same, we just need to find the correct models:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sentiment_classifier <span class="ot">&lt;-</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"lxyuan/distilbert-base-multilingual-cased-sentiments-student"</span>, <span class="at">tokenizer =</span> <span class="st">"lxyuan/distilbert-base-multilingual-cased-sentiments-student"</span>, <span class="at">top_k =</span> <span class="dv">4</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sent  <span class="ot">&lt;-</span> <span class="fu">sentiment_classifier</span>(text)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sent <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(sent, data.frame)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>other type of model:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># other type</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>subj_classifier <span class="ot">=</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"cffl/bert-base-styleclassification-subjective-neutral"</span>, <span class="at">tokenizer =</span> <span class="st">"cffl/bert-base-styleclassification-subjective-neutral"</span>, <span class="at">task=</span><span class="st">"text-classification"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>subj <span class="ot">&lt;-</span> <span class="fu">subj_classifier</span>(text)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>subj <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(subj, data.frame)</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>subj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="apply-this-to-our-data" class="level2">
@@ -395,6 +422,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The previous sections have shown how to use NER and sentiment analysis on a text. We now need to run this over a corpus. This means building a function that will allow us to automate the execution of the tasks.</p>
 <p>Start by importing the lexis uni data used in the previous tutorial. For this tutorial, this data is stored in the “LN_dataframe” object. If this takes too long to run, you can always change the NER system. For a faster system use the “dslim/bert-base-NER” model at the beginning.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"LN_dataframe.rdata"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the text we want to analyse is in the "Article" column</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>NER_function <span class="ot">=</span> <span class="cf">function</span>(data, score_thresh){</span>
@@ -420,9 +449,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>NER_results <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(NER_results, data.frame)</span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># this can take a while so we save the results</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(NER_results, <span class="at">file =</span> <span class="st">"NER_results.rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>If your computer is a bit slower (or you want to run this a little bit at a time), you can also use a loop:</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we start by adding the columns we want to add</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>LN_dataframe_NER <span class="ot">&lt;-</span> LN_dataframe <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="st">"LOC"</span> <span class="ot">=</span> <span class="cn">NA</span>, <span class="st">"ORG"</span> <span class="ot">=</span> <span class="cn">NA</span>, <span class="st">"PER"</span> <span class="ot">=</span> <span class="cn">NA</span>, <span class="st">"MISC"</span><span class="ot">=</span> <span class="cn">NA</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(LN_dataframe)[<span class="dv">1</span>]){</span>
@@ -442,6 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  LN_dataframe_NER[i,<span class="dv">12</span><span class="sc">:</span><span class="dv">15</span>] <span class="ot">&lt;-</span> output_df</span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(LN_dataframe_NER, <span class="at">file =</span> <span class="st">"LN_dataframe_NER.rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Once you have all the results in the dataframe, you can start the analysis with the tools you learned in previous tutorials.</p>
 </section>
@@ -449,12 +482,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="connecting-topics-to-the-initial-dataframe">Connecting Topics to the initial dataframe</h2>
 <p>In the previous tutorial we extracted topics, now let’s connect the topics to the dataframe so that we know which document connects to which topic.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>most_likely_topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(topics_model)<span class="co"># if you want THE most likely topic</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>most_likely_topics <span class="ot">&lt;-</span> <span class="fu">topics</span>(topics_model, <span class="at">k =</span> <span class="dv">3</span>) <span class="co"># if you want the 3 most likely</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># organise this data a bit</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># when requesting more than one topic, you need to transpose the df:</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>most_likely_topics <span class="ot">&lt;-</span> <span class="fu">t</span>(most_likely_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 
