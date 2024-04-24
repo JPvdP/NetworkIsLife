@@ -119,7 +119,7 @@ data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
 
 The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list:
 
-```{python}
+```{python, eval = FALSE}
 #| eval: false
 data = data[['abstract']] # we first select only the column with the text
 data = data(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() # transform the df into a list
@@ -131,7 +131,8 @@ First up are the embeddings we want to use for the data. Embeddings in text mini
 ![](imgs/bertopic/Embeddings_1.png)
 
 For this tutorial we pick a small, low-weight embedding model to not waste too much time on computation. Other models are available, check [Hugging Face](https://huggingface.co/datasets?search=embedding) for inspiration.
-```{python}
+
+```{python, eval = FALSE}
 #| eval: false
 # 1. Get the embeddings
 from sentence_transformers import SentenceTransformer
@@ -163,7 +164,7 @@ This dimensionality reduction relies on different parameters that heavily influe
 
 
 
-```{python}
+```{python, eval = FALSE}
 #| eval: false
 # 2. Reduce the dimensions of the embeddings
 from umap import UMAP
@@ -182,7 +183,7 @@ Once we have reduced the dimensions of the data, we need to cluster the terms to
 
 
 
-```{python}
+```{python, eval = FALSE}
 #| eval: false
 # 3. Control for the number of topics
 from hdbscan import HDBSCAN
@@ -190,13 +191,14 @@ hdbscan_model = HDBSCAN(min_cluster_size = 7, metric = "euclidean", cluster_sele
 ```
 
 
-```{python}
+```{python, eval = FALSE}
 #| eval: false
 # 4. prep the text
 from sklearn.feature_extraction.text import CountVectorizer
 vect_model = CountVectorizer(stop_words = "english", min_df = 2, ngram_range = (1,1)) 
 ```
-```{python}
+
+```{python, eval = FALSE}
 #| eval: false
 # 5. representation
 from bertopic.representation import KeyBERTInspired, MaximalMarginalRelevance, PartOfSpeech
@@ -207,7 +209,7 @@ mmr_model = MaximalMarginalRelevance(diversity = 0.3)
 
 ```
 
-```{python}
+```{python, eval = FALSE}
 #| eval: false
 representation_model = {
     "keyBERT": keybert_model,
