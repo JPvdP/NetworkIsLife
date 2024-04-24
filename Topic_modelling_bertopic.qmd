@@ -85,7 +85,7 @@ To install bertopic in our environment use pip as shown below, between brackets 
 ![](imgs/bertopic/Packages_Bertopic_1.png)
 
 
-```{python, eval=FALSE}
+```{r, eval=FALSE}
 #| eval: false #
 # now do the same for other packages:
 # pip install ipywidgets
@@ -106,7 +106,7 @@ We should now be good to go!
 
 We start by loading required packages
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 import pandas as pd
@@ -116,7 +116,7 @@ from bertopic import BERTopic
 
 Once the packages have loaded correctly we need to import some data. For the purpose of this tutorial we will import a csv file. But you can technically import any data format that contains text. In the following line, replace the name of the file with yours. For simplicity, the data is stored at the root where python in running. For windows users this is the folder that has the same name as your login user name.
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
@@ -124,7 +124,7 @@ data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
 
 The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list:
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 data = data[['abstract']] # we first select only the column with the text
@@ -138,7 +138,7 @@ First up are the embeddings we want to use for the data. Embeddings in text mini
 
 For this tutorial we pick a small, low-weight embedding model to not waste too much time on computation. Other models are available, check [Hugging Face](https://huggingface.co/datasets?search=embedding) for inspiration.
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 # 1. Get the embeddings
@@ -171,7 +171,7 @@ This dimensionality reduction relies on different parameters that heavily influe
 
 
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 # 2. Reduce the dimensions of the embeddings
@@ -191,7 +191,7 @@ Once we have reduced the dimensions of the data, we need to cluster the terms to
 
 
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 # 3. Control for the number of topics
@@ -200,7 +200,7 @@ hdbscan_model = HDBSCAN(min_cluster_size = 7, metric = "euclidean", cluster_sele
 ```
 
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 # 4. prep the text
@@ -208,7 +208,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 vect_model = CountVectorizer(stop_words = "english", min_df = 2, ngram_range = (1,1)) 
 ```
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 # 5. representation
@@ -218,7 +218,7 @@ keybert_model = KeyBERTInspired()
 mmr_model = MaximalMarginalRelevance(diversity = 0.3)
 ```
 
-```{python, eval = FALSE}
+```{r, eval = FALSE}
 #| eval: false #
 #| echo: fenced #
 representation_model = {
