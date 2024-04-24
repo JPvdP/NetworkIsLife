@@ -43,6 +43,7 @@ format:
     extra_dependencies: ['amsmath', 'fontawesome5', 'tikz-network', 'xkeyval']
     css: styles.css
     toc: true
+    code-fold: true
 
 editor: visual
 
