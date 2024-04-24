@@ -76,7 +76,7 @@ Blocks can be easily added and removed as you develop your code. Note that addin
 
 To use Bertopic we need a certain number of packages. We will first install the basic requirements. The installation of packages in Python is done with the **pip** command. Note that since we use anaconda, in a specific environment, the packages will be installed in this environment and hence will not be accessible from other environments. This has as a consequence that we sometimes have to install the same package multiple times in different environments.
 
-To install bertopic in our environment, we simply write *pip install bertopic*, between brackets you should see the * appear indicating that the code is running, and slowly you will see the different steps appearing underneath the code block:
+To install bertopic in our environment use pip as shown below, between brackets you should see the * appear indicating that the code is running, and slowly you will see the different steps appearing underneath the code block:
 
 
 ![](imgs/bertopic/Packages_Bertopic_1.png)
