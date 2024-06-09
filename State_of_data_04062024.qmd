@@ -1,9 +1,3 @@
----
-title: "ESMEE_State_of_Data"
-format: html
-editor: visual
----
-
 ## State of Data
 
 This document describes the current state of the available data in the ESMEE project. Given that we continuously add and improve upon the data we create this webpage, so that we can easily update the information and ensure we all have the latest information.
