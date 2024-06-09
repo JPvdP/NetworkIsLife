@@ -73,7 +73,9 @@ Blocks can be easily added and removed as you develop your code. Note that addin
 
 ### Installing microsoft visual C++ build tools
 
+Download and install C++ visual build tools:
 
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
 ### Installing Bertopic
 
@@ -90,7 +92,7 @@ To install bertopic in our environment use pip as shown below, between brackets 
 # now do the same for other packages:
 # pip install ipywidgets
 # pip install pandas
-# pip install space
+# pip install spacy
 ```
 
 
@@ -128,7 +130,7 @@ The input data for bertopic needs to have a specific format: it need to be a lis
 #| eval: false #
 #| echo: fenced #
 data = data[['abstract']] # we first select only the column with the text
-data = data(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() # transform the df into a list
+data = data.apply(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() # transform the df into a list
 ```
 
 Now that the data is in the right format we start with the setting of the parameters of the model.
@@ -226,6 +228,87 @@ representation_model = {
     "MMR": mmr_model,
  #  "POS": pos_model
 }
+```
+
+```{r, eval = FALSE}
+#| eval: false
+# 5. compute the topics and the probabilities
+topic_model = BERTopic(
+    embedding_model = embed_model,
+    umap_model = umap_model,
+    hdbscan_model = hdbscan_model,
+    vectorizer_model = vect_model,
+    representation_model = representation_model,
+    top_n_words = 20,
+    verbose = True
+)
+
+
+#topics, probs = topic_model_scopus.fit_transform(data_scopus, embeddings)
+topic_model.fit(data)
+```
+
+
+```{r, eval = FALSE}
+#| eval: false
+hier_topics = topic_model_scopus.hierarchical_topics(data_keep)
+topic_model_scopus.visualize_hierarchical_documents(data_keep, hier_topics)
+```
+
+```{r, eval = FALSE}
+#| eval: false
+topic_model_scopus.visualize_hierarchy(hierarchical_topics=hier_topics)
+```
+
+
+```{r, eval = FALSE}
+#| eval: false
+# Assuming `documents` is your list of documents and you have already fitted a BERTopic model:
+# topic_model = BERTopic().fit(documents)
+# Retrieve all the unique topics (excluding -1 which usually stands for outliers/noise)
+topics = sorted(list(topic_model_scopus.get_topics().keys()))
+# Initialize a list to hold your data
+data2 = []
+# Iterate over each topic to get the top 20 words and their scores
+for topic in topics:
+    if topic == -1:  # Optionally skip the outliers topic
+        continue
+    words, scores = zip(*topic_model_scopus.get_topic(topic))
+    # Append to your data list
+    for word, score in zip(words, scores):
+        data2.append({"Topic": topic, "Word": word, "Score": score})
+# Create a DataFrame from your data
+topic_words_df = pd.DataFrame(data2)
+# Now `topic_words_df` contains the top 20 words per topic along with their scores
+print(topic_words_df)
+# If you want to save this to a CSV file
+topic_words_df.to_csv("top_words_per_topic_crunchbase.csv", index=False)
+```
+
+```{r, eval = FALSE}
+#| eval: false
+topic_model_scopus.visualize_barchart(topics=[1,2,3,4,5,6,7,8])
+```
+
+
+
+```{r, eval = FALSE}
+#| eval: false
+plop = topic_model_scopus.get_document_info(data_keep)
+plop.to_csv('CE_topics.csv', index=False)
+```
+
+
+```{r, eval = FALSE}
+#| eval: false
+topic_distr, _ = topic_model.approximate_distribution(docs)
+topic_model.visualize_distribution(topic_distr[1])
+```
+
+
+```{r, eval = FALSE}
+#| eval: false
+topic_model.visualize_heatmap()
 ```
 
 
