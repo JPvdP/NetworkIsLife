@@ -1,4 +1,4 @@
-## State of Data
+# State of Data
 
 This document describes the current state of the available data in the ESMEE project. Given that we continuously add and improve upon the data we create this webpage, so that we can easily update the information and ensure we all have the latest information.
 
@@ -22,7 +22,7 @@ We have the following data distribution of the patents:
 
 ```{r, include=FALSE}
 library(tidyverse)
-load("~/Library/CloudStorage/OneDrive-UniversiteitUtrecht/3_ecosystem_project/DEP_Data/DEP_Patents/DEP_Regpat_final_20240308.rdata")
+load("stateofdatadata/DEP_Regpat_final_20240308.rdata")
 
 regpat_per_year = regpat %>% group_by(year) %>% summarise("freq"=n_distinct(pct_nbr))
 couleur = "#4CAF50"
@@ -108,7 +108,7 @@ plot(p)
 ```{r, include=F}
 library(rnaturalearth)
 library(rnaturalearthdata)
-load("~/Library/CloudStorage/OneDrive-UniversiteitUtrecht/3_ecosystem_project/DEP_Data/DEP_Patents/DEP_regpat_provincie_20240325.rdata")
+load("stateofdatadata/DEP_regpat_provincie_20240325.rdata")
 regpat_players_per_province = regpat %>% group_by(provincie) %>% summarise("players"=n_distinct(pct_nbr))
 
 
@@ -133,7 +133,7 @@ plot(p)
 ### players per province
 
 ```{r, include=FALSE}
-load("~/Library/CloudStorage/OneDrive-UniversiteitUtrecht/3_ecosystem_project/DEP_Data/DEP_Patents/DEP_regpat_provincie_20240325.rdata")
+load("stateofdatadata/DEP_regpat_provincie_20240325.rdata")
 regpat_players_per_province = regpat %>% group_by(provincie) %>% summarise("players"=n_distinct(final_harmonized2))
 
 
@@ -160,7 +160,7 @@ plot(p2)
 # patents per year per province
 
 ```{r, include=FALSE}
-load("~/Library/CloudStorage/OneDrive-UniversiteitUtrecht/3_ecosystem_project/DEP_Data/DEP_Patents/DEP_regpat_provincie_20240325.rdata")
+load("stateofdatadata/DEP_regpat_provincie_20240325.rdata")
 Regpat_per_year_per_prov = regpat %>% group_by(year, provincie) %>% summarise("freq" = n_distinct(pct_nbr))
 Regpat_per_year_per_prov = na.omit(Regpat_per_year_per_prov)
 p2 = ggplot(Regpat_per_year_per_prov, aes(x = as.factor(year), y = freq, fill = provincie)) +
