@@ -2,6 +2,22 @@
 
 This document describes the current state of the available data in the ESMEE project. Given that we continuously add and improve upon the data we create this webpage, so that we can easily update the information and ensure we all have the latest information.
 
+In short the datasources we currently have are:
+
+| Type          | Source          | Time frame | Regionalised  |  Ecosystem Element |
+|--------------------|-----------------|------------|---|---|
+| Patents            | Regpat/Lens.org | 1800-Today | Yes - by hand  | Networks, Knowledge, Talent, Leadership|
+| Publications       | Lens.org        | 1800-Today | Yes - by hand  | Networks, Knowledge, Talent, Leadership  |
+| European Projects  | EU              | Fp1-2024   | Yes |  Networks, Knowledge, Leadership |
+| Keep/Interreg      | EU              |            | Yes  | Networks, Knowledge, Leadership  |
+| Startups           | Crunchbase      | 2010-2024  | Yes  | Culture, Finance   |
+| Subsidies          | RVO             |            | by hand  | Formal Institutions  |
+| News               | NPO             | 2010-2024  | by hand  | Culture, Leadership, Demand, Formal Institutions |
+| Trademarks/designs | EU              |            | by hand  | Culture    |
+| Eco-label          | EU              |            | by hand  | Culture   |
+
+
+
 ## Patents
 
 Patents are used as an indicator of technological innovation. Each patent family contains information on a specific invention that at the time of submission was new to the state of the art. When all patent information is aggregated into a database we have a valuable source of knowledge on technological innovation.
@@ -195,7 +211,7 @@ Patents contain a variety of variables that we can use for the analysis of innov
 All this data sounds great, but patents are a complex data source and not all information is perfectly available. In the following table we summarise the different fields of interest in patent data.
 
 | Category        | Field             | Description                                                                                                                                                                                                                      |
-|-----------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------|----------|----------------------------------------------------|
 | Dates           | Priority          |                                                                                                                                                                                                                                  |
 |                 | Application       |                                                                                                                                                                                                                                  |
 |                 | Publication       |                                                                                                                                                                                                                                  |

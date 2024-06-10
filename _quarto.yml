@@ -35,6 +35,9 @@ website:
         - href: Topic_modelling_bertopic.qmd
         - href: NER.qmd
         - href: Text_networks.qmd
+      - section: "State of Data"
+        contents:
+        - href: State_of_data_04062024.qmd
 
 
 
