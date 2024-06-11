@@ -1,0 +1,49 @@
+# Run Bertopic
+
+The *topic model* that we use will just be the aggregation of all the prepared steps:
+
+## Classic Topic Modelling:
+
+```{r, eval=FALSE}
+topics, probs = topic_model.fit_transform(data)
+```
+
+
+### Visualisation
+
+Create a plot with the documents projected in a two dimensional space
+
+```{r, eval = FALSE}
+topic_model.visualize_documents(data)
+```
+
+![](imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png)
+
+Check out the topics:
+
+```{r, eval = FALSE}
+topic_model.visualize_barchart(top_n_topics = 10)
+```
+![](imgs/Topic_mod_workshop_images/Topics_monogram.png)
+
+The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)
+
+We can run the model again with bi-grams for example:
+
+![](imgs/Topic_mod_workshop_images/Topics_bigram.png)
+
+
+```{r, eval = FALSE}
+topic_info = topic_model.get_topic_info()
+topic_info
+```
+
+![](imgs/Topic_mod_workshop_images/topic_info_output.png)
+
+
+## Hierchical Topic Models
+
+```{r, eval = FALSE}
+my_hier_topic_model = topic_model.hierarchical_topics(data)
+my_hier_topic_model.visualize_hierarchical_documents(data, my_hier_topic_model)
+```
