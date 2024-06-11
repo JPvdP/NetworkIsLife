@@ -260,12 +260,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Topic modelling with Bertopic</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./NER.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Named Entity Recognition</span></a>
   </div>
@@ -295,6 +289,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Topic Modelling Workshop</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing Bertopic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (details)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic_nodetails.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (TL;DR version)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run Bertopic</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -311,18 +340,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#what-data-do-we-have" id="toc-what-data-do-we-have" class="nav-link" data-scroll-target="#what-data-do-we-have">What data do we have</a></li>
   <li><a href="#geographical-distribution-of-patents-in-the-netherlands" id="toc-geographical-distribution-of-patents-in-the-netherlands" class="nav-link" data-scroll-target="#geographical-distribution-of-patents-in-the-netherlands">geographical distribution of patents in the Netherlands</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#patents-per-100-companies-per-province" id="toc-patents-per-100-companies-per-province" class="nav-link" data-scroll-target="#patents-per-100-companies-per-province">patents per 100 companies per province</a>
-  <ul class="collapse">
-  <li><a href="#players-per-province" id="toc-players-per-province" class="nav-link" data-scroll-target="#players-per-province">players per province</a></li>
-  <li><a href="#patents-per-province-per-year" id="toc-patents-per-province-per-year" class="nav-link" data-scroll-target="#patents-per-province-per-year">patents per province per year</a></li>
-  </ul></li>
-  <li><a href="#patents-per-year-per-province" id="toc-patents-per-year-per-province" class="nav-link" data-scroll-target="#patents-per-year-per-province">patents per year per province</a>
-  <ul class="collapse">
-  <li><a href="#geolocalisation-of-patents-in-nl" id="toc-geolocalisation-of-patents-in-nl" class="nav-link" data-scroll-target="#geolocalisation-of-patents-in-nl">geolocalisation of patents in NL</a></li>
   <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis">Missing value analysis</a></li>
   <li><a href="#information-in-the-patent-database" id="toc-information-in-the-patent-database" class="nav-link" data-scroll-target="#information-in-the-patent-database">Information in the patent database</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -347,11 +367,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </colgroup>
 <thead>
 <tr class="header">
-<th>Type</th>
-<th>Source</th>
-<th>Time frame</th>
-<th>Regionalised</th>
-<th>Ecosystem Element</th>
+<th><strong>Type</strong></th>
+<th><strong>Source</strong></th>
+<th><strong>Time frame</strong></th>
+<th><strong>Regionalised</strong></th>
+<th><strong>Ecosystem Element</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -477,11 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="geographical-distribution-of-patents-in-the-netherlands" class="level3">
 <h3 class="anchored" data-anchor-id="geographical-distribution-of-patents-in-the-netherlands">geographical distribution of patents in the Netherlands</h3>
-</section>
-</section>
-</section>
-<section id="patents-per-100-companies-per-province" class="level1">
-<h1>patents per 100 companies per province</h1>
+<section id="patents-per-100-companies-per-province" class="level4">
+<h4 class="anchored" data-anchor-id="patents-per-100-companies-per-province">patents per 100 companies per province</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -496,8 +513,9 @@ give correct results for longitude/latitude data</code></pre>
 </div>
 </div>
 </div>
-<section id="players-per-province" class="level3">
-<h3 class="anchored" data-anchor-id="players-per-province">players per province</h3>
+</section>
+<section id="players-per-province" class="level4">
+<h4 class="anchored" data-anchor-id="players-per-province">players per province</h4>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in st_point_on_surface.sfc(sf::st_zm(x)): st_point_on_surface may not
@@ -512,12 +530,8 @@ give correct results for longitude/latitude data</code></pre>
 </div>
 </div>
 </section>
-<section id="patents-per-province-per-year" class="level3">
-<h3 class="anchored" data-anchor-id="patents-per-province-per-year">patents per province per year</h3>
-</section>
-</section>
-<section id="patents-per-year-per-province" class="level1">
-<h1>patents per year per province</h1>
+<section id="patents-per-province-per-year" class="level4">
+<h4 class="anchored" data-anchor-id="patents-per-province-per-year">patents per province per year</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -527,8 +541,7 @@ give correct results for longitude/latitude data</code></pre>
 </div>
 </div>
 </div>
-<section id="geolocalisation-of-patents-in-nl" class="level3">
-<h3 class="anchored" data-anchor-id="geolocalisation-of-patents-in-nl">geolocalisation of patents in NL</h3>
+</section>
 </section>
 <section id="missing-value-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="missing-value-analysis">Missing value analysis</h3>
@@ -683,6 +696,7 @@ give correct results for longitude/latitude data</code></pre>
 </table>
 
 
+</section>
 </section>
 </section>
 

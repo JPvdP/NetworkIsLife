@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./feature_extraction.html">Text Mining</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic modelling with Bertopic</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Installing Bertopic</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,12 +260,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Topic modelling with Bertopic</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./NER.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Named Entity Recognition</span></a>
   </div>
@@ -295,6 +289,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Topic Modelling Workshop</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Installing Bertopic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (details)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic_nodetails.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (TL;DR version)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run Bertopic</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -305,16 +334,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#topic-modelling-with-bertopic" id="toc-topic-modelling-with-bertopic" class="nav-link active" data-scroll-target="#topic-modelling-with-bertopic">Topic modelling with Bertopic</a>
-  <ul class="collapse">
-  <li><a href="#installing-bertopic" id="toc-installing-bertopic" class="nav-link" data-scroll-target="#installing-bertopic">Installing Bertopic</a>
+  <li><a href="#installing-bertopic" id="toc-installing-bertopic" class="nav-link active" data-scroll-target="#installing-bertopic">Installing Bertopic</a>
   <ul class="collapse">
   <li><a href="#creating-a-virtual-environment-with-anaconda" id="toc-creating-a-virtual-environment-with-anaconda" class="nav-link" data-scroll-target="#creating-a-virtual-environment-with-anaconda">Creating a virtual environment with anaconda</a></li>
   <li><a href="#setting-up-jupyter" id="toc-setting-up-jupyter" class="nav-link" data-scroll-target="#setting-up-jupyter">Setting up Jupyter</a></li>
   <li><a href="#installing-microsoft-visual-c-build-tools" id="toc-installing-microsoft-visual-c-build-tools" class="nav-link" data-scroll-target="#installing-microsoft-visual-c-build-tools">Installing microsoft visual C++ build tools</a></li>
   <li><a href="#installing-bertopic-1" id="toc-installing-bertopic-1" class="nav-link" data-scroll-target="#installing-bertopic-1">Installing Bertopic</a></li>
-  <li><a href="#using-bertopic" id="toc-using-bertopic" class="nav-link" data-scroll-target="#using-bertopic">Using BERTopic</a></li>
-  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -325,10 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="topic-modelling-with-bertopic" class="level1">
-<h1>Topic modelling with Bertopic</h1>
-<section id="installing-bertopic" class="level2">
-<h2 class="anchored" data-anchor-id="installing-bertopic">Installing Bertopic</h2>
+<section id="installing-bertopic" class="level1">
+<h1>Installing Bertopic</h1>
 <section id="creating-a-virtual-environment-with-anaconda" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-virtual-environment-with-anaconda">Creating a virtual environment with anaconda</h3>
 <p>Imagine you have a toolbox where you keep all your tools. Each tool has a specific purpose: a hammer for nails, a screwdriver for screws, etc. Now, think of your computer as a large workshop where you can undertake various projects (like building software or analyzing data). For each project, you might need a different set of tools. Some projects might require a hammer and a saw, while others might need a screwdriver and a wrench.</p>
@@ -376,226 +399,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To use Bertopic we need a certain number of packages. We will first install the basic requirements. The installation of packages in Python is done with the <strong>pip</strong> command. Note that since we use anaconda, in a specific environment, the packages will be installed in this environment and hence will not be accessible from other environments. This has as a consequence that we sometimes have to install the same package multiple times in different environments.</p>
 <p>To install bertopic in our environment use pip as shown below, between brackets you should see the * appear indicating that the code is running, and slowly you will see the different steps appearing underneath the code block:</p>
 <p><img src="imgs/bertopic/Packages_Bertopic_1.png" class="img-fluid"></p>
+<p>Now do the same for other packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now do the same for other packages:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install ipywidgets</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install pandas</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install spacy</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install ipywidgets</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pip install pandas</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pip install spacy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once all the packages are installed we reload the kernel so that everything will be available for use. Click on the circular arrow in the menu:</p>
 <p><img src="imgs/bertopic/Packages_Bertopic_2.png" class="img-fluid"></p>
 <p>We should now be good to go!</p>
-</section>
-<section id="using-bertopic" class="level3">
-<h3 class="anchored" data-anchor-id="using-bertopic">Using BERTopic</h3>
-<p>We start by loading required packages</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">from bertopic import BERTopic</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Once the packages have loaded correctly we need to import some data. For the purpose of this tutorial we will import a csv file. But you can technically import any data format that contains text. In the following line, replace the name of the file with yours. For simplicity, the data is stored at the root where python in running. For windows users this is the folder that has the same name as your login user name.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">data = data[['abstract']] # we first select only the column with the text</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">data = data.apply(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() # transform the df into a list</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now that the data is in the right format we start with the setting of the parameters of the model. First up are the embeddings we want to use for the data. Embeddings in text mining are representations of words or phrases in a numerical form. These numerical representations capture the semantic meaning of the words or phrases, allowing machines to understand and process text more effectively. Think of embeddings as a way to convert words into vectors of numbers, where similar words are represented by similar vectors. This enables algorithms to analyze, compare, and make predictions based on the meaning of the text rather than just the raw text itself. There are multiple ways to do this, some embeddings have specific purposes (models for patents for instance), others are more general, some focus on one language, others on multiple. In the following image from Bandyopadhyay et al.&nbsp;2022 some words are positionned in space. The closer the words, the more proximity between them. What we download are basically the coordinates of the words in this space and replace each word with it’s coordinates. Doing this allows us to take into account the distance between the words rather than considering each word at the same distance from each other word.</p>
-<p><img src="imgs/bertopic/Embeddings_1.png" class="img-fluid"></p>
-<p>For this tutorial we pick a small, low-weight embedding model to not waste too much time on computation. Other models are available, check <a href="https://huggingface.co/datasets?search=embedding">Hugging Face</a> for inspiration.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in"># 1. Get the embeddings</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">from sentence_transformers import SentenceTransformer</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">embed_model = SentenceTransformer("all-MiniLM-L6-V2")</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>These embedding have a very high dimensionality. The high-dimensional embeddings can be quite complex and computationally expensive to cluster directly. UMAP helps by reducing the dimensionality of these embeddings. It maps the data into a lower-dimensional space (typically 2D or 3D for visualization purposes, but higher dimensions can be used for clustering), aiming to maintain the original data’s essential structure. Our data is usually of a lower dimension than that of the model. We therefore use a technique to reduce the dimension of the data. The Uniform Manifold Approximation and Projection (UMAP) technique is used for this.</p>
-<p>For example, we can represent our words in a three dimensional space based on our embeddings. This would look something like this:</p>
-<p><img src="imgs/bertopic/UMAP_1.png" class="img-fluid"></p>
-<p>The UMAP algorithm reduced the dimension of this data so that clustering algorithms can more efficiently identify clusters:</p>
-<p><img src="imgs/bertopic/UMAP_2.png" class="img-fluid"></p>
-<p>These images come from <a href="https://fernando-lunap-streamlit-apps-umap-dashboard-fqce9m.streamlit.app">this webiste</a> where you can interact with this data.</p>
-<p>This dimensionality reduction relies on different parameters that heavily influence the output, for a full explanation on this topic see <a href="https://umap-learn.readthedocs.io/en/latest/index.html">this webiste</a> . There are many more, but here we focus on the main ones:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 75%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>n_neighbors</td>
-<td>A larger value for n_neighbors encourages UMAP to take a broader view of the data structure, making it more focused on preserving the global data structure. Conversely, a smaller value makes UMAP focus more on local data structures.</td>
-</tr>
-<tr class="even">
-<td>n_components</td>
-<td>This specifies the number of dimensions to which the data should be reduced. For example, n_components = 5 means that UMAP will reduce the data to 5 dimensions. This is useful when you want to reduce dimensionality but retain more structure in multiple dimensions, which can be important for clustering algorithms that follow the dimensionality reduction</td>
-</tr>
-<tr class="odd">
-<td>min_dist</td>
-<td>This parameter controls how tightly UMAP is allowed to pack points together, which influences how much the data points in the low-dimensional representation can cluster together. Setting min_dist to 0.0 allows points to be packed together as closely as possible, leading to clumpier embeddings. This might be useful in highlighting local clusters at the expense of possibly losing some broader structure.</td>
-</tr>
-<tr class="even">
-<td>metric</td>
-<td>The distance metric used to measure the similarity between points in the high-dimensional space.</td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in"># 2. Reduce the dimensions of the embeddings</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">from umap import UMAP</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">umap_model = UMAP(n_neighbors = 30, n_components = 5, min_dist = 0.0, metric = "cosine", random_state = 42)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Once we have reduced the dimensions of the data, we need to cluster the terms together into topics. For this purpose the HDBSCAN algorithm is used.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>min_cluster_size</td>
-<td>the minimum size of clusters that HDBSCAN will consider valid</td>
-</tr>
-<tr class="even">
-<td>metric</td>
-<td>This is the distance metric used to measure the similarity or distance between points in the feature space</td>
-</tr>
-<tr class="odd">
-<td>cluster_selection_method</td>
-<td>This parameter determines how clusters are selected from the hierarchical tree generated during the clustering process. The ‘eom’ method focuses on finding clusters that persist over a significant range of cluster stability (i.e., clusters that have a lot of “excess of mass”). This tends to result in selecting larger, more prominent clusters and is generally more robust to noise. The alternative is ‘leaf’, which would consider all possible clusters at the leaves of the tree, often resulting in a larger number of smaller clusters.</td>
-</tr>
-<tr class="even">
-<td>prediction_data</td>
-<td>When set to True, this parameter instructs HDBSCAN to generate additional data about the cluster hierarchy and the soft clustering assignments, which can be used for predicting the cluster memberships of new, unseen data. This is particularly useful if you intend to use the clustering model as part of a production pipeline where new documents need to be automatically assigned to the existing clusters/topics identified during the initial clustering.</td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in"># 3. Control for the number of topics</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">from hdbscan import HDBSCAN</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">hdbscan_model = HDBSCAN(min_cluster_size = 7, metric = "euclidean", cluster_selection_method = 'eom', prediction_data = True)</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in"># 4. prep the text</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="in">from sklearn.feature_extraction.text import CountVectorizer</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="in">vect_model = CountVectorizer(stop_words = "english", min_df = 2, ngram_range = (1,1)) </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. representation</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="in">from bertopic.representation import KeyBERTInspired, MaximalMarginalRelevance, PartOfSpeech</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="in">import spacy</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="in">keybert_model = KeyBERTInspired()</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">mmr_model = MaximalMarginalRelevance(diversity = 0.3)</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| eval: false #</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">representation_model = {</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="in">    "keyBERT": keybert_model,</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="in">    "MMR": mmr_model,</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="in"> #  "POS": pos_model</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. compute the topics and the probabilities</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>topic_model <span class="ot">=</span> <span class="fu">BERTopic</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">embedding_model =</span> embed_model,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">umap_model =</span> umap_model,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">hdbscan_model =</span> hdbscan_model,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vectorizer_model =</span> vect_model,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">representation_model =</span> representation_model,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_n_words =</span> <span class="dv">20</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> True</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#topics, probs = topic_model_scopus.fit_transform(data_scopus, embeddings)</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.fit</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hier_topics <span class="ot">=</span> <span class="fu">topic_model_scopus.hierarchical_topics</span>(data_keep)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model_scopus.visualize_hierarchical_documents</span>(data_keep, hier_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model_scopus.visualize_hierarchy</span>(<span class="at">hierarchical_topics=</span>hier_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming `documents` is your list of documents and you have already fitted a BERTopic model:</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># topic_model = BERTopic().fit(documents)</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve all the unique topics (excluding -1 which usually stands for outliers/noise)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>topics <span class="ot">=</span> <span class="fu">sorted</span>(<span class="fu">list</span>(<span class="fu">topic_model_scopus.get_topics</span>()<span class="fu">.keys</span>()))</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize a list to hold your data</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">=</span> []</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterate over each topic to get the top 20 words and their scores</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> topic <span class="cf">in</span> topics<span class="sc">:</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> topic <span class="sc">==</span> <span class="sc">-</span><span class="dv">1</span><span class="sc">:</span>  <span class="co"># Optionally skip the outliers topic</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        continue</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    words, scores <span class="ot">=</span> <span class="fu">zip</span>(<span class="sc">*</span><span class="fu">topic_model_scopus.get_topic</span>(topic))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Append to your data list</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word, score <span class="cf">in</span> <span class="fu">zip</span>(words, scores)<span class="sc">:</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data2.append</span>({<span class="st">"Topic"</span><span class="sc">:</span> topic, <span class="st">"Word"</span><span class="sc">:</span> word, <span class="st">"Score"</span><span class="sc">:</span> score})</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame from your data</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>topic_words_df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data2)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Now `topic_words_df` contains the top 20 words per topic along with their scores</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(topic_words_df)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to save this to a CSV file</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_words_df.to_csv</span>(<span class="st">"top_words_per_topic_crunchbase.csv"</span>, <span class="at">index=</span>False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model_scopus.visualize_barchart</span>(<span class="at">topics=</span>[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plop <span class="ot">=</span> <span class="fu">topic_model_scopus.get_document_info</span>(data_keep)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plop.to_csv</span>(<span class="st">'CE_topics.csv'</span>, <span class="at">index=</span>False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>topic_distr, _ <span class="ot">=</span> <span class="fu">topic_model.approximate_distribution</span>(docs)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_distribution</span>(topic_distr[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_heatmap</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 
 
-</section>
 </section>
 </section>
 

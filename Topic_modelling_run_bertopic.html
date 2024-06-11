@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NetworkIsLife – intro_programming_functions</title>
+<title>NetworkIsLife – topic_modelling_run_bertopic</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Intro_programming_basic_operations.html">Intro to Programming</a></li><li class="breadcrumb-item"><a href="./Intro_programming_functions.html">Making functions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_run_bertopic.html">Run Bertopic</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -219,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_functions.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Intro_programming_functions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Making functions</span></a>
   </div>
 </li>
@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Run Bertopic</span></a>
   </div>
 </li>
@@ -334,7 +334,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#making-functions" id="toc-making-functions" class="nav-link active" data-scroll-target="#making-functions">Making functions</a></li>
+  <li><a href="#run-bertopic" id="toc-run-bertopic" class="nav-link active" data-scroll-target="#run-bertopic">Run Bertopic</a>
+  <ul class="collapse">
+  <li><a href="#classic-topic-modelling" id="toc-classic-topic-modelling" class="nav-link" data-scroll-target="#classic-topic-modelling">Classic Topic Modelling:</a>
+  <ul class="collapse">
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">Visualisation</a></li>
+  </ul></li>
+  <li><a href="#hierchical-topic-models" id="toc-hierchical-topic-models" class="nav-link" data-scroll-target="#hierchical-topic-models">Hierchical Topic Models</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -344,17 +351,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="making-functions" class="level2">
-<h2 class="anchored" data-anchor-id="making-functions">Making functions</h2>
-<p>This chapter discusses how to create a function</p>
+<section id="run-bertopic" class="level1">
+<h1>Run Bertopic</h1>
+<p>The <em>topic model</em> that we use will just be the aggregation of all the prepared steps:</p>
+<section id="classic-topic-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="classic-topic-modelling">Classic Topic Modelling:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>topics, probs <span class="ot">=</span> <span class="fu">topic_model.fit_transform</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="visualisation">Visualisation</h3>
+<p>Create a plot with the documents projected in a two dimensional space</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_documents</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png" class="img-fluid"></p>
+<p>Check out the topics:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_barchart</span>(<span class="at">top_n_topics =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="imgs/Topic_mod_workshop_images/Topics_monogram.png" class="img-fluid"></p>
+<p>The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)</p>
+<p>We can run the model again with bi-grams for example:</p>
+<p><img src="imgs/Topic_mod_workshop_images/Topics_bigram.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>topic_info <span class="ot">=</span> <span class="fu">topic_model.get_topic_info</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>topic_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="imgs/Topic_mod_workshop_images/topic_info_output.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="hierchical-topic-models" class="level2">
+<h2 class="anchored" data-anchor-id="hierchical-topic-models">Hierchical Topic Models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_hier_topic_model <span class="ot">=</span> <span class="fu">topic_model.hierarchical_topics</span>(data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_hier_topic_model.visualize_hierarchical_documents</span>(data, my_hier_topic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
