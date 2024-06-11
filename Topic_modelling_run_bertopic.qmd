@@ -47,3 +47,11 @@ topic_info
 my_hier_topic_model = topic_model.hierarchical_topics(data)
 my_hier_topic_model.visualize_hierarchical_documents(data, my_hier_topic_model)
 ```
+
+
+## Connect with other data
+
+Network
+
+
+

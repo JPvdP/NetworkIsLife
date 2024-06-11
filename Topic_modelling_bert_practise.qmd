@@ -1,4 +1,4 @@
-# Create the model (details)
+# Create the model (detailed)
 
 We start by loading required packages
 
@@ -147,5 +147,10 @@ By default, each document is assigned to one topic. However, base on the text an
 
 You are now ready to run the model!
 
+The code for this is the following:
+
+```{r, eval=FALSE}
+topics, probs = topic_model.fit_transform(data)
+```
 
 
