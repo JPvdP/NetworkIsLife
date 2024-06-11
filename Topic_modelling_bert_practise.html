@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bert_practise.html">Create the model (details)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bert_practise.html">Create the model (detailed)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -307,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Create the model (details)</span></a>
+ <span class="menu-text">Create the model (detailed)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -334,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#create-the-model-details" id="toc-create-the-model-details" class="nav-link active" data-scroll-target="#create-the-model-details">Create the model (details)</a>
+  <li><a href="#create-the-model-detailed" id="toc-create-the-model-detailed" class="nav-link active" data-scroll-target="#create-the-model-detailed">Create the model (detailed)</a>
   <ul class="collapse">
   <li><a href="#step-1-loading-the-data" id="toc-step-1-loading-the-data" class="nav-link" data-scroll-target="#step-1-loading-the-data">Step 1: Loading the data</a></li>
   <li><a href="#step-2-creating-the-embeddings" id="toc-step-2-creating-the-embeddings" class="nav-link" data-scroll-target="#step-2-creating-the-embeddings">Step 2: Creating the embeddings</a></li>
@@ -351,8 +351,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="create-the-model-details" class="level1">
-<h1>Create the model (details)</h1>
+<section id="create-the-model-detailed" class="level1">
+<h1>Create the model (detailed)</h1>
 <p>We start by loading required packages</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
@@ -544,6 +544,10 @@ Important
 </div>
 <p>By default, each document is assigned to one topic. However, base on the text analysis of the topics, each document can get a probability distribution for all the topics. If you prefer to have probabilities for each document to be assigned to each topic, add the <strong>calculate_probabilities = True</strong> option to the model.</p>
 <p>You are now ready to run the model!</p>
+<p>The code for this is the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>topics, probs <span class="ot">=</span> <span class="fu">topic_model.fit_transform</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
