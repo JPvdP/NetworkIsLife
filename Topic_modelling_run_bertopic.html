@@ -322,6 +322,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Run Bertopic</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_lda2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modelling with LDA</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -354,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="run-bertopic" class="level1">
 <h1>Run Bertopic</h1>
-<p>The <em>topic model</em> that we use will just be the aggregation of all the prepared steps:</p>
+<p>The <em>topic model</em> uses all the previously :</p>
 <section id="classic-topic-modelling" class="level2">
 <h2 class="anchored" data-anchor-id="classic-topic-modelling">Classic Topic Modelling:</h2>
 <div class="cell">
@@ -362,14 +368,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="visualisation" class="level3">
 <h3 class="anchored" data-anchor-id="visualisation">Visualisation</h3>
-<p>Create a plot with the documents projected in a two dimensional space</p>
+<p>Create a plot with the documents projected in a two dimensional space:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_documents</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png" class="img-fluid"></p>
-<p>Check out the topics:</p>
+<p>In this space, each dot is a document. The color of the document represents its cluster/topic. The distance between the documents should be interpreted in terms of a semantic proximity between the documents.</p>
+<p>Beyond this visualisation we usually want to know which words constitute these topics. We can do this by creating a barplot of the words:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_barchart</span>(<span class="at">top_n_topics =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_barchart</span>(<span class="at">top_n_topics =</span> <span class="dv">10</span>, <span class="at">n_words =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/Topics_monogram.png" class="img-fluid"></p>
 <p>The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)</p>
@@ -380,6 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>topic_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/topic_info_output.png" class="img-fluid"></p>
+<p>Based on the results of these topics we can go back to the parameters and adjust the model to improve the output. Once we are happy with the results, we can export the topics and connect them with other variables. Bertopic exports the results in the same order as the input data, topics can therefore be combined directly with the intial dataframe that we have been working with.</p>
 </section>
 </section>
 <section id="hierchical-topic-models" class="level2">
@@ -391,7 +399,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="connect-with-other-data" class="level2">
 <h2 class="anchored" data-anchor-id="connect-with-other-data">Connect with other data</h2>
-<p>Network</p>
 
 
 </section>

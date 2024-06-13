@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NetworkIsLife – state_of_data_04062024</title>
+<title>NetworkIsLife – topic_modelling_lda2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./State_of_data_04062024.html">State of Data</a></li><li class="breadcrumb-item"><a href="./State_of_data_04062024.html">State of Data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_lda2.html">Topic Modelling with LDA</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./State_of_data_04062024.html" class="sidebar-item-text sidebar-link active">
+  <a href="./State_of_data_04062024.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">State of Data</span></a>
   </div>
 </li>
@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_lda2.html" class="sidebar-item-text sidebar-link">
+  <a href="./Topic_modelling_lda2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Topic Modelling with LDA</span></a>
   </div>
 </li>
@@ -340,15 +340,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#state-of-data" id="toc-state-of-data" class="nav-link active" data-scroll-target="#state-of-data">State of Data</a>
+  <li><a href="#topic-modelling-with-lda" id="toc-topic-modelling-with-lda" class="nav-link active" data-scroll-target="#topic-modelling-with-lda">Topic Modelling with LDA</a>
   <ul class="collapse">
-  <li><a href="#patents" id="toc-patents" class="nav-link" data-scroll-target="#patents">Patents</a>
-  <ul class="collapse">
-  <li><a href="#what-data-do-we-have" id="toc-what-data-do-we-have" class="nav-link" data-scroll-target="#what-data-do-we-have">What data do we have</a></li>
-  <li><a href="#geographical-distribution-of-patents-in-the-netherlands" id="toc-geographical-distribution-of-patents-in-the-netherlands" class="nav-link" data-scroll-target="#geographical-distribution-of-patents-in-the-netherlands">geographical distribution of patents in the Netherlands</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis">Missing value analysis</a></li>
-  <li><a href="#information-in-the-patent-database" id="toc-information-in-the-patent-database" class="nav-link" data-scroll-target="#information-in-the-patent-database">Information in the patent database</a></li>
-  </ul></li>
+  <li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data">Load the data</a></li>
+  <li><a href="#text-preprocessing" id="toc-text-preprocessing" class="nav-link" data-scroll-target="#text-preprocessing">Text preprocessing</a></li>
+  <li><a href="#prepare-the-data-format" id="toc-prepare-the-data-format" class="nav-link" data-scroll-target="#prepare-the-data-format">Prepare the data format</a></li>
+  <li><a href="#find-the-number-of-topics" id="toc-find-the-number-of-topics" class="nav-link" data-scroll-target="#find-the-number-of-topics">Find the number of topics</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -359,350 +356,168 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="state-of-data" class="level1">
-<h1>State of Data</h1>
-<p>This document describes the current state of the available data in the ESMEE project. Given that we continuously add and improve upon the data we create this webpage, so that we can easily update the information and ensure we all have the latest information.</p>
-<p>In short the datasources we currently have are:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 30%">
-<col style="width: 21%">
-<col style="width: 5%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Type</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Time frame</strong></th>
-<th><strong>Regionalised</strong></th>
-<th><strong>Ecosystem Element</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Patents</td>
-<td>Regpat/Lens.org</td>
-<td>1800-Today</td>
-<td>Yes - by hand</td>
-<td>Networks, Knowledge, Talent, Leadership</td>
-</tr>
-<tr class="even">
-<td>Publications</td>
-<td>Lens.org</td>
-<td>1800-Today</td>
-<td>Yes - by hand</td>
-<td>Networks, Knowledge, Talent, Leadership</td>
-</tr>
-<tr class="odd">
-<td>European Projects</td>
-<td>EU</td>
-<td>Fp1-2024</td>
-<td>Yes</td>
-<td>Networks, Knowledge, Leadership</td>
-</tr>
-<tr class="even">
-<td>Keep/Interreg</td>
-<td>EU</td>
-<td></td>
-<td>Yes</td>
-<td>Networks, Knowledge, Leadership</td>
-</tr>
-<tr class="odd">
-<td>Startups</td>
-<td>Crunchbase</td>
-<td>2010-2024</td>
-<td>Yes</td>
-<td>Culture, Finance</td>
-</tr>
-<tr class="even">
-<td>Subsidies</td>
-<td>RVO</td>
-<td></td>
-<td>by hand</td>
-<td>Formal Institutions</td>
-</tr>
-<tr class="odd">
-<td>News</td>
-<td>NPO</td>
-<td>2010-2024</td>
-<td>by hand</td>
-<td>Culture, Leadership, Demand, Formal Institutions</td>
-</tr>
-<tr class="even">
-<td>Trademarks/designs</td>
-<td>EU</td>
-<td></td>
-<td>by hand</td>
-<td>Culture</td>
-</tr>
-<tr class="odd">
-<td>Eco-label</td>
-<td>EU</td>
-<td></td>
-<td>by hand</td>
-<td>Culture</td>
-</tr>
-</tbody>
-</table>
-<section id="patents" class="level2">
-<h2 class="anchored" data-anchor-id="patents">Patents</h2>
-<p>Patents are used as an indicator of technological innovation. Each patent family contains information on a specific invention that at the time of submission was new to the state of the art. When all patent information is aggregated into a database we have a valuable source of knowledge on technological innovation.</p>
-<p>Summarizing the data available in patents and all the research questions we can answer with patent is quite complicated. A limited answer to this question would be: Patents allow us to measure and understand who developed (inventors/assignees) which technologies (classifications, text), where (Address of inventors and assignees) and based on what knowledge (citations).</p>
-<p>There are many complexities and limitations to this data which we will not describe here (there is just too much to address).</p>
-<section id="what-data-do-we-have" class="level3">
-<h3 class="anchored" data-anchor-id="what-data-do-we-have">What data do we have</h3>
-<p>For the measurement of technological innovation, we use two patent databases. The first is REGPAT which is provided by the OECD and the patents are already regionlised. The second is lens.org</p>
-<p>How are regions attributed to a patent? There are two ways to attribute a region to a patent document. First we can look at the address of the patent applicant. If the applicant has supplied an address on the patent we can use it to attach a region to the patent. The second method is to use the address of the inventor. In scientific research the address of the inventor is usually used to regionalize a patent. The reasoning behind this is that we want to approach the region in which the knowledge is located. The inventors usually live close to the place where they work and hence where the knowledge is created. Companies on the other hand can file patent on behalf of subsidiaries in other countries. Actually, there are many fiscal incentives for companies to have other structures file and manage the patents for them. Depending on the level of detail supplied this is more or less easy. In RegPat this work has been done for us. Each patent document has a nuts3 code attached to it. Note: the RegPat database only has patents that went through the EPO, WIPO, or JPO. A patent filed by a Dutch Company at the DPO or even GPO/FPO will not be present in this database. Other than the restrictions per office, there are not limits to the geographical origin of the inventors or the applicants.</p>
-<p>Caution: A patent can be filed in different offices at the same time, there is a difference between a patent family and a patent document. One cannot simply count the number of patents in a region, we need to take into account that we are over evaluating the number of patents in the region if we do not regroup them at the family level.</p>
-<p>We have the following data distribution of the patents:</p>
+<section id="topic-modelling-with-lda" class="level1">
+<h1>Topic Modelling with LDA</h1>
+<section id="load-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-data">Load the data</h2>
+<p>We start by loading the data from a csv file, we then remove the publications without an abstract</p>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>companies_new_per_year <span class="ot">=</span> regpat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(app_name_harmonised) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">"first"</span><span class="ot">=</span> <span class="fu">min</span>(year), <span class="st">"last"</span><span class="ot">=</span> <span class="fu">max</span>(year))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>companies_new_per_year <span class="ot">=</span> companies_new_per_year <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(first) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">"freq"</span> <span class="ot">=</span> <span class="fu">n</span>())</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>couleur <span class="ot">=</span> <span class="st">"#4CAF50"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(companies_new_per_year, <span class="fu">aes</span>(<span class="at">x =</span> first, <span class="at">y =</span> freq)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> couleur) <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>( </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"transparent"</span>), <span class="co"># bg of the panel</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># bg of the plot</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"transparent"</span>), <span class="co"># get rid of legend bg</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.box.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"transparent"</span>)) <span class="sc">+</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">max</span>(companies_new_per_year<span class="sc">$</span>freq), <span class="at">by =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2010</span>, <span class="fu">max</span>(companies_new_per_year<span class="sc">$</span>first), <span class="at">by =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>New companies with patents per year:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="geographical-distribution-of-patents-in-the-netherlands" class="level3">
-<h3 class="anchored" data-anchor-id="geographical-distribution-of-patents-in-the-netherlands">geographical distribution of patents in the Netherlands</h3>
-<section id="patents-per-100-companies-per-province" class="level4">
-<h4 class="anchored" data-anchor-id="patents-per-100-companies-per-province">patents per 100 companies per province</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in st_point_on_surface.sfc(sf::st_zm(x)): st_point_on_surface may not
-give correct results for longitude/latitude data</code></pre>
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ purrr     1.0.2
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="players-per-province" class="level4">
-<h4 class="anchored" data-anchor-id="players-per-province">players per province</h4>
-<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/Teachings/Topic_mod_workshop/entr_eco_publications.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in st_point_on_surface.sfc(sf::st_zm(x)): st_point_on_surface may not
-give correct results for longitude/latitude data</code></pre>
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 1603 Columns: 46
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (30): Authors, Author full names, Author(s) ID, Title, Source title, Iss...
+dbl  (4): Year, Volume, Page count, Cited by
+lgl (12): Molecular Sequence Numbers, Chemicals/CAS, Tradenames, Manufacture...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-</div>
-</div>
-</section>
-<section id="patents-per-province-per-year" class="level4">
-<h4 class="anchored" data-anchor-id="patents-per-province-per-year">patents per province per year</h4>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="missing-value-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="missing-value-analysis">Missing value analysis</h3>
-<div class="cell" data-inlcude="false">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># missing values with the naniar package</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">subset</span>(entr_eco_publications, entr_eco_publications<span class="sc">$</span>Abstract <span class="sc">!=</span> <span class="st">"[No abstract available]"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> entr_eco_publications<span class="sc">$</span>Abstract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="text-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="text-preprocessing">Text preprocessing</h2>
+<p>Before creating the model we need to prepare the text. This means removing punctuation, weird characters or even words that we don’t want to find in our topics simply because they don’t have any informational value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_dico <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"publication"</span>, <span class="st">"research"</span>, <span class="st">"focus"</span>, <span class="st">"results"</span>, <span class="st">"result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We build a function that prepares the text. It removed punctuation, removes stopwords and the words we don’t want, stems the text etc. This function can be adapted and extended to your need by adding lemmatization for example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: NLP</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'NLP'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    annotate</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clean_text <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">=</span> <span class="fu">removePunctuation</span>(text) <span class="co"># optional</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we can use the gsub funciton to substite specific patterns in the text with something else. Or remove them by replacing them with "".</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, text)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">stemDocument</span>(text) <span class="co"># stem the terms</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We apply the function to our text</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(entr_eco_publications), <span class="dv">1</span>, clean_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="prepare-the-data-format" class="level2">
+<h2 class="anchored" data-anchor-id="prepare-the-data-format">Prepare the data format</h2>
+<p>Topic modelling with LDA requires a document-term matrix:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the document-Term-matrix</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">&lt;-</span> <span class="fu">DocumentTermMatrix</span>(entr_eco_publications)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="find-the-number-of-topics" class="level2">
+<h2 class="anchored" data-anchor-id="find-the-number-of-topics">Find the number of topics</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>topic_num <span class="ot">&lt;-</span> <span class="fu">FindTopicsNumber</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  dtm,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">60</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"CaoJuan2009"</span>, <span class="st">"Arun2010"</span>, <span class="st">"Deveaud2014"</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc.cores =</span> <span class="dv">8</span>L,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fit models... done.
+calculate metrics:
+  CaoJuan2009... done.
+  Arun2010... done.
+  Deveaud2014... done.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(topic_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `&lt;scale&gt;` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+of ggplot2 3.3.4.
+ℹ The deprecated feature was likely used in the ldatuning package.
+  Please report the issue at &lt;https://github.com/nikita-moor/ldatuning/issues&gt;.</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="State_of_data_04062024_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Topic_modelling_lda2_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="information-in-the-patent-database" class="level3">
-<h3 class="anchored" data-anchor-id="information-in-the-patent-database">Information in the patent database</h3>
-<p>Patents contain a variety of variables that we can use for the analysis of innovation and entrepreneurship. Summarizing the data available in patents and all the research questions we can answer with patent is quite complicates. A limited answer to this question would be: Patents allow us to measure and understand who developed (inventors/assignees) which technologies (classifications, text), where (Address of inventors and assignees) and based on what knowledge (citations).</p>
-<p>All this data sounds great, but patents are a complex data source and not all information is perfectly available. In the following table we summarise the different fields of interest in patent data.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 72%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Dates</td>
-<td>Priority</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Application</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Publication</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Applicants</td>
-<td>App_name</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Assignees</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Owners</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Inventors</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Classifications</td>
-<td>IPC</td>
-<td>International Patent Classification</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>CPC</td>
-<td>Cooperative Patent Classification</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>USC</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Identifiers</td>
-<td>App_nbr</td>
-<td>Application number</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Appln_id</td>
-<td>Internal patent number</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Person_id</td>
-<td>Internal applicant number</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Pub_nbr</td>
-<td>Publication number</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Pct_nbr</td>
-<td>Wo application? Number</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Internat_appln_nr</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Localisation</td>
-<td>Address</td>
-<td>Full address as written by the assignee (or the inventor)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>City</td>
-<td>City of the assignee (or inventor)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Postal_code</td>
-<td>Postcode of the assignee (or the inventor)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Reg_code</td>
-<td>NUTS-3</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Ctry_code</td>
-<td>Iso 2 country code</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Reg_share</td>
-<td>Share to attribute to each region on the patent. When multiple assignees are on the patent, and they come from different regions, we only assign a fraction of the patent to the region. 2 regions = 0.5, 3 regions = 0.333 etc.</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>App-share</td>
-<td>When multiple assignees on the patent, we attribute a fraction of the count to the assignee. When there are two assignees we only count the patent as 0.5 for the assignee.</td>
-</tr>
-</tbody>
-</table>
+<p>From these plots we deduce that we 12~17 topics should provide optimal results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># perform topic modelling</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">17</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>topics_model  <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, <span class="at">k =</span> k, <span class="at">method=</span><span class="st">"Gibbs"</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">42</span>, <span class="at">alpha=</span><span class="dv">50</span><span class="sc">/</span>k, <span class="at">nstart =</span> <span class="dv">1</span>, <span class="at">keep =</span> <span class="dv">1</span>, <span class="at">burnin =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">100</span>, <span class="at">iter =</span> <span class="dv">1000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)) </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># get the betas</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topics_model, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the betas for results</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="ot">&lt;-</span> betas <span class="sc">%&gt;%</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="sc">%&gt;%</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder_within</span>(term, beta, topic)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(beta, term, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Topic_modelling_lda2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tmResult <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topics_model)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(tmResult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$names
+[1] "terms"  "topics"</code></pre>
+</div>
+</div>
 
 
-</section>
 </section>
 </section>
 
