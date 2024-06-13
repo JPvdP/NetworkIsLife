@@ -62,6 +62,20 @@ my_hier_topic_model.visualize_hierarchical_documents(data, my_hier_topic_model)
 ```
 
 
+![](imgs/Topic_mod_workshop_images/hier_topics.png)
+
+
+### Dendrogram of the topics
+
+```{r, eval=FALSE}
+topic_model.visualize_hierarchy(hierarchical_topics=hierarchical_topics)
+```
+
+![](imgs/Topic_mod_workshop_images/hier_topics2.png)
+
+
+
+
 ## Connect with other data
 
 
