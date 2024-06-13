@@ -1,6 +1,6 @@
 # Run Bertopic
 
-The *topic model* that we use will just be the aggregation of all the prepared steps:
+The *topic model* uses all the previously :
 
 ## Classic Topic Modelling:
 
@@ -11,7 +11,7 @@ topics, probs = topic_model.fit_transform(data)
 
 ### Visualisation
 
-Create a plot with the documents projected in a two dimensional space
+Create a plot with the documents projected in a two dimensional space:
 
 ```{r, eval = FALSE}
 topic_model.visualize_documents(data)
@@ -19,10 +19,13 @@ topic_model.visualize_documents(data)
 
 ![](imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png)
 
-Check out the topics:
+In this space, each dot is a document. The color of the document represents its cluster/topic. The distance between the documents should be interpreted in terms of a semantic proximity between the documents. 
+
+
+Beyond this visualisation we usually want to know which words constitute these topics. We can do this by creating a barplot of the words:
 
 ```{r, eval = FALSE}
-topic_model.visualize_barchart(top_n_topics = 10)
+topic_model.visualize_barchart(top_n_topics = 10, n_words = 5)
 ```
 ![](imgs/Topic_mod_workshop_images/Topics_monogram.png)
 
@@ -32,13 +35,23 @@ We can run the model again with bi-grams for example:
 
 ![](imgs/Topic_mod_workshop_images/Topics_bigram.png)
 
-
 ```{r, eval = FALSE}
 topic_info = topic_model.get_topic_info()
 topic_info
 ```
 
 ![](imgs/Topic_mod_workshop_images/topic_info_output.png)
+
+
+
+
+
+
+
+Based on the results of these topics we can go back to the parameters and adjust the model to improve the output. Once we are happy with the results, we can export the topics and connect them with other variables. Bertopic exports the results in the same order as the input data, topics can therefore be combined directly with the intial dataframe that we have been working with. 
+
+
+
 
 
 ## Hierchical Topic Models
@@ -51,7 +64,6 @@ my_hier_topic_model.visualize_hierarchical_documents(data, my_hier_topic_model)
 
 ## Connect with other data
 
-Network
 
 
 

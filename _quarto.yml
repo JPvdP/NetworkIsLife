@@ -43,6 +43,7 @@ website:
         - href: Topic_modelling_bert_practise.qmd
         - href: Topic_modelling_bertopic_nodetails.qmd
         - href: Topic_modelling_run_bertopic.qmd
+        - href: Topic_modelling_lda2.qmd
 
 
 

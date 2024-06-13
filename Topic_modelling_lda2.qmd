@@ -1,0 +1,103 @@
+# Topic Modelling with LDA
+
+## Load the data 
+
+We start by loading the data from a csv file, we then remove the publications without an abstract
+
+```{r, eval = TRUE}
+library(readr)
+library(tidyverse)
+entr_eco_publications <- read_csv("~/Desktop/Teachings/Topic_mod_workshop/entr_eco_publications.csv")
+```
+
+```{r, eval = TRUE}
+entr_eco_publications = subset(entr_eco_publications, entr_eco_publications$Abstract != "[No abstract available]")
+entr_eco_publications = entr_eco_publications$Abstract
+
+```
+
+## Text preprocessing
+
+Before creating the model we need to prepare the text. This means removing punctuation, weird characters or even words that we don't want to find in our topics simply because they don't have any informational value. 
+
+```{r, eval = TRUE}
+my_dico = c("publication", "research", "focus", "results", "result")
+```
+
+We build a function that prepares the text. It removed punctuation, removes stopwords and the words we don't want, stems the text etc.
+This function can be adapted and extended to your need by adding lemmatization for example. 
+```{r, eval=TRUE}
+library(tm)
+clean_text <- function(text){
+  text = removePunctuation(text) # optional
+  text <- tolower(text) # remove caps
+  # we can use the gsub funciton to substite specific patterns in the text with something else. Or remove them by replacing them with "".
+  text <- gsub("\\.", "", text)
+  text <- removeWords(text, my_dico) # Remove the terms from our own dictionary
+  text <- stemDocument(text) # stem the terms
+  text <- removeWords(text, stopwords(kind <- "en")) # remove stopwords (in english)
+  text <- trimws(text) # remove any weird spaces in the text
+}
+```
+
+We apply the function to our text
+```{r, eval=TRUE}
+entr_eco_publications = apply(as.matrix(entr_eco_publications), 1, clean_text)
+```
+
+## Prepare the data format
+
+Topic modelling with LDA requires a document-term matrix:
+
+```{r, eval= TRUE}
+# create the document-Term-matrix
+dtm <- DocumentTermMatrix(entr_eco_publications)
+```
+
+
+## Find the number of topics
+
+```{r, eval=TRUE}
+library(ldatuning)
+topic_num <- FindTopicsNumber(
+  dtm,
+  topics = seq(from = 2, to = 60, by = 5),
+  metrics = c("CaoJuan2009", "Arun2010", "Deveaud2014"),
+  mc.cores = 8L,
+  verbose = TRUE
+)
+FindTopicsNumber_plot(topic_num)
+```
+From these plots we deduce that we 12~17 topics should provide optimal results.
+
+```{r, eval = TRUE, warning=FALSE}
+library(topicmodels)
+library(tidytext)
+# perform topic modelling
+k = 17
+topics_model  <- LDA(dtm, k = k, method="Gibbs", control = list(seed = 42, alpha=50/k, nstart = 1, keep = 1, burnin = 1000, thin = 100, iter = 1000, verbose = FALSE)) 
+# get the betas
+betas <- tidy(topics_model, matrix = "beta")
+# subset the betas for results
+ap_top_terms <- betas %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 10) %>% 
+  ungroup() %>%
+  arrange(topic, -beta)
+
+library(ggplot2)
+ap_top_terms %>%
+  mutate(term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(beta, term, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  scale_y_reordered()
+```
+
+```{r, eval = TRUE}
+tmResult <- posterior(topics_model)
+attributes(tmResult)
+```
+
+
+
