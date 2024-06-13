@@ -561,21 +561,13 @@ of ggplot2 3.3.4.
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">theta =</span> lda_topics,</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">doc.length =</span> doc_length,</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">vocab =</span> <span class="fu">colnames</span>(dtm),</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">term.frequency =</span> term_frequency)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the topics</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#serVis(json_lda)</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="fu">serVis</span>(json_lda, <span class="at">out.dir =</span> <span class="st">"lda_vis"</span>, <span class="at">open.browser =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in dir.create(out.dir): 'lda_vis' already exists</code></pre>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">term.frequency =</span> term_frequency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required namespace: servr</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">serVis</span>(json_lda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<iframe src="lda_vis/index.html" width="100%" height="600px" frameborder="0">
-</iframe>
-<p>In this visualisation, controls the relevance of the shown terms:</p>
+<p><img src="imgs/Topic_mod_workshop_images/LDA_vis.png" class="img-fluid"></p>
+<p>In this visualisation, lambda controls the relevance of the shown terms:</p>
 <ul>
 <li>lambda = 1: The relevance of terms is based entirely on their probability within the topic (p(term | topic)). This means that the most probable terms for each topic will be shown.</li>
 <li>lambda = 0: The relevance of terms is based entirely on their lift (p(term | topic) / p(term)). This means that terms that are particularly unique to a topic (compared to their overall frequency) will be shown.</li>
@@ -586,8 +578,8 @@ of ggplot2 3.3.4.
 <h2 class="anchored" data-anchor-id="export-the-information">Export the information</h2>
 <p>Often, we want to use the results of topic modelling to connect with other data (funding, authors, dates etc.). We can directly export the probability matrix. In this matrix each row is a document, and each column contains the probability that the document relates to this topic. The documents are in the same order as the initial data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>posterior_probs <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topic_model_results)<span class="sc">$</span>topics</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(posterior_probs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>posterior_probs <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topic_model_results)<span class="sc">$</span>topics</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(posterior_probs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           1          2          3          4          5          6          7
 1 0.03713235 0.10588235 0.05588235 0.01838235 0.05588235 0.08088235 0.03713235
@@ -675,9 +667,9 @@ Figure&nbsp;2: Example of Stemming, where variations are reduced to their stem â
 <p>There are practical advantages to using lemmatization since the main form remains readable, while with stemming this is more complicated. <em>In fine</em>, itâ€™s up to the analyst to decide which approach is best for both the question at hand and the data chosen. In the following table some advantages and disadvantages are shown:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 37%">
-<col style="width: 37%">
+<col style="width: 26%">
+<col style="width: 36%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -719,7 +711,7 @@ Figure&nbsp;2: Example of Stemming, where variations are reduced to their stem â
 <p>For the implementation of lemmatization we will use the <strong>textstem</strong> package. Lemmatization is done in two steps, first a dictionnary is created based on the text. Basically this means that all terms in the provided text are identified and for these terms lemmas are identified. In a second step this dictionary is then applied to the text. The main reason for this two-step approach is to reduce computation time since we donâ€™t have to search through words that are not in the text.</p>
 <p>For example, when we apply lemmatisation on the variation of the word desalinate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: koRpus.lang.en</code></pre>
 </div>
@@ -750,32 +742,32 @@ Attaching package: 'koRpus'</code></pre>
 
     tokenize</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variations on a word as an example:</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(Example_text) <span class="co"># remove the capital letters (required)</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we make a dictionary from the text</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>My_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(Example_text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(Example_text, <span class="at">dictionary =</span> My_dico)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variations on a word as an example:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(Example_text) <span class="co"># remove the capital letters (required)</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we make a dictionary from the text</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>My_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(Example_text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(Example_text, <span class="at">dictionary =</span> My_dico)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "desalinate"  "desalinate"  "desalinate"  "desalinator" "desalinate" </code></pre>
 </div>
 </div>
 <p>We can include lemmatization in the cleaning function and then rerun the script from the beginning with this function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>clean_text_lemma <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#text = removePunctuation(text) # optional</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># here we apply lemmatization instead of stemming:</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  lemma_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(text, <span class="at">dictionary =</span> lemma_dico)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"  "</span>, <span class="st">" "</span>, text)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>clean_text_lemma <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#text = removePunctuation(text) # optional</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># here we apply lemmatization instead of stemming:</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  lemma_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(text, <span class="at">dictionary =</span> lemma_dico)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"  "</span>, <span class="st">" "</span>, text)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
