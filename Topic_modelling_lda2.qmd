@@ -1,6 +1,6 @@
 # Topic Modelling with LDA
 
-## Load the data 
+## Load the data
 
 We start by loading the data from a csv file, we then remove the publications without an abstract
 
@@ -24,14 +24,13 @@ entr_eco_publications = entr_eco_publications$Abstract
 
 ## Text preprocessing
 
-Before creating the model we need to prepare the text. This means removing punctuation, weird characters or even words that we don't want to find in our topics simply because they don't have any informational value. 
+Before creating the model we need to prepare the text. This means removing punctuation, weird characters or even words that we don't want to find in our topics simply because they don't have any informational value.
 
 ```{r, eval = TRUE}
 my_dico = c("publication", "research", "focus", "results", "result")
 ```
 
-We build a function that prepares the text. It removed punctuation, removes stopwords and the words we don't want, stems the text etc.
-This function can be adapted and extended to your need by adding lemmatization for example. 
+We build a function that prepares the text. It removed punctuation, removes stopwords and the words we don't want, stems the text etc. This function can be adapted and extended to your need by adding lemmatization for example.
 
 ```{r, eval=TRUE}
 library(tm)
@@ -48,6 +47,7 @@ clean_text <- function(text){
 ```
 
 We apply the function to our text
+
 ```{r, eval=TRUE}
 entr_eco_publications = apply(as.matrix(entr_eco_publications), 1, clean_text)
 ```
@@ -61,7 +61,6 @@ Now that we have the text prepared, we need to create a document-term matrix for
 dtm <- DocumentTermMatrix(entr_eco_publications)
 ```
 
-
 ## Find the number of topics
 
 Based on this matrix we will now try to define how many topics we need to extract. For this we use the **FindTopicsNumber** and **FindTopicsNumber_plot** from the **ldatuning** package.
@@ -70,11 +69,11 @@ The **FindTopicsNumber** functions takes several arguments. The first is directl
 
 We then specify the metrics we want to compute, we have discussed these in the lecture.
 
-::: {.callout-warning}
-For an unknown reason, the "Griffiths2004" function does not work on mac OSX. It should work for windows users. 
+::: callout-warning
+For an unknown reason, the "Griffiths2004" function does not work on mac OSX. It should work for windows users.
 :::
 
-The mc.cores option specifies on how many cores you want the algorithm to run, this depends on your laptop, adjust to suit your needs. The verbose argument defines whether or not you want the algorithm to provide some information on which stage it is working. This will reduce the anxiety of not knowing whether the algorithm is stuck, still running or finished. 
+The mc.cores option specifies on how many cores you want the algorithm to run, this depends on your laptop, adjust to suit your needs. The verbose argument defines whether or not you want the algorithm to provide some information on which stage it is working. This will reduce the anxiety of not knowing whether the algorithm is stuck, still running or finished.
 
 ```{r, eval=TRUE}
 topic_num <- FindTopicsNumber(
@@ -89,14 +88,13 @@ FindTopicsNumber_plot(topic_num)
 
 ## Run the model
 
-Now that we have an idea of how many topics we need, let's extract the topics. We will use the **LDA** function from the **topicmodels** package, and specify *K* as the number of topics. Here we can pick 12~17 based on the previous plot.
+Now that we have an idea of how many topics we need, let's extract the topics. We will use the **LDA** function from the **topicmodels** package, and specify *K* as the number of topics. Here we can pick 12\~17 based on the previous plot.
 
 ```{r, eval = TRUE, warning=FALSE}
 # perform topic modelling
 k = 17
 topic_model_results  <- LDA(dtm, k = k, method="Gibbs", control = list(seed = 42, alpha=50/k, nstart = 1, keep = 1, burnin = 1000, iter = 1000, verbose = FALSE)) 
 ```
-
 
 ## Visualize the results
 
@@ -120,6 +118,7 @@ ap_top_terms %>%
   facet_wrap(~ topic, scales = "free") +
   scale_y_reordered()
 ```
+
 This plot shows the top 10 words for each topic. This means that it shows the 10 words with the highest probability to be part of the topic. The values under each barplot represent the betas.
 
 ## Create an interactive visualisation
@@ -137,18 +136,18 @@ json_lda <- createJSON(phi = lda_terms,
                        doc.length = doc_length,
                        vocab = colnames(dtm),
                        term.frequency = term_frequency)
-
-# Visualize the topics
-#serVis(json_lda)
-serVis(json_lda, out.dir = "lda_vis", open.browser = FALSE)
 ```
-<iframe src="lda_vis/index.html" width="100%" height="600px" frameborder="0"></iframe>
+```{r, eval=FALSE}
+serVis(json_lda)
+```
 
-In this visualisation, \lambda controls the relevance of the shown terms:
+![](imgs/Topic_mod_workshop_images/LDA_vis.png)
 
-* lambda = 1: The relevance of terms is based entirely on their probability within the topic (p(term | topic)). This means that the most probable terms for each topic will be shown.
-* lambda = 0: The relevance of terms is based entirely on their lift (p(term | topic) / p(term)). This means that terms that are particularly unique to a topic (compared to their overall frequency) will be shown.
-* 0 < lambda < 1: The relevance is a combination of probability and lift, allowing a balance between common terms within the topic and terms that are distinctive for the topic.
+In this visualisation, lambda controls the relevance of the shown terms:
+
+-   lambda = 1: The relevance of terms is based entirely on their probability within the topic (p(term \| topic)). This means that the most probable terms for each topic will be shown.
+-   lambda = 0: The relevance of terms is based entirely on their lift (p(term \| topic) / p(term)). This means that terms that are particularly unique to a topic (compared to their overall frequency) will be shown.
+-   0 \< lambda \< 1: The relevance is a combination of probability and lift, allowing a balance between common terms within the topic and terms that are distinctive for the topic.
 
 ## Export the information
 
@@ -159,10 +158,7 @@ posterior_probs <- posterior(topic_model_results)$topics
 print(head(posterior_probs))
 ```
 
-
-
 # Going further with text preparations:
-
 
 ## Lemmatization
 
@@ -208,7 +204,7 @@ flowchart LR
 There are practical advantages to using lemmatization since the main form remains readable, while with stemming this is more complicated. *In fine*, it's up to the analyst to decide which approach is best for both the question at hand and the data chosen. In the following table some advantages and disadvantages are shown:
 
 | **Aspect**                   | **Lemmatization**                         | **Stemming**                                   |
-|------------------|---------------------------|---------------------------|
+|-------------------|---------------------------|---------------------------|
 | **Accuracy**                 | Better accuracy, considers context        | Faster, computationally less expensive         |
 | **Readability**              | Improved, real words                      | Simpler, heuristic rules                       |
 | **Context Preservation**     | Considers word meaning, preserves context | May lead to over-stemming, loss of specificity |
@@ -219,8 +215,8 @@ There are practical advantages to using lemmatization since the main form remain
 
 For the implementation of lemmatization we will use the **textstem** package. Lemmatization is done in two steps, first a dictionnary is created based on the text. Basically this means that all terms in the provided text are identified and for these terms lemmas are identified. In a second step this dictionary is then applied to the text. The main reason for this two-step approach is to reduce computation time since we don't have to search through words that are not in the text.
 
-
 For example, when we apply lemmatisation on the variation of the word desalinate:
+
 ```{r, eval = TRUE}
 library(textstem)
 # Some variations on a word as an example:
@@ -233,7 +229,7 @@ lemmatized_text <- lemmatize_strings(Example_text, dictionary = My_dico)
 lemmatized_text
 ```
 
-We can include lemmatization in the cleaning function and then rerun the  script from the beginning with this function.
+We can include lemmatization in the cleaning function and then rerun the script from the beginning with this function.
 
 ```{r, eval=TRUE}
 clean_text_lemma <- function(text){
@@ -249,11 +245,3 @@ clean_text_lemma <- function(text){
   text <- gsub("  ", " ", text)
 }
 ```
-
-
-
-
-
-
-
-
