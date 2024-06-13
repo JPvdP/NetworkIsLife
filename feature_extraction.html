@@ -545,7 +545,6 @@ Figure&nbsp;1: 5 Short texts
 </section>
 <section id="stemming-and-lemmatization" class="level3">
 <h3 class="anchored" data-anchor-id="stemming-and-lemmatization">Stemming and Lemmatization</h3>
-<p>start by describing the problem, also referring to the table with the problems and solutions.</p>
 <p>It is common, even natural, to find inflections of the same term in a corpus of texts. The presence of a term and its plural (<em>desalinator</em>, <em>desalinators</em>), abbreviations (<em>pneu</em>, <em>pneumatics</em>), conjugations (<em>run</em>, <em>ran</em>, <em>running</em>) or terms with a close semantic meaning (<em>desalinator</em>, <em>desalination</em>) are common occurrences. These inflections, however, pose a problem in term frequency counts. In general, we consider that the terms <em>desalinator</em>, <em>desalination</em> and <em>desalinators</em> have the same informational value and are therefore synonymous. Retaining multiple inflections in the text results in a frequency calculation for each individual term resulting in a lower overall importance of each term. We would like to have only one count, for a term that we consider to be the reference term. There are two approaches to doing this, <strong>stemming</strong> and <strong>lemmatization</strong>. Stemming approaches this issue by reducing each word to its stem. The stem that results from this process is not always a word and can be difficult to understand out of context. Lemmatization has a different approach and used dictionary definitions to replace terms by a <strong>main form</strong>. <a href="#fig-lemmatization" class="quarto-xref">Figure&nbsp;2</a> gives an example for different inflections which are reduced to a <em>main form</em>, in this case: <em>desalinate</em>).</p>
 <div class="columns">
 <div class="column" style="width:45%;">
@@ -603,9 +602,9 @@ Figure&nbsp;3: Example of Stemming, where variations are reduced to their stem â
 <p>There are practical advantages to using lemmatization since the main form remains readable, while with stemming this is more complicated. <em>In fine</em>, itâ€™s up to the analyst to decide which approach is best for both the question at hand and the data chosen. In the following table some advantages and disadvantages are shown:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 38%">
-<col style="width: 36%">
+<col style="width: 25%">
+<col style="width: 37%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">

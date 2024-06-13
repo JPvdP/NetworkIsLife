@@ -100,6 +100,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -346,6 +349,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#text-preprocessing" id="toc-text-preprocessing" class="nav-link" data-scroll-target="#text-preprocessing">Text preprocessing</a></li>
   <li><a href="#prepare-the-data-format" id="toc-prepare-the-data-format" class="nav-link" data-scroll-target="#prepare-the-data-format">Prepare the data format</a></li>
   <li><a href="#find-the-number-of-topics" id="toc-find-the-number-of-topics" class="nav-link" data-scroll-target="#find-the-number-of-topics">Find the number of topics</a></li>
+  <li><a href="#run-the-model" id="toc-run-the-model" class="nav-link" data-scroll-target="#run-the-model">Run the model</a></li>
+  <li><a href="#visualize-the-results" id="toc-visualize-the-results" class="nav-link" data-scroll-target="#visualize-the-results">Visualize the results</a></li>
+  <li><a href="#create-an-interactive-visualisation" id="toc-create-an-interactive-visualisation" class="nav-link" data-scroll-target="#create-an-interactive-visualisation">Create an interactive visualisation</a></li>
+  <li><a href="#export-the-information" id="toc-export-the-information" class="nav-link" data-scroll-target="#export-the-information">Export the information</a></li>
+  </ul></li>
+  <li><a href="#going-further-with-text-preparations" id="toc-going-further-with-text-preparations" class="nav-link" data-scroll-target="#going-further-with-text-preparations">Going further with text preparations:</a>
+  <ul class="collapse">
+  <li><a href="#lemmatization" id="toc-lemmatization" class="nav-link" data-scroll-target="#lemmatization">Lemmatization</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -375,7 +386,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/Teachings/Topic_mod_workshop/entr_eco_publications.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: NLP
+
+Attaching package: 'NLP'
+
+The following object is masked from 'package:ggplot2':
+
+    annotate</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LDAvis)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/Desktop/Teachings/Topic_mod_workshop/entr_eco_publications.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
 e.g.:
@@ -395,66 +421,70 @@ lgl (12): Molecular Sequence Numbers, Chemicals/CAS, Tradenames, Manufacture...
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">subset</span>(entr_eco_publications, entr_eco_publications<span class="sc">$</span>Abstract <span class="sc">!=</span> <span class="st">"[No abstract available]"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> entr_eco_publications<span class="sc">$</span>Abstract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">subset</span>(entr_eco_publications, entr_eco_publications<span class="sc">$</span>Abstract <span class="sc">!=</span> <span class="st">"[No abstract available]"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> entr_eco_publications<span class="sc">$</span>Abstract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="text-preprocessing" class="level2">
 <h2 class="anchored" data-anchor-id="text-preprocessing">Text preprocessing</h2>
 <p>Before creating the model we need to prepare the text. This means removing punctuation, weird characters or even words that we don’t want to find in our topics simply because they don’t have any informational value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_dico <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"publication"</span>, <span class="st">"research"</span>, <span class="st">"focus"</span>, <span class="st">"results"</span>, <span class="st">"result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_dico <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"publication"</span>, <span class="st">"research"</span>, <span class="st">"focus"</span>, <span class="st">"results"</span>, <span class="st">"result"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We build a function that prepares the text. It removed punctuation, removes stopwords and the words we don’t want, stems the text etc. This function can be adapted and extended to your need by adding lemmatization for example.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: NLP</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'NLP'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    annotate</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clean_text <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">=</span> <span class="fu">removePunctuation</span>(text) <span class="co"># optional</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we can use the gsub funciton to substite specific patterns in the text with something else. Or remove them by replacing them with "".</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, text)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">stemDocument</span>(text) <span class="co"># stem the terms</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>clean_text <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">=</span> <span class="fu">removePunctuation</span>(text) <span class="co"># optional</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we can use the gsub funciton to substite specific patterns in the text with something else. Or remove them by replacing them with "".</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">""</span>, text)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">stemDocument</span>(text) <span class="co"># stem the terms</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We apply the function to our text</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(entr_eco_publications), <span class="dv">1</span>, clean_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>entr_eco_publications <span class="ot">=</span> <span class="fu">apply</span>(<span class="fu">as.matrix</span>(entr_eco_publications), <span class="dv">1</span>, clean_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="prepare-the-data-format" class="level2">
 <h2 class="anchored" data-anchor-id="prepare-the-data-format">Prepare the data format</h2>
-<p>Topic modelling with LDA requires a document-term matrix:</p>
+<p>Now that we have the text prepared, we need to create a document-term matrix for the topic modelling function. The document-term matrix specifies for each document which terms are contained within it. We use the <strong>DocumentTermMatrix()</strong> function from the <strong>tm</strong> package. This function has one argument which is a dataframe with the text of the corpus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the document-Term-matrix</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">&lt;-</span> <span class="fu">DocumentTermMatrix</span>(entr_eco_publications)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the document-Term-matrix</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">&lt;-</span> <span class="fu">DocumentTermMatrix</span>(entr_eco_publications)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="find-the-number-of-topics" class="level2">
 <h2 class="anchored" data-anchor-id="find-the-number-of-topics">Find the number of topics</h2>
+<p>Based on this matrix we will now try to define how many topics we need to extract. For this we use the <strong>FindTopicsNumber</strong> and <strong>FindTopicsNumber_plot</strong> from the <strong>ldatuning</strong> package.</p>
+<p>The <strong>FindTopicsNumber</strong> functions takes several arguments. The first is directly the document term matrix. We also need to specify which number of topics we want to try. The <strong>seq()</strong> function creates a vector which starts at the <em>from</em> arguments, stops at the <em>to</em> argument. The size of the steps is set by the <em>by</em> argument. If we want to check for a number of topics between 2 and 60 with steps of 5 (2, 7, 13, 18, …) we would write <em>seq(from = 2, to = 60, by = 5)</em>.</p>
+<p>We then specify the metrics we want to compute, we have discussed these in the lecture.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For an unknown reason, the “Griffiths2004” function does not work on mac OSX. It should work for windows users.</p>
+</div>
+</div>
+<p>The mc.cores option specifies on how many cores you want the algorithm to run, this depends on your laptop, adjust to suit your needs. The verbose argument defines whether or not you want the algorithm to provide some information on which stage it is working. This will reduce the anxiety of not knowing whether the algorithm is stuck, still running or finished.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>topic_num <span class="ot">&lt;-</span> <span class="fu">FindTopicsNumber</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  dtm,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">60</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"CaoJuan2009"</span>, <span class="st">"Arun2010"</span>, <span class="st">"Deveaud2014"</span>),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc.cores =</span> <span class="dv">8</span>L,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>topic_num <span class="ot">&lt;-</span> <span class="fu">FindTopicsNumber</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dtm,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">topics =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2</span>, <span class="at">to =</span> <span class="dv">60</span>, <span class="at">by =</span> <span class="dv">5</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">"CaoJuan2009"</span>, <span class="st">"Arun2010"</span>, <span class="st">"Deveaud2014"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mc.cores =</span> <span class="dv">8</span>L,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>fit models... done.
 calculate metrics:
@@ -462,7 +492,7 @@ calculate metrics:
   Arun2010... done.
   Deveaud2014... done.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(topic_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(topic_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: The `&lt;scale&gt;` argument of `guides()` cannot be `FALSE`. Use "none" instead as
 of ggplot2 3.3.4.
@@ -477,47 +507,279 @@ of ggplot2 3.3.4.
 </div>
 </div>
 </div>
-<p>From these plots we deduce that we 12~17 topics should provide optimal results.</p>
+</section>
+<section id="run-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-model">Run the model</h2>
+<p>Now that we have an idea of how many topics we need, let’s extract the topics. We will use the <strong>LDA</strong> function from the <strong>topicmodels</strong> package, and specify <em>K</em> as the number of topics. Here we can pick 12~17 based on the previous plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># perform topic modelling</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">17</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>topics_model  <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, <span class="at">k =</span> k, <span class="at">method=</span><span class="st">"Gibbs"</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">42</span>, <span class="at">alpha=</span><span class="dv">50</span><span class="sc">/</span>k, <span class="at">nstart =</span> <span class="dv">1</span>, <span class="at">keep =</span> <span class="dv">1</span>, <span class="at">burnin =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">100</span>, <span class="at">iter =</span> <span class="dv">1000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)) </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># get the betas</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topics_model, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the betas for results</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="ot">&lt;-</span> betas <span class="sc">%&gt;%</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="sc">%&gt;%</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder_within</span>(term, beta, topic)) <span class="sc">%&gt;%</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(beta, term, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perform topic modelling</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">17</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>topic_model_results  <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, <span class="at">k =</span> k, <span class="at">method=</span><span class="st">"Gibbs"</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">42</span>, <span class="at">alpha=</span><span class="dv">50</span><span class="sc">/</span>k, <span class="at">nstart =</span> <span class="dv">1</span>, <span class="at">keep =</span> <span class="dv">1</span>, <span class="at">burnin =</span> <span class="dv">1000</span>, <span class="at">iter =</span> <span class="dv">1000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualize-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-the-results">Visualize the results</h2>
+<p>topic_model_results contains the results of the topic modelling process, in other words it contains the probabilities that a word is part of a topic and a topic is part of a document. We can visualise this information by plotting the betas (probability that a word is part of a topic).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the betas</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>betas <span class="ot">&lt;-</span> <span class="fu">tidy</span>(topic_model_results, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the betas for results</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="ot">&lt;-</span> betas <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>ap_top_terms <span class="sc">%&gt;%</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder_within</span>(term, beta, topic)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(beta, term, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Topic_modelling_lda2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Topic_modelling_lda2_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>This plot shows the top 10 words for each topic. This means that it shows the 10 words with the highest probability to be part of the topic. The values under each barplot represent the betas.</p>
+</section>
+<section id="create-an-interactive-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="create-an-interactive-visualisation">Create an interactive visualisation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tmResult <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topics_model)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(tmResult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the necessary components for LDAvis</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lda_topics <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topic_model_results)<span class="sc">$</span>topics</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>lda_terms <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topic_model_results)<span class="sc">$</span>terms</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>term_frequency <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">as.matrix</span>(dtm))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>doc_length <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(<span class="fu">as.matrix</span>(dtm))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the JSON object for visualization</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>json_lda <span class="ot">&lt;-</span> <span class="fu">createJSON</span>(<span class="at">phi =</span> lda_terms,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">theta =</span> lda_topics,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">doc.length =</span> doc_length,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">vocab =</span> <span class="fu">colnames</span>(dtm),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">term.frequency =</span> term_frequency)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the topics</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">#serVis(json_lda)</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="fu">serVis</span>(json_lda, <span class="at">out.dir =</span> <span class="st">"lda_vis"</span>, <span class="at">open.browser =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in dir.create(out.dir): 'lda_vis' already exists</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: servr</code></pre>
+</div>
+</div>
+<iframe src="lda_vis/index.html" width="100%" height="600px" frameborder="0">
+</iframe>
+<p>In this visualisation, controls the relevance of the shown terms:</p>
+<ul>
+<li>lambda = 1: The relevance of terms is based entirely on their probability within the topic (p(term | topic)). This means that the most probable terms for each topic will be shown.</li>
+<li>lambda = 0: The relevance of terms is based entirely on their lift (p(term | topic) / p(term)). This means that terms that are particularly unique to a topic (compared to their overall frequency) will be shown.</li>
+<li>0 &lt; lambda &lt; 1: The relevance is a combination of probability and lift, allowing a balance between common terms within the topic and terms that are distinctive for the topic.</li>
+</ul>
+</section>
+<section id="export-the-information" class="level2">
+<h2 class="anchored" data-anchor-id="export-the-information">Export the information</h2>
+<p>Often, we want to use the results of topic modelling to connect with other data (funding, authors, dates etc.). We can directly export the probability matrix. In this matrix each row is a document, and each column contains the probability that the document relates to this topic. The documents are in the same order as the initial data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>posterior_probs <span class="ot">&lt;-</span> <span class="fu">posterior</span>(topic_model_results)<span class="sc">$</span>topics</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(posterior_probs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$names
-[1] "terms"  "topics"</code></pre>
+<pre><code>           1          2          3          4          5          6          7
+1 0.03713235 0.10588235 0.05588235 0.01838235 0.05588235 0.08088235 0.03713235
+2 0.04428288 0.05551884 0.10046266 0.04428288 0.04428288 0.03304693 0.04428288
+3 0.02492522 0.05882353 0.02492522 0.03339980 0.05882353 0.07577268 0.03339980
+4 0.03385940 0.02410330 0.03385940 0.07288379 0.08751793 0.02898135 0.02410330
+5 0.01867856 0.03763591 0.02341790 0.02341790 0.08028994 0.06133259 0.02341790
+6 0.04507257 0.03208556 0.05805959 0.29182582 0.04507257 0.02559206 0.04507257
+           8          9         10         11         12         13         14
+1 0.04338235 0.07463235 0.11213235 0.11213235 0.03088235 0.06213235 0.03713235
+2 0.05551884 0.03304693 0.05551884 0.08922670 0.03304693 0.05551884 0.03304693
+3 0.26221336 0.04187438 0.03339980 0.04187438 0.05882353 0.02492522 0.03339980
+4 0.05337159 0.15581062 0.06800574 0.03385940 0.04361549 0.04361549 0.02898135
+5 0.03289657 0.21773069 0.15611932 0.01393922 0.03289657 0.02815723 0.11820463
+6 0.02559206 0.07104660 0.02559206 0.01909855 0.01909855 0.04507257 0.03208556
+          15         16         17
+1 0.09338235 0.02463235 0.01838235
+2 0.14540648 0.04428288 0.08922670
+3 0.05034895 0.03339980 0.10967099
+4 0.16068867 0.06312769 0.04361549
+5 0.03289657 0.06133259 0.03763591
+6 0.06455309 0.11650115 0.03857907</code></pre>
 </div>
+</div>
+</section>
+</section>
+<section id="going-further-with-text-preparations" class="level1">
+<h1>Going further with text preparations:</h1>
+<section id="lemmatization" class="level2">
+<h2 class="anchored" data-anchor-id="lemmatization">Lemmatization</h2>
+<p>It is common, even natural, to find inflections of the same term in a corpus of texts. The presence of a term and its plural (<em>desalinator</em>, <em>desalinators</em>), abbreviations (<em>pneu</em>, <em>pneumatics</em>), conjugations (<em>run</em>, <em>ran</em>, <em>running</em>) or terms with a close semantic meaning (<em>desalinator</em>, <em>desalination</em>) are common occurrences. These inflections, however, pose a problem in term frequency counts. In general, we consider that the terms <em>desalinator</em>, <em>desalination</em> and <em>desalinators</em> have the same informational value and are therefore synonymous. Retaining multiple inflections in the text results in a frequency calculation for each individual term resulting in a lower overall importance of each term. We would like to have only one count, for a term that we consider to be the reference term. There are two approaches to doing this, <strong>stemming</strong> and <strong>lemmatization</strong>. Stemming approaches this issue by reducing each word to its stem. The stem that results from this process is not always a word and can be difficult to understand out of context. Lemmatization has a different approach and used dictionary definitions to replace terms by a <strong>main form</strong>. <a href="#fig-lemmatization" class="quarto-xref">Figure&nbsp;1</a> gives an example for different inflections which are reduced to a <em>main form</em>, in this case: <em>desalinate</em>).</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-lemmatization" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lemmatization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-lemmatization">flowchart LR
+  C(Desalinate)
+  D[Desalinates] --&gt; C
+  E[Desalinating] --&gt; C
+  F[Desalinated] --&gt; C
+  G[Desalinator] --&gt; C
+  H[Desalination] --&gt; C
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lemmatization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Example of lemmatisation, where variations are replaced by “desalinate”
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-stemming" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stemming-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-stemming">flowchart LR
+  O(Desalin)
+  J[Desalinates] --&gt; O
+  K[Desalinating] --&gt; O
+  L[Desalinated] --&gt; O
+  M[Desalinator] --&gt; O
+  N[Desalination] --&gt; O
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stemming-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Example of Stemming, where variations are reduced to their stem “desalin”
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>There are practical advantages to using lemmatization since the main form remains readable, while with stemming this is more complicated. <em>In fine</em>, it’s up to the analyst to decide which approach is best for both the question at hand and the data chosen. In the following table some advantages and disadvantages are shown:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 37%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Aspect</strong></th>
+<th><strong>Lemmatization</strong></th>
+<th><strong>Stemming</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Accuracy</strong></td>
+<td>Better accuracy, considers context</td>
+<td>Faster, computationally less expensive</td>
+</tr>
+<tr class="even">
+<td><strong>Readability</strong></td>
+<td>Improved, real words</td>
+<td>Simpler, heuristic rules</td>
+</tr>
+<tr class="odd">
+<td><strong>Context Preservation</strong></td>
+<td>Considers word meaning, preserves context</td>
+<td>May lead to over-stemming, loss of specificity</td>
+</tr>
+<tr class="even">
+<td><strong>Computational Complexity</strong></td>
+<td>More computationally expensive</td>
+<td>Less computationally expensive</td>
+</tr>
+<tr class="odd">
+<td><strong>Resource Intensive</strong></td>
+<td>Requires linguistic resources</td>
+<td>Minimal resources required</td>
+</tr>
+</tbody>
+</table>
+<section id="stemming-and-lemmatization-in-r" class="level4">
+<h4 class="anchored" data-anchor-id="stemming-and-lemmatization-in-r">Stemming and Lemmatization in R</h4>
+<p>For the implementation of lemmatization we will use the <strong>textstem</strong> package. Lemmatization is done in two steps, first a dictionnary is created based on the text. Basically this means that all terms in the provided text are identified and for these terms lemmas are identified. In a second step this dictionary is then applied to the text. The main reason for this two-step approach is to reduce computation time since we don’t have to search through words that are not in the text.</p>
+<p>For example, when we apply lemmatisation on the variation of the word desalinate:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: koRpus.lang.en</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: koRpus</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sylly</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>For information on available language packages for 'koRpus', run
+
+  available.koRpus.lang()
+
+and see ?install.koRpus.lang()</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'koRpus'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:tm':
+
+    readTagged</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:readr':
+
+    tokenize</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some variations on a word as an example:</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>Example_text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(Example_text) <span class="co"># remove the capital letters (required)</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we make a dictionary from the text</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>My_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(Example_text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(Example_text, <span class="at">dictionary =</span> My_dico)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "desalinate"  "desalinate"  "desalinate"  "desalinator" "desalinate" </code></pre>
+</div>
+</div>
+<p>We can include lemmatization in the cleaning function and then rerun the script from the beginning with this function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>clean_text_lemma <span class="ot">&lt;-</span> <span class="cf">function</span>(text){</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#text = removePunctuation(text) # optional</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(text) <span class="co"># remove caps</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, my_dico) <span class="co"># Remove the terms from our own dictionary</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># here we apply lemmatization instead of stemming:</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  lemma_dico <span class="ot">&lt;-</span>  <span class="fu">make_lemma_dictionary</span>(text, <span class="at">engine =</span> <span class="st">'hunspell'</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># now we apply the dictionnary to clean the text</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">lemmatize_strings</span>(text, <span class="at">dictionary =</span> lemma_dico)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">removeWords</span>(text, <span class="fu">stopwords</span>(kind <span class="ot">&lt;-</span> <span class="st">"en"</span>)) <span class="co"># remove stopwords (in english)</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">trimws</span>(text) <span class="co"># remove any weird spaces in the text</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"  "</span>, <span class="st">" "</span>, text)</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
+</section>
 </section>
 </section>
 
