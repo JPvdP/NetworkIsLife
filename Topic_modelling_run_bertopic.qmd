@@ -1,8 +1,7 @@
 # Run Bertopic
 
-The *topic model* uses all the previously :
 
-## Classic Topic Modelling:
+## Run a classic BERTopic Model:
 
 ```{r, eval=FALSE}
 topics, probs = topic_model.fit_transform(data)
