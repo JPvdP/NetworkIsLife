@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1-loading-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-loading-the-data">Step 1: Loading the data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"CE_abstracts_text_lemm_prepped.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"entr_eco_publications.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list. In addition, we only need the column that has the text, in our case the “abstract” column.</p>
 <div class="cell">
