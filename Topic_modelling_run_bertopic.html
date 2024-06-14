@@ -345,12 +345,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#classic-topic-modelling" id="toc-classic-topic-modelling" class="nav-link" data-scroll-target="#classic-topic-modelling">Classic Topic Modelling:</a>
   <ul class="collapse">
   <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">Visualisation</a></li>
+  <li><a href="#topics-over-time" id="toc-topics-over-time" class="nav-link" data-scroll-target="#topics-over-time">Topics over time</a></li>
   </ul></li>
+  <li><a href="#proba-per-document" id="toc-proba-per-document" class="nav-link" data-scroll-target="#proba-per-document">Proba per document</a></li>
   <li><a href="#hierchical-topic-models" id="toc-hierchical-topic-models" class="nav-link" data-scroll-target="#hierchical-topic-models">Hierchical Topic Models</a>
   <ul class="collapse">
   <li><a href="#dendrogram-of-the-topics" id="toc-dendrogram-of-the-topics" class="nav-link" data-scroll-target="#dendrogram-of-the-topics">Dendrogram of the topics</a></li>
   </ul></li>
-  <li><a href="#connect-with-other-data" id="toc-connect-with-other-data" class="nav-link" data-scroll-target="#connect-with-other-data">Connect with other data</a></li>
+  <li><a href="#additional-data-prep-lemmatization" id="toc-additional-data-prep-lemmatization" class="nav-link" data-scroll-target="#additional-data-prep-lemmatization">Additional data prep (lemmatization)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -385,31 +387,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)</p>
 <p>We can run the model again with bi-grams for example:</p>
 <p><img src="imgs/Topic_mod_workshop_images/Topics_bigram.png" class="img-fluid"></p>
+<p>We can export the information per topic using the following function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>topic_info <span class="ot">=</span> <span class="fu">topic_model.get_topic_info</span>()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>topic_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/topic_info_output.png" class="img-fluid"></p>
+<p>Bertopic creates a -1 topic that will contain terms considered very generic. Using the probabilities option in the mode we can assign topic to the publications classified in topic -1.</p>
 <p>Based on the results of these topics we can go back to the parameters and adjust the model to improve the output. Once we are happy with the results, we can export the topics and connect them with other variables. Bertopic exports the results in the same order as the input data, topics can therefore be combined directly with the intial dataframe that we have been working with.</p>
 </section>
+<section id="topics-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="topics-over-time">Topics over time</h3>
+<p>We can check the evolution of topics over time by adding information on the year of publication of the documents. For this we first need a dataframe with the years:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>timestamps <span class="ot">=</span> data_full[<span class="st">'Year'</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>timestamps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We then run a topic model, supplying this time information:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>topics_dynamic <span class="ot">=</span> <span class="fu">topic_model.topics_over_time</span>(data, timestamps, <span class="at">nr_bins =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="imgs/Topic_mod_workshop_images/dynamics.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="proba-per-document" class="level2">
+<h2 class="anchored" data-anchor-id="proba-per-document">Proba per document</h2>
+<p>Just as for an LDA, we can get the probability for each to document to be linked to a topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Topic_distribution <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(probs, <span class="at">columns =</span> [f<span class="st">"Topic_{i}]"</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(probs.shape[<span class="dv">1</span>])])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Topic_distribution[<span class="st">"Document"</span>] <span class="ot">=</span> data</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Topic_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="imgs/Topic_mod_workshop_images/probs_per_docs.png" class="img-fluid"></p>
 </section>
 <section id="hierchical-topic-models" class="level2">
 <h2 class="anchored" data-anchor-id="hierchical-topic-models">Hierchical Topic Models</h2>
+<p>BERTopic allows for a specific type of topic model which takes a hierachy of topics into account. This allows us to visually check what level of aggregation suits us best.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_hier_topic_model <span class="ot">=</span> <span class="fu">topic_model.hierarchical_topics</span>(data)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_hier_topic_model.visualize_hierarchical_documents</span>(data, my_hier_topic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_hier_topic_model <span class="ot">=</span> <span class="fu">topic_model.hierarchical_topics</span>(data)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_hier_topic_model.visualize_hierarchical_documents</span>(data, my_hier_topic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/hier_topics.png" class="img-fluid"></p>
 <section id="dendrogram-of-the-topics" class="level3">
 <h3 class="anchored" data-anchor-id="dendrogram-of-the-topics">Dendrogram of the topics</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_hierarchy</span>(<span class="at">hierarchical_topics=</span>hierarchical_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_hierarchy</span>(<span class="at">hierarchical_topics=</span>hierarchical_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="imgs/Topic_mod_workshop_images/hier_topics2.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="connect-with-other-data" class="level2">
-<h2 class="anchored" data-anchor-id="connect-with-other-data">Connect with other data</h2>
+<section id="additional-data-prep-lemmatization" class="level2">
+<h2 class="anchored" data-anchor-id="additional-data-prep-lemmatization">Additional data prep (lemmatization)</h2>
+<p>We need some additional help from other packages to use lemmatization:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>import nltk</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>from nltk.stem import WordNetLemmatizer</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>from nltk.corpus import wordnet</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download required resources</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'wordnet'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'averaged_perceptron_tagger'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we need a function to assign the part-of-speech tags to the text</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to map NLTK position tags to WordNet position tags</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>def <span class="fu">get_wordnet_pos</span>(word)<span class="sc">:</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    tag <span class="ot">=</span> <span class="fu">nltk.pos_tag</span>([word])[<span class="dv">0</span>][<span class="dv">1</span>][<span class="dv">0</span>]<span class="fu">.upper</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    tag_dict <span class="ot">=</span> {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span><span class="sc">:</span> wordnet.ADJ,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span><span class="sc">:</span> wordnet.NOUN,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"V"</span><span class="sc">:</span> wordnet.VERB,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"R"</span><span class="sc">:</span> wordnet.ADV</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">tag_dict.get</span>(tag, wordnet.NOUN)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="ot">=</span> <span class="fu">WordNetLemmatizer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And we need a function that goes over the words to lemmatize them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">tokenize_text_bert</span>(tmp)<span class="sc">:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tokenize the text into sentences</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    sentences <span class="ot">=</span> <span class="fu">nltk.sent_tokenize</span>(tmp)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lemmatize each word in each sentence with its correct pos tag</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    lemmatized_sentences <span class="ot">=</span> []</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="cf">in</span> sentences<span class="sc">:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">=</span> <span class="fu">nltk.word_tokenize</span>(sentence)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        lemmatized_words <span class="ot">=</span> [<span class="fu">lemmatizer.lemmatize</span>(w, <span class="fu">get_wordnet_pos</span>(w)) <span class="cf">for</span> w <span class="cf">in</span> words]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        lemmatized_sentence <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_words)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lemmatized_sentences.append</span>(lemmatized_sentence)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Join the lemmatized sentences</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    reconstructed_text <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_sentences)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    return reconstructed_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>W now apply the function to the text, we can then us this data as an input for the embeddings.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>(<span class="fu">map</span>(tokenize_text_bert, data[<span class="st">'Abstract'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
