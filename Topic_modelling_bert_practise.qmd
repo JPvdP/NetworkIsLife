@@ -12,14 +12,14 @@ Once the packages have loaded correctly we need to import some data. For the pur
 ## Step 1: Loading the data
 
 ```{r, eval = FALSE}
-data = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
+data_full = pd.read_csv("CE_abstracts_text_lemm_prepped.csv", sep = ";")
 ```
 
 The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list. In addition, we only need the column that has the text, in our case the "abstract" column. 
 
 ```{r, eval = FALSE}
 # We first select only the column with the text:
-data = data[['abstract']]
+data = data_full['abstract']
 # We transform the dataframe into a list:
 data = data.apply(lambda row: ' '.join(row.values.astype(str)),axis=1).tolist() 
 ```
