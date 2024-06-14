@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The input data for bertopic needs to have a specific format: it need to be a list. We therefore transform our dataframe into a list. In addition, we only need the column that has the text, in our case the “abstract” column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We first select only the column with the text:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> data_full[<span class="st">'abstract'</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> data_full[<span class="st">'Abstract'</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We transform the dataframe into a list:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.apply</span>(lambda row<span class="sc">:</span> <span class="st">' '</span><span class="fu">.join</span>(<span class="fu">row.values.astype</span>(str)),<span class="at">axis=</span><span class="dv">1</span>)<span class="fu">.tolist</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
