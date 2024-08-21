@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Janpieter van der Pol">
 
 <title>NetworkIsLife – feature_extraction</title>
 <style>
@@ -388,12 +389,33 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./feature_extraction.html">Text Mining</a></li><li class="breadcrumb-item"><a href="./feature_extraction.html">Feature Extraction</a></li></ol></nav>
+<div class="quarto-title">
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="feature-extraction" class="level1">
 <h1>Feature Extraction</h1>
-<p>80% of the data at our disposal is textual and often unstructured (web, press, reports, internal notes). This data contains high value-added information for decision-making. Given the amount of information the text contains, it is important to know what is worth reading and what can be put aside <span class="citation" data-cites="fayyad1996knowledge">[@fayyad1996knowledge]</span>. Thus, the text requires particular techniques which aim to extract the salient elements of the text in order to be able to transform the text into intelligence. The objective of this training is to introduce the basic notions associated with textual and semantic analysis and present some use cases linked to sustainability.</p>
+<p>80% of the data at our disposal is textual and often unstructured (web, press, reports, internal notes). This data contains high value-added information for decision-making. Given the amount of information the text contains, it is important to know what is worth reading and what can be put aside <span class="citation" data-cites="fayyad1996knowledge">(<a href="#ref-fayyad1996knowledge" role="doc-biblioref"><strong>fayyad1996knowledge?</strong></a>)</span>. Thus, the text requires particular techniques which aim to extract the salient elements of the text in order to be able to transform the text into intelligence. The objective of this training is to introduce the basic notions associated with textual and semantic analysis and present some use cases linked to sustainability.</p>
 <p>The learning goals for this chapter are:</p>
 <ul>
 <li><strong>Know</strong> the vocabulary associated with textual and semantic analysis</li>
@@ -861,7 +883,7 @@ Figure&nbsp;4: Output of the Tagging process
 <section id="c-value" class="level4">
 <h4 class="anchored" data-anchor-id="c-value">C-value</h4>
 <p>C value = <span class="math inline">\(log_2|a|f(a) - \frac{1}{P(T_a)}\sum_{b \in T_a}f(b)\)</span></p>
-<p>It’s this problem that the <em>c-value</em> indicator proposed by <span class="citation" data-cites="frantzi2000automatic">[@frantzi2000automatic]</span> seeks to address. The logic is to reduce the value of a term according to the number of times it is nested within another term. The hypothesis is that if a term only appears as part of a larger term, it has no value. For example, in <a href="#tbl-Cvalue" class="quarto-xref">Table&nbsp;1</a>, we compute the c-values for the term “Fuel Cell Battery Stack”. This term has 3 nested terms (<em>fuel cell battery</em>, <em>Fuel Cell</em>, <em>Fuel</em>). The term <span class="math inline">\(Fuel\)</span> appears 14 times in the text, of these 14 occurrences 12 are attributed to the broader term <em>Fuel Cell</em>. This reduces significantly the importance of the term <span class="math inline">\(Fuel\)</span> in the text. Applying the formula from the beginning of this section we can compute the values for each term we get:</p>
+<p>It’s this problem that the <em>c-value</em> indicator proposed by <span class="citation" data-cites="frantzi2000automatic">(<a href="#ref-frantzi2000automatic" role="doc-biblioref"><strong>frantzi2000automatic?</strong></a>)</span> seeks to address. The logic is to reduce the value of a term according to the number of times it is nested within another term. The hypothesis is that if a term only appears as part of a larger term, it has no value. For example, in <a href="#tbl-Cvalue" class="quarto-xref">Table&nbsp;1</a>, we compute the c-values for the term “Fuel Cell Battery Stack”. This term has 3 nested terms (<em>fuel cell battery</em>, <em>Fuel Cell</em>, <em>Fuel</em>). The term <span class="math inline">\(Fuel\)</span> appears 14 times in the text, of these 14 occurrences 12 are attributed to the broader term <em>Fuel Cell</em>. This reduces significantly the importance of the term <span class="math inline">\(Fuel\)</span> in the text. Applying the formula from the beginning of this section we can compute the values for each term we get:</p>
 <div id="tbl-Cvalue" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-Cvalue-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -937,7 +959,7 @@ Table&nbsp;1: C Value computation illustration
 <p>This frequency can be calculated in two ways: firstly, we can consider absolute frequency, i.e.&nbsp;the number of times the term is encountered in the corpus. This approach implies that if the term occurs three times in the same document, we increase the frequency by three. This method will therefore give the same score to a term that appears 10 times in a single document as to a term that appears once in 10 documents.</p>
 <p>The second approach consists in calculating frequencies at document level, so that even if a term appears 10 times in a document, its frequency only increases by 1.</p>
 <p>Both approaches have their advantages and disadvantages. Counting at the sentence level brings out terms that are important in a subset of documents, whereas the document-level approach will bring out mainly generic terms (terms present in all documents).</p>
-<p>To conduct an in-depth analysis, these indicators have limitations. A problem of generality. We can consider a term to be generic when it appears in a significant number of documents <span class="citation" data-cites="jones1972statistical">[@jones1972statistical]</span>. The use of frequency-based classification can therefore lead to the highlighting of elements of little interest. For example, when studying cars, it’s not necessarily useful to highlight , and . More precise terms might contain more information.</p>
+<p>To conduct an in-depth analysis, these indicators have limitations. A problem of generality. We can consider a term to be generic when it appears in a significant number of documents <span class="citation" data-cites="jones1972statistical">(<a href="#ref-jones1972statistical" role="doc-biblioref"><strong>jones1972statistical?</strong></a>)</span>. The use of frequency-based classification can therefore lead to the highlighting of elements of little interest. For example, when studying cars, it’s not necessarily useful to highlight , and . More precise terms might contain more information.</p>
 <ul>
 <li><p>Taking into account the absolute frequency of terms can help to highlight more specific terms. However, this approach is influenced by document size. In a corpus with heterogeneous text lengths, this largely influences the counts and can bias the identification work.</p></li>
 <li><p>The limitations of raw counts in texts has led to the development of indicators that aim to avoid generic terms while highlighting more specific terms that represent at least part of the corpus. In the case of technological analyses, this means avoiding generic technological terms while retaining important terms for technological sub-segments.</p></li>

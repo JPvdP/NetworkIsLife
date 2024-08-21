@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Janpieter van der Pol">
 
 <title>NetworkIsLife – topic_modelling_bert_practise</title>
 <style>
@@ -354,7 +355,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bert_practise.html">Create the model (detailed)</a></li></ol></nav>
+<div class="quarto-title">
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="create-the-model-detailed" class="level1">
@@ -381,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-2-creating-the-embeddings" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-creating-the-embeddings">Step 2: Creating the embeddings</h2>
-<p><strong>First</strong> up are the embeddings we want to use for the data. Embeddings in text mining are representations of words or phrases in a numerical form. These numerical representations capture the semantic meaning of the words or phrases, allowing machines to understand and process text more effectively. Think of embeddings as a way to convert words into vectors of numbers, where similar words are represented by similar vectors. This enables algorithms to analyze, compare, and make predictions based on the meaning of the text rather than just the raw text itself. There are multiple ways to do this, some embeddings have specific purposes (models for patents for instance), others are more general, some focus on one language, others on multiple. In the following image from Bandyopadhyay et al.&nbsp;2022 some words are positionned in space. The closer the words, the more proximity between them. What we download are basically the coordinates of the words in this space and replace each word with it’s coordinates. Doing this allows us to take into account the distance between the words rather than considering each word at the same distance from each other word.</p>
+<p><strong>First</strong> up are the embeddings we want to use for the data. Embeddings in text mining are representations of words or phrases in a numerical form. These numerical representations capture the semantic meaning of the words or phrases, allowing machines to understand and process text more effectively. Think of embeddings as a way to convert words into vectors of numbers, where similar words are represented by similar vectors. This enables algorithms to analyze, compare, and make predictions based on the meaning of the text rather than just the raw text itself. There are multiple ways to do this, some embeddings have specific purposes (models for patents for instance), others are more general, some focus on one language, others on multiple. In the following image some words are positioned in space. The closer the words, the more proximity between them. What we download are basically the coordinates of the words in this space and replace each word with it’s coordinates. Doing this allows us to take into account the distance between the words rather than considering each word at the same distance from each other word.</p>
 <p><img src="imgs/Topic_mod_workshop_images/embeddings_3d.png" class="img-fluid"></p>
 <p>For this tutorial we pick a small, low-weight embedding model to not waste too much time on computation. Other models are available, check <a href="https://huggingface.co/datasets?search=embedding">Hugging Face</a> for inspiration.</p>
 <div class="cell">

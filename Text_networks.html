@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Janpieter van der Pol">
 
 <title>NetworkIsLife – text_networks</title>
 <style>
@@ -20,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -356,7 +377,28 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">Network Analysis</a></li><li class="breadcrumb-item"><a href="./Text_networks.html">Textual Networks</a></li></ol></nav>
+<div class="quarto-title">
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="textual-networks" class="level2">
@@ -534,7 +576,7 @@ Remark
 </section>
 <section id="the-cramer-indicator" class="level3">
 <h3 class="anchored" data-anchor-id="the-cramer-indicator">The Cramer indicator</h3>
-<p>This is an indicator developed by <span class="citation" data-cites="cramer1979some">[@cramer1979some]</span>. It is an indicator that is automatically calculated in the Cortext Manager text analysis software.</p>
+<p>This is an indicator developed by <span class="citation" data-cites="cramer1979some">(<a href="#ref-cramer1979some" role="doc-biblioref">Cramer and Nicewander 1979</a>)</span>. It is an indicator that is automatically calculated in the Cortext Manager text analysis software.</p>
 <p>This indicator aims to remove language bias. In a given language, certain words occur more often than others, creating high co-occurrences for these words, which are <em>de facto</em> highlighted to the detriment of words that have lower frequencies but may be of interest. To correct for these biases, raw co-occurrences will be compared with expected co-occurrences. In other words, if a term is frequent in the text, it will have more co-occurrences by definition. An infrequent term will have fewer co-occurrences. The number of co-occurrences we can expect can be estimated by a statistical calculation:</p>
 <span class="math display">\[\begin{equation}
 e(i,j) = \frac{n(i) \cdot n(j)}{n}
@@ -1067,7 +1109,7 @@ Remark
 <p>In what follows, we present two indirect indicators: cosine and distributional.</p>
 <section id="cosine" class="level3">
 <h3 class="anchored" data-anchor-id="cosine">Cosine</h3>
-<p>The first indicator we’ll be looking at here is cosine, a well-known and widely used indicator in scientometrics <span class="citation" data-cites="eck2009normalize">[@eck2009normalize]</span> and economics <span class="citation" data-cites="jaffe1986technological">[@jaffe1986technological]</span>, <span class="citation" data-cites="engelsman1991mapping">[@engelsman1991mapping]</span>, <span class="citation" data-cites="breschi2003knowledge">[@breschi2003knowledge]</span>. In a later chapter, we’ll show how we use this same indicator to understand technological proximity based on technological classifications. In this chapter, we focus on the application to textual analysis. Let’s go back to the co-occurrence matrix, which we recall here for fluency:</p>
+<p>The first indicator we’ll be looking at here is cosine, a well-known and widely used indicator in scientometrics <span class="citation" data-cites="eck2009normalize">(<a href="#ref-eck2009normalize" role="doc-biblioref">Eck and Waltman 2009</a>)</span> and economics <span class="citation" data-cites="jaffe1986technological">(<a href="#ref-jaffe1986technological" role="doc-biblioref">Jaffe 1986</a>)</span>, <span class="citation" data-cites="engelsman1991mapping">(<a href="#ref-engelsman1991mapping" role="doc-biblioref">Engelsman and Raan 1991</a>)</span>, <span class="citation" data-cites="breschi2003knowledge">(<a href="#ref-breschi2003knowledge" role="doc-biblioref">Breschi, Lissoni, and Malerba 2003</a>)</span>. In a later chapter, we’ll show how we use this same indicator to understand technological proximity based on technological classifications. In this chapter, we focus on the application to textual analysis. Let’s go back to the co-occurrence matrix, which we recall here for fluency:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 12%">
@@ -1468,10 +1510,27 @@ Distr(geometry, tire) &amp;= \frac{min(0.14) + min(0.031, 0.185)}{0.14 + 0.185} 
 <p>The aim here is not to specify that one indicator is better than another, as this will depend on the use case. The most important thing is to understand how these indicators are calculated or, failing that, to be aware of their limitations, as presented in this table, in order to make a coherent choice of indicator for the chosen use case.</p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-breschi2003knowledge" class="csl-entry" role="listitem">
+Breschi, Stefano, Francesco Lissoni, and Franco Malerba. 2003. <span>“Knowledge-Relatedness in Firm Technological Diversification.”</span> <em>Research Policy</em> 32 (1): 69–87.
+</div>
+<div id="ref-cramer1979some" class="csl-entry" role="listitem">
+Cramer, Elliot M, and W Alan Nicewander. 1979. <span>“Some Symmetric, Invariant Measures of Multivariate Association.”</span> <em>Psychometrika</em> 44 (1): 43–54.
+</div>
+<div id="ref-eck2009normalize" class="csl-entry" role="listitem">
+Eck, Nees Jan van, and Ludo Waltman. 2009. <span>“How to Normalize Cooccurrence Data? An Analysis of Some Well-Known Similarity Measures.”</span> <em>Journal of the American Society for Information Science and Technology</em> 60 (8): 1635–51.
+</div>
+<div id="ref-engelsman1991mapping" class="csl-entry" role="listitem">
+Engelsman, Eibert C, and Anthony FJ van Raan. 1991. <em>Mapping of Technology: A First Exploration of Knowledge Diffusion Amongst Fields of Technology</em>. Vol. 15. Centre for Science; Technology Studies, University of Leiden.
+</div>
+<div id="ref-jaffe1986technological" class="csl-entry" role="listitem">
+Jaffe, A. B. 1986. <span>“Technological Opportunity and Spillovers of r&amp;d: Evidence from Firms’ Patents, Profits and Market Value.”</span> National Bureau of Economic Research Cambridge, Mass., USA.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
