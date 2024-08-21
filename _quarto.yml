@@ -1,6 +1,10 @@
 project:
   type: website
 
+author: "Janpieter van der Pol"
+
+bibliography: Biblio5G.bib
+
 website:
   title: "NetworkIsLife"
   navbar:
