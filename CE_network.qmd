@@ -1,0 +1,25 @@
+---
+title: "Collaboration network: Research on the circular economy"
+---
+
+The network is created from co-authorship from publications written between 2010 and 2024. Only published articles and books were selected from the Scopus database.
+
+Affiliation were obtained from scopus in a raw format (hence the many variations in the list), some small cleaning steps were taken to identify universities and tag researchers from copernicus.
+
+```{r}
+library(visNetwork)
+library(igraph)
+load("~/Desktop/Projects/3GPP/3GPP/CE_g_GC.rdata")
+visIgraph(CE_g_GC)  %>% 
+  visOptions(selectedBy = "Affiliation", highlightNearest = TRUE, nodesIdSelection = TRUE) %>% 
+  visPhysics(
+              solver = "forceAtlas2Based",
+              forceAtlas2Based = list(
+              gravitationalConstant = -50,
+              centralGravity = 0.01,
+              springLength = 100,
+              springConstant = 0.08,
+              damping = 0.4,
+              avoidOverlap = 1   # This tries to avoid overlap; values 0 (off) to 1 (on)
+              ))
+```
