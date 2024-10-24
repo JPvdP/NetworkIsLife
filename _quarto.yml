@@ -18,6 +18,10 @@ website:
     #logo: images/ofce_m.png
     search: true
     contents:
+      - section: "DAFS - Programming"
+        contents:
+        - href: DAFS_install_R.qmd
+        - href: DAFS_prog_week_1.qmd
       - section: "Network Analysis"
         contents:
         - href: Network_analysis_basics.qmd
@@ -47,7 +51,6 @@ website:
         - href: Topic_modelling_bert_practise.qmd
         - href: Topic_modelling_bertopic_nodetails.qmd
         - href: Topic_modelling_run_bertopic.qmd
-        - href: Topic_modelling_lda2.qmd
 
 
 
