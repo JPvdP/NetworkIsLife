@@ -1,0 +1,68 @@
+project:
+  type: website
+
+author: "Janpieter van der Pol"
+
+bibliography: Biblio5G.bib
+
+website:
+  title: "NetworkIsLife"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+  sidebar:
+    style: "docked"
+    #logo: images/ofce_m.png
+    search: true
+    contents:
+      - section: "DAFS Programming module"
+        contents:
+        - href: DAFS_install_R.qmd
+        - href: DAFS_prog_week_1.qmd
+      - section: "Network Analysis"
+        contents:
+        - href: Network_analysis_basics.qmd
+        - href: Text_networks.qmd
+        - href: CE_network.qmd
+      - section: "Intro to Programming"
+        contents:
+        - href: Intro_programming_basic_operations.qmd
+        - href: Intro_programming_DataImportAndPrep.qmd
+        - href: Intro_programming_Databasemanip.qmd
+        - href: Intro_programming_functions.qmd
+        - href: Intro_programming_loops_ifelse.qmd
+        - href: Intro_programming_random.qmd
+        - href: Intro_programming_visualisation.qmd
+      - section: "Text Mining"
+        contents:
+        - href: feature_extraction.qmd
+        - href: Topic_modelling_lda.qmd
+        - href: NER.qmd
+        - href: Text_networks.qmd
+      - section: "State of Data"
+        contents:
+        - href: State_of_data_04062024.qmd
+      - section: "Topic Modelling Workshop"
+        contents:
+        - href: Topic_modelling_bertopic.qmd
+        - href: Topic_modelling_bert_practise.qmd
+        - href: Topic_modelling_bertopic_nodetails.qmd
+        - href: Topic_modelling_run_bertopic.qmd
+        - href: Topic_modelling_lda2.qmd
+      - section: "Useful scripts"
+        contents:
+        - href: useful_scripts.qmd
+
+
+format:
+  html:
+    theme: Litera
+    extra_dependencies: ['amsmath', 'fontawesome5', 'tikz-network', 'xkeyval']
+    css: styles.css
+    toc: true
+
+editor: visual
+
