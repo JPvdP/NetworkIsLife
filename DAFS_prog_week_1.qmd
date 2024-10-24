@@ -1,6 +1,5 @@
 ---
 title: "Week 1: The programming basics"
-format: html
 ---
 
 
