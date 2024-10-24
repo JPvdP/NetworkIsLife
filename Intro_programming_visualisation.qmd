@@ -1,7 +1,0 @@
-## Data visualisation
-
-This chapter discusses how to visualize data
-
-```{r}
-1 + 1
-```

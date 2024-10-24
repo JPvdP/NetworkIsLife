@@ -1,7 +1,0 @@
-## Making functions
-
-This chapter discusses how to create a function
-
-```{r}
-1 + 1
-```

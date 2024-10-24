@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Janpieter van der Pol">
+
+<title>NetworkIsLife – network_analysis_basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NetworkIsLife</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Programming</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">Network Analysis</a></li><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">The basics of Network Analysis</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Network Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Network_analysis_basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">The basics of Network Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Text_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Textual Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CE_network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaboration network: Research on the circular economy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Intro to Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_basic_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_DataImportAndPrep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Import and preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_Databasemanip.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database Manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_loops_ifelse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loops, if-else and Mapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature_extraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feature Extraction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_lda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modelling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./NER.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Named Entity Recognition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Text_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Textual Networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">State of Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./State_of_data_04062024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State of Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Topic Modelling Workshop</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing Bertopic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (detailed)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic_nodetails.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (TL;DR version)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run Bertopic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_lda2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modelling with LDA</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-basics-of-network-analysis" id="toc-the-basics-of-network-analysis" class="nav-link active" data-scroll-target="#the-basics-of-network-analysis">The basics of Network Analysis</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#theory---network-analysis" id="toc-theory---network-analysis" class="nav-link" data-scroll-target="#theory---network-analysis">Theory - Network Analysis</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">Network Analysis</a></li><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">The basics of Network Analysis</a></li></ol></nav>
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-basics-of-network-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="the-basics-of-network-analysis">The basics of Network Analysis</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p>We are familiar with the statistical processing of object data (sum, mean, variance, histograms, etc.). However, there is a different kind of data with a high informational value: relational data. We are referring here to data that indicates a relationship, <em>e.g</em> a collaborative relationship, a citation link, a financial investment, a social link, etc. Relational data is rich in information. Relational data show their informational richness with different tools and methods. In fact, in relational data we’re mainly interested in the structure of these relationships and the role that entities play in this structure. This idea is illustrated in Figure <a href="#fig-1">1</a>.</p>
+<p><img src="histo_to_nw.pdf" alt="Figure_1" id="fig-1" width="800"></p>
+<p>The bar chart shows the frequency of patent technology classifications in a portfolio. The diagram provides information on the fields in which players seek to protect their inventions. Code B60C1/00 corresponds to <em>“Tires characterized by chemical composition”</em>, code C08K003/04 corresponds to <em>“Use of inorganic substances as adjuvants”</em> and so on. The network is generated by connecting two classifications present on the same patent. Each node in this network is therefore a classification, and each link indicates that both classifications were observed on the same patent.</p>
+<p>The network representation of these classifications enables us to learn more about the combination of classifications. We can see which classifications are often combined, which are never combined, which play a central role, and so on. What interests us in networks is the <strong>structure</strong>. Analyzing structure allows us to quantify which nodes group together in communities, which nodes are central, which nodes connect different parts of the network (or <em>clusters</em>) and much more.</p>
+<p>However, to get the most out of this data, we need specific metrics and methods. These tools fall into a field known as <em>Social Network Analysis (SNA)</em>. The name is misleading, coming from the pioneering methods that began work on social systems analysis. The methods have subsequently been employed in every field of science, but the name hasn’t really changed.</p>
+<p>Whatever the data source, the methods and indicators are the same. Interpretation, however, depends on the data: a co-classification link, a shareholding, a citation or a collaboration are not interpreted in the same way. And even between the same types of data, interpretation can differ. For example, a collaboration link in a project funded by the French National Research Agency (ANR) is not interpreted in the same way as a collaboration link in a European project. It is therefore essential to understand both the theory (indicators and methods) associated with SNA and the origin of the data. To this end, this manual has a dual objective. The first is to present the theoretical aspects of network analysis. The second is to present use cases mobilizing different data sources. These cases are divided into three parts:</p>
+<ul>
+<li>Present the origin of the data, how to interpret the data</li>
+<li>Present how the network was generated (what information was mobilized, what clean-ups were carried out, etc.).</li>
+<li>Analysis of the network with an interpretation in line with the use case and the data mobilized.</li>
+</ul>
+<p>Particular attention is paid to the explanation of citation analysis in patents, and textual analysis, which present a higher level of complexity than other data sources.</p>
+<p>This manual is aimed at Masters students and intelligence professionals who wish to include network analysis in their toolbox.</p>
+</section>
+<section id="theory---network-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="theory---network-analysis">Theory - Network Analysis</h3>
+<p>In its most basic form, a network is an object based on a set of nodes and links. The nature of the nodes and links is unlimited. A network can be created from any type of object with an interaction link. Network analysis can be applied to the analysis of social interactions: social interactions between cows, interactions between brain areas, equity investment links between firms, financial exposures between banks, collaborations between firms, links between criminals - the list goes on.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure 2 shows the construction of a network in its simplest form. Objects are represented by circles we call <em>“nodes”</em> and interactions by connections we call <em>“links”</em>. The network here shows object 1 interacting with object 2. This could be two researchers co-authoring a paper, two firms collaborating on a project, etc.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A network is the sum of the objects and interconnections between these objects.</p>
+</div>
+</div>
+<p>The concept is relatively simple, and we may be tempted to create networks from any kind of data. In order to avoid errors and misinterpretations, it is important to be able to identify the type of network we are creating and how this impacts on the validity or choice of indicators for analysis. In this section, we present the different types of networks and introduce a few vocabulary elements that will serve as a basis for the cases applied in the following.</p>
+<section id="the-network-types" class="level4">
+<h4 class="anchored" data-anchor-id="the-network-types">The network types</h4>
+<section id="the-undirected-or-bilateral-network" class="level5">
+<h5 class="anchored" data-anchor-id="the-undirected-or-bilateral-network">The undirected, or bilateral, network</h5>
+<p>In the simplest cases, an interaction between two objects can go either way. Suppose a collaborative link between two researchers: if <span class="math inline">\(\textit{A}\)</span> collaborates with <span class="math inline">\(\textit{B}\)</span>, then <span class="math inline">\(\textit{B}\)</span> collaborates with <span class="math inline">\(\textit{A}\)</span>. Another example is a network of criminals, a network based on participants in conferences or projects.</p>
+<p>If the interaction between objects takes place in both directions, we speak of a <span class="math inline">\(\textbf{nondirected}\)</span> network. Classically, this type of interaction is represented by a line without arrows between objects. Figure <span class="math inline">\(\ref{nw_simple_nondirected}\)</span> gives an example of this type of network.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>a. Unweighted Network</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>b. Weighted Network</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>It is possible to quantify the link between objects, in which case we speak of a weighted network. If we take the example of a collaboration network, a collaboration link can be weighted by the number of collaborations between two actors. The number is then associated as a weight on the link and can be visualized by a different link thickness. In figure <span class="math inline">\(\ref{nw_simple_non_dirige_pondere}\)</span> we have the same structure, but different weights on the links. The weights are visualized by the link thickness and by the number displayed next to the links. It is often important to associate this type of information, both for the relevance of the calculation of certain indicators, and for visualization purposes. The latter makes it easier to see the structure of interactions between objects, and quickly identifies the densest areas of the network.</p>
+<p>It’s possible to observe a link in a network that points from a node to itself. This is called a <span class="math inline">\(\textbf{loop}\)</span> and is represented in figure <span class="math inline">\(\ref{nw_simple_non_dirige_pondere}\)</span> by a red broken line. Let’s assume that each node in the illustrated network represents a country, and each link represents collaboration between players in the territory. The network shows us that two actors from country <span class="math inline">\(\textit{A}\)</span> collaborate with actors from country <span class="math inline">\(\textit{C}\)</span>. In this context, the loop indicates that actors in country <span class="math inline">\(\textit{C}\)</span> are also working together.</p>
+</section>
+<section id="the-directed-or-unilateral-network" class="level5">
+<h5 class="anchored" data-anchor-id="the-directed-or-unilateral-network">The directed, or unilateral, network</h5>
+<p>When the interaction goes from one node to another, the network is <span class="math inline">\(\textbf{directed}\)</span>. A financial transaction is directed from one account to another. Quotations are another example: a document quoting a pre-existing document. So is the infection of one person by another. The virus spreads from the infected individual to the healthy one. The direction must be unilateral for the network to be considered directed. Figure <span class="math inline">\(\ref{nw_simple_dirige}\)</span> shows an example of a directed network. By convention, to indicate the direction of interaction, the link is represented by an arrow.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In this illustration, the node <span class="math inline">\(\textit{A}\)</span> interacts with three other nodes, with varying intensity. However, no node interacts with it. Node <span class="math inline">\(\textit{B}\)</span>, on the other hand, both receives and gives interactions (with node <span class="math inline">\(\textit{C}\)</span>). Suppose we’re dealing with a financial network in which each node is a bank account held by an individual. In this case, node $textit{A}$ sends money to three other individuals, sending the largest amount (3 units) to node <span class="math inline">\(\textit{B}\)</span>. The latter receives money from two individuals and sends money to individual <span class="math inline">\(\textit{C}\)</span>.</p>
+<p>The fact that a network is directed does not prevent two-way interaction. The difference with an undirected (or bilateral) network is that this interaction is split into two directed interactions. In figure <span class="math inline">\(\ref{nw_simple_directed_loop}\)</span> this is visualized between nodes <span class="math inline">\(\textit{D}\)</span> and <span class="math inline">\(\text{E}\)</span> by two red directed links. It is therefore possible that the weight of the link from <span class="math inline">\(\textit{D}\)</span> to <span class="math inline">\(\textit{E}\)</span> is different from the weight of <span class="math inline">\(\textit{E}\)</span> to <span class="math inline">\(\textit{D}\)</span>. In an undirected network, the weight is unique.</p>
+<p>As in an undirected network, a loop on a node is possible, with the difference that this loop is directed.</p>
+</section>
+<section id="multiple-types-of-nodes-the-bi-modal-or-bipartite-network." class="level5">
+<h5 class="anchored" data-anchor-id="multiple-types-of-nodes-the-bi-modal-or-bipartite-network.">Multiple types of nodes: The bi-modal, or bipartite, network.</h5>
+<p>It is possible to create a network containing different types of objects. Suppose we want to analyze the career of inventors by mapping the companies they have worked for. This implies having two types of nodes: inventors and companies. When two types of nodes are interconnected in the same network, this network is called a <span class="math inline">\(\textit{bi-modal}\)</span> network.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>An example is given in figure <span class="math inline">\(\ref{Reseau_bimodal}\)</span>. We have three inventors and two companies. Two inventors are common to both companies, and one inventor is specific to one company. It’s important to note that in this type of network, there is no direct link between companies or inventors. Indeed, a link between inventors would represent a different type of link: the network would no longer be solely bi-modal, but would also be a multi-graph (network with more types of links, see <span class="math inline">\(\ref{muli_graph}\)</span>). In the network represented here, we have only one type of link: the company membership link.</p>
+<p>However, it is possible to transform a bi-modal network into a uni-modal one. The idea is to create a link between two inventors who have belonged to the same companies, and to create a link between two companies that have employed the same inventor. The nature of the link changes, but we’re trying to show the same thing. In figure <span class="math inline">\(\ref{Reseau_bimodal_ecalte}\)</span> the transformation is visualized.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The first network is a simple link between the two firms, with a weight of two because they have employed two inventors in common. The second network is composed solely of inventors. Here, the blue inventor has one firm in common with the orange inventor, and the orange inventor has two firms in common with the grey inventor.</p>
+<p>This type of transformation facilitates analysis and, above all, the calculation of indicators that are more complex to calculate in an n-modal network.</p>
+</section>
+<section id="the-multigraphe" class="level5">
+<h5 class="anchored" data-anchor-id="the-multigraphe">The Multigraphe</h5>
+<p>Let’s suppose we want to represent different types of interaction in the same network. This translates into the possible existence of two (or more) links between two objects in the same network. Figure <span class="math inline">\(\ref{Network_two_types_of_links}\)</span> visualizes this idea with two links between nodes <span class="math inline">\(\textit{C}\)</span> and <span class="math inline">\(\textit{D}\)</span>. The first link is shown in black, the second in red. A network containing different types of links is called a <span class="math inline">\(\textbf{multi-graph}\)</span>.</p>
+<p>As with any network, it can be analyzed visually or by calculating indicators. In the particular case of a multigraph, the vast majority of indicators would be false (or incalculable) if two types of link co-existed. We must therefore be careful with multigraphs. While a visual analysis can be carried out without too many constraints, an analysis using indicators requires vigilance with regard to the indicators calculated (check in the software that the indicators take into account the different links). Indeed, if the software doesn’t distinguish between them, each link will be treated as identical, undermining the additional informational value of the multigraph.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s assume that the nodes in this network are companies, with black links representing collaborative links in patents, and red links representing collaborations in these scientific publications. We can read in this network that firm <span class="math inline">\(\textit{A}\)</span> has co-authored a paper with firms <span class="math inline">\(\textit{E}\)</span> and <span class="math inline">\(\textit{B}\)</span> but has co-filed a patent with firm <span class="math inline">\(\textit{C}\)</span>. Although these are collaborative links in both cases, the implications are not at all the same. A collaborative link in patents implies an intellectual property parte, whereas publication shows above all a fundamental research activity between the two entities. A visual analysis here is interesting and relevant. However, the calculation of classic indicators would be wrong, as it considers both types of link to be identical. To overcome this problem, it is possible to create two networks from the first, each with only one type of link. The alternative relies on the use of more complex indicators, which are far more difficult to interpret and limit the impact these analyses can have on decision-making.</p>
+<p>More effective than the multigraph are multiplex networks and interconnected networks, which we will describe in detail below.</p>
+</section>
+<section id="muli-layered-networks" class="level5">
+<h5 class="anchored" data-anchor-id="muli-layered-networks">Muli-layered Networks</h5>
+<p>A different approach to multigraphs and bi-modal graphs is to consider each typology of links or nodes as a specific network, and to create links between networks. There are two types of multi-layer network, the multiplex network and the interconnected network.</p>
+<p>A different approach to the multigraph is to consider each link typology in a specific network and create links between networks. For example, in the network shown in figure <span class="math inline">\(\ref{nw_multiplex}\)</span> we have two networks represented simultaneously. Each network is also called <em>layer</em> here, referring to the idea that each layer handles a particular interaction <span class="citation" data-cites="kivela2014multilayer">(<a href="#ref-kivela2014multilayer" role="doc-biblioref">Kivelä et al. 2014</a>)</span>. Thus, links connecting nodes in the same network are called <em>intra-layer</em> links. In this type of network, links between layers (<em>inter-layer</em>) exist only to notify the presence of the same node in different layers of the network <span class="citation" data-cites="sole2013spectral">(<a href="#ref-sole2013spectral" role="doc-biblioref">Sole-Ribalta et al. 2013</a>)</span>.<br>
+</p>
+<p>We can thus imagine co-patenting in a first layer and co-publishing in a second layer. Visualizing this type of network is possible for small networks, but quickly becomes unmanageable for larger ones. For the latter, a layered network remains the best solution. To calculate indicators, a multiplex network is possible, provided the software can handle them (R, Python, networkX).</p>
+<p><img src="NW_multicouche.png" alt="Figure_2" width="600"></p>
+<p>Unlike multi-layer networks, which assign a layer to each type of interaction, the interconnected network considers one object per layer. For example, the first network may consist of all interactions in a given region, the second network a different region. As a result, inter-layer links can be made between different nodes, unlike in a multiplex network. For example, in the network shown in figure <span class="math inline">\(\ref{nw_interconnected}\)</span>, company A in region 1 collaborates with company B in region 2.</p>
+<p><img src="NW_multinetwork.png" alt="Figure_2" width="600"></p>
+<p>Both the multiplex and the interconnected network require specific algorithms for calculating indicators, and few software packages are able to manage this type of network.</p>
+</section>
+</section>
+<section id="paths-distance-and-loops" class="level4">
+<h4 class="anchored" data-anchor-id="paths-distance-and-loops">Paths, distance and loops</h4>
+<p>The analysis of connections between nodes often raises the question of distance. A node that is close to all the nodes in the network is, a priori, an important node. Many centrality indicators are based on notions of distance between a node and other nodes in the network. By the same token, to judge the size of a network, we’d like to know the distance separating the most outlying nodes. In other cases, it may be important to know whether it’s simply possible to navigate from one node to another in a network.</p>
+<p>To answer these questions, we first need to introduce the notion of “path”.</p>
+<section id="the-path" class="level5">
+<h5 class="anchored" data-anchor-id="the-path">The path</h5>
+<p>In network analysis, a is a sequence of nodes through which you must pass to reach a given node from a given node. Suppose we’re looking for a path between node and node in the network shown in figure <span class="math inline">\(\ref{Notion_de_chemin_bilat}\)</span>. As the network is undirected, we can take the direction of the link as we wish. Thus, we start from node to node , then continue from node to node . The path connecting nodes G and A is therefore G, F, A.</p>
+<p>If the network is directed, a path follows the direction of the links. So, in figure <span class="math inline">\(\ref{Notion_of_path_unilat}\)</span>, the only path between and is A <span class="math inline">\(\mapsto\)</span> D <span class="math inline">\(\mapsto\)</span> E <span class="math inline">\(\mapsto\)</span> B <span class="math inline">\(\mapsto\)</span> C. Since the link between A and B is in the opposite direction, we cannot go from A to B directly.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In both examples, the path between the two nodes is unique. However, several paths can coexist. The more nodes and links a network contains, the greater the number of paths. A key factor in differentiating these paths will then be their length, or the separating the nodes.</p>
+<p>The distance between two nodes is given by the length of the path separating two nodes. The length is then given by the number of links separating the two nodes. For example, in figure two different paths are given to connect nodes G and C. The first path, in figure <span class="math inline">\(\ref{notion_distance_bi}\)</span> has a length of 4, giving a distance of 4 between the two nodes. The second path in figure <span class="math inline">\(\ref{notion_distance_uni}\)</span> has a distance of 6, giving a distance of 6 between G and C. Both distances and paths are valid, but we’ll often use the . This is calculated by identifying all possible paths between two nodes and retaining the shortest distance.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In the case where no path exists between two nodes, by convention, we consider the distance between the two nodes to be <span class="math inline">\(\infty\)</span>..</p>
+<p>A special case of a path is the . A loop is a path leading from a node to itself. In figure <span class="math inline">\(\ref{Notion_loop}\)</span>, a loop is shown in a directed network and in an undirected network. Loops can be problematic in some cases when we want to calculate distances or identify paths. For example, to calculate the distance between A and C, a correct path would be:<br>
+</p>
+<p>A <span class="math inline">\(\mapsto\)</span> D <span class="math inline">\(\mapsto\)</span> E <span class="math inline">\(\mapsto\)</span> B <span class="math inline">\(\mapsto\)</span> A <span class="math inline">\(\mapsto\)</span> D <span class="math inline">\(\mapsto\)</span> E <span class="math inline">\(\mapsto\)</span> B <span class="math inline">\(\mapsto\)</span> C<br>
+</p>
+<p>Theoretically, there are an infinite number of paths between A and C, as we could include the loop A - D - E - B - A an infinite number of times. In some cases, software will require an acyclic network, which implies a loop-free network, to enable algorithms to run.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="network-indicators" class="level4">
+<h4 class="anchored" data-anchor-id="network-indicators">Network indicators</h4>
+<section id="the-degree" class="level5">
+<h5 class="anchored" data-anchor-id="the-degree">The degree</h5>
+<p>In this section, we’ll start by presenting a number of indicators. Initially, we’ll focus on indicators at node level.</p>
+<p>In order to illustrate the different indicators, we will mobilize a network extracted from real data. This is a collaborative network extracted from research projects funded by the French National Research Agency around 5G technologies. The network is given in figure <a href="#fig-3">3</a>.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge.pdf" alt="Figure_3" id="fig-3&quot;/" width="800"></p>
+<p>When analyzing a network, the first valuable piece of information is the number of connections for each node. This provides a measure of the number of collaborators (or number of citations, investors, co-authors, etc.). This indicator is called the .</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition: degree
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The degree of a node is the number of nodes it connects to. We can measure the degree by counting the number of links.</p>
+</div>
+</div>
+<p>In the example of the network in figure <span class="math inline">\(\ref{fig_ind_degree}\)</span>, node E has two connections (with and ), so its degree is 2. We then note <span class="math inline">\(d_E = 2\)</span>. The nodes and have a degree of 2, and a degree of 3.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>This is a caption for the figure. </figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>If we calculate the degrees of the network nodes in <a href="#fig-fil_rouge_degree">1</a> we can visualize the degree by a color gradient. In <a href="#fig-fil_rouge_degree">1</a> we visualize the degree of the nodes by a green gradient. The darker the color, the higher the degree.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_degree.pdf" alt="Figure_degree" id="fig-fil_rouge_degree" width="600"></p>
+<p>The degree visualization shows that some nodes, even if central, have a relatively low degree (ETIS, IRCICA). Orange has the highest degree, and therefore the largest number of employees, followed by the Institut Mines Telecom (which is more off-center).</p>
+<p>The degree is a simple but effective measure for differentiating the positioning of nodes in a network.</p>
+<p><strong>The Degree in a directed network</strong></p>
+<p>If the network we’re analyzing is a directed one, we need to take into account the direction of interaction. A node can have both incoming and outgoing links. It therefore seems natural to propose two degrees in a directed network.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition: in-degree
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The in-degree of a node corresponds to the number of links pointing to the node.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition: out-degree
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The in-degree of a node corresponds to the number of links originating from the node, pointing to other nodes.</p>
+</div>
+</div>
+<p>For example, in figure <span class="math inline">\(\ref{Reseau_degre_dirige}\)</span>, the incoming degree of node is <span class="math inline">\(2\)</span>, since two links point to it. Since no links point to other nodes from <span class="math inline">\(E\)</span>, its outgoing degree is <span class="math inline">\(0\)</span>. The logic is therefore the same as for the classic degree, with the only difference being the directions.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Network_analysis_basics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Degree in a weighted network</strong></p>
+<p>The weights of interactions can be included in the degree calculation, so we speak of . The latter is obtained by summing the weights of the node’s links. For example, in <a href="#fig-Reseau_degre_pondere" class="quarto-xref">Figure&nbsp;1</a>, node E has two links, one with a weight of 1 and one with a weight of 2. The weighted degree of node E is therefore 3.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-Reseau_degre_pondere" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Reseau_degre_pondere-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network_analysis_basics_files/figure-html/fig-Reseau_degre_pondere-1.png" id="fig-Reseau_degre_pondere" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Reseau_degre_pondere-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="centrality-measures" class="level4">
+<h4 class="anchored" data-anchor-id="centrality-measures">Centrality measures</h4>
+<p>One of the aims of network analysis is to identify nodes with an important position in the network structure. Important can be defined in different ways: in the case of degree, it’s the number of links, but we can also look at things in a more structural way. If we take the network shown in figure , it’s clear that the position of Orange and CEA differ. The role of these two players is therefore different from a structural point of view. Orange has a more position than CEA. Intuitively, we can consider that the centrality of a node is linked to its importance in a network, as it reflects a higher level of interconnectivity than a node positioned more on the periphery. In other words, the smaller the distance between a node and all the other nodes in the network, the more central the node is in the network.</p>
+<p>The idea of centrality is reflected in various indicators that measure the centrality of a node with a slightly different objective. We’ll introduce some of these indicators below.</p>
+<p><strong>Betweenness Centrality</strong></p>
+<p>A first vision of centrality is given in terms of flows in the network. Let’s suppose that the network represents interactions between individuals, and that a virus is circulating between them. A person on the periphery of the network is less likely to receive the virus, as it has to pass through a large number of nodes before reaching him or her. A central player is located on a large number of paths, exposing him to a greater risk of the virus reaching him before it reaches the entire network.</p>
+<p>If we return to our collaboration network, we can consider that collaboration involves the exchange of ideas and information. These elements pass from node to node (possibly degrading or enriching themselves) in order to spread throughout the entire network. In the context of R&amp;D, the pooling of the knowledge of different players can result in innovation. The logic then is that the position of a node is important if it is able to capture the information flows passing through the network.</p>
+<p>To measure the importance of a node from a flow capture point of view, we’re going to identify the number of on which a node is positioned. More precisely, we’ll identify the number of shortest paths between each pair of nodes, and how many of them a given node is positioned on.</p>
+<p>Formally, the betweenness centrality is computed by:\</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Betweennes Centrality formula:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<span class="math display">\[\begin{equation}
+    BC = \sum_{k \neq j, i \in \{k,j\}} \frac{\frac{P_i(kj)}{P(kj)}}{\frac{(n-1)\cdot(n-2)}{2}}\\
+\end{equation}\]</span>
+</div>
+</div>
+<p>The nominator calculates the number of paths between nodes <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> (<span class="math inline">\(P(kj)\)</span>) and the number of paths between <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> on which node <span class="math inline">\(i\)</span> is positioned (<span class="math inline">\(P_i(kj)\)</span>). The ratio therefore gives the fraction of paths between <span class="math inline">\(k\)</span> and <span class="math inline">\(j\)</span> on which <span class="math inline">\(i\)</span> is positioned.</p>
+<p>The denominator is there to normalize the value for the size of the network. Betweenness Centrality therefore has a value between 0 and 1, the higher the value, the more central the node. This indicator was proposed by <span class="citation" data-cites="Freeman77">(<a href="#ref-Freeman77" role="doc-biblioref">Freeman 1977</a>)</span>.</p>
+<p><strong>Example</strong></p>
+<p>Let’s take an example of calculation using the network in <a href="#fig-reseau_BC_calcul" class="quarto-xref">Figure&nbsp;2</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-reseau_BC_calcul" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reseau_BC_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network_analysis_basics_files/figure-html/fig-reseau_BC_calcul-1.png" id="fig-reseau_BC_calcul" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-reseau_BC_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s calculate the BC of node <span class="math inline">\(C\)</span>. We need to start by identifying the shortest paths between all the nodes and then count how many of these paths node <span class="math inline">\(C\)</span> is positioned on. In the table <span class="math inline">\(\ref{table_example_BC}\)</span>, the first column lists each pair of nodes. There’s only one path between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (<span class="math inline">\(A \mapsto C \mapsto B\)</span>). There is therefore a single shortest path (<span class="math inline">\(P(AB) = 1\)</span>) and node <span class="math inline">\(C\)</span> is positioned on this path (<span class="math inline">\(P_C(AB)\)</span>). This calculation is repeated for every other pair of nodes as shown in the table below:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 41%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Link</th>
+<th style="text-align: center;">Number of shortest paths with C <span class="math inline">\(P_i(kj)\)</span></th>
+<th style="text-align: center;">Number of shortest paths <span class="math inline">\(P(kj)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A-B</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A-J</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B-J</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A-G</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">B-G</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B-I</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A-I</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B-H</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">A-H</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The final centrality score of node <span class="math inline">\(C\)</span> is given by:</p>
+<span class="math display">\[\begin{equation}
+BC_C = \frac{1+1+1+1+1+1+1+1+1}{\frac{(n-1)\cdot(n-2)}{2}} = \frac{9}{15} = 0.6
+\end{equation}\]</span>
+<p>if we apply this calculation to the collaboration network, and color the nodes according to the betweenness centrality score, we obtain the network in Figure <a href="#fig-fil_rouge_BC">1</a>.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_BC.pdf" alt="Figure_BC" id="fig-fil_rouge_BC" width="800"></p>
+<p>This centrality indicator highlights a number of players, notably Orange, CEA and ITM, with high centrality. The CEA, which is located on the periphery, positions itself on short paths by connecting to more central players, reducing the distance between itself and the other players in the network.</p>
+<p>The BC thus makes it possible to identify players who act as links between different parts of the network. The CEA, for example, is the only actor linking the actors to its left with the rest of the network. As such, it controls the flow of information between these two parts of the network. This position is called . The BC makes it easier to identify actors with this particular (and valuable) position.</p>
+<p><strong>Closeness Centrality</strong></p>
+<p>In contrast to BC, we can also consider a node to be important in a network when it is able to disseminate information rapidly throughout the network. For this reason, the indicator is called Closeness Centrality (CC) and was proposed by Mark Newman (<span class="citation" data-cites="newman2005measure">(<a href="#ref-newman2005measure" role="doc-biblioref">Newman 2005</a>)</span>). Instead of considering that a node is central because it receives a lot of information, we’ll consider that a node is central when it can quickly reach the other nodes. Once again, the concepts of distance and path are used here. The idea and calculation are similar to those of BC.</p>
+<p>In mathematical terms, the Closeness Centrality is measured as follows:\ <span class="math display">\[\begin{equation}
+CC_i = \frac{1}{avg(L(n,m)}
+\end{equation}\]</span></p>
+<p>With <span class="math inline">\(L(n,m)\)</span> the distance of the shortest path between <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>.\</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-reseau_CC_calcul" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reseau_CC_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network_analysis_basics_files/figure-html/fig-reseau_CC_calcul-1.png" id="fig-reseau_CC_calcul" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-reseau_CC_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s compare the Closeness Centrality of nodes <span class="math inline">\(C\)</span> and <span class="math inline">\(D\)</span> in figure <span class="math inline">\(\ref{nw_example_CC}\)</span>. We need the shortest distance between <span class="math inline">\(C\)</span> and all other nodes. For nodes <span class="math inline">\(C\)</span> we get:</p>
+<ul>
+<li>C-A Shortest path at a distance of 1</li>
+<li>C-B Shortest path at a distance of 1</li>
+<li>C-C The path from the node to itself is not taken into account</li>
+<li>C-D Shortest path at a distance of 2</li>
+<li>C-E Shortest path at a distance of 2</li>
+<li>C-F Shortest path at a distance of 1</li>
+</ul>
+<span class="math display">\[\begin{equation}
+CC(C)\frac{1}{\frac{1+1+2+2+1}{5}} = 0.71   
+\end{equation}\]</span>
+<p>For node <span class="math inline">\(D\)</span> we have:</p>
+<ul>
+<li>D-A Shortest path at a distance of 1</li>
+<li>D-B Shortest path at a distance of 2</li>
+<li>D-C Shortest path at a distance of 2</li>
+<li>D-D The path from the node to itself is not taken into account</li>
+<li>D-E Shortest path at a distance of 3</li>
+<li>D-F Shortest path at a distance of 1</li>
+</ul>
+<span class="math display">\[\begin{equation}
+CC(D)\frac{1}{\frac{1+2+2+3+1}{5}} = 0.55
+\end{equation}\]</span>
+<p>So node <span class="math inline">\(C\)</span> has a more central position in the network than node <span class="math inline">\(D\)</span>. From an information dissemination point of view, node <span class="math inline">\(C\)</span> has a more important position than node <span class="math inline">\(D\)</span>.</p>
+<p>By calculating the CC in the ANR project network and coloring the nodes according to CC, we obtain the network shown in figure <span class="math inline">\(\ref{Reseau_fil_rouge_CC}\)</span>. Closeness Centrality identifies actors other than the BC. Nodes with the highest BC have a lower CC. Nodes in a dense community tend to have a higher score, as they reach their neighbors in a very empty space. We also identify nodes at the heart of the network that have a more important position from a broadcasting point of view, notably CNES and Parrot.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_CC.pdf" alt="Figure_CC" id="fig-rfil_rouge_CC" width="800"></p>
+<p><strong>Radiality</strong></p>
+<p>One way of assessing the importance of a node in a network is to quantify its impact on the rest of the network. This impact strongly depends on the node’s position in the network. A node that interconnects several communities is important for the structuring of the network; if the node were to leave the network, the impact on the structure would be great. A node with a relatively isolated position has a more limited impact. To quantify just how important a node is, we look at a measure introduced by <span class="citation" data-cites="valente1998integration">Valente and Foreman (<a href="#ref-valente1998integration" role="doc-biblioref">1998</a>)</span>: Radiality.</p>
+<p>Radiality is a measure similar to centrality, quantifying the importance of the node in the network from a community interconnection point of view. The major difference with a centrality measure is that radiality is adjusted by the diameter of the network: the higher the radiality, the closer the node is to all other nodes and therefore impacts different communities (but not necessarily all of them). If the radiality is low, the node is only locally important, so it’s more likely to be on the periphery of the network. Its calculation is based on the average distance between the node and all other nodes in the network. This distance is then adjusted by the size of the network (its diameter).</p>
+<span class="math display">\[\begin{equation}
+R_a=\frac{\sum_{i \in N_a}[L(a,m)-(D+1)]}{k}
+\end{equation}\]</span>
+<p>Where <span class="math inline">\(L(a,m)\)</span> is the shortest path between node <span class="math inline">\(a\)</span> and all other nodes in the network, <span class="math inline">\(D\)</span> is the diameter of the network and <span class="math inline">\(k\)</span> is the number of nodes in the component. The measure is a relative one, giving an idea of isolation (far from all the others) or proximity (close to all the others).</p>
+<p>Since this is not really a measure of centrality, it must be interpreted in combination with other indicators such as eccentricity and centrality. A node with a high score on these three indicators has an important, central position in the network.</p>
+<p>In the case of our example network of ANR projects, the result is shown in figure <span class="math inline">\(\ref{Reseau_fil_rouge_rad}\)</span>. The nodes that are highlighted do indeed connect different communities. The notion is slightly different from that of BC, which captures the importance between a community and the rest of the network. Here, nodes at the heart of the network have a higher score than the periphery, with the highest score for nodes located on a higher number of communities.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_radiality.pdf" alt="filrouge_rad" id="fig-Reseau_fil_rouge_rad" width="800"></p>
+<p><strong>Topology Coefficient</strong></p>
+<p>It can be interesting to identify the nodes that play an important role in a community, as well as the nodes that interconnect communities. A node at the center of its community is an influential node that can influence decision-making for its community. A node that connects different communities has a strategic position, giving it access to information from different communities. This position is favorable for an innovator, for example, seeking to combine different technologies. To identify community leaders and gatekeepers, we use the topology coefficient introduced by Ravasz et al.&nbsp;in 2002 : .</p>
+<p>The topology coefficient quantifies the proportion of nodes that an individual has in common with the other individuals in his network (on average). The higher the score for a node, the denser its neighborhood. The probability of being at the center of a community increases as the score rises. If the score is low, the firm has very few neighbors in common, so it’s in a strategic position connecting different communities. The more neighbors a node has in common with the rest of the network, the denser its direct neighborhood. The calculation of the topology coefficient is therefore based on identifying the number of neighbors that the node has in common with all the other nodes in the network (on average).</p>
+<span class="math display">\[\begin{equation}
+T_n = \frac{avg(J(n,m))}{k_n}
+\end{equation}\]</span>
+<p>In this formula, <span class="math inline">\(J(n,m)\)</span> corresponds to the number of neighbors shared by two nodes in the network. <span class="math inline">\(avg()\)</span> implies that we take the average. <span class="math inline">\(k_n\)</span> is the number of neighbors of node <span class="math inline">\(n\)</span>. The score is between 0 and 1. To illustrate, let’s take the network shown in figure <span class="math inline">\(\ref{nw_example_topo}\)</span> and calculate the score for node <span class="math inline">\(m\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-reseau_topo_calcul" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reseau_topo_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network_analysis_basics_files/figure-html/fig-reseau_topo_calcul-1.png" id="fig-reseau_topo_calcul" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-reseau_topo_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We begin by looking at the neighbors of node <span class="math inline">\(m\)</span>: - <span class="math inline">\(m - h\)</span> - There are no common neighbors, but there is a direct link between <span class="math inline">\(m\)</span> and <span class="math inline">\(h\)</span>. J(m,h) = 1. - <span class="math inline">\(m - i\)</span> - There are no common neighbors, but there is a direct link between <span class="math inline">\(m\)</span> and <span class="math inline">\(i\)</span>. J(m,i) = 1. - <span class="math inline">\(m - c\)</span> - There are no common neighbors, but there is a direct link between <span class="math inline">\(m\)</span> and <span class="math inline">\(c\)</span>. J(m,c) = 1.</p>
+<p>For all other nodes, there is neither a direct link nor a common neighbor, so for all these links <span class="math inline">\(J(\cdot,\cdot) = 0\)</span>.</p>
+<p>We therefore have <span class="math inline">\(T_m = \frac{avg(1+1+1}{3}=\frac{\frac{1}{3}(3)}{3} = 0. 333\)</span></p>
+<p>As the number of nodes in the network increases ( <span class="math inline">\(k_n\)</span> increases), the coefficient mechanically decreases. We therefore interpret this coefficient in relative terms, comparing it with the scores of other nodes in the network.<span class="math inline">\(\ref{Reseau_fil_rouge_topology}\)</span> gives an illustration of this indicator in the ANR project network.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_topology.pdf" alt="RFR_topo" id="fig-reseau_topo_calcul" width="800"></p>
+<p><strong>Eigenvector Centrality</strong></p>
+<p>The centrality measures proposed so far identify the importance of a node based on a measure of its distance from other nodes. We can also consider that the importance of a node depends on the nodes to which it is connected. In other words, a node is important because it is connected to important nodes.</p>
+<p>Imagine that a researcher with few connections, but who works with the most important researchers, could be more important than a researcher with many connections to lesser-known researchers. Eigenvector centrality (EC) is a measure that integrates this dimension. A node with a high EC is connected to important nodes in the network. The potential for this node to become important in the future is high. This measure ranges from 0 to 1. The higher the measure, the more important the node.</p>
+<p>The calculation of this measure is more complex than the others. The indicator is obtained by spectral decomposition. Using the Perron-Frobenius theorem, we know that the largest eigenvector of this decomposition contains the centrality scores, hence the name: . To illustrate the indicator, the CE has been calculated for the various nodes in the network of ANR projects shown in figure <span class="math inline">\(\ref{Reseau_fil_rouge_EC}\)</span>.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_EC.pdf" alt="RFR_EC" id="fig:Reseau_fil_rouge_EC" width="800"></p>
+<p>From a mathematical perspective: If <span class="math inline">\(A\)</span> is the adjacency matrix where <span class="math inline">\(A_{ij}= 1\)</span> when there is a link between nodes <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> and <span class="math inline">\(A_{ij} = 0\)</span> when there is no link. Then the eigenvectos centrality of node <span class="math inline">\(i\)</span> is proportional to the sum of the centralities of its neighbors:</p>
+<span class="math display">\[\begin{equation}
+EC_i = \frac{1}{\lambda}\sum_j A_{ij}EC_j
+\end{equation}\]</span>
+<p>This shows that when we use compute the EC of a node, the value increases when the node is connected to nodes with a high EC.</p>
+<p><strong>Le clustering</strong></p>
+<p>Beyond the number of links and the centrality of the node, the direct neighborhood of the node also holds importance. A node positioned in a dense neighborhood (textit{i.e}, with a significant number of connections between its neighbors) does not have the same impact on the network as a node positioned with sparse connections.</p>
+<p>In order to assess the level of interconnection in the direct neighborhood of the node, it is necessary to measure the propensity for interconnection among the neighbors of a node. At the maximum, all of a node’s neighbors are interconnected (the network is then complete, as in the network on the left in Figure <span class="math inline">\(\ref{nw_exemple_clust}\)</span>). Thus, for node <span class="math inline">\(a\)</span>, the entire set of neighbors is interconnected, unlike node <span class="math inline">\(g\)</span>, which has two neighbors that are not connected. The neighborhood of node <span class="math inline">\(g\)</span> is therefore less dense than the neighborhood of node <span class="math inline">\(b\)</span>.</p>
+<p>Measuring the level of interconnection relies on the identification of triangles, i.e., groups of three connected nodes ({<span class="math inline">\(a\)</span> - <span class="math inline">\(b\)</span> - <span class="math inline">\(c\)</span>} in the network on the left). By counting how many of these triangles are present relative to the number of possible triangles, we obtain a measure known as clustering.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-reseau_clust_calcul" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reseau_clust_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Network_analysis_basics_files/figure-html/fig-reseau_clust_calcul-1.png" id="fig-reseau_clust_calcul" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-reseau_clust_calcul-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<span class="math display">\[\begin{equation}
+Cl_a = \displaystyle\frac{\mbox{Number of observed triangles}}{\mbox{Number of possible triangles}}
+\end{equation}\]</span>
+<p>The clustering coefficient gives a value between 0 and 1; the higher the value, the greater the clustering. The number can be interpreted as the fraction of triangles formed between the node and its neighborhood.</p>
+<p>To illustrate, let’s calculate the clustering coefficient for nodes <span class="math inline">\(a\)</span> and <span class="math inline">\(e\)</span>.</p>
+<p>We begin by identifying the number of triangles:</p>
+<p>For <span class="math inline">\(a\)</span>: <span class="math inline">\({a - b - d}\)</span>, <span class="math inline">\({a - c - d}\)</span>, and <span class="math inline">\({a - b - c}\)</span> For <span class="math inline">\(e\)</span>: No triangles, so the numerator for <span class="math inline">\(Cl_e = 0\)</span></p>
+<p>Il convient maintenant de trouver le nombre potentiel de triangles. Autrement dit le nombre de triangles qui pourraient exister en connectant les voisins directs qui ne sont pas déjà connectés.\</p>
+<p>Now, we need to find the potential number of triangles. In other words, the number of triangles that could exist by connecting the direct neighbors that are not already connected.</p>
+<p>For <span class="math inline">\(a\)</span>: All the neighbors are interconnected, so the potential number is equal to the observed number: 3. For <span class="math inline">\(e\)</span>: {<span class="math inline">\(e\)</span> - <span class="math inline">\(g\)</span> - <span class="math inline">\(h\)</span>}, {<span class="math inline">\(e\)</span> - <span class="math inline">\(g\)</span> - <span class="math inline">\(f\)</span>}, and {<span class="math inline">\(e\)</span> - <span class="math inline">\(h\)</span> - <span class="math inline">\(f\)</span>}. <span class="math inline">\(e\)</span> could potentially be part of 3 triangles. Finally, by taking the ratio of the two:</p>
+<p>For <span class="math inline">\(a\)</span>: <span class="math inline">\(Cl_a = \frac{3}{3} = 1\)</span> For <span class="math inline">\(e\)</span>: <span class="math inline">\(Cl_e = \frac{0}{3} = 0\)</span></p>
+<p>A node with a high clustering coefficient is therefore densely interconnected in its neighborhood and, consequently, within its community. A node with a low clustering coefficient is more isolated compared to other nodes.</p>
+<p>In Figure <span class="math inline">\(\ref{Reseau_fil_rouge_clust}\)</span>, clustering is calculated for the network of ANR projects. Since the neighborhood of nodes is entirely defined by the partners of a project, we know that the number of triangles is significant in this type of network (each actor is linked to every other actor in a project). The most central nodes have a lower clustering coefficient than some other nodes in the core (Parrot, CNES, L2S, TRCOM). At the same time, the central nodes also participate in more projects. If the clustering for these nodes is lower, it implies that the central actors collaborate more with different actors, who in turn do not collaborate with each other. These actors therefore play a role as intermediaries.</p>
+<p><img src="imgs/indicators/Reseau_fil_rouge_Clust.pdf" alt="Reseau_fil_rouge_Clust" id="fig:Reseau_fil_rouge_Clust" width="800"></p>
+
+
+
+</section>
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Freeman77" class="csl-entry" role="listitem">
+Freeman, L. C. 1977. <span>“A Set of Measures of Centrality Based on Betweenness.”</span> <em>Sociometry</em>, no. 40: 35–41.
+</div>
+<div id="ref-kivela2014multilayer" class="csl-entry" role="listitem">
+Kivelä, Mikko, Alex Arenas, Marc Barthelemy, James P Gleeson, Yamir Moreno, and Mason A Porter. 2014. <span>“Multilayer Networks.”</span> <em>Journal of Complex Networks</em> 2 (3): 203–71.
+</div>
+<div id="ref-newman2005measure" class="csl-entry" role="listitem">
+Newman, Mark EJ. 2005. <span>“A Measure of Betweenness Centrality Based on Random Walks.”</span> <em>Social Networks</em> 27 (1): 39–54.
+</div>
+<div id="ref-sole2013spectral" class="csl-entry" role="listitem">
+Sole-Ribalta, Albert, Manlio De Domenico, Nikos E Kouvaris, Albert Diaz-Guilera, Sergio Gomez, and Alex Arenas. 2013. <span>“Spectral Properties of the Laplacian of Multiplex Networks.”</span> <em>Physical Review E</em> 88 (3): 032807.
+</div>
+<div id="ref-valente1998integration" class="csl-entry" role="listitem">
+Valente, Thomas W, and Robert K Foreman. 1998. <span>“Integration and Radiality: Measuring the Extent of an Individual’s Connectedness and Reachability in a Network.”</span> <em>Social Networks</em> 20 (1): 89–105.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/JPvdP\.github\.io\/NetworkIsLife\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
