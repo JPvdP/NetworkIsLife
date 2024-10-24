@@ -1,0 +1,457 @@
+# Useful scripts and where to find them
+
+## Geolocalisation
+
+Suppose I have a DB with players located by lon and lat and i want to find the NUTS2/3 code associated with this:
+
+```{r, eval = FALSE}
+library(sf)
+# first loas a shapefile of the region in which we search
+nuts2 <- st_read("somepatch/NUTS_RG_20M_2021_4326.shp")
+nuts2 <- st_transform(nuts2, crs = 4326)
+# Example data frame with longitude and latitude
+df <- trd102_app_detail_loc_nuts[,c("GEO_LONG", "GEO_LAT")]
+df = na.omit(df)
+# Convert the data frame to an sf object
+df_sf <- st_as_sf(df, coords = c("GEO_LONG", "GEO_LAT"), crs = 4326, agr = "constant")
+# Perform spatial join to match points to NUTS2 polygons
+points_with_nuts2 <- st_join(df_sf, nuts2)
+```
+
+
+Find the localisation and eventually KVK number of players identified in data:
+
+```{r, eval = FALSE}
+NDS_pats_clean_companies_geoloc$searchname <- gsub(" ", "\\+", NDS_pats_clean_companies_geoloc$applicant_cleaned)
+for(i in 1:dim(NDS_pats_clean_companies_geoloc)[1]){
+  if(i %% 100 == 0){print(i)}
+  if(NDS_pats_clean_companies_geoloc[i,3] == TRUE & is.na(NDS_pats_clean_companies_geoloc[i, 4]) == TRUE){ # we only search if it's a company and we haven't searched before
+  url = paste0("https://www.bedrijvenregister.nl/zoekresultaten?q_source=cta&q=", NDS_pats_clean_companies_geoloc[i,5])
+  #url = paste0("https://www.telefoonboek.nl/zoeken/",fabia_not_found[i,1],"/")
+  response <- GET(as.character(url)) # get the information
+  NDS_pats_clean_companies_geoloc[i,4] <- content(response, as = "text") # extract the content
+  #Sys.sleep(3)
+  #if(i %% 1000 == 0){Sys.sleep(300)}
+  }
+}
+
+
+```
+
+Different approach:
+
+
+```{r, eval = FALSE}
+postcodes$long <-NA
+postcodes$lan <- NA
+for(i in 3193:dim(postcodes)[1]){
+  if(i %% 100 == 0){print(i)}
+  pc = gsub(" ","",postcodes[i,1])
+  url = paste0("https://postcodebijadres.nl/",pc)
+  test = GET(url)
+  content <- content(test, as = "text")
+  postcodes[i,2] <- str_extract(content, "(?<=Breedtegraad \\(N\\):<\\/td><td>)(.*)(?=<\\/td>)")
+  postcodes[i,3] <- str_extract(content, "(?<=Lengtegraad \\(E\\):<\\/td><td>)(.*)(?=<\\/td>)")
+}
+
+```
+
+## Companies
+
+### Classify inventor/company
+
+```{r, eval=FALSE}
+# create a df with the names of the assignees
+df <- as.data.frame(unique(player_geoloc$final_player))
+colnames(df) = "applicant_name"
+df = na.omit(df)
+
+# Create a list of common company keywords
+company_keywords <- c("CERAMICS","HOSP","MEDIC","FONDATION","FUNDACION","PRODUCT"," KK"," S A","DU PONT","VISION","CHEMI","DEUTSCHES"," INT"," CO","ELEKT"," ＳＥ","BUND","INSTR","LICENS","B V","ELEC","MICRO","&","SOLAR","OPER"," AB"," SRL"," SE","GERMANY","NETHERLANDS","AIR","FRANCE","FRAUNHOFER","IMEC","ASML","PHILIPS","SIEMENS","KONINK","ROYAL"," NV"," BV","SCHOOL","INSTIT","CENT","UNIV","CONDU","NANO","PLASTIC"," AS","PLC","ＡＧ","SYSTEM","WERK","INC", "LTD", "CORP", "LLC", "CO.", "GROUP", "COMPANY", "AG", "GMBH", " S.A.", " S.P.A.", " OY", " SPA", " SA", "TECH", "IND", "SOLU")
+
+# Function to determine if a name is likely a person or a company
+is_person_or_company <- function(name) {
+  # Check if the name contains any company-related keywords
+  if (any(str_detect(name, company_keywords))) {
+    return("Company")
+  }
+  # Check if the name contains common patterns for person names
+  # Example: Names with 2 or 3 words and lack company-like keywords
+  words <- str_split(name, " ")[[1]]
+  
+  if (length(words) >= 2 && length(words) <= 3 && !any(str_detect(name, "[0-9]"))) {
+    return("Person")
+  }
+  # Fallback to "Company" if none of the person rules matched
+  return("Company")
+}
+
+# Apply the function to the applicant_name column
+df <- df %>%
+  mutate(type = sapply(applicant_name, is_person_or_company))
+
+# Print the resulting data frame
+print(df)
+
+```
+
+## Networks
+
+### Edgelist from ; separated data
+
+Start with the dataframe in which each row has the elements that need to be linked in seperated by something: player_1;player_2;player_3 etc. Use splitstackshape::cSplit() to split the dataframe. Then use the following script on this df. Replace the start of the loop according to how many columns are in front of the player info: ID\|year\|players -\> start at 3 and adjust if you want to include this info into the final dataframe.
+
+```{r, eval =FALSE}
+player_geoloc_collab = as.matrix(player_geoloc_collab)
+for(i in 2:(dim(player_geoloc_collab)[2]-1)){
+  for(j in (i+1):dim(player_geoloc_collab)[2]){
+    tmp = player_geoloc_collab[,c(1, i, j)]
+    tmp = na.omit(tmp)
+    if(i == 2 & j == 3){res = tmp}else{res = rbind(res, tmp)}
+  }
+}
+```
+
+### Network with years
+
+```{r, eval = F}
+network_creation = function(data, dynamic, sep){
+  library(tidyverse)
+  res = c(NA,NA,NA)
+  # we start by splitting the data
+  nw = splitstackshape::cSplit(data, 1, sep = sep)
+  nw = as.matrix(nw)
+  # garde-fou : if the dimension of the dataframe after splitting is the same, then there is no network
+  if(dim(nw)[2] == dim(data)[2]){
+    print("You idiot, there is no network to be made here!")
+  }else{
+    # there is data, we need to make the list of links
+    # we do this by looping over the columns and combining them
+    for(i in 2:(dim(nw)[2]-1)){
+      for(j in (i+1):dim(nw)[2]){
+        tmp = cbind(nw[,1], nw[,i], nw[,j])
+        tmp = na.omit(tmp)
+        res = rbind(res, tmp)
+      }
+    }
+    res = as.data.frame(na.omit(res))
+    colnames(res) = c("Year", "Source", "Target")
+    if(missing(dynamic) == FALSE){
+      res[,c(2,3)] = alpha.order(res[,c(2,3)])
+      res$linkid = paste(res[,2], res[,3], sep = ";")
+      res = res %>% group_by(linkid) %>% summarize("weight" = n(), "first_year" = min(Year), "last_year" = max(Year))
+      res = splitstackshape::cSplit(res, 1, sep = ";")
+      colnames(res) = c("Weight", "First_year", "Last_year", "Source", "Target")
+    }
+    return(res)
+  }
+}
+
+
+
+```
+
+## Patents
+
+### Reduce digits of IPCS
+
+```{r, eval = FALSE}
+reduce.digits.fast = function (data, digit, sep){
+  # verifier le digit demandé
+  if (digit == 3){
+    y = function(x) {
+      substr(x, 1, 3)
+    }
+    z = function(x) {
+      tmp = x
+      x = na.omit(x)
+      x = unique(x)
+      x = paste(t(x), collapse = sep)
+    }
+    data <- as.matrix(data)
+    result = matrix(NA, nrow = dim(data)[1])
+    data = splitstackshape::cSplit(data, 1,  sep = sep)
+    data = as.matrix(data)
+    data[] <- vapply(data, y, character(1))
+    result[] = apply(data, 1, z)
+    #print(class(result))
+    return(result)
+  }
+  if (digit == 4){
+    # creer une fonction qui extrait le 4 premiers caracteres
+    y = function(x) {
+      substr(x, 1, 4)
+    }
+    # creer une fonction qui enlève les na, les doublons, recoller 
+    z = function(x) {
+      tmp = x
+      x = na.omit(x)
+      x = unique(x)
+      x = paste(t(x), collapse = sep)
+    }
+    # ici traitement des donnees
+    data <- as.matrix(data) # assurer que format soit matrice
+    result = matrix(NA, nrow = dim(data)[1]) # créer une matrice qui contiendra les resultats
+    data = splitstackshape::cSplit(data, 1, sep =sep) # couper les données
+    data = as.matrix(data) # remettre en matrice
+    data[] <- vapply(data, y, character(1)) # appliquer la fonction y (soustraire) à toutes les lignes (vapply)
+    result[] <- apply(data, 1, z) # Appliquer la fonction y sur toutes les
+    return(result)
+  }
+  if (digit == 7){
+    y = function(x) {
+      sub("/.*", "", x)
+    }
+    z = function(x) {
+      tmp = x
+      x = na.omit(x)
+      x = unique(x)
+      x = paste(t(x), collapse = sep)
+    }
+    data <- as.matrix(data)
+    result = matrix(NA, nrow = dim(data)[1])
+    data = splitstackshape::cSplit(data, 1, sep = sep)
+    data = as.matrix(data)
+    data[] <- vapply(data, y, character(1))
+    result[] = apply(data, 1, z)
+    return(result)
+  }
+  if (digit == 9){return(data)}
+}
+```
+
+### Put into alpha order
+
+```{r, eval = F}
+alpha.order<-function(data){
+  data<-as.matrix(data)
+  for (i in 1:dim(data)[1]){
+    data[i,1] = textclean::replace_non_ascii(data[i,1], remove.nonconverted = TRUE)
+    data[i,2] = textclean::replace_non_ascii(data[i,2], remove.nonconverted = TRUE)
+    if (data[i,1] > data[i,2]){
+      s<-data[i,1]
+      data[i,1]<-data[i,2]
+      data[i,2]<-s
+    }  
+  }
+  return(data)
+}
+
+```
+
+## Visualisations
+
+Load the following packages:
+
+```{r, eval = F}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(ggflags)
+```
+
+### Back to back barplot
+
+```{r, eval = FALSE}
+back_to_back_barplot = function(data, col1, col2, couleur1, couleur2){
+  # libaries
+  #library(gridExtra)
+  if(missing(couleur1)){couleur1 ="#009DE0"}
+  if(missing(couleur2)){couleur2 ="#009DE0"}
+  # Make sure sata is numeric
+  data$col1 = as.numeric(data$col1)
+  data$col2 = as.numeric(data$col2)
+  
+  # Organiser les données en fonction de la valeur 
+  data = data %>% arrange(-col1)
+  # Put left column as negative value
+  data$col1 = -data$col1
+  data = data[c(1:20),]
+  # Create frame for the plot
+  par(mfrow=c(1,2), mai = c(0, 0, 0, 0))
+  
+  # Create first plot
+  p1 = data  %>%
+    ggplot(aes(x = reorder(Id, -col1) , y = col2)) +
+    geom_bar(stat = "identity", fill = couleur1) +
+    coord_flip() +
+    ylab("") +
+    xlab("") + theme(panel.background = element_blank(), 
+                     plot.title = element_text(hjust = 0.5),
+                     axis.title.x=element_blank(),
+                     axis.ticks.x=element_blank(),
+                     axis.text.x=element_blank(),
+                     axis.text.y = element_text(hjust=0, size = 15),
+                     axis.ticks.y=element_blank(),
+                     
+    ) +
+    geom_text(aes(label=col2), position=position_dodge(width=0), vjust=0, hjust = -0.25)
+    
+  # Create second plot
+  p2 = data %>%
+    ggplot(aes(x = reorder(Id, -col1) , y = col1)) +
+    geom_bar(stat = "identity", fill = couleur2) +
+    #scale_fill_discrete(name = "", labels = c("Collaborateurs Francais", "Collaborateurs total"), type = c("#443A31","#009DE0")) + 
+    #scale_fill_manual(values = c("#443A31","#009DE0")) +
+    coord_flip() +
+    ylab("") +
+    xlab("") + theme(panel.background = element_blank(),
+                     axis.title.x=element_blank(),
+                     axis.text.x=element_blank(),
+                     axis.ticks.x=element_blank(),
+                     axis.text.y=element_blank(),
+                     axis.ticks.y=element_blank()
+    ) +
+    geom_text(aes(label=-col1), position=position_dodge(width=0), vjust=0, hjust = -0.25)
+  
+    # put back to back
+    p = grid.arrange(p2, p1, ncol =2)
+    
+    # Export
+    ggsave(p, file  = "back_to_back_jp.pdf", height = 10, width = 25)
+}
+
+
+```
+
+### Simple barplot with flags
+
+```{r, eval = FALSE}
+simple_barplot_flags = function(data, pays, chiffres, Id, couleur){
+  library(ggflags)
+  library(ggplot2)
+  #colnames(JP2) = c("Id", "chiffres", "pays")
+  if(missing(couleur)){couleur ="#009DE0"}
+  
+  data$chiffres = as.numeric(data$chiffres)
+  data = data %>% arrange(-chiffres)
+  
+  p1 = data %>% mutate(code = tolower(pays)) %>%
+    ggplot(aes(x = reorder(Id, chiffres), y =chiffres)) +
+    geom_bar(stat = "identity", fill = couleur) +
+    geom_flag(y = 0, aes(country = code), size = 10) +
+    coord_flip() +
+    ylab("") +
+    xlab("") + theme(panel.background = element_blank(), 
+                     plot.title = element_text(hjust = 0.5),
+                     axis.title.x=element_blank(),
+                     axis.ticks.x=element_blank(),
+                     axis.text.x=element_blank(),
+                     axis.text.y = element_text(hjust=0, size = 15),
+                     axis.ticks.y=element_blank(),
+    ) +
+    geom_text(aes(label=chiffres), position=position_dodge(width=0), vjust=0, hjust = -0.25)
+    # Export
+    ggsave(p1, file  = "Barplot_avec_drapeaux.pdf", height = 10, width = 10)
+}
+
+
+```
+
+### temporal evolution
+
+```{r, eval=FALSE}
+dynamique_tempo = function(data, Id, Annee, couleur){
+  # libaries
+  #library(gridExtra)
+  if(missing(couleur)){couleur ="#009DE0"}
+  # Make sure data is numeric
+  data = as.data.frame(data)
+  data$Annee = as.numeric(data$Annee)
+  # Organiser les données en fonction de l'annee -> compter les observations par an 
+  data = data %>% group_by(Annee) %>% summarise(freq = n())
+
+  # Create first plot
+  par(bg = "transparent")
+  ggplot(data, aes(x = Annee, y = freq)) + geom_bar(stat = "identity", fill = couleur) +
+    xlab("") + ylab("") + theme( 
+      text = element_text(size=10),
+      plot.title = element_text(hjust = 0.5),
+      panel.background = element_rect(fill = "transparent"), # bg of the panel
+      plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+      legend.background = element_rect(fill = "transparent"), # get rid of legend bg
+      legend.box.background = element_rect(fill = "transparent")
+      ) + scale_y_continuous(breaks = seq(0, max(data$freq), by = 1))
+  
+  # get rid of legend panel bg)
+  ggsave(file= "Dynamique_tempo.pdf", bg = "transparent", width = 6, height = 4)
+}
+
+
+```
+
+### Simple barplot
+
+```{r, eval = F}
+simple_barplot = function(data, Id, Chiffres, couleur){
+
+  if(missing(couleur)){couleur ="#009DE0"}
+  # Make sure sata is numeric
+  data$Chiffres = as.numeric(data$Chiffres)
+  # Organiser les données en fonction de la valeur 
+  data = data %>% arrange(-Chiffres)
+
+  # Create first plot
+  data  %>%
+    ggplot(aes(x = reorder(Id, Chiffres) , y = Chiffres)) +
+    geom_bar(stat = "identity", fill = couleur1) +
+    coord_flip() +
+    ylab("") +
+    xlab("") + theme(panel.background = element_blank(), 
+                     plot.title = element_text(hjust = 0.5),
+                     axis.title.x=element_blank(),
+                     axis.ticks.x=element_blank(),
+                     axis.text.x=element_blank(),
+                     axis.text.y = element_text(hjust=0, size = 15),
+                     axis.ticks.y=element_blank(),
+                     
+    ) +
+    geom_text(aes(label=Chiffres), position=position_dodge(width=0), vjust=0, hjust = -0.25)
+  
+}
+```
+
+## Get patent information
+
+```{r, eval = F}
+## Set up the selenium server
+rD <- RSelenium::rsDriver(browser = "firefox")
+# Assign the client to an object
+remDr <- rD[["client"]]
+
+
+for(i in 10:dim(numbers_for_google)[1]){
+  if(i%%100==0){print(i)}
+  if(is.na(numbers_for_google[i,2])==TRUE){
+    remDr$navigate(paste0("https://patents.google.com/patent/",numbers_for_google[i,4],"/en?oq=",numbers_for_google[i,4]))
+    WebsiteHTML = remDr$getPageSource()[[1]]
+    page <- read_html(WebsiteHTML)
+    
+    UGV_abst[i,2] <- page %>% 
+      html_node('div.abstract') %>% 
+      html_text()
+    
+    UGV_descr[i,2] <- page %>% 
+      html_node('div.description') %>% 
+      html_text()
+    
+    UGV_claims[i,2] <- page %>%
+      html_node("div.claims") %>%
+      html_text
+  }
+  secs = runif(1, min = 1, max = 3)
+  Sys.sleep(secs)
+  if(i%%100==0){
+    # we save the data here in case of catastophic problems
+    save(UGV_abst, file = "UGV_abst_backup.rdata")
+    save(UGV_descr, file = "UGV_descr_backup.rdata")
+    save(UGV_claims, file = "UGV_claims_backup.rdata")
+  }
+}
+rD[["server"]]$stop()
+
+```
+
+## Geographical Maps
+
+## Publications
