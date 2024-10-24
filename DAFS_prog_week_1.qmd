@@ -2,7 +2,7 @@
 title: "Week 1: The programming basics"
 ---
 
-
+# 0. Overview
 For this first session, the goal for you is to learn the following operations:
 
 |                                                        | R                                | Python                            | Example R                                 | Example Python                         |
