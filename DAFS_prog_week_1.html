@@ -183,6 +183,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Week 1: The programming basics</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: Data and conditions</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -424,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>Load a library</td>
+<td>Load a package</td>
 <td><input type="checkbox"></td>
 <td><input type="checkbox"></td>
 <td>library(dplyr)</td>
@@ -751,7 +757,7 @@ Assign the number <code>10</code> to a variable named <code>my_number</code>. Wh
 <li><p><strong>Matrix Operations</strong>:<br>
 Perform an operation that adds <code>5</code> to each element in the matrix you created in question 1.</p></li>
 </ol>
-<p>Remember to think about how variables and objects work together in Python as you complete each task.</p>
+<p>Remember to think about how variables and objects work together in Python/R as you complete each task.</p>
 </div>
 </div>
 </section>
@@ -809,8 +815,7 @@ Perform an operation that adds <code>5</code> to each element in the matrix you 
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is numeric:</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(variable_text)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is text:</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(variable_text)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in variable_text * 2 : non-numeric argument to binary operator</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(variable_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:10%;">
 <!-- empty column to create gap -->
@@ -831,14 +836,17 @@ Perform an operation that adds <code>5</code> to each element in the matrix you 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-1. <strong>Integer</strong> (<code>int</code>)
+Data types
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<section id="integer-int" class="level3">
+<h3 class="anchored" data-anchor-id="integer-int">1. <strong>Integer</strong> (<code>int</code>)</h3>
 <ul>
 <li>Represents whole numbers, both positive and negative, without decimals.</li>
 <li>Example: <code>5</code>, <code>-42</code>, <code>100</code></li>
 </ul>
+</section>
 <section id="float-float" class="level3">
 <h3 class="anchored" data-anchor-id="float-float">2. <strong>Float</strong> (<code>float</code>)</h3>
 <ul>
@@ -881,9 +889,10 @@ Exercises part 3:
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><p><strong>Check numeric values</strong>:<br>
-Assign numeric values to 2 variables. You can name them however you want and assign any numerical value. Check the format of the variable</p></li>
+Assign numeric values to two variables. You can name them however you want and assign any numerical value. Check the format of the variable of this variable.</p></li>
 <li><p><strong>Check textual values</strong>:<br>
 Assign a textual value to 2 variables. You can name them however you want and assign any numerical value. Check the format of the variable.</p></li>
+<li><p><strong>Transform the values</strong>: We now want to transform the values to another format. It often happens that when we download data and load it into python/R that the format is not understood correctly. Use the <strong>str()</strong> function in python to transform your number into text, then use the <strong>isinstance()</strong> function to check that it worked. Do the same in R, with the <strong>as.character()</strong> function and the <strong>is.character()</strong> function.</p></li>
 </ol>
 </div>
 </div>
@@ -1051,13 +1060,13 @@ Exercises part 4.
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for this we are going to paste the text "the number generated was" and the value of x:</span></span>
 <span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"The number generated was "</span>, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "The number generated was  1.14754262147471"</code></pre>
+<pre><code>[1] "The number generated was  4.03942608856596"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the paste function can take as many argument as you want, it will paste all of them together</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Now if we want to print the result:</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The number generated was "</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "The number generated was  1.14754262147471"</code></pre>
+<pre><code>[1] "The number generated was  4.03942608856596"</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -1076,7 +1085,7 @@ Exercises part 4.
 <span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"The number generated was  </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The number generated was  4.384227508694746</code></pre>
+<pre><code>The number generated was  3.3873059021284235</code></pre>
 </div>
 </div>
 </div>
