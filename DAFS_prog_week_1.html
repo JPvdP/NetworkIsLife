@@ -1083,13 +1083,13 @@ Exercises part 4:
 <span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for this we are going to paste the text "the number generated was" and the value of x:</span></span>
 <span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"The number generated was "</span>, x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "The number generated was  0.802929810015485"</code></pre>
+<pre><code>[1] "The number generated was  0.940557033754885"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the paste function can take as many argument as you want, it will paste all of them together</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Now if we want to print the result:</span></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"The number generated was "</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "The number generated was  0.802929810015485"</code></pre>
+<pre><code>[1] "The number generated was  0.940557033754885"</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:10%;">
@@ -1108,7 +1108,7 @@ Exercises part 4:
 <span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"The number generated was  </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The number generated was  4.7274811358086115</code></pre>
+<pre><code>The number generated was  4.870295565855574</code></pre>
 </div>
 </div>
 </div>
@@ -1259,18 +1259,17 @@ Important:
 <h3 class="anchored" data-anchor-id="exercice-1---python--">7.1 Exercice 1 - Python -</h3>
 <p>You are provided with a script, your aim is to explain the script. For each line of code, comment what the line of code does and then explain what the function does and returns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>distance_by_car <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Distance traveled by car in km</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>distance_by_bus <span class="op">=</span> <span class="dv">30</span>  <span class="co"># Distance traveled by bus in km</span></span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>distance_by_bike <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Distance traveled by bike in km</span></span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>emission_car <span class="op">=</span> <span class="dv">120</span>  <span class="co"># CO₂ per km for a car</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>emission_bus <span class="op">=</span> <span class="dv">68</span>   <span class="co"># CO₂ per km for a bus</span></span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>emission_bike <span class="op">=</span> <span class="dv">0</span>   <span class="co"># CO₂ per km for a bike</span></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>total_emission_car <span class="op">=</span> distance_by_car <span class="op">*</span> emission_car</span>
-<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>total_emission_bus <span class="op">=</span> distance_by_bus <span class="op">*</span> emission_bus</span>
-<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>total_emission_bike <span class="op">=</span> distance_by_bike <span class="op">*</span> emission_bike</span>
-<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>total_emission <span class="op">=</span> total_emission_car <span class="op">+</span> total_emission_bus <span class="op">+</span> total_emission_bike</span>
-<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The total CO₂ emissions for the trip are </span><span class="sc">{</span>total_emission<span class="sc">}</span><span class="ss"> grams."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>distance_by_car <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Distance traveled by car in km</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>distance_by_bus <span class="op">=</span> <span class="dv">30</span>  <span class="co"># Distance traveled by bus in km</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>distance_by_bike <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Distance traveled by bike in km</span></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>emission_car <span class="op">=</span> <span class="dv">120</span>  <span class="co"># CO₂ per km for a car</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>emission_bus <span class="op">=</span> <span class="dv">68</span>   <span class="co"># CO₂ per km for a bus</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>emission_bike <span class="op">=</span> <span class="dv">0</span>   <span class="co"># CO₂ per km for a bike</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>total_emission_car <span class="op">=</span> distance_by_car <span class="op">*</span> emission_car</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>total_emission_bus <span class="op">=</span> distance_by_bus <span class="op">*</span> emission_bus</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>total_emission_bike <span class="op">=</span> distance_by_bike <span class="op">*</span> emission_bike</span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>total_emission <span class="op">=</span> total_emission_car <span class="op">+</span> total_emission_bus <span class="op">+</span> total_emission_bike</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The total CO₂ emissions for the trip are </span><span class="sc">{</span>total_emission<span class="sc">}</span><span class="ss"> grams."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercice-2---python--" class="level3">
