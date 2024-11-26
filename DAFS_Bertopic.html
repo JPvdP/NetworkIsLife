@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – topic_modelling_bert_practise</title>
+<title>NetworkIsLife – dafs_bertopic</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_bert_practise.html">Create the model (detailed)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./DAFS_Bertopic.html">Session 2: Topic Modelling</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -220,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_Bertopic.html" class="sidebar-item-text sidebar-link">
+  <a href="./DAFS_Bertopic.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Session 2: Topic Modelling</span></a>
   </div>
 </li>
@@ -371,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Create the model (detailed)</span></a>
   </div>
 </li>
@@ -399,13 +399,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#create-the-model-detailed" id="toc-create-the-model-detailed" class="nav-link active" data-scroll-target="#create-the-model-detailed">Create the model (detailed)</a>
+  <li><a href="#session-2-topic-modelling" id="toc-session-2-topic-modelling" class="nav-link active" data-scroll-target="#session-2-topic-modelling">Session 2: Topic Modelling</a>
   <ul class="collapse">
   <li><a href="#step-1-loading-the-data" id="toc-step-1-loading-the-data" class="nav-link" data-scroll-target="#step-1-loading-the-data">Step 1: Loading the data</a></li>
   <li><a href="#step-2-creating-the-embeddings" id="toc-step-2-creating-the-embeddings" class="nav-link" data-scroll-target="#step-2-creating-the-embeddings">Step 2: Creating the embeddings</a></li>
   <li><a href="#step-3-dimension-reduction" id="toc-step-3-dimension-reduction" class="nav-link" data-scroll-target="#step-3-dimension-reduction">Step 3: Dimension reduction</a></li>
   <li><a href="#step-4-clustering" id="toc-step-4-clustering" class="nav-link" data-scroll-target="#step-4-clustering">Step 4: Clustering</a></li>
   <li><a href="#step-5-representations" id="toc-step-5-representations" class="nav-link" data-scroll-target="#step-5-representations">Step 5: Representations</a></li>
+  <li><a href="#step-5-results" id="toc-step-5-results" class="nav-link" data-scroll-target="#step-5-results">Step 5: Results</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -416,8 +417,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="create-the-model-detailed" class="level1">
-<h1>Create the model (detailed)</h1>
+<section id="session-2-topic-modelling" class="level1">
+<h1>Session 2: Topic Modelling</h1>
 <p>We start by loading required packages</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
@@ -457,7 +458,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You choice in this step resides in the model of embeddings that you pick.</p>
+<p>Your choice in this step resides in the model of embeddings that you pick.</p>
 </div>
 </div>
 <p>the <strong>embed_model</strong> object contains the coordinates for the documents in an n-dimensional space. The model we used has X dimensions and therefore our document have X-dimensional vectors. Clustering data with this many dimensions presents many issues, we therefore now move on to reduce the dimensions of these vectors.</p>
@@ -612,6 +613,31 @@ Important
 <p>The code for this is the following:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>topics, probs <span class="ot">=</span> <span class="fu">topic_model.fit_transform</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-results" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-results">Step 5: Results</h2>
+<p>Bertopic will assign a topic to each of the observations supplied to the model. The observations can be visualised in a 2-dimensional space. The dimensions of this space are open to interpretation by the analysist (similar to a Principal Component Analysis).</p>
+<p>To visualise the topic space we use the following function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>topic_model.visualize_documents(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This creates the visualisation, in which each point on the map is a document. The closer the points, the closer the text is (semantically). When points have the same colors they are considered a topic. The name of the topic is built from the top words of each topic.</p>
+<p><img src="bertopic_space.png" class="img-fluid"></p>
+<p>This visualisation can be exported to a html file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>topic_space <span class="op">=</span> topic_model.visualize_documents(data)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        topic_space.write_html(<span class="st">"topic_space_topics.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This already shows us what the main topics of the corpus are. But we would like to learn a bit more about what defines these topics. Let’s have a look at the tokens that are behind the topics. We can do this by creating barplots of the different topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>topic_model.visualize_barchart(top_n_topics<span class="op">=</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="bertopic_barplots.png" class="img-fluid"> This visualisation shows the top 5 words for each topic identified, this allows us a better understanding of the contents of the topic. The number below the chart give the prevalence of the word in the topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export the visualisation to html</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>topic_barplots <span class="op">=</span> topic_model.visualize_barchart(top_n_topics <span class="op">=</span> num_topics, n_words<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        plop.write_html(<span class="st">"topic_barplots.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
