@@ -828,17 +828,17 @@ Pay Attention
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># csv and various other separators</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">sep =</span> <span class="st">"|"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">delim =</span> <span class="st">"|"</span>)</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># txt (space separated values)</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">delim =</span> <span class="st">" "</span>)</span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># tsv (tab separated values)</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"Data/myfile.csv"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="xls-.xlsx" class="level3">
@@ -1124,7 +1124,7 @@ Exercises part 3:
 <ol type="i">
 <li>Multiply each element of this matrix by 5</li>
 <li>compute the sum of all elements in this matrix</li>
-<li>The <em>runif()</em> function allows us to generate random values in R. In python the <strong>randint</strong> function from the <em>random</em> package allows the same. Create a 3 by 3 matrix filled with random values</li>
+<li>The <em>runif()</em> function allows us to generate random values in R. In python the <strong>np.random.rand</strong> function from the <em>numpy</em> package allows the same. Create a 3 by 3 matrix filled with random values</li>
 <li>create a dataframe with 3 columns, the first column should be called “ID”, the second “Country” and the third “Value”. The countries columns should have “NL”, “BE”, “FR” as observations, ID should have 1, 2, 3 and Value should have 1340.90, 142.23, 821.42</li>
 <li>Multiply the first column of the matrix (from question 4) with the value column of the dataframe</li>
 </ol>
