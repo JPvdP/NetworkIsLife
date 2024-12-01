@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="">
+
+<title>NetworkIsLife – dafs_nlp_session1_tutorial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NetworkIsLife</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Programming</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./DAFS_NLP_session1_tutorial.html">Session 1: Tutorial</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">DAFS - Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing all the software</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: The programming basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Loops and exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">DAFS - NLP</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NLP module Assignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_NPL_Feature_Extraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 1: Feature Extraction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_NLP_session1_tutorial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Session 1: Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_Bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session 2: Topic Modelling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Network Analysis</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Network_analysis_basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The basics of Network Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Text_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Textual Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CE_network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaboration network: Research on the circular economy</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Intro to Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_basic_operations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_DataImportAndPrep.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Import and preparation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_Databasemanip.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Database Manipulation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_loops_ifelse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loops, if-else and Mapping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro_programming_visualisation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data visualisation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Text Mining</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./feature_extraction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feature Extraction with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_lda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modelling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./NER.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Named Entity Recognition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Text_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Textual Networks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">State of Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./State_of_data_04062024.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State of Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Topic Modelling Workshop</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing Bertopic</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (detailed)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_bertopic_nodetails.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Create the model (TL;DR version)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Run Bertopic</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#session-1-tutorial" id="toc-session-1-tutorial" class="nav-link active" data-scroll-target="#session-1-tutorial">Session 1: Tutorial</a></li>
+  <li><a href="#installing-the-required-packages." id="toc-installing-the-required-packages." class="nav-link" data-scroll-target="#installing-the-required-packages.">1.1 Installing the required packages.</a></li>
+  <li><a href="#dowloading-some-models" id="toc-dowloading-some-models" class="nav-link" data-scroll-target="#dowloading-some-models">1.2 Dowloading some models:</a></li>
+  <li><a href="#explanation-of-nltk-downloads" id="toc-explanation-of-nltk-downloads" class="nav-link" data-scroll-target="#explanation-of-nltk-downloads">Explanation of NLTK Downloads</a></li>
+  <li><a href="#create-a-sample-text-to-work-with" id="toc-create-a-sample-text-to-work-with" class="nav-link" data-scroll-target="#create-a-sample-text-to-work-with">1.3 Create a sample text to work with</a></li>
+  <li><a href="#stopword-removal" id="toc-stopword-removal" class="nav-link" data-scroll-target="#stopword-removal">1.4 Stopword removal</a></li>
+  <li><a href="#words-you-want-to-remove" id="toc-words-you-want-to-remove" class="nav-link" data-scroll-target="#words-you-want-to-remove">1.5 Words you want to remove</a></li>
+  <li><a href="#stemming" id="toc-stemming" class="nav-link" data-scroll-target="#stemming">1.6 Stemming</a></li>
+  <li><a href="#lemmatisation" id="toc-lemmatisation" class="nav-link" data-scroll-target="#lemmatisation">1.7 Lemmatisation</a></li>
+  <li><a href="#part-of-speech-tagging" id="toc-part-of-speech-tagging" class="nav-link" data-scroll-target="#part-of-speech-tagging">1.8 Part-of-Speech Tagging:</a></li>
+  <li><a href="#word-weighing" id="toc-word-weighing" class="nav-link" data-scroll-target="#word-weighing">1.9 Word weighing</a></li>
+  <li><a href="#easy-solutions-with-rake" id="toc-easy-solutions-with-rake" class="nav-link" data-scroll-target="#easy-solutions-with-rake">2.0 Easy solutions with RAKE</a></li>
+  <li><a href="#lets-visualise" id="toc-lets-visualise" class="nav-link" data-scroll-target="#lets-visualise">2.1 Let’s visualise</a></li>
+  <li><a href="#larger-dataset" id="toc-larger-dataset" class="nav-link" data-scroll-target="#larger-dataset">3.1 Larger dataset:</a></li>
+  <li><a href="#term-emergence" id="toc-term-emergence" class="nav-link" data-scroll-target="#term-emergence">3.2 Term emergence:</a></li>
+  <li><a href="#themes-and-networks" id="toc-themes-and-networks" class="nav-link" data-scroll-target="#themes-and-networks">3.3 Themes and networks:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="session-1-tutorial" class="level1">
+<h1>Session 1: Tutorial</h1>
+</section>
+<section id="installing-the-required-packages." class="level1">
+<h1>1.1 Installing the required packages.</h1>
+<p>For this first tutorial we will learn how to apply specific tasks in NLP. We won’t use each of these tasks in each session, we will therefore start with creating a new anaconda envirnment for this session. The main reason is that we need a specific version of the numpy package. This version will conflict with other packages required later on, so we really need a seperate environment.</p>
+<p>Once the environment has been created, we install the packages we need:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages to install</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install nltk</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install stanza</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install pandas</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install phrasemachine</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install rake<span class="sc">-</span>nltk</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install numpy<span class="sc">==</span><span class="fl">1.24</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to install an older version of numpy because otherwise</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># we will have a clash with other packages</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install wordcloud</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install matplotlib</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install scikit<span class="sc">-</span>learn</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install igraph</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install cairocffi</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>pip install pycairo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The we load the packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>import nltk</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>from nltk.corpus import wordnet <span class="co"># These are sub-modules that need to be loaded separetely",</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>from nltk.stem import WordNetLemmatizer</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>from nltk.corpus import stopwords</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>from nltk import pos_tag, word_tokenize</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>from nltk.chunk import RegexpParser</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>from nltk.stem import PorterStemmer</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>from collections import Counter</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>import math</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>import stanza</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dowloading-some-models" class="level1">
+<h1>1.2 Dowloading some models:</h1>
+</section>
+<section id="explanation-of-nltk-downloads" class="level1">
+<h1>Explanation of NLTK Downloads</h1>
+<ol type="1">
+<li><strong><code>nltk.download('punkt')</code></strong>
+<ul>
+<li>Downloads the Punkt tokenizer models.<br>
+</li>
+<li>These are pre-trained sentence and word tokenization models that can split text into sentences and words.<br>
+</li>
+<li><strong>Example usage</strong>: <code>nltk.tokenize.word_tokenize</code> and <code>nltk.tokenize.sent_tokenize</code>.</li>
+</ul></li>
+<li><strong><code>nltk.download('averaged_perceptron_tagger')</code></strong> &amp; <strong><code>nltk.download('averaged_perceptron_tagger_eng')</code></strong>
+<ul>
+<li>Downloads the Averaged Perceptron Tagger model.<br>
+</li>
+<li>This is used for Part-of-Speech (POS) tagging, assigning word types (e.g., noun, verb, adjective) to each word in a sentence.</li>
+</ul></li>
+<li><strong><code>nltk.download('stopwords')</code></strong>
+<ul>
+<li>Downloads a list of stopwords for various languages.<br>
+</li>
+<li>Stopwords are common words like “the,” “and,” or “is” that are often filtered out in text processing because they carry less semantic meaning.</li>
+</ul></li>
+<li><strong><code>nltk.download('wordnet')</code></strong>
+<ul>
+<li>Downloads the WordNet database.<br>
+</li>
+<li>WordNet is a large lexical database of English, providing synonyms, antonyms, and hierarchical relationships between words.</li>
+</ul></li>
+<li><strong><code>nltk.download('omw-1.4')</code></strong>
+<ul>
+<li>Downloads the Open Multilingual WordNet 1.4 dataset.<br>
+</li>
+<li>This extends WordNet with translations and multilingual support for lexical relationships.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to download some models (only required once)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>) <span class="co"># model that splits text at punctuation</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'averaged_perceptron_tagger'</span>) <span class="co"># POS tagger</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'averaged_perceptron_tagger_eng'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'stopwords'</span>) <span class="co"># stopword removal</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt_tab'</span>) <span class="co"># split at tab</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'wordnet'</span>) <span class="co"># contains english dictionary for lemmatisation</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'omw-1.4'</span>) <span class="co"># same as wordnet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-a-sample-text-to-work-with" class="level1">
+<h1>1.3 Create a sample text to work with</h1>
+<p>To test out the different functions, we will use sample text before working on a lager dataset. Let’s create an object called “text_object” that will contain the abstract of a patent on seawater desalination.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's create a sample text to work on:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>text_object <span class="ot">=</span> <span class="st">"Provided is a separation membrane for seawater desalination and a method for manufacturing the same, and more particularly, a separation membrane for seawater desalination with excellent water permeability and salt rejection and a method for manufacturing the same. If the separation membrane for seawater desalination and the method for manufacturing the same according to the present disclosure are applied, it is possible to provide a separation membrane for seawater desalination with excellent water permeability and salt rejection. Therefore, it is possible to provide a separation membrane for seawater desalination with improved performance in comparison to an existing separation membrane for seawater desalination. As a result, water resources may be widely utilized."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="stopword-removal" class="level1">
+<h1>1.4 Stopword removal</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We start by creating a set of stopwords. The stopwords function comes from the nltk package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we dowloaded the set with the nltk.download('stopwords') previously.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>stop_words <span class="ot">=</span> <span class="fu">set</span>(<span class="fu">stopwords.words</span>(<span class="st">'english'</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To remove the stopwords, we first need to tokenize the text (i.e splitting it up) and then remove the words</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>text_object_nostopwords <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>([word <span class="cf">for</span> word <span class="cf">in</span> <span class="fu">word_tokenize</span>(text_object) <span class="cf">if</span> <span class="fu">word.lower</span>() not <span class="cf">in</span> stop_words])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># check the new text:</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>text_object_nostopwords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A lot is happening in this code, let’s split it up:</p>
+<ol type="1">
+<li><p>word_tokenize(text_object): This code splits the text up into tokens (words). We can then check if any of these words are in the list of stopwords. If they are we remove them.</p></li>
+<li><p>[word for word in word_tokenize(text_object) if word.lower() not in stop_words]: This is a loop. For each word that was created by tokenizing the text, we remove any capital letters (word.lower()) and if it’s not in the stop_words, then we join it back to the initial text.</p></li>
+<li><p>’ ’.join: the words that are not in the stopword list are pasted back together into a single string. The tokens are separated by a ” “.</p></li>
+</ol>
+<p>The output of this script is a text from which the stopwords have been removed.</p>
+</section>
+<section id="words-you-want-to-remove" class="level1">
+<h1>1.5 Words you want to remove</h1>
+<p>Often there are words that we want to remove from the text after our first analysis. This can be because there are copyright statements we want to remove, name of the publisher (springer, elsevier), or any other word that is influencing the quality of the analysis:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We start by creating a list of words to remove from the text</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>words_to_remove <span class="ot">=</span> {<span class="st">"particularly"</span>, <span class="st">"Therefore"</span>, <span class="st">"result"</span>} </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To remove the words, we use the same code as before, but we replace the object:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>filtered_text <span class="ot">=</span> <span class="st">" "</span><span class="fu">.join</span>([word <span class="cf">for</span> word <span class="cf">in</span> <span class="fu">text_object_nostopwords.split</span>() <span class="cf">if</span> <span class="fu">word.lower</span>() not <span class="cf">in</span> words_to_remove])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(filtered_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="stemming" class="level1">
+<h1>1.6 Stemming</h1>
+<p>When working with text in a bag-of-words approach (i.e no semantic models are used, we only count frequencies), it can be important to harmonise the text as much as possible. We can do this with the use of a Stemmer which reduces the form of the words to their root.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the stemmer</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>stemmer <span class="ot">=</span> <span class="fu">PorterStemmer</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we tokenise the text so that the stemmer has specific words to work with.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tokens <span class="ot">=</span> <span class="fu">word_tokenize</span>(text_object)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># we then stem each word in the tokens</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>stemmed_text <span class="ot">=</span> [<span class="fu">stemmer.stem</span>(word) <span class="cf">for</span> word <span class="cf">in</span> tokens]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># And we print it out</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stemmed_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lemmatisation" class="level1">
+<h1>1.7 Lemmatisation</h1>
+<p>Let’s use a more sophisticated approach. Instead of reducing the words to their roots, we will reduce them to a reference term from the dictionary:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's use a Sample text for this exercisee</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>example_text <span class="ot">=</span> [<span class="st">"Desalinates"</span>, <span class="st">"Desalinating"</span>, <span class="st">"Desalinated"</span>, <span class="st">"Desalinator"</span>, <span class="st">"Desalination"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>example_text <span class="ot">=</span> [<span class="fu">word.lower</span>() <span class="cf">for</span> word <span class="cf">in</span> example_text]  <span class="co"># Convert to lowercase</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize lemmatizer</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="ot">=</span> <span class="fu">WordNetLemmatizer</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to convert NLTK POS tags to WordNet POS tags</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>def <span class="fu">get_wordnet_pos</span>(nltk_pos_tag)<span class="sc">:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'J'</span>)<span class="sc">:</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        return wordnet.ADJ</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'V'</span>)<span class="sc">:</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        return wordnet.VERB</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'N'</span>)<span class="sc">:</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        return wordnet.NOUN</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'R'</span>)<span class="sc">:</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        return wordnet.ADV</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        return wordnet.NOUN  <span class="co"># Default to noun if no tag matches</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply POS tagging</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="ot">=</span> <span class="fu">pos_tag</span>(example_text)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Lemmatize each word with the correct POS tag</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">=</span> [<span class="fu">lemmatizer.lemmatize</span>(word, <span class="fu">get_wordnet_pos</span>(pos)) <span class="cf">for</span> word, pos <span class="cf">in</span> pos_tags]</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see how this works on our sample text:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># applied to our sample text:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>example_text <span class="ot">=</span> <span class="fu">word_tokenize</span>(text_object)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>example_text <span class="ot">=</span> [<span class="fu">word.lower</span>() <span class="cf">for</span> word <span class="cf">in</span> example_text]  <span class="co"># Convert to lowercase</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize lemmatizer</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="ot">=</span> <span class="fu">WordNetLemmatizer</span>()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to convert NLTK POS tags to WordNet POS tags</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>def <span class="fu">get_wordnet_pos</span>(nltk_pos_tag)<span class="sc">:</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'J'</span>)<span class="sc">:</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        return wordnet.ADJ</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'V'</span>)<span class="sc">:</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        return wordnet.VERB</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'N'</span>)<span class="sc">:</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        return wordnet.NOUN</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    elif <span class="fu">nltk_pos_tag.startswith</span>(<span class="st">'R'</span>)<span class="sc">:</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        return wordnet.ADV</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        return wordnet.NOUN  <span class="co"># Default to noun if no tag matches</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply POS tagging</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="ot">=</span> <span class="fu">pos_tag</span>(example_text)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Lemmatize each word with the correct POS tag</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>lemmatized_text <span class="ot">=</span> [<span class="fu">lemmatizer.lemmatize</span>(word, <span class="fu">get_wordnet_pos</span>(pos)) <span class="cf">for</span> word, pos <span class="cf">in</span> pos_tags]</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>lemmatized_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-of-speech-tagging" class="level1">
+<h1>1.8 Part-of-Speech Tagging:</h1>
+<p>Part of speech tagging is a method that allows us to identify specific types of words in a text. When we are interested in actions we can focus on verbs, when we are interested in technologies, we can focus more on nouns. Or a combination of both. POS tagging is a method that allows us to search for specific patterns inside a text.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize and POS tag the text</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tokens <span class="ot">=</span> <span class="fu">word_tokenize</span>(text_object)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="ot">=</span> <span class="fu">pos_tag</span>(tokens)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a chunk grammar to capture noun phrases</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>grammar <span class="ot">=</span> <span class="st">"NP: {&lt;DT&gt;?&lt;JJ&gt;*&lt;NN|NNS&gt;+}"</span>  <span class="co"># Noun Phrase pattern</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a chunk parser</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Chunk_parser <span class="ot">=</span> <span class="fu">RegexpParser</span>(grammar)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the tagged words</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">=</span> <span class="fu">Chunk_parser.parse</span>(pos_tags)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract noun phrases</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>noun_phrases <span class="ot">=</span> []</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subtree <span class="cf">in</span> <span class="fu">tree.subtrees</span>(<span class="at">filter=</span>lambda t<span class="sc">:</span> <span class="fu">t.label</span>() <span class="sc">==</span> <span class="st">'NP'</span>)<span class="sc">:</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">noun_phrases.append</span>(<span class="st">" "</span><span class="fu">.join</span>([word <span class="cf">for</span> word, pos <span class="cf">in</span> <span class="fu">subtree.leaves</span>()]))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(noun_phrases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="word-weighing" class="level1">
+<h1>1.9 Word weighing</h1>
+<p>Identifying words that are more important than others can be done by computing indicators such as TF-IDF, c-TF-IDF, c-value etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk <span class="im">import</span> pos_tag, word_tokenize</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.chunk <span class="im">import</span> RegexpParser</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample text</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> text_object</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize and POS tag</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> word_tokenize(text.lower())</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="op">=</span> pos_tag(tokens)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Define chunk grammar for noun phrases</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>grammar <span class="op">=</span> <span class="vs">r"NP: {&lt;JJ&gt;*&lt;NN&gt;+}"</span>  <span class="co"># e.g., "separation membrane"</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>chunker <span class="op">=</span> RegexpParser(grammar)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> chunker.parse(pos_tags)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract noun phrases</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>noun_phrases <span class="op">=</span> []</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subtree <span class="kw">in</span> tree.subtrees(<span class="bu">filter</span><span class="op">=</span><span class="kw">lambda</span> t: t.label() <span class="op">==</span> <span class="st">'NP'</span>):</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    noun_phrases.append(<span class="st">" "</span>.join([word <span class="cf">for</span> word, tag <span class="kw">in</span> subtree.leaves()]))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Count frequency of phrases</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>phrase_freq <span class="op">=</span> Counter(noun_phrases)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute C-Value for each phrase</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>c_values <span class="op">=</span> {}</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> phrase, freq <span class="kw">in</span> phrase_freq.items():</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    nested_phrases <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> phrase_freq <span class="cf">if</span> p <span class="op">!=</span> phrase <span class="kw">and</span> phrase <span class="kw">in</span> p]</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    nested_freq <span class="op">=</span> <span class="bu">sum</span>(phrase_freq[nested] <span class="cf">for</span> nested <span class="kw">in</span> nested_phrases)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    nested_count <span class="op">=</span> <span class="bu">len</span>(nested_phrases)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    log_len <span class="op">=</span> math.log2(<span class="bu">len</span>(phrase.split()))</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    c_values[phrase] <span class="op">=</span> log_len <span class="op">*</span> (freq <span class="op">-</span> (nested_freq <span class="op">/</span> nested_count <span class="cf">if</span> nested_count <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span>))</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort phrases by C-Value</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>sorted_c_values <span class="op">=</span> <span class="bu">sorted</span>(c_values.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> phrase, score <span class="kw">in</span> sorted_c_values:</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>phrase<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>score<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="easy-solutions-with-rake" class="level1">
+<h1>2.0 Easy solutions with RAKE</h1>
+<p>Rake is package that has streamlined a big part of the process to extract noun phrases, making it easy to get results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rom rake_nltk <span class="im">import</span> Rake</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize RAKE (Rapid Automatic Keyword Extraction)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>rake <span class="op">=</span> Rake()</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>rake.extract_keywords_from_text(text_object) <span class="co"># Extract key phrases</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>phrases_with_scores <span class="op">=</span> rake.get_ranked_phrases_with_scores() <span class="co"># let's add some scores</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(phrases_with_scores,  columns<span class="op">=</span>[<span class="st">"Score"</span>, <span class="st">"Phrase"</span>]) <span class="co"># make it into a df</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df.drop_duplicates() <span class="co"># and remove duplicates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The score for each phrase represents its importance, calculated as:</p>
+<p><span class="math inline">\(Phrase_{score} = \sum_{words} Word_{score}\)</span></p>
+<p>Each <span class="math inline">\(Word_score\)</span> is computed by:</p>
+<p><span class="math inline">\(word_{score} =. \frac{Degree of the word}{Frequency of the word}\)</span> where the degree is the number of other words the word co-occurs with in phrases, and frequency the count of how many times the word appears in the text.</p>
+</section>
+<section id="lets-visualise" class="level1">
+<h1>2.1 Let’s visualise</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisation</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>from wordcloud import WordCloud</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>import matplotlib.pyplot as plt</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for the word cloud: a dictionary of phrases and scores</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">=</span> <span class="fu">dict</span>(<span class="fu">zip</span>(df[<span class="st">"Phrase"</span>], df[<span class="st">"Score"</span>]))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the word cloud</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="ot">=</span> <span class="fu">WordCloud</span>(<span class="at">width=</span><span class="dv">800</span>, <span class="at">height=</span><span class="dv">400</span>, <span class="at">background_color=</span><span class="st">"white"</span>)<span class="fu">.generate_from_frequencies</span>(word_freq)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the word cloud</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.figure</span>(<span class="at">figsize=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.imshow</span>(wordcloud, <span class="at">interpolation=</span><span class="st">"bilinear"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.axis</span>(<span class="st">"off"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.show</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="larger-dataset" class="level1">
+<h1>3.1 Larger dataset:</h1>
+<p>Let’s make this more interesting. Download the dataset from blackboard and load it into python:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"DAFS_NLP_Lectures_2024/Scopus_protein_transition.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> documents[[<span class="st">'Abstract'</span>, <span class="st">'Year'</span>]]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> documents.iloc[<span class="dv">1</span><span class="sc">:</span><span class="dv">600</span>,<span class="sc">:</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>documents <span class="ot">=</span> documents[documents[<span class="st">"Year"</span>] <span class="sc">!=</span> <span class="dv">2025</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s make a wordcloud for the corpus:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>import string</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>from wordcloud import WordCloud</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(documents)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom stop words that i want to remove. These were identified by running this script a first time</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># based on the results i saw words i don't want, added them here so they can be removed</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>custom_stop_words <span class="ot">=</span> {<span class="st">"0"</span>, <span class="st">"online survey"</span>, <span class="st">"results show"</span>, <span class="st">"recent years"</span>, <span class="st">"exclusive licence"</span>, <span class="st">"crucial role"</span>, <span class="st">"based diets"</span>, <span class="st">"based meat"</span>}</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to preprocess text: remove stop words and punctuation</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>def <span class="fu">preprocess_text</span>(text)<span class="sc">:</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.lower</span>()  <span class="co"># Convert to lowercase</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> stop_phrase <span class="cf">in</span> custom_stop_words<span class="sc">:</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="fu">stop_phrase.lower</span>(), <span class="st">""</span>)  <span class="co"># Remove stop phrases</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">=</span> <span class="fu">text.split</span>()  <span class="co"># Tokenize text</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    return <span class="st">" "</span><span class="fu">.join</span>(<span class="fu">word.strip</span>(string.punctuation) <span class="cf">for</span> word <span class="cf">in</span> words <span class="cf">if</span> <span class="fu">word.strip</span>(string.punctuation))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract multi-word phrases using RAKE</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>def <span class="fu">extract_key_phrases</span>(text)<span class="sc">:</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    rake <span class="ot">=</span> <span class="fu">Rake</span>()  <span class="co"># Initialize RAKE</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rake.extract_keywords_from_text</span>(text)  <span class="co"># Extract keywords/phrases</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    phrases <span class="ot">=</span> <span class="fu">rake.get_ranked_phrases</span>()  <span class="co"># Get the ranked phrases</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out monograms (single-word phrases)</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    return [phrase <span class="cf">for</span> phrase <span class="cf">in</span> phrases <span class="cf">if</span> <span class="fu">len</span>(<span class="fu">phrase.split</span>()) <span class="sc">&gt;</span> <span class="dv">1</span>]</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocess abstracts and extract key phrases</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Cleaned_Abstract"</span>] <span class="ot">=</span> df[<span class="st">"Abstract"</span>]<span class="fu">.apply</span>(preprocess_text)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Noun_Phrases"</span>] <span class="ot">=</span> df[<span class="st">"Cleaned_Abstract"</span>]<span class="fu">.apply</span>(extract_key_phrases)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Flatten the lists of noun phrases into a single sequence of strings</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>all_phrases <span class="ot">=</span> <span class="st">" "</span><span class="fu">.join</span>(phrase <span class="cf">for</span> phrases <span class="cf">in</span> df[<span class="st">"Noun_Phrases"</span>] <span class="cf">for</span> phrase <span class="cf">in</span> phrases)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the word cloud</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="ot">=</span> <span class="fu">WordCloud</span>(<span class="at">width=</span><span class="dv">800</span>, <span class="at">height=</span><span class="dv">400</span>, <span class="at">background_color=</span><span class="st">'white'</span>)<span class="fu">.generate</span>(all_phrases)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the word cloud</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>import matplotlib.pyplot as plt</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.figure</span>(<span class="at">figsize=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.imshow</span>(wordcloud, <span class="at">interpolation=</span><span class="st">"bilinear"</span>)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.axis</span>(<span class="st">"off"</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.show</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="Feature_extraction_images/wordcloud_1.png" class="img-fluid"></p>
+</section>
+<section id="term-emergence" class="level1">
+<h1>3.2 Term emergence:</h1>
+<p>An interesting application is to measure which terms are emerging (i.e which terms are being new and discussed with frequency).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let's look at the emergence of terms</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we want to see which terms emerge over time in the discussion about the protein transition</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>from rake_nltk import Rake</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>import matplotlib.pyplot as plt</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>import string</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load NLTK resources</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>import nltk</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># load the data in a dataframe</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(documents)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom stop words (add domain-specific or undesired words)</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>custom_stop_words <span class="ot">=</span> {<span class="st">"0"</span>, <span class="st">"online survey"</span>, <span class="st">"results show"</span>, <span class="st">"recent years"</span>, <span class="st">"exclusive licence"</span>, <span class="st">"crucial role"</span>, <span class="st">"based diets"</span>, <span class="st">"based meat"</span>}</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to preprocess text: remove stop words and punctuation</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>def <span class="fu">preprocess_text</span>(text)<span class="sc">:</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.lower</span>()  <span class="co"># Convert to lowercase</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> stop_phrase <span class="cf">in</span> custom_stop_words<span class="sc">:</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="fu">stop_phrase.lower</span>(), <span class="st">""</span>)  <span class="co"># Remove stop phrases</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    words <span class="ot">=</span> <span class="fu">text.split</span>()  <span class="co"># Tokenize text</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    return <span class="st">" "</span><span class="fu">.join</span>(<span class="fu">word.strip</span>(string.punctuation) <span class="cf">for</span> word <span class="cf">in</span> words <span class="cf">if</span> <span class="fu">word.strip</span>(string.punctuation))</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to extract multi-word phrases using RAKE</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>def <span class="fu">extract_key_phrases</span>(text)<span class="sc">:</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    rake <span class="ot">=</span> <span class="fu">Rake</span>()  <span class="co"># Initialize RAKE</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rake.extract_keywords_from_text</span>(text)  <span class="co"># Extract keywords/phrases</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    phrases <span class="ot">=</span> <span class="fu">rake.get_ranked_phrases</span>()  <span class="co"># Get the ranked phrases</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out monograms (single-word phrases)</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    return [phrase <span class="cf">for</span> phrase <span class="cf">in</span> phrases <span class="cf">if</span> <span class="fu">len</span>(<span class="fu">phrase.split</span>()) <span class="sc">&gt;</span> <span class="dv">1</span>]</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Preprocess abstracts and extract key phrases</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Cleaned_Abstract"</span>] <span class="ot">=</span> df[<span class="st">"Abstract"</span>]<span class="fu">.apply</span>(preprocess_text)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Noun_Phrases"</span>] <span class="ot">=</span> df[<span class="st">"Cleaned_Abstract"</span>]<span class="fu">.apply</span>(extract_key_phrases)</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to know when a noun phrase was written. We need a df with two</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co"># columns, a first with the year and a second with the phrase</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># this way we can then compute how many times a noun phrase was written in each year</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new dataframe with one row per noun phrase and year</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">=</span> []</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="cf">in</span> <span class="fu">df.iterrows</span>()<span class="sc">:</span> <span class="co"># we loop over the rows of the df</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> row[<span class="st">"Year"</span>] <span class="co"># we set the year to the observed value</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> phrase <span class="cf">in</span> row[<span class="st">"Noun_Phrases"</span>]<span class="sc">:</span> <span class="co"># we loop over the phrases</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">expanded_data.append</span>({<span class="st">"Year"</span><span class="sc">:</span> year, <span class="st">"Noun_Phrase"</span><span class="sc">:</span> phrase}) <span class="co"># we add the years next to the phrase</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co"># make sure this is a dataframe</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>noun_phrase_df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(expanded_data)</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Count frequency of each noun phrase per year</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>freq_per_year <span class="ot">=</span> <span class="fu">noun_phrase_df.groupby</span>([<span class="st">"Year"</span>, <span class="st">"Noun_Phrase"</span>])<span class="fu">.size</span>()<span class="fu">.reset_index</span>(<span class="at">name=</span><span class="st">"Frequency"</span>)</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot to get years as columns for growth rate calculation</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>pivot_table <span class="ot">=</span> <span class="fu">freq_per_year.pivot</span>(<span class="at">index=</span><span class="st">"Noun_Phrase"</span>, <span class="at">columns=</span><span class="st">"Year"</span>, <span class="at">values=</span><span class="st">"Frequency"</span>)<span class="fu">.fillna</span>(<span class="dv">0</span>)</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute growth rate (percentage change) between consecutive years</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>growth_rates <span class="ot">=</span> <span class="fu">pivot_table.pct_change</span>(<span class="at">axis=</span><span class="dv">1</span>)<span class="fu">.fillna</span>(<span class="dv">0</span>)</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="fu">growth_rates.replace</span>([<span class="fu">float</span>(<span class="st">'inf'</span>), <span class="sc">-</span><span class="fu">float</span>(<span class="st">'inf'</span>)], <span class="dv">0</span>, <span class="at">inplace=</span>True)</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify the top 3 terms with the highest average growth rate</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>avg_growth_rate <span class="ot">=</span> <span class="fu">growth_rates.mean</span>(<span class="at">axis=</span><span class="dv">1</span>)<span class="fu">.sort_values</span>(<span class="at">ascending=</span>False)</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>top_10_terms <span class="ot">=</span> <span class="fu">avg_growth_rate.head</span>(<span class="dv">10</span>).index</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the frequency of the top 3 terms over time</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> term <span class="cf">in</span> top_10_terms<span class="sc">:</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plt.plot</span>(pivot_table.columns, pivot_table.loc[term], <span class="at">marker=</span><span class="st">"o"</span>, <span class="at">label=</span>term)</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.title</span>(<span class="st">"Top 10 Emerging Terms Over Time"</span>)</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.xlabel</span>(<span class="st">"Year"</span>)</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.ylabel</span>(<span class="st">"Frequency"</span>)</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.legend</span>()</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="fu">plt.show</span>()</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Display top 3 emerging terms and their growth rates</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Top 10 Emerging Terms and Their Growth Rates:"</span>)</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">avg_growth_rate.head</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="Feature_extraction_images/emergence_transition.png" class="img-fluid"></p>
+</section>
+<section id="themes-and-networks" class="level1">
+<h1>3.3 Themes and networks:</h1>
+<p>Words are written in a context, a wordcloud, or even looking at the emergence of terms neglects this context. In the bag-of-word approaches, one method to include context in the analysis is to create networks. The idea is to create a link between words that often appear together in the same unit of analysis. Whenever two extracted tokens are present in the same unit (document, sentence, paragraph) a link is created between the words. The wight of this link can then be the frequence of co-occurrence for example. Other types of values exist for this (<span class="math inline">\(\chi^2\)</span>, Cramer, mutual information), see https://jpvdp.github.io/NetworkIsLife/Text_networks.html for more information (this is not part of the course DAFS).</p>
+<p>A script has been prepared for you to create a network between terms. Keep in mind that there are many ways of creating these networks, this is one of the simler approaches.:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Since everything is crap, I make my own function to make a network</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># V43.2</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>import re <span class="co"># some string manipulation</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>from rake_nltk import Rake <span class="co"># noun phrase extraction</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>from sklearn.feature_extraction.text import CountVectorizer </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>import igraph <span class="co"># package for network creation, analysis and visualisation</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>words_to_remove <span class="ot">=</span> [<span class="st">"using vos viewer"</span>, <span class="st">"also revealed"</span>,<span class="st">"dx"</span>,<span class="st">"doi"</span>,<span class="st">"Background: "</span>,<span class="st">"rights reserved"</span>,<span class="st">"elsevier inc"</span>,<span class="st">"du"</span>,<span class="st">"Jiang"</span>,<span class="st">"0"</span>, <span class="st">"online survey"</span>, <span class="st">"results show"</span>, <span class="st">"recent years"</span>, <span class="st">"exclusive licence"</span>, <span class="st">"crucial role"</span>, <span class="st">"based diets"</span>, <span class="st">"based meat"</span>,<span class="st">"et al"</span>, <span class="st">"results show"</span>]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># we start by creating a function that cleans the text and extracts the tokens. Having a function at our disposal</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># makes it easier to apply it to all the documents.</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>def <span class="fu">extract_cleaned_multi_terms</span>(text)<span class="sc">:</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a regex pattern to match whole words in the list</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this ensures that our words are removed in their entirety from the text</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if the word is part of another word, it will not be removed</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    pattern <span class="ot">=</span> r<span class="st">'</span><span class="sc">\b</span><span class="st">('</span> <span class="sc">+</span> <span class="st">'|'</span><span class="fu">.join</span>(<span class="fu">map</span>(re.escape, words_to_remove)) <span class="sc">+</span> r<span class="st">')</span><span class="sc">\b</span><span class="st">'</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">re.sub</span>(pattern, <span class="st">''</span>, text, <span class="at">flags=</span>re.IGNORECASE) <span class="co"># function removes words based on the regex pattern</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="st">';'</span>, <span class="st">' '</span>) <span class="co"># these functions replace a specific character with a space</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="st">','</span>, <span class="st">' '</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="st">'+'</span>, <span class="st">''</span>)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="st">'-'</span>, <span class="st">''</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">text.replace</span>(<span class="st">'≥'</span>, <span class="st">''</span>)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    text <span class="ot">=</span> <span class="fu">re.sub</span>(r<span class="st">"\d+"</span>, <span class="st">""</span>, text) <span class="co"># remove numbers</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove all  special characters</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    cleaned_text <span class="ot">=</span> <span class="fu">re.sub</span>(r<span class="st">"[^\w\s]"</span>, <span class="st">""</span>, text)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize RAKE for the extraction of the noun-phrases</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    rake <span class="ot">=</span> <span class="fu">Rake</span>()</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract phrases using RAKE</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rake.extract_keywords_from_text</span>(cleaned_text)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    phrases <span class="ot">=</span> <span class="fu">rake.get_ranked_phrases</span>()</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove leading and trailing spaces: It can happen that we have created extra spaces when removing</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># words and characters, we need to remove them </span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the following loops over the phrases and removes the spaces from each noun phrase</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>    cleaned_phrases <span class="ot">=</span> [<span class="fu">phrase.strip</span>() <span class="cf">for</span> phrase <span class="cf">in</span> phrases]</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For the purpose of this exercise, we want to remove monograms (single-word terms)</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we do this here by counting the spaces in the multiterm. If there are more than one</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># then the word is a multiterm so we keep it. </span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>    multi_word_phrases <span class="ot">=</span> [phrase <span class="cf">for</span> phrase <span class="cf">in</span> cleaned_phrases <span class="cf">if</span> <span class="fu">len</span>(<span class="fu">phrase.split</span>()) <span class="sc">&gt;</span> <span class="dv">1</span>]</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we replace the spaces with a _ so that they become one string</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    multi_word_phrases <span class="ot">=</span> [<span class="fu">item.replace</span>(<span class="st">" "</span>, <span class="st">"_"</span>) <span class="cf">for</span> item <span class="cf">in</span> multi_word_phrases]</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we return the list of multiwords</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>    return multi_word_phrases</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">#  extract the noun phrases: we apply the function to extract the phrases</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>documents[<span class="st">'noun_phrases'</span>] <span class="ot">=</span> documents[<span class="st">'Abstract'</span>]<span class="fu">.apply</span>(extract_cleaned_multi_terms)</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>documents[<span class="st">'noun_phrases'</span>] <span class="ot">=</span> documents[<span class="st">'noun_phrases'</span>]<span class="fu">.apply</span>(lambda phrases<span class="sc">:</span> <span class="st">" "</span><span class="fu">.join</span>(phrases))</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Document-Term Matrix</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co"># This matrix has a row per document and each column is a word</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>vectorizer <span class="ot">=</span> <span class="fu">CountVectorizer</span>(<span class="at">token_pattern =</span> r<span class="st">"\S+"</span>)</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">=</span> <span class="fu">vectorizer.fit_transform</span>(documents[<span class="st">'noun_phrases'</span>])</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the Co-occurrence Matrix</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply DTM by its transpose to get term-term co-occurrence</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>cooccurrence_matrix <span class="ot">=</span> (dtm.T <span class="sc">@</span> dtm)<span class="fu">.toarray</span>()</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the term names</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">=</span> <span class="fu">vectorizer.get_feature_names_out</span>()</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Create a DataFrame for better readability</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>cooccurrence_df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(cooccurrence_matrix, <span class="at">index=</span>terms, <span class="at">columns=</span>terms)</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>adjacency_matrix <span class="ot">=</span> <span class="fu">cooccurrence_df.values.tolist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>At the end of this script we will have an adjacency matrix. This is a matrix that has phrases on each row and phrases on each column. A value &gt; 0 indicates a co-occurrence between the phrases. 0 means the phases do not occur in the same document.</p>
+<p>Now that we have the matrix, we can start making the network. We will use the igraph package for this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a weighted graph from the adjacency matrix</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># version where we manually set the weights</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">igraph.Graph.Weighted_Adjacency</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    adjacency_matrix,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mode=</span>igraph.ADJ_UNDIRECTED,  <span class="co"># Use ig.ADJ_DIRECTED for directed graphs</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">attr=</span><span class="st">"weight"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign weights to edges</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>g.es[<span class="st">"weight"</span>] <span class="ot">=</span> [</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    adjacency_matrix[i][j] <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="fu">len</span>(adjacency_matrix))</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="cf">in</span> <span class="fu">range</span>(<span class="fu">len</span>(adjacency_matrix[i])) <span class="cf">if</span> adjacency_matrix[i][j] <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign names to the nodes (terms)</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>g.vs[<span class="st">"name"</span>] <span class="ot">=</span> <span class="fu">cooccurrence_df.columns.tolist</span>()</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># !!!!!!!!! Here we filter !!!!!!!!!</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co"># //////// Adjust parameter here \\\\\\\\\\</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">=</span> <span class="dv">4</span> <span class="co"># Set your desired threshold here</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># \\\\\\\\ Adjust parameter here //////////</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>edges_to_delete <span class="ot">=</span> [e.index <span class="cf">for</span> e <span class="cf">in</span> g.es <span class="cf">if</span> e[<span class="st">"weight"</span>] <span class="sc">&lt;</span> threshold]</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="fu">g.delete_edges</span>(edges_to_delete)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">g.clusters</span>()<span class="fu">.giant</span>()</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the graph</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>from igraph import plot</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>betweenness <span class="ot">=</span> <span class="fu">g.betweenness</span>()</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>node_sizes <span class="ot">=</span> [<span class="dv">5</span> <span class="sc">+</span> (b <span class="sc">/</span> <span class="fu">max</span>(betweenness) <span class="sc">*</span> <span class="dv">30</span>) <span class="cf">if</span> <span class="fu">max</span>(betweenness) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">10</span> <span class="cf">for</span> b <span class="cf">in</span> betweenness]</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>g.vs[<span class="st">"label_size"</span>] <span class="ot">=</span> [c <span class="cf">for</span> c <span class="cf">in</span> node_sizes]  <span class="co"># Base size + degree</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>g.vs[<span class="st">"label"</span>] <span class="ot">=</span> g.vs[<span class="st">"name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And finally we visualise the network:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    g, <span class="co"># g is the network</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout=</span><span class="fu">g.layout</span>(<span class="st">"kk"</span>),  <span class="co"># this defines how the nodes are positionned</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex_size=</span>node_sizes, <span class="co"># size of the nodes</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex_color=</span><span class="st">"yellow"</span>, <span class="co"># color of the nodes</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge_width=</span><span class="dv">2</span>, <span class="co"># how thick the links</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">bbox=</span>(<span class="dv">1000</span>, <span class="dv">1000</span>),  <span class="co"># Set size of the plot</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">margin=</span><span class="dv">20</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex_label_size=</span>g.vs[<span class="st">"label_size"</span>]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="Feature_extraction_images/NW_transition.png" class="img-fluid"></p>
+<p>In a network we can see how terms are positioned relatif to each other. We see groups of terms that form themes.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/JPvdP\.github\.io\/NetworkIsLife\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
