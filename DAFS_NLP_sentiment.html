@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – topic_modelling_run_bertopic</title>
+<title>NetworkIsLife – dafs_nlp_sentiment</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_run_bertopic.html">Run Bertopic</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -395,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Run Bertopic</span></a>
   </div>
 </li>
@@ -411,20 +411,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#run-bertopic" id="toc-run-bertopic" class="nav-link active" data-scroll-target="#run-bertopic">Run Bertopic</a>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link active" data-scroll-target="#sentiment-analysis">Sentiment analysis</a>
   <ul class="collapse">
-  <li><a href="#run-a-classic-bertopic-model" id="toc-run-a-classic-bertopic-model" class="nav-link" data-scroll-target="#run-a-classic-bertopic-model">Run a classic BERTopic Model:</a>
-  <ul class="collapse">
-  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">Visualisation</a></li>
-  <li><a href="#topics-over-time" id="toc-topics-over-time" class="nav-link" data-scroll-target="#topics-over-time">Topics over time</a></li>
+  <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages">1. Installing packages</a></li>
+  <li><a href="#we-load-the-packages-required" id="toc-we-load-the-packages-required" class="nav-link" data-scroll-target="#we-load-the-packages-required">2. We load the packages required:</a></li>
+  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">3. Import the data</a></li>
+  <li><a href="#split-the-data" id="toc-split-the-data" class="nav-link" data-scroll-target="#split-the-data">4. Split the data</a></li>
   </ul></li>
-  <li><a href="#proba-per-document" id="toc-proba-per-document" class="nav-link" data-scroll-target="#proba-per-document">Proba per document</a></li>
-  <li><a href="#hierchical-topic-models" id="toc-hierchical-topic-models" class="nav-link" data-scroll-target="#hierchical-topic-models">Hierchical Topic Models</a>
-  <ul class="collapse">
-  <li><a href="#dendrogram-of-the-topics" id="toc-dendrogram-of-the-topics" class="nav-link" data-scroll-target="#dendrogram-of-the-topics">Dendrogram of the topics</a></li>
-  </ul></li>
-  <li><a href="#additional-data-prep-lemmatization" id="toc-additional-data-prep-lemmatization" class="nav-link" data-scroll-target="#additional-data-prep-lemmatization">Additional data prep (lemmatization)</a></li>
-  </ul></li>
+  <li><a href="#loading-the-model" id="toc-loading-the-model" class="nav-link" data-scroll-target="#loading-the-model">5. Loading the model</a></li>
+  <li><a href="#x.-troubleshooting" id="toc-x.-troubleshooting" class="nav-link" data-scroll-target="#x.-troubleshooting">x. Troubleshooting:</a></li>
   </ul>
 </nav>
     </div>
@@ -434,129 +429,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="run-bertopic" class="level1">
-<h1>Run Bertopic</h1>
-<section id="run-a-classic-bertopic-model" class="level2">
-<h2 class="anchored" data-anchor-id="run-a-classic-bertopic-model">Run a classic BERTopic Model:</h2>
+<section id="sentiment-analysis" class="level1">
+<h1>Sentiment analysis</h1>
+<section id="installing-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-packages">1. Installing packages</h2>
+<p>For this tutorial we will need the following packages:</p>
+<ul>
+<li>Transformers</li>
+<li>Pandas</li>
+<li>Tensorflow</li>
+<li>nltk</li>
+</ul>
+<p>As we have learned from the previous sessions, we will install these packages via the terminal. Open up a new terminal and activate the correct anaconda environment. My environment is called “DAFS_NLP_sentiment”, replace this with the name of your environment:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>topics, probs <span class="ot">=</span> <span class="fu">topic_model.fit_transform</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>conda activate DAFS_NLP_sentiment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="visualisation" class="level3">
-<h3 class="anchored" data-anchor-id="visualisation">Visualisation</h3>
-<p>Create a plot with the documents projected in a two dimensional space:</p>
+<p>Now you can install the packages, one by one:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_documents</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pip install nltk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png" class="img-fluid"></p>
-<p>In this space, each dot is a document. The color of the document represents its cluster/topic. The distance between the documents should be interpreted in terms of a semantic proximity between the documents.</p>
-<p>Beyond this visualisation we usually want to know which words constitute these topics. We can do this by creating a barplot of the words:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_barchart</span>(<span class="at">top_n_topics =</span> <span class="dv">10</span>, <span class="at">n_words =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/Topics_monogram.png" class="img-fluid"></p>
-<p>The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)</p>
-<p>We can run the model again with bi-grams for example:</p>
-<p><img src="imgs/Topic_mod_workshop_images/Topics_bigram.png" class="img-fluid"></p>
-<p>We can export the information per topic using the following function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>topic_info <span class="ot">=</span> <span class="fu">topic_model.get_topic_info</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>topic_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/topic_info_output.png" class="img-fluid"></p>
-<p>Bertopic creates a -1 topic that will contain terms considered very generic. Using the probabilities option in the mode we can assign topic to the publications classified in topic -1.</p>
-<p>Based on the results of these topics we can go back to the parameters and adjust the model to improve the output. Once we are happy with the results, we can export the topics and connect them with other variables. Bertopic exports the results in the same order as the input data, topics can therefore be combined directly with the intial dataframe that we have been working with.</p>
 </section>
-<section id="topics-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="topics-over-time">Topics over time</h3>
-<p>We can check the evolution of topics over time by adding information on the year of publication of the documents. For this we first need a dataframe with the years:</p>
+<section id="we-load-the-packages-required" class="level2">
+<h2 class="anchored" data-anchor-id="we-load-the-packages-required">2. We load the packages required:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>timestamps <span class="ot">=</span> data_full[<span class="st">'Year'</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>timestamps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>import nltk</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>from nltk.tokenize import sent_tokenize</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>from transformers import pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We then run a topic model, supplying this time information:</p>
+<p>Pandas and nltk you are familiar with by now. You can see that we import the pipeline function and the sent_tokenize function. The pipeline is what allows us to streamline the sentiment analysis task, the sent_tokenize allows us to split a text at the level of the sentence. We will see in a bit why this is important for this task.</p>
+</section>
+<section id="import-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-the-data">3. Import the data</h2>
+<p>We need to keep an ID of the article and the text the reason we need an ID is so we can match the documents to other informations sources we are going to detect emotions in the text for each sentence. This means that we need to know where the sentence came from. So we need to keep track of identifiers. In general, it’s best practice to always keep an ID of an observation so that you can match back to intial data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>topics_dynamic <span class="ot">=</span> <span class="fu">topic_model.topics_over_time</span>(data, timestamps, <span class="at">nr_bins =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load the data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"/Users/janpieter/Desktop/Projects/Emotions/Emtions_query2_full.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ['ID','Article'] creates a list of columns names that we can then subset:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> data_full[[<span class="st">'ID'</span>,<span class="st">'Article'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/dynamics.png" class="img-fluid"></p>
+</section>
+<section id="split-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="split-the-data">4. Split the data</h2>
+<p>At this stage we need to decide how we are going to identify emotion/sentiment in a text. Theoretically this means that we need to consider at what level we expect the emotion to be detectable. If we take a whole paragraph we might get a mix of emtions, but we might need a paragraph to identify subjectivity. This question defines how we need to split the data. In this first step of the tutorial, we focus on emotion, and we consider that can usually be found at the level of the sentence. Many sentences will be void of emotion, a couple will be loaded. Computing at the level of the sentence allows us to decide later how we manage this information.</p>
+<p>We start with downloading a model that will help us splitting the data at the level of the sentence</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To avoid issues, we make sure the data is in a dataframe format. We want a dataframe because the functions we will use to extract emotion and combine the results :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We now want to split the data at the sentence level, but we want to keep the ID of the document. We therefore define a function that takes a df as an input, splits each article into sentences, and add the id of the document to the beginning of the document.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">split_sentences</span>(row)<span class="sc">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we split up the article, the sent_tokenize functions tokenizes at the level of the sentence</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    sentences <span class="ot">=</span> <span class="fu">sent_tokenize</span>(row[<span class="st">'Article'</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># then we for each row extracted from the dataframe we combine the ID and the text of the sentence</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    return [{<span class="st">'ID'</span><span class="sc">:</span> row[<span class="st">'ID'</span>], <span class="st">'sentence'</span><span class="sc">:</span> sentence} <span class="cf">for</span> sentence <span class="cf">in</span> sentences]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to apply this function to each row of the dataframe we use the following code to do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sentences_df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>([sentence <span class="cf">for</span> _, row <span class="cf">in</span> <span class="fu">df.iterrows</span>() <span class="cf">for</span> sentence <span class="cf">in</span> <span class="fu">split_sentences</span>(row)])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we export this dataframe for safety. It might take a while to run this script. If something goes wrong we can simply load this file, instead of starting from scratch</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sentences_df.to_csv</span>(<span class="st">'sentences_df.csv'</span>, <span class="at">index =</span> False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explanation of the code:</p>
+<ul>
+<li>df.iterrows(): This iterates over the rows of the DataFrame df. Each row is returned as a tuple (index, row) where: index is the index of the row. row is a pandas Series object representing the data in the row.</li>
+<li>for <em>, row in df.iterrows(): The underscore </em> is used to ignore the index because it’s not needed.</li>
+<li>split_sentences(row): This is a function that processes the row and splits its content into multiple sentences.</li>
+<li>for sentence in split_sentences(row): Loops through each sentence returned by split_sentences(row).</li>
+<li></li>
+</ul>
 </section>
 </section>
-<section id="proba-per-document" class="level2">
-<h2 class="anchored" data-anchor-id="proba-per-document">Proba per document</h2>
-<p>Just as for an LDA, we can get the probability for each to document to be linked to a topic.</p>
+<section id="loading-the-model" class="level1">
+<h1>5. Loading the model</h1>
+<p>We went on the hugging face website to find a model that fitted well with our task. As you saw many models exist, so try some out to see which performs better for your text. The first step is to copy the link to the model from the website and save this in a variable. We could add the name directly into the pipeline, but since we will try different models this approach is easier:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Topic_distribution <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(probs, <span class="at">columns =</span> [f<span class="st">"Topic_{i}]"</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(probs.shape[<span class="dv">1</span>])])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Topic_distribution[<span class="st">"Document"</span>] <span class="ot">=</span> data</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Topic_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sentiment_model_dutch <span class="ot">=</span> <span class="st">"antalvdb/robbert-v2-dutch-base-finetuned-emotion"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sentiment_model_english <span class="ot">=</span> <span class="st">"SamLowe/roberta-base-go_emotions"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/probs_per_docs.png" class="img-fluid"></p>
+<p>We can now use a very handy function that does multiple tasks for us in one go. Normally we would have to tokenize etc. before we can perform sentiment analysis. The <strong>pipeline</strong> function does all the tasks for us. All we have to do is specify the model that we want to use, the task we want to perform with the model and some other optional parameters. Since we want to do sentiment analysis and downloaded a model trained to this end, we can specify the task as “sentiment-analysis”, the model is the one we downloaded. The pipeline than looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sentiment_pipeline <span class="op">=</span> pipeline(<span class="st">"sentiment-analysis"</span>, model<span class="op">=</span>sentiment_model_english, device <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The final option “device = 0”, can be used to mobilize the GPU of the laptop (if you have one) to speed up computation.</p>
 </section>
-<section id="hierchical-topic-models" class="level2">
-<h2 class="anchored" data-anchor-id="hierchical-topic-models">Hierchical Topic Models</h2>
-<p>BERTopic allows for a specific type of topic model which takes a hierachy of topics into account. This allows us to visually check what level of aggregation suits us best.</p>
+<section id="x.-troubleshooting" class="level1">
+<h1>x. Troubleshooting:</h1>
+<p>If you get the following error while running the sentiment analysis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_hier_topic_model <span class="ot">=</span> <span class="fu">topic_model.hierarchical_topics</span>(data)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_hier_topic_model.visualize_hierarchical_documents</span>(data, my_hier_topic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>RuntimeError<span class="sc">:</span> The expanded size of the <span class="fu">tensor</span> (<span class="dv">589</span>) must match the existing <span class="fu">size</span> (<span class="dv">514</span>) at non<span class="sc">-</span>singleton dimension <span class="fl">1.</span>  Target sizes<span class="sc">:</span> [<span class="dv">1</span>, <span class="dv">589</span>].  Tensor sizes<span class="sc">:</span> [<span class="dv">1</span>, <span class="dv">514</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/hier_topics.png" class="img-fluid"></p>
-<section id="dendrogram-of-the-topics" class="level3">
-<h3 class="anchored" data-anchor-id="dendrogram-of-the-topics">Dendrogram of the topics</h3>
+<p>This means that the text (once tokenized) has a length of 589 while the maximum length that the model can handle is 514. In other words: your text is too long. So we need to cut it to length. This means counting the tokens for each of the sentences and then cutting down to size:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_hierarchy</span>(<span class="at">hierarchical_topics=</span>hierarchical_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/hier_topics2.png" class="img-fluid"></p>
-</section>
-</section>
-<section id="additional-data-prep-lemmatization" class="level2">
-<h2 class="anchored" data-anchor-id="additional-data-prep-lemmatization">Additional data prep (lemmatization)</h2>
-<p>We need some additional help from other packages to use lemmatization:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>import nltk</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>from nltk.stem import WordNetLemmatizer</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>from nltk.corpus import wordnet</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download required resources</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'wordnet'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'averaged_perceptron_tagger'</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then we need a function to assign the part-of-speech tags to the text</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to map NLTK position tags to WordNet position tags</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>def <span class="fu">get_wordnet_pos</span>(word)<span class="sc">:</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    tag <span class="ot">=</span> <span class="fu">nltk.pos_tag</span>([word])[<span class="dv">0</span>][<span class="dv">1</span>][<span class="dv">0</span>]<span class="fu">.upper</span>()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    tag_dict <span class="ot">=</span> {</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span><span class="sc">:</span> wordnet.ADJ,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span><span class="sc">:</span> wordnet.NOUN,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"V"</span><span class="sc">:</span> wordnet.VERB,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"R"</span><span class="sc">:</span> wordnet.ADV</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">tag_dict.get</span>(tag, wordnet.NOUN)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="ot">=</span> <span class="fu">WordNetLemmatizer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And we need a function that goes over the words to lemmatize them.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">tokenize_text_bert</span>(tmp)<span class="sc">:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tokenize the text into sentences</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    sentences <span class="ot">=</span> <span class="fu">nltk.sent_tokenize</span>(tmp)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lemmatize each word in each sentence with its correct pos tag</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    lemmatized_sentences <span class="ot">=</span> []</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="cf">in</span> sentences<span class="sc">:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">=</span> <span class="fu">nltk.word_tokenize</span>(sentence)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        lemmatized_words <span class="ot">=</span> [<span class="fu">lemmatizer.lemmatize</span>(w, <span class="fu">get_wordnet_pos</span>(w)) <span class="cf">for</span> w <span class="cf">in</span> words]</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        lemmatized_sentence <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_words)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lemmatized_sentences.append</span>(lemmatized_sentence)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Join the lemmatized sentences</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    reconstructed_text <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_sentences)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    return reconstructed_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>W now apply the function to the text, we can then us this data as an input for the embeddings.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>(<span class="fu">map</span>(tokenize_text_bert, data[<span class="st">'Abstract'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We import the tokenizer from the same model as the one we will be using</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"antalvdb/robbert-v2-dutch-base-finetuned-emotion"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We check the maximum length the model can take:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>max_length <span class="op">=</span> tokenizer.model_max_length  <span class="co"># Usually 512</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># We add a column with the token count to our dataframe</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># we add the number of tokens to this column</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df_sentences[<span class="st">'token_count'</span>] <span class="op">=</span> df_sentences[<span class="st">'sentence'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">len</span>(tokenizer.tokenize(x)))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out sentences exceeding the maximum length</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_filtered[df_filtered[<span class="st">'token_count'</span>] <span class="op">&lt;=</span> max_length]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the 'token_count' column if no longer needed</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_filtered.drop(columns<span class="op">=</span>[<span class="st">'token_count'</span>])</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># we save the df, to avoid issues in case we mess something up</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>sentences_df.to_csv(<span class="st">'sentences_df.csv'</span>, index <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># then we proceed with the rest of the script as before but with the shorter dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

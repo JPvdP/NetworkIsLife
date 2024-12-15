@@ -259,6 +259,12 @@ window.Quarto = {
  <span class="menu-text">Session 2: Topic Modelling</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_NLP_NER.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Named Entity Recognition</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -454,8 +460,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a>
   <ul class="collapse">
-  <li><a href="#write-a-script" id="toc-write-a-script" class="nav-link" data-scroll-target="#write-a-script">3.1 Write a script</a></li>
-  <li><a href="#write-a-script-1" id="toc-write-a-script-1" class="nav-link" data-scroll-target="#write-a-script-1">3.2 Write a script</a></li>
+  <li><a href="#write-a-script-that-does-the-following" id="toc-write-a-script-that-does-the-following" class="nav-link" data-scroll-target="#write-a-script-that-does-the-following">3.1 Write a script that does the following:</a></li>
+  <li><a href="#write-a-script" id="toc-write-a-script" class="nav-link" data-scroll-target="#write-a-script">3.2 Write a script</a></li>
   </ul></li>
   <li><a href="#part-4-identify-errors" id="toc-part-4-identify-errors" class="nav-link" data-scroll-target="#part-4-identify-errors">Part 4: Identify errors</a>
   <ul class="collapse">
@@ -491,11 +497,14 @@ window.Quarto = {
 <h1>1. Mutliple Choice Questions</h1>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">1.1</h2>
+<p>What will the following script print?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> x <span class="op">&lt;</span> y:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span>  <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span>  <span class="dv">2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><ol type="A">
@@ -505,7 +514,7 @@ window.Quarto = {
 <li>9</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>11</li>
+<li>11 *</li>
 </ol></li>
 <li><ol start="4" type="A">
 <li>10</li>
@@ -514,34 +523,34 @@ window.Quarto = {
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1">1.2</h2>
-<p>In R, given a data frame df with columns A, B, and C, which command correctly adds a new column D that is the sum of columns A and B?</p>
+<p>In R, given a dataframe df with columns A, B, and C, which command correctly adds a new column D that is the sum of columns A and B?</p>
 <ul>
 <li><ol type="A">
 <li>df<span class="math inline">\(D &lt;- df\)</span>A + df$B</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>df[“D”] = df[“A”] + df[“B”]</li>
+<li>df[“D”] &lt;- df[“A”] + df[“B”]</li>
 </ol></li>
 <li><ol start="3" type="A">
 <li>df &lt;- mutate(df, D = A + B)</li>
 </ol></li>
 <li><ol start="4" type="A">
-<li>All of the above</li>
+<li>All of the above *</li>
 </ol></li>
 </ul>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">1.3</h2>
-<p>In R, how do you remove rows from a data frame df where the value in column X is greater than 10?</p>
+<p>In R, how do you remove rows from a dataframe df, where the value in column X is greater than 10?</p>
 <ul>
 <li><ol type="A">
-<li>df &lt;- df[df$X &lt;= 10, ]</li>
+<li>df &lt;- df[df$X &lt;= 10, ] *</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>df &lt;- subset(df, X &lt;= 10)</li>
+<li>df &lt;- df[df$X &lt;= 10]</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>df &lt;- df[!(df$X &gt; 10), ]</li>
+<li>df &lt;- df[(df$X &gt; 10), ]</li>
 </ol></li>
 <li><ol start="4" type="A">
 <li>All of the above</li>
@@ -550,29 +559,29 @@ window.Quarto = {
 </section>
 <section id="section-3" class="level2">
 <h2 class="anchored" data-anchor-id="section-3">1.4</h2>
-<p>What is the purpose of the apply() function in R when used on a data frame?</p>
+<p>I want to adjust the loop in the image so that it prints a sentence that says “value is now 1”, “value is now 2” each time i is increased. Which line of code should i add?</p>
 <ul>
 <li><ol type="A">
-<li>To apply a function to each element of the data frame individually</li>
+<li>print(“value is now i”)</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>To apply a function to the margins (rows or columns) of the data frame</li>
+<li>print(f”value is now {i}“) *</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>To apply a function to the entire data frame as a single object</li>
+<li>print: “value is now i”</li>
 </ol></li>
 <li><ol start="4" type="A">
-<li>To combine multiple data frames into one</li>
+<li>print: f”value is now {i}”</li>
 </ol></li>
 </ul>
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4">1.5</h2>
+<p>What will the following script print?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">3</span>:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><ol type="A">
@@ -582,7 +591,7 @@ window.Quarto = {
 <li>0 1 2 3 4</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>0 1 2 4</li>
+<li>0 1 2 4 *</li>
 </ol></li>
 <li><ol start="4" type="A">
 <li>1 2 4</li>
@@ -591,34 +600,37 @@ window.Quarto = {
 </section>
 <section id="section-5" class="level2">
 <h2 class="anchored" data-anchor-id="section-5">1.6</h2>
+<p>What value is returned by compute(6) in the following script?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute(n):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            total <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> n:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">3</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            total <span class="op">=</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(total)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>compute(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(i)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>compute(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><ol type="A">
-<li>21</li>
+<li>1</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>27</li>
+<li>6 *</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>33</li>
+<li>7</li>
 </ol></li>
 <li><ol start="4" type="A">
-<li>39</li>
+<li>None of the above</li>
 </ol></li>
 </ul>
 </section>
 <section id="section-6" class="level2">
 <h2 class="anchored" data-anchor-id="section-6">1.7</h2>
+<p>What is printed by the following scritp?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
@@ -631,7 +643,7 @@ window.Quarto = {
 </div>
 <ul>
 <li><ol type="A">
-<li>32.5</li>
+<li>32.5 *</li>
 </ol></li>
 <li><ol start="2" type="A">
 <li>67</li>
@@ -646,11 +658,12 @@ window.Quarto = {
 </section>
 <section id="section-7" class="level2">
 <h2 class="anchored" data-anchor-id="section-7">1.8</h2>
+<p>What is printed by the following script?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'Employee'</span>: [<span class="st">'Anna'</span>, <span class="st">'Ben'</span>, <span class="st">'Clara'</span>, <span class="st">'Dan'</span>],</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Department'</span>: [<span class="st">'HR'</span>, <span class="st">'IT'</span>, <span class="st">'HR'</span>, <span class="st">'IT'</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Department'</span>: [<span class="st">'IT'</span>, <span class="st">'IT'</span>, <span class="st">'HR'</span>, <span class="st">'HR'</span>],</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Salary'</span>: [<span class="dv">50000</span>, <span class="dv">60000</span>, <span class="dv">55000</span>, <span class="dv">65000</span>]}</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.groupby(<span class="st">'Department'</span>)[<span class="st">'Salary'</span>].mean()</span>
@@ -661,18 +674,21 @@ window.Quarto = {
 <li>Department HR 52500 IT 62500</li>
 </ol></li>
 <li><ol start="2" type="A">
-<li>Department HR 105000 IT 125000</li>
+<li>Department HR 120000 IT 110000</li>
 </ol></li>
 <li><ol start="3" type="A">
-<li>Department Salary HR 50000 IT 60000 HR 55000 IT 65000</li>
+<li>Department Salary HR 55000 IT 50000 HR 65000 IT 60000</li>
 </ol></li>
 <li><ol start="4" type="A">
-<li>Department HR 55000 IT 62500</li>
+<li><ul>
+<li>Department HR 60000 IT 55000</li>
+</ul></li>
 </ol></li>
 </ul>
 </section>
 <section id="section-8" class="level2">
 <h2 class="anchored" data-anchor-id="section-8">1.9</h2>
+<p>I want to create a dataframe that contains only students with grades higher than 85, how can I do this in R?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">&lt;-</span> data.frame(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  Student <span class="op">=</span> c(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"Diana"</span>),</span>
@@ -691,12 +707,13 @@ window.Quarto = {
 <li>df[df<span class="math inline">\(Math &gt;= 85 &amp; df\)</span>English &gt;= 85, ]</li>
 </ol></li>
 <li><ol start="4" type="A">
-<li>subset(df, Math &gt; 85 &amp; English &gt; 85)</li>
+<li>subset(df, Math &gt; 85 &amp; English &gt; 85) *</li>
 </ol></li>
 </ul>
 </section>
 <section id="section-9" class="level2">
 <h2 class="anchored" data-anchor-id="section-9">1.10</h2>
+<p>What does the following script give as an output?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">10</span>:</span>
@@ -706,7 +723,7 @@ window.Quarto = {
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Smaller"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Options: + A) Greater + B) Equal + C) Smaller + D) Error</p>
+<p>Options: + A) Greater + B) Equal * + C) Smaller + D) Error</p>
 </section>
 </section>
 <section id="part-2-explaining-scripts" class="level1">
@@ -722,7 +739,6 @@ window.Quarto = {
 <th>Region</th>
 <th>WaterPollution</th>
 <th>Airpollution</th>
-<th></th>
 </tr>
 </thead>
 <tbody>
@@ -731,55 +747,59 @@ window.Quarto = {
 <td>EU</td>
 <td>45</td>
 <td>2.1</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>B</td>
 <td>EU</td>
 <td>50</td>
 <td>2.1</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>C</td>
 <td>Non-EU</td>
 <td>70</td>
 <td>3.2</td>
-<td></td>
 </tr>
 <tr class="even">
+<td>C</td>
+<td>Non-EU</td>
+<td>65</td>
+<td>2.1</td>
+</tr>
+<tr class="odd">
 <td>D</td>
 <td>EU</td>
 <td>60</td>
 <td>1.1</td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>E</td>
 <td>Non-EU</td>
 <td>80</td>
 <td>1.0</td>
-<td></td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>Non-EU</td>
+<td>45</td>
+<td>4.0</td>
 </tr>
 <tr class="even">
 <td>F</td>
 <td>EU</td>
 <td>40</td>
 <td>3.4</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>G</td>
 <td>EU</td>
 <td>55</td>
 <td>12.1</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>…</td>
 <td>…</td>
 <td>…</td>
-<td></td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -787,28 +807,24 @@ window.Quarto = {
 <td>EU</td>
 <td>67</td>
 <td>3.4</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>X</td>
 <td>EU</td>
 <td>42</td>
 <td>4.2</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>Y</td>
 <td>EU</td>
 <td>31</td>
 <td>9.1</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>Z</td>
 <td>Non-EU</td>
 <td>52</td>
 <td>10.1</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -824,129 +840,36 @@ window.Quarto = {
 </section>
 <section id="explain-an-r-script" class="level2">
 <h2 class="anchored" data-anchor-id="explain-an-r-script">2.2: Explain an R script</h2>
-<p>You are provided with the following R script. Explain each line of code in this script. Provide the output of the script.</p>
+<p>You are provided with the following R script that aims to compute the fibonacci sequence. Explain each line of code in this script. Provide the output of the script. Note: you are not requested to explain how the sequence is computed (i.e explain why we store values, why they are added, what a sequence is), only what a line of code does.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>generate_fibonacci <span class="ot">&lt;-</span> <span class="cf">function</span>(limit) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  next_value <span class="ot">&lt;-</span> fib_sequence[<span class="dv">1</span>] <span class="sc">+</span> fib_sequence[<span class="dv">2</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (next_value <span class="sc">&lt;=</span> limit) {</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(fib_sequence, next_value)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    next_value <span class="ot">&lt;-</span> <span class="fu">tail</span>(fib_sequence, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">tail</span>(fib_sequence, <span class="at">n =</span> <span class="dv">2</span>)[<span class="dv">1</span>]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fib_sequence)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>fib_seq <span class="ot">&lt;-</span> <span class="fu">generate_fibonacci</span>(<span class="dv">3</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Fibonacci sequence up to 3:"</span>, fib_seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  prev <span class="ot">&lt;-</span> fib_sequence[<span class="dv">1</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  curr <span class="ot">&lt;-</span> fib_sequence[<span class="dv">2</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  next_value <span class="ot">&lt;-</span> prev <span class="sc">+</span> curr</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (next_value <span class="sc">&lt;=</span> limit) {</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(fib_sequence, next_value)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    prev <span class="ot">&lt;-</span> curr</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    curr <span class="ot">&lt;-</span> next_value</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    next_value <span class="ot">&lt;-</span> prev <span class="sc">+</span> curr</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fib_sequence)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>fib_seq <span class="ot">&lt;-</span> <span class="fu">generate_fibonacci</span>(<span class="dv">3</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fib_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="part-3" class="level1">
 <h1>Part 3</h1>
-<section id="write-a-script" class="level2">
-<h2 class="anchored" data-anchor-id="write-a-script">3.1 Write a script</h2>
-<p>You are provided with the following dataframe, write a script that will compute the average water pollution levels of EU countries and Average air pollution countries outside of the EU. You can write this script in either python or R.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Country</th>
-<th>Region</th>
-<th>Water Pollution</th>
-<th>Airpollution</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td>EU</td>
-<td>45</td>
-<td>2.1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td>EU</td>
-<td>50</td>
-<td>2.1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td>Non-EU</td>
-<td>70</td>
-<td>3.2</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>D</td>
-<td>EU</td>
-<td>60</td>
-<td>1.1</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>E</td>
-<td>Non-EU</td>
-<td>80</td>
-<td>1.0</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>F</td>
-<td>EU</td>
-<td>40</td>
-<td>3.4</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>G</td>
-<td>EU</td>
-<td>55</td>
-<td>12.1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>W</td>
-<td>EU</td>
-<td>67</td>
-<td>3.4</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>X</td>
-<td>EU</td>
-<td>42</td>
-<td>4.2</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Y</td>
-<td>EU</td>
-<td>31</td>
-<td>9.1</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Z</td>
-<td>Non-EU</td>
-<td>52</td>
-<td>10.1</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="write-a-script-that-does-the-following" class="level2">
+<h2 class="anchored" data-anchor-id="write-a-script-that-does-the-following">3.1 Write a script that does the following:</h2>
+<p>You have a variable that contains a 4x4 matrix filled containing only the number 5 (the matrix is filled with 5). You are requested to write a program that : - removes the second and third column - removes the second and third row - multiples all values in the remaining matrix by 5 - sums up all elements of the matrix - prints the results</p>
 </section>
-<section id="write-a-script-1" class="level2">
-<h2 class="anchored" data-anchor-id="write-a-script-1">3.2 Write a script</h2>
-<p>You are provided with a dataset containing information about a group of people, including their names, ages, and test scores. Your task is to write a program that processes this data to classify each person based on specific criteria. The dataset contains 3 columns: ‘Name’, ‘Age’ and ‘Score’.</p>
+<section id="write-a-script" class="level2">
+<h2 class="anchored" data-anchor-id="write-a-script">3.2 Write a script</h2>
+<p>You are provided with a dataset containing information about a group of people in csv format. The data includes names, ages, and test scores. Your task is to write a program that imports this data into either R or Python and classifies each person based on specific criteria. The dataset contains 3 columns: ‘Name’, ‘Age’ and ‘Score’. Classify the people in 2 categories, a first category for people with a score lower than 42, a second with people with a score higher or equal to 42. The final dataset should have 4 columns: Name, Age, Score, Category. You can decide what to call the categories.</p>
+<p>for i in range(1,4): print(i)</p>
 </section>
 </section>
 <section id="part-4-identify-errors" class="level1">
@@ -956,15 +879,17 @@ window.Quarto = {
 <p>The following is a python script resulting in an error. Identify and explain the error. Then provide a solution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> { <span class="st">'Country'</span>: [<span class="st">'France'</span>, <span class="st">'Germany'</span>, <span class="st">'Netherlands'</span>, <span class="st">'Italy'</span>, <span class="st">'Spain'</span>], <span class="st">'Region'</span>: [<span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>], <span class="st">'Emissions'</span>: [<span class="dv">200</span>, <span class="dv">250</span>, <span class="dv">220</span>, <span class="dv">230</span>, <span class="dv">180</span>] } </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data) </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_total_emissions(dataframe): </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(dataframe[<span class="st">'Emission'</span>])  </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> result</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="op">=</span> calculate_total_emissions(df) </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> { <span class="st">'Country'</span>: [<span class="st">'France'</span>, <span class="st">'Germany'</span>, <span class="st">'Netherlands'</span>, <span class="st">'Italy'</span>, <span class="st">'Spain'</span>], </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Region'</span>: [<span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>], </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Emission'</span>: [<span class="dv">200</span>, <span class="dv">250</span>, <span class="dv">220</span>, <span class="dv">230</span>, <span class="dv">180</span>] } </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data) </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_total_emissions(dataframe): </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(dataframe[<span class="st">'Emission'</span>])  </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> result</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="op">=</span> calculate_total_emissions(df) </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="error-in-r" class="level2">
