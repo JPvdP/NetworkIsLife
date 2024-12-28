@@ -268,6 +268,12 @@ window.Quarto = {
  <span class="menu-text">Session 3: Named Entity Recognition</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_NLP_sentiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sentiment analysis</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -807,10 +813,8 @@ Figure&nbsp;3: Example of Stemming, where variations are reduced to their stem �
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pattern <span class="op">=</span> <span class="st">"\d[0-9]</span><span class="sc">{3}</span><span class="st">[A-Z]</span><span class="sc">{2}</span><span class="st">"</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cleaned_text <span class="op">=</span> re.sub(pattern, <span class="st">""</span>, address)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cleaned_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Straatweg 42, , dorpstad</code></pre>
 </div>
-</div>
+<p>Output : Straatweg 42, , dorpstad</p>
 <p>The combination of these elements will hence search for 4 numbers followed by 2 capital letters. Given that RegEx is a language in itself, it goes beyond the scope of this document to go into details. Know that it exists and can help with the identification of specific patterns in data. For more information see <a href="https://regexr.com">this website for testing</a> and <a href="https://towardsdatascience.com/introduction-to-regular-expressions-3371c86f7">this website to get you started</a>.</p>
 </section>
 <section id="part-of-speech-tagging" class="level3">
@@ -821,34 +825,34 @@ Figure&nbsp;3: Example of Stemming, where variations are reduced to their stem �
 <p>“Provided is a <span style="color: red;">separation membrane for seawater desalination</span> and a method for manufacturing the same, and more particularly, a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">excellent</span> <span style="color: red;">water permeability and salt rejection</span> and a <span style="color: green;">method for manufacturing</span> the same. If the <span style="color: red;">separation membrane for seawater desalination</span> and the <span style="color: green;">method for manufacturing</span> the same according to the present disclosure are applied, it is possible to provide a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">excellent</span> <span style="color: red;">water permeability and salt rejection</span>. Therefore, it is possible to provide a <span style="color: red;">separation membrane for seawater desalination</span> with <span style="color: blue;">improved performance</span> in comparison to an existing <span style="color: red;">separation membrane for seawater desalination</span>. As a result, <span style="color: red;">water resources</span> may be <span style="color: orange;">widely utilized</span>.”</p>
 <p>Let’s start with the analysis of this text. Start with downloading a language model that we will use for the tagging of the words in the text. The language can be changed according to the language of the text you are trying to analyse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stanza</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the English model for stanza (only need to do this once)</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>stanza.download(<span class="st">'en'</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the model</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> stanza.Pipeline(<span class="st">'en'</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate the text</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text_object)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a simple data structure</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sentence <span class="kw">in</span> doc.sentences: <span class="co"># the data is split into sentences</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> sentence.words: <span class="co"># the sentence is split into words</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        data.append({</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'id'</span>: word.<span class="bu">id</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'text'</span>: word.text,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">'lemma'</span>: word.lemma,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">'pos'</span>: word.pos,</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'head'</span>: word.head,</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">'deprel'</span>: word.deprel</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the data as a DataFrame</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stanza</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the English model for stanza (only need to do this once)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>stanza.download(<span class="st">'en'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the model</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>nlp <span class="op">=</span> stanza.Pipeline(<span class="st">'en'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotate the text</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>doc <span class="op">=</span> nlp(text_object)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a simple data structure</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sentence <span class="kw">in</span> doc.sentences: <span class="co"># the data is split into sentences</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> sentence.words: <span class="co"># the sentence is split into words</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        data.append({</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">'id'</span>: word.<span class="bu">id</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">'text'</span>: word.text,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">'lemma'</span>: word.lemma,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">'pos'</span>: word.pos,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">'head'</span>: word.head,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">'deprel'</span>: word.deprel</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the data as a DataFrame</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="Feature_extraction_images/POS_tagging.png" id="fig-POS_output" class="img-fluid" alt="Output of the Tagging process"> The output of the code is a DataFrame that contains detailed linguistic annotations for each word in the text_object. Each row in the DataFrame represents a word, and each column provides information about that word’s linguistic properties. Here’s a description of the columns:</p>
 <ul>
@@ -866,32 +870,32 @@ Figure&nbsp;3: Example of Stemming, where variations are reduced to their stem �
 <li>(P+D*(A|N)*N)*: This part represents a sequence that includes a preposition (P) followed by zero or more determiners (D) and then followed by the same pattern as described earlier for adjectives and nouns.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk <span class="im">import</span> pos_tag, word_tokenize</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.chunk <span class="im">import</span> RegexpParser</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample text</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> text_object</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize and POS tag the text</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> word_tokenize(text)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="op">=</span> pos_tag(tokens)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a chunk grammar to capture noun phrases</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>grammar <span class="op">=</span> <span class="st">"NP: {&lt;DT&gt;?&lt;JJ&gt;*&lt;NN|NNS&gt;+}"</span>  <span class="co"># Noun Phrase pattern</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a chunk parser</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>Chunk_parser <span class="op">=</span> RegexpParser(grammar)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the tagged words</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> Chunk_parser.parse(pos_tags)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract noun phrases</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>noun_phrases <span class="op">=</span> []</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subtree <span class="kw">in</span> tree.subtrees(<span class="bu">filter</span><span class="op">=</span><span class="kw">lambda</span> t: t.label() <span class="op">==</span> <span class="st">'NP'</span>):</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    noun_phrases.append(<span class="st">" "</span>.join([word <span class="cf">for</span> word, pos <span class="kw">in</span> subtree.leaves()]))</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(noun_phrases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk <span class="im">import</span> pos_tag, word_tokenize</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.chunk <span class="im">import</span> RegexpParser</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample text</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> text_object</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Tokenize and POS tag the text</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>tokens <span class="op">=</span> word_tokenize(text)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>pos_tags <span class="op">=</span> pos_tag(tokens)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a chunk grammar to capture noun phrases</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>grammar <span class="op">=</span> <span class="st">"NP: {&lt;DT&gt;?&lt;JJ&gt;*&lt;NN|NNS&gt;+}"</span>  <span class="co"># Noun Phrase pattern</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a chunk parser</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>Chunk_parser <span class="op">=</span> RegexpParser(grammar)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse the tagged words</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> Chunk_parser.parse(pos_tags)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract noun phrases</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>noun_phrases <span class="op">=</span> []</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subtree <span class="kw">in</span> tree.subtrees(<span class="bu">filter</span><span class="op">=</span><span class="kw">lambda</span> t: t.label() <span class="op">==</span> <span class="st">'NP'</span>):</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    noun_phrases.append(<span class="st">" "</span>.join([word <span class="cf">for</span> word, pos <span class="kw">in</span> subtree.leaves()]))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(noun_phrases)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This gives us: [‘a separation membrane’, ‘seawater desalination’, ‘a method’, ‘a separation membrane’, ‘seawater desalination’, ‘excellent water permeability’, ‘salt rejection’, ‘a method’, ‘the separation membrane’, ‘seawater desalination’, ‘the method’, ‘the present disclosure’, ‘a separation membrane’, ‘seawater desalination’, ‘excellent water permeability’, ‘salt rejection’, ‘a separation membrane’, ‘seawater desalination’, ‘improved performance’, ‘comparison’, ‘separation membrane’, ‘seawater desalination’, ‘a result’, ‘water resources’] as identified terms.</p>
 <p>The results of the extraction show the different patterns containing adjectives, prepositions, determiners and nouns. The terms that are identified in this way are less random than extracting all possible combinations of sequential tokens. Of course the type of pattern can be adjusted in relation to a specific question or specific data.</p>

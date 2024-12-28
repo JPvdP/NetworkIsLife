@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./DAFS_NLP_sentiment.html">Sentiment analysis</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -234,6 +234,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./DAFS_NLP_NER.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Session 3: Named Entity Recognition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_NLP_sentiment.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Sentiment analysis</span></a>
   </div>
 </li>
       </ul>
@@ -416,10 +422,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#installing-packages" id="toc-installing-packages" class="nav-link" data-scroll-target="#installing-packages">1. Installing packages</a></li>
   <li><a href="#we-load-the-packages-required" id="toc-we-load-the-packages-required" class="nav-link" data-scroll-target="#we-load-the-packages-required">2. We load the packages required:</a></li>
   <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">3. Import the data</a></li>
-  <li><a href="#split-the-data" id="toc-split-the-data" class="nav-link" data-scroll-target="#split-the-data">4. Split the data</a></li>
+  <li><a href="#where-to-split-the-data" id="toc-where-to-split-the-data" class="nav-link" data-scroll-target="#where-to-split-the-data">4. Where to split the data</a></li>
+  <li><a href="#analysis-at-the-document-level-polarity" id="toc-analysis-at-the-document-level-polarity" class="nav-link" data-scroll-target="#analysis-at-the-document-level-polarity">5. Analysis at the document level: Polarity</a></li>
   </ul></li>
-  <li><a href="#loading-the-model" id="toc-loading-the-model" class="nav-link" data-scroll-target="#loading-the-model">5. Loading the model</a></li>
-  <li><a href="#x.-troubleshooting" id="toc-x.-troubleshooting" class="nav-link" data-scroll-target="#x.-troubleshooting">x. Troubleshooting:</a></li>
+  <li><a href="#emotion-detection" id="toc-emotion-detection" class="nav-link" data-scroll-target="#emotion-detection">6. Emotion detection</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">6.1 Data preparation</a></li>
+  <li><a href="#setting-up-the-pipeline" id="toc-setting-up-the-pipeline" class="nav-link" data-scroll-target="#setting-up-the-pipeline">6.2 Setting up the pipeline</a></li>
+  <li><a href="#running-the-model" id="toc-running-the-model" class="nav-link" data-scroll-target="#running-the-model">6.3 Running the model</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">6.4 Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -431,56 +441,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="sentiment-analysis" class="level1">
 <h1>Sentiment analysis</h1>
+<p>The final NLP task we will focus on in this course is Sentiment Analysis. Unlike the previous tasks, which emphasized extracting information from text by identifying topics, specific word patterns, or particular token types, sentiment analysis takes a more nuanced approach. It involves understanding and categorizing the sentiment behind written text, aiming to qualify sentences, paragraphs, or entire documents based on the emotions, attitudes, or opinions they convey.</p>
+<p>A common application of sentiment analysis is found in analyzing product reviews. For example, statements like “I hate this product” or “I love this product; I use it every day” clearly express the emotional stance of the reviewer. This makes sentiment analysis a cornerstone of marketing strategies, as it helps companies gauge customer satisfaction and improve their offerings.</p>
+<p>However, the applications of sentiment analysis extend far beyond product reviews. Advanced NLP techniques, such as using BERT models, allow us to uncover a wide spectrum of sentiments and emotions within texts. These models enable the identification of emotions like anger, joy, or love; varying degrees of satisfaction, from highly satisfied to deeply dissatisfied; and even nuanced aspects like the polarity of a statement (e.g., subjective versus objective).</p>
+<p>In the context of innovation sciences, sentiment analysis becomes a powerful tool for addressing questions about the social acceptance of new technologies, policies, or solutions. For example, it can help researchers analyze public opinion on emerging technologies, identify concerns or enthusiasm expressed in public debates, and assess emotional responses to innovation-driven policies. By applying sentiment analysis, we can gain deeper insights into the emotional and attitudinal dimensions of societal reactions to innovation, providing valuable guidance for decision-making and policy design.</p>
 <section id="installing-packages" class="level2">
 <h2 class="anchored" data-anchor-id="installing-packages">1. Installing packages</h2>
-<p>For this tutorial we will need the following packages:</p>
-<ul>
-<li>Transformers</li>
-<li>Pandas</li>
-<li>Tensorflow</li>
-<li>nltk</li>
-</ul>
-<p>As we have learned from the previous sessions, we will install these packages via the terminal. Open up a new terminal and activate the correct anaconda environment. My environment is called “DAFS_NLP_sentiment”, replace this with the name of your environment:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>conda activate DAFS_NLP_sentiment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now you can install the packages, one by one:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pip install nltk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>We won’t have to install anything, we will only use packages we have already installed. The logic of what we’ll do is the same as for NER: we set up a pipeline, and transform the results so we can prepare them for analysis.</p>
 </section>
 <section id="we-load-the-packages-required" class="level2">
 <h2 class="anchored" data-anchor-id="we-load-the-packages-required">2. We load the packages required:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>import nltk</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>from nltk.tokenize import sent_tokenize</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>from transformers import pipeline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We need the pipeline function to perform the task:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>from transformers import pipeline</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We need a function that can split the text into sentences:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>from nltk.tokenize import sent_tokenize</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We need pandas for all the data work:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pandas and nltk you are familiar with by now. You can see that we import the pipeline function and the sent_tokenize function. The pipeline is what allows us to streamline the sentiment analysis task, the sent_tokenize allows us to split a text at the level of the sentence. We will see in a bit why this is important for this task.</p>
 </section>
 <section id="import-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="import-the-data">3. Import the data</h2>
-<p>We need to keep an ID of the article and the text the reason we need an ID is so we can match the documents to other informations sources we are going to detect emotions in the text for each sentence. This means that we need to know where the sentence came from. So we need to keep track of identifiers. In general, it’s best practice to always keep an ID of an observation so that you can match back to intial data.</p>
+<p>For illustrating we will use news articles from Lexis Uni. You can (preferably) load you own data here, otherwise use the data from Blackboard.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load the data</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"/Users/janpieter/Desktop/Projects/Emotions/Emtions_query2_full.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ['ID','Article'] creates a list of columns names that we can then subset:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data_full <span class="ot">=</span> data_full[[<span class="st">'ID'</span>,<span class="st">'Article'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>articles_df <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"Protein_LU_2000_2024.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>articles_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Document Identifiers:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep in mind that we will in fine connect this the results of the sentiment analysis with other metadata so we need to ensure that we keep a document identifier in the datasets while working with them. The identifier will allow us to connect to the metadata. This is also the case if we split the text at the level of the sentence!</p>
+</div>
 </div>
 </section>
-<section id="split-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="split-the-data">4. Split the data</h2>
-<p>At this stage we need to decide how we are going to identify emotion/sentiment in a text. Theoretically this means that we need to consider at what level we expect the emotion to be detectable. If we take a whole paragraph we might get a mix of emtions, but we might need a paragraph to identify subjectivity. This question defines how we need to split the data. In this first step of the tutorial, we focus on emotion, and we consider that can usually be found at the level of the sentence. Many sentences will be void of emotion, a couple will be loaded. Computing at the level of the sentence allows us to decide later how we manage this information.</p>
+<section id="where-to-split-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-split-the-data">4. Where to split the data</h2>
+<p>At this stage we need to decide how we are going to identify emotion/sentiment in a text. Theoretically this means that we need to consider at what level we expect the emotion to be detectable. If we take a whole document we might get a mix of emotions, but we might need the whole document to identify subjectivity. Detailed emotions such as anger and love might be more visible at the sentence level. This is the first decision we need to make. In accordance with this decision we split the data at the relevant level.</p>
+</section>
+<section id="analysis-at-the-document-level-polarity" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-at-the-document-level-polarity">5. Analysis at the document level: Polarity</h2>
+<p>Let’s start with a identifying polarity in texts, this is usually done at the document level, we don’t have to split the text for now. Polarity analysis is basically a classification exercice where we assign either a neutral class or subjective class to a text. A probability score shows us how likely the class is for a given document.</p>
+<p>The setup is similar to NER, with one addition. The models used for Sentiment analysis have a limit in the number of tokens they can handle. This means that we either cut our text down to a specific length, or we add an argument to the pipeline that specifies that it has to do this for us. This addition step is the <strong>tokenizer_kwargs</strong> that you can see in the script below.</p>
+<ul>
+<li><strong>padding</strong>: Ensures that all tokenized inputs have the same length by adding padding tokens to shorter sequences. True means that shorter sequences will be padded to match the length of the longest sequence in the batch or to the max_length (if specified). This is necessary because most deep learning models require inputs of consistent dimensions.</li>
+<li><strong>truncation</strong>: Ensures that input sequences longer than the model’s maximum token length are truncated to fit within the limit. True means that sequences longer than the specified max_length will be cut off. Transformers like BERT have a limit on the number of tokens they can process in a single input (e.g., 512 tokens for BERT). Truncation ensures that overly long inputs do not exceed this limit.</li>
+<li><strong>max_length</strong>: Defines the maximum length an input can have. In this case we set this to 512 since it matches the maximum number of tokens BERT can take.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We start by setting up a basic pipeline. The first argument defines the task we want to do</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># here we want to perform "sentiment-analysis"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>subjective_pipeline <span class="ot">=</span> <span class="fu">pipeline</span>(<span class="st">"sentiment-analysis"</span>, <span class="at">model=</span> <span class="st">"cffl/bert-base-styleclassification-subjective-neutral"</span>, <span class="at">device =</span> <span class="dv">0</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The models that we run have a limitation in the number of tokens they can handle</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we add the following arguments to truncate the text at 512 tokens</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tokenizer_arguments <span class="ot">=</span> {<span class="st">'padding'</span><span class="sc">:</span>True,<span class="st">'truncation'</span><span class="sc">:</span>True,<span class="st">'max_length'</span><span class="sc">:</span><span class="dv">512</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When using the pipeline, we add the <em>tokenizer_arguments</em> to the function to include them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">=</span> <span class="fu">subjective_pipeline</span>(<span class="st">'sample text to predict'</span>,<span class="sc">**</span>tokenizer_kwargs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is the basic setup of the model. We will use this pipeline on each of the documents in our corpus. We will use a loop to do this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we create an empty dataframe that will receivt the final outputs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sub_obj <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(<span class="at">columns=</span>[<span class="st">"label"</span>, <span class="st">"score"</span>, <span class="st">"ID"</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(num_docs)<span class="sc">:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we run the task on article i:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">=</span> <span class="fu">subjective_pipeline</span>(articles_df.loc[i,<span class="st">'Article'</span>], <span class="sc">**</span>tokenizer_arguments)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for this we transform the result into a df</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(tmp)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># then we add the ID</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    tmp[<span class="st">'ID'</span>] <span class="ot">=</span> articles_df.iloc[i,<span class="dv">0</span>]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and now we add the result for this document to the final dataframe</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    sub_obj <span class="ot">=</span> <span class="fu">pd.concat</span>([sub_obj, tmp], <span class="at">ignore_index=</span>True)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>sub_obj</strong> contains the output of the model for each of the documents: <img src="Sentiment_images/DAFS_sentiment_obj_output.png" class="img-fluid"> The ID gives us the document identifier, the label tells us how the article is perceived and the score is the confidence. The confidence scores are not always easy to interpret nor is it easy to decide on a cutoff. Values vary with data sets, datatypes, and themes. So let’s visualize the score to get a better idea of their distribution.</p>
+<p><img src="Sentiment_images/DAFS_sentiment_obj_score_distribution.png" class="img-fluid"></p>
+<p>Notice that there is no confidence score below 0.5. This is the case because we have a binary classifier here, so anything below 0.5 is considered to be part of the opposite class. We do see that the classifier gives much higher scores to neutral documents than it does to subjective documents. It’s easier to class something as neutral, subjectivity is less clear-cut. It’s always good practice to read a couple of the lower confidence documents to assess whether or not they are correctly classified. If not, you can subset the set to a higher score.</p>
+<p><img src="Sentiment_images/DAFS_sentiment_obj_sub_vs_neutral.png" class="img-fluid"></p>
+<p>Let’s push the analysis a bit with some other data. We know which newspaper published each article. Let’s see the balance of neutral/subjective per outlet:</p>
+<p><img src="Sentiment_images/DAFS_sentiment_obj_per_outlet.png" class="img-fluid"> The first outlet has many neutral and many subjective, there is a balance between the two, but still quite some subjective articles. Pivotal Sources has no neutral articles, all of the 12 articles are subjective. The results show that most of the leading outlets on the topic have a balance towards subjectivity.</p>
+<p>This makes me curious what the differences are between the documents, are there different words in the two types of documents? Let’s make a wordcloud for each set:</p>
+<div class="layout">
+<div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Sentiment_images/DAFS_sentiment_neutral_wordcloud.png" class="img-fluid figure-img"></p>
+<figcaption>Neutral Documents</figcaption>
+</figure>
+</div>
+</div>
+<div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Sentiment_images/DAFS_sentiment_subjective_wordcloud.png" class="img-fluid figure-img"></p>
+<figcaption>Subjective Documents</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The neutral documents contain different types of articles, we see information from company websites, press releases, and word related to urls and websites. We could argue that many of these articles should be removed from the dataset since they do not necessarily contribute to the types of analysis we want to run. Another choice to make!</p>
+<p>Just for fun, let’s have a look at the words per outlet (i’ll let you be the judge of what’s happening here and which issues need to be adressed).</p>
+<p><img src="Sentiment_images/DAFS_sentiment_wordcloud_per_outlet.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="emotion-detection" class="level1">
+<h1>6. Emotion detection</h1>
+<p>Now we go more into the details of the text by analysing emotions. This is also a classification task, but at the level of the sentence. Manu models have been trained on reviews or tweets which are short texts. Since larger texts often contain many sentences that are neutral, the emotion is difficult to extract. We therefore search at the level of the sentence, and then decide how we aggregate this to the level of the document. For example is a text has 100 sentences and 1 is angry we can decide that 1/100 is not much. We can also compute the average number of angry sentences per document in the corpus and extract those that are above average. Basically this approach gives us flexibility.</p>
+</section>
+<section id="data-preparation" class="level1">
+<h1>6.1 Data preparation</h1>
 <p>We start with downloading a model that will help us splitting the data at the level of the sentence</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To avoid issues, we make sure the data is in a dataframe format. We want a dataframe because the functions we will use to extract emotion and combine the results :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We now want to split the data at the sentence level, but we want to keep the ID of the document. We therefore define a function that takes a df as an input, splits each article into sentences, and add the id of the document to the beginning of the document.</p>
+<p>Then we want to ensure that we</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">split_sentences</span>(row)<span class="sc">:</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we split up the article, the sent_tokenize functions tokenizes at the level of the sentence</span></span>
@@ -491,8 +573,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We want to apply this function to each row of the dataframe we use the following code to do this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sentences_df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>([sentence <span class="cf">for</span> _, row <span class="cf">in</span> <span class="fu">df.iterrows</span>() <span class="cf">for</span> sentence <span class="cf">in</span> <span class="fu">split_sentences</span>(row)])</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we export this dataframe for safety. It might take a while to run this script. If something goes wrong we can simply load this file, instead of starting from scratch</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sentences_df.to_csv</span>(<span class="st">'sentences_df.csv'</span>, <span class="at">index =</span> False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then we remove any sentences that are too short:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to remove some sentences that are too short</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">=</span> sentences_df[sentences_df[<span class="st">'sentence'</span>]<span class="fu">.str.split</span>(<span class="st">" "</span>)<span class="fu">.apply</span>(len) <span class="sc">&gt;=</span> <span class="dv">3</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># and we reset the index of the dataframe so we can loop over it</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">=</span> <span class="fu">df_filtered.reset_index</span>()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># we export this dataframe for safety. It might take a while to run this script. If something goes wrong we can simply load this file, instead of starting from scratch</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">df_filtered.to_csv</span>(<span class="st">'sentences_df.csv'</span>, <span class="at">index =</span> False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Explanation of the code:</p>
 <ul>
@@ -503,50 +590,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li></li>
 </ul>
 </section>
+<section id="setting-up-the-pipeline" class="level1">
+<h1>6.2 Setting up the pipeline</h1>
+<p>Once we have the dataframe we want with one sentence per row we can set up the pipeline. This is identical to the previous one, we only swap out the model for one with more precise emotions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sentiment_pipeline <span class="ot">=</span> <span class="fu">pipeline</span>(<span class="st">"sentiment-analysis"</span>, <span class="at">model=</span> <span class="st">"joeddav/distilbert-base-uncased-go-emotions-student"</span>, <span class="at">device =</span> <span class="dv">0</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>tokenizer_arguments <span class="ot">=</span> {<span class="st">'padding'</span><span class="sc">:</span>True,<span class="st">'truncation'</span><span class="sc">:</span>True,<span class="st">'max_length'</span><span class="sc">:</span><span class="dv">512</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With the pipeline set up we use the same procedure as before to detect emotion in each sentence:</p>
 </section>
-<section id="loading-the-model" class="level1">
-<h1>5. Loading the model</h1>
-<p>We went on the hugging face website to find a model that fitted well with our task. As you saw many models exist, so try some out to see which performs better for your text. The first step is to copy the link to the model from the website and save this in a variable. We could add the name directly into the pipeline, but since we will try different models this approach is easier:</p>
+<section id="running-the-model" class="level1">
+<h1>6.3 Running the model</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sentiment_model_dutch <span class="ot">=</span> <span class="st">"antalvdb/robbert-v2-dutch-base-finetuned-emotion"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sentiment_model_english <span class="ot">=</span> <span class="st">"SamLowe/roberta-base-go_emotions"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We set up an empty dataframe to which we can add the results</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>emotions <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(<span class="at">columns=</span>[<span class="st">"label"</span>, <span class="st">"score"</span>, <span class="st">"ID"</span>])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we loop over all rows of the dataframe, we need to know how many rows there are</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df_filtered.shape[<span class="dv">0</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># and now we loop. </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for testing you can adjust the value in range to have this run faster</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">38439</span>)<span class="sc">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">=</span> <span class="fu">sentiment_pipeline</span>(df_filtered.loc[i,<span class="st">'sentence'</span>],<span class="sc">**</span>tokenizer_kwargs)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we add the identifier of the document</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for this we transform the result into a df</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    tmp <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(tmp)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># then we add the ID of the document</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    tmp[<span class="st">'ID'</span>] <span class="ot">=</span> df_filtered.iloc[i,<span class="dv">1</span>]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we use i as an identifier for the sentence. This is important in case we want to</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># combine NER with Emotions</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    tmp[<span class="st">'Sentence_ID'</span>] <span class="ot">=</span> i</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and now we add the result for this document to the final dataframe</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    emotions <span class="ot">=</span> <span class="fu">pd.concat</span>([emotions, tmp], <span class="at">ignore_index=</span>True)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># export for safety</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">emotions.to_csv</span>(<span class="st">"emotions_results_persentence.csv"</span>, <span class="at">index=</span>False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can now use a very handy function that does multiple tasks for us in one go. Normally we would have to tokenize etc. before we can perform sentiment analysis. The <strong>pipeline</strong> function does all the tasks for us. All we have to do is specify the model that we want to use, the task we want to perform with the model and some other optional parameters. Since we want to do sentiment analysis and downloaded a model trained to this end, we can specify the task as “sentiment-analysis”, the model is the one we downloaded. The pipeline than looks like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sentiment_pipeline <span class="op">=</span> pipeline(<span class="st">"sentiment-analysis"</span>, model<span class="op">=</span>sentiment_model_english, device <span class="op">=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The final option “device = 0”, can be used to mobilize the GPU of the laptop (if you have one) to speed up computation.</p>
+<p>The result is a dataframe of the following format. Notice that we have an ID for each sentence and an ID for each document.</p>
+<p><img src="Sentiment_images/DAFS_sentiment_output_emotions.png" class="img-fluid"></p>
 </section>
-<section id="x.-troubleshooting" class="level1">
-<h1>x. Troubleshooting:</h1>
-<p>If you get the following error while running the sentiment analysis:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>RuntimeError<span class="sc">:</span> The expanded size of the <span class="fu">tensor</span> (<span class="dv">589</span>) must match the existing <span class="fu">size</span> (<span class="dv">514</span>) at non<span class="sc">-</span>singleton dimension <span class="fl">1.</span>  Target sizes<span class="sc">:</span> [<span class="dv">1</span>, <span class="dv">589</span>].  Tensor sizes<span class="sc">:</span> [<span class="dv">1</span>, <span class="dv">514</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="analysis" class="level1">
+<h1>6.4 Analysis</h1>
+<p>Once we have the results of the model, we check the distribution of the labels. This is an important step to check both that the model fits your purpose but also that it performs well.</p>
+<p><img src="Sentiment_images/DAFS_sentiment_emotion_distribution.png" class="img-fluid"></p>
+<p>The large majority of the sentences are classified as neutral, which is good! Having neutral sentences in larger texts allows us to normalize the emotionally loaded sentences. We can for example divide the number of <strong>approval</strong> sentences by the number of <strong>neutral</strong> sentences to remove effects related to document length. Let’s put that into practice. Let’s aim to provide an emotion tag to a document based on the labels of the sentences composing it. This means that we need a dataframe that has one document per row, and each column corresponds to an emotion. The value provides the number of sentences tagged with this emotion in the document:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Sentiment_images/DAFS_sentiment_emotion_per_doc_df.png" class="img-fluid figure-img"></p>
+<figcaption>Table 1: Dataframe with the frequency of emotions per document</figcaption>
+</figure>
 </div>
-<p>This means that the text (once tokenized) has a length of 589 while the maximum length that the model can handle is 514. In other words: your text is too long. So we need to cut it to length. This means counting the tokens for each of the sentences and then cutting down to size:</p>
+<p>Here, the ID is the document identifier. Document 1 has one sentence that was tagged as <strong>approval</strong>. Document 4 has 9 sentences tagged as approval.</p>
+<p>To create this dataframe we need to regroup our initial output by document ID and by label:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> transformers <span class="im">import</span> AutoTokenizer</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We import the tokenizer from the same model as the one we will be using</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>tokenizer <span class="op">=</span> AutoTokenizer.from_pretrained(<span class="st">"antalvdb/robbert-v2-dutch-base-finetuned-emotion"</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We check the maximum length the model can take:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>max_length <span class="op">=</span> tokenizer.model_max_length  <span class="co"># Usually 512</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># We add a column with the token count to our dataframe</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># we add the number of tokens to this column</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>df_sentences[<span class="st">'token_count'</span>] <span class="op">=</span> df_sentences[<span class="st">'sentence'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="bu">len</span>(tokenizer.tokenize(x)))</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out sentences exceeding the maximum length</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_filtered[df_filtered[<span class="st">'token_count'</span>] <span class="op">&lt;=</span> max_length]</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the 'token_count' column if no longer needed</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_filtered.drop(columns<span class="op">=</span>[<span class="st">'token_count'</span>])</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># we save the df, to avoid issues in case we mess something up</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>sentences_df.to_csv(<span class="st">'sentences_df.csv'</span>, index <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># then we proceed with the rest of the script as before but with the shorter dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>emotion_counts_per_document <span class="ot">=</span> <span class="fu">emotions.groupby</span>([<span class="st">'ID'</span>, <span class="st">'label'</span>])<span class="fu">.size</span>()<span class="fu">.unstack</span>(<span class="at">fill_value=</span><span class="dv">0</span>)<span class="fu">.reset_index</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This give the dataframe in Table 1. Now we need to divide all the columns by the number of neutral sentences. Note that the screenshot in Table 1 only shows part of the dataframe, in reality it has 27 columns, the last one has the number of neutral sentences.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="ot">=</span> <span class="fl">1e-6</span>  <span class="co"># Small value to prevent division by zero</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we divide every score by the number of neutral sentences</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>emotion_counts_per_document.iloc[<span class="sc">:</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">27</span>] <span class="ot">=</span> emotion_counts_per_document.iloc[<span class="sc">:</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">27</span>]<span class="fu">.div</span>(emotion_counts_per_document.iloc[<span class="sc">:</span>, <span class="dv">20</span>] <span class="sc">+</span>epsilon, <span class="at">axis=</span><span class="dv">0</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To assigne an emotion to a document we can take the highest fraction</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>emotion_counts_per_document[<span class="st">'max_score'</span>] <span class="ot">=</span> emotion_counts_per_document.iloc[<span class="sc">:</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>]<span class="fu">.max</span>(<span class="at">axis=</span><span class="dv">1</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># we add the emotion that links to the score</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>emotion_counts_per_document[<span class="st">'max_emotion'</span>] <span class="ot">=</span> emotion_counts_per_document.iloc[<span class="sc">:</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>]<span class="fu">.idxmax</span>(<span class="at">axis=</span><span class="dv">1</span>)  <span class="co"># Get the column (emotion) with the maximum score</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># export for safe keeping</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">emotion_counts_per_document.to_csv</span>(<span class="st">"Emotion_score_per_doc.csv"</span>, <span class="at">index=</span>False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution !
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the script above uses the index of the columns. If you use a different model you might get more (or less) emotion tags and therefore a longer or shorter dataframe. It’s up to you to change the values to make this work!</p>
+</div>
+</div>
+<p>This should result in a dataframe that looks like this: <img src="Sentiment_images/DAFS_sentiment_emotion_per_doc_df_norm.png" class="img-fluid" alt="Table 1: Dataframe with the frequency of emotions per document"> The values are now fractions of emotions normalised by the number of neutral sentences. Using this we can count the number of documents classified with specific emotions:</p>
+<p><img src="Sentiment_images/DAFS_sentiment_emotion_distribution_doc_norm.png" class="img-fluid"></p>
+<p>The results show that a large portion of the articles are classified as <strong>approval</strong>. For our context this shows that the content of the articles is largely approving of steps related to the protein transition. The second emotion is <strong>amusement</strong>, showing that in the end there are still some elements of novelty to new protein sources that evoke this emotion.</p>
+<p><img src="Sentiment_images/DAFS_sentiment_per_outlet.png" class="img-fluid"></p>
+<p>We can also compare profiles by creating radar plots. You can make these more readable by removing emotions from the radar, adjust what suits your analysis!</p>
+<p><img src="Sentiment_images/DAFS_sentiment_per_outlet_spider.png" class="img-fluid"></p>
 
 
 </section>
