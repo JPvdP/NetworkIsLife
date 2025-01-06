@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – topic_modelling_run_bertopic</title>
+<title>NetworkIsLife – dafs_lexisuniimport</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Topic_modelling_bertopic.html">Topic Modelling Workshop</a></li><li class="breadcrumb-item"><a href="./Topic_modelling_run_bertopic.html">Run Bertopic</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -407,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Run Bertopic</span></a>
   </div>
 </li>
@@ -423,19 +423,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#run-bertopic" id="toc-run-bertopic" class="nav-link active" data-scroll-target="#run-bertopic">Run Bertopic</a>
+  <li><a href="#exporting-and-importing-data-from-lexis-uni" id="toc-exporting-and-importing-data-from-lexis-uni" class="nav-link active" data-scroll-target="#exporting-and-importing-data-from-lexis-uni">Exporting and importing data from Lexis Uni</a>
   <ul class="collapse">
-  <li><a href="#run-a-classic-bertopic-model" id="toc-run-a-classic-bertopic-model" class="nav-link" data-scroll-target="#run-a-classic-bertopic-model">Run a classic BERTopic Model:</a>
-  <ul class="collapse">
-  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation">Visualisation</a></li>
-  <li><a href="#topics-over-time" id="toc-topics-over-time" class="nav-link" data-scroll-target="#topics-over-time">Topics over time</a></li>
-  </ul></li>
-  <li><a href="#proba-per-document" id="toc-proba-per-document" class="nav-link" data-scroll-target="#proba-per-document">Proba per document</a></li>
-  <li><a href="#hierchical-topic-models" id="toc-hierchical-topic-models" class="nav-link" data-scroll-target="#hierchical-topic-models">Hierchical Topic Models</a>
-  <ul class="collapse">
-  <li><a href="#dendrogram-of-the-topics" id="toc-dendrogram-of-the-topics" class="nav-link" data-scroll-target="#dendrogram-of-the-topics">Dendrogram of the topics</a></li>
-  </ul></li>
-  <li><a href="#additional-data-prep-lemmatization" id="toc-additional-data-prep-lemmatization" class="nav-link" data-scroll-target="#additional-data-prep-lemmatization">Additional data prep (lemmatization)</a></li>
+  <li><a href="#export-lexisuni-data" id="toc-export-lexisuni-data" class="nav-link" data-scroll-target="#export-lexisuni-data">Export LexisUni data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -446,126 +436,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="run-bertopic" class="level1">
-<h1>Run Bertopic</h1>
-<section id="run-a-classic-bertopic-model" class="level2">
-<h2 class="anchored" data-anchor-id="run-a-classic-bertopic-model">Run a classic BERTopic Model:</h2>
+<section id="exporting-and-importing-data-from-lexis-uni" class="level1">
+<h1>Exporting and importing data from Lexis Uni</h1>
+<section id="export-lexisuni-data" class="level2">
+<h2 class="anchored" data-anchor-id="export-lexisuni-data">Export LexisUni data</h2>
+<p>Even though exporting data from LexisUni is quite straightforward, if we want to export in a format that can be directly read by R and used for textmining, we need to tick the right boxes. We will go through those steps now:</p>
+<p>Start with building a query in the advances query section. Make sure you check the AND and OR operators. <img src="LN_Tutorial_1.png" class="img-fluid"></p>
+<p>Below the text elements you can adapt the data range if required.</p>
+<p><img src="LN_Tutorial_2.png" class="img-fluid"></p>
+<p>Then click on search to launch the search process. Once the results are shown, make sure to click the switch to remove Group Duplicates (this should be on “On”). At this point adjust any other filter. Be particulary cautious with the language. Many language models are trained for one language so remove any document not in that language if you use a mono-lingual model.</p>
+<p><img src="LN_Tutorial_3.png" class="img-fluid"> Once you’re happy with the dataset, go to the “download button”: <img src="LN_Tutorial_4.png" class="img-fluid"> A window will appear, this is were you need to be sure to click the same boxes as in the following screenshots. Ensure that the format is Word (docx) and that the documents are grouped into one.</p>
+<p><img src="LN_Tutorial_5.png" class="img-fluid"></p>
+<p>The second screen should look like this: (these should be the basic options):</p>
+<p><img src="LN_Tutorial_6.png" class="img-fluid"></p>
+<p>You can then click on “download”.</p>
+<p>Do this as many times are required to download all the articles (100 per 100). Creating an account with your uu email will make this process slightly more streamlined and faster.</p>
+<p>Put all the files into one folder. We will then use the <strong>LexisNexisTools</strong> package to import and format this data to make it directly usable.</p>
+<p>First we need to search for all the documents, using the <em>list.files()</em> function we create a list of all the <em>.docx</em> documents in the “LN” folder. Note that the LN folder is created by me to store the files, replace LN with the name of the folder in which you store the files. If the files are stored directly at the root of the current WD, use ““.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>topics, probs <span class="ot">=</span> <span class="fu">topic_model.fit_transform</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>my_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">".docx"</span>, <span class="at">path =</span> <span class="st">"LN"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="visualisation" class="level3">
-<h3 class="anchored" data-anchor-id="visualisation">Visualisation</h3>
-<p>Create a plot with the documents projected in a two dimensional space:</p>
+<p>At this stage the data is not yet imported, we merely created a list with paths to the files. We will now load those files into R with the <strong>lnt_read()</strong> function. This will load the data into a specific object with a specific format that we cannot use directly. We therefore transform this object with the <strong>lnt_convent()</strong> function. We specify “to =”data.frame” so that the result is a dataframe that we can use.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_documents</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(LexisNexisTools)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">lnt_read</span>(my_files) <span class="co">#Object of class 'LNT output'</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>LN_dataframe <span class="ot">=</span> <span class="fu">lnt_convert</span>(dat, <span class="at">to =</span> <span class="st">"data.frame"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/visu_1_bert_no_hier.png" class="img-fluid"></p>
-<p>In this space, each dot is a document. The color of the document represents its cluster/topic. The distance between the documents should be interpreted in terms of a semantic proximity between the documents.</p>
-<p>Beyond this visualisation we usually want to know which words constitute these topics. We can do this by creating a barplot of the words:</p>
+<p>We now have the data loaded in R and ready for use. We will perform two extra actions before we continue to ensure that we don’t run into trouble later on. We start with the removal of identical articles (even though the switch is on, there are still some left…) and we remove the articles that are too short for the analysis. We use the <strong>nchar()</strong> function to count the number of characters in each article and remove those with less than 200 characters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_barchart</span>(<span class="at">top_n_topics =</span> <span class="dv">10</span>, <span class="at">n_words =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>LN_dataframe <span class="ot">=</span> <span class="fu">unique</span>(LN_dataframe)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>LN_dataframe<span class="sc">$</span>length <span class="ot">=</span> <span class="fu">nchar</span>(LN_dataframe<span class="sc">$</span>Article)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>LN_dataframe <span class="ot">=</span> <span class="fu">subset</span>(LN_dataframe, LN_dataframe<span class="sc">$</span>length <span class="sc">&gt;=</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="imgs/Topic_mod_workshop_images/Topics_monogram.png" class="img-fluid"></p>
-<p>The numbers under the terms, represent the contribution of the term to the topic (c-TF-IDF)</p>
-<p>We can run the model again with bi-grams for example:</p>
-<p><img src="imgs/Topic_mod_workshop_images/Topics_bigram.png" class="img-fluid"></p>
-<p>We can export the information per topic using the following function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>topic_info <span class="ot">=</span> <span class="fu">topic_model.get_topic_info</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>topic_info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/topic_info_output.png" class="img-fluid"></p>
-<p>Bertopic creates a -1 topic that will contain terms considered very generic. Using the probabilities option in the mode we can assign topic to the publications classified in topic -1.</p>
-<p>Based on the results of these topics we can go back to the parameters and adjust the model to improve the output. Once we are happy with the results, we can export the topics and connect them with other variables. Bertopic exports the results in the same order as the input data, topics can therefore be combined directly with the intial dataframe that we have been working with.</p>
-</section>
-<section id="topics-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="topics-over-time">Topics over time</h3>
-<p>We can check the evolution of topics over time by adding information on the year of publication of the documents. For this we first need a dataframe with the years:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>timestamps <span class="ot">=</span> data_full[<span class="st">'Year'</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>timestamps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We then run a topic model, supplying this time information:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>topics_dynamic <span class="ot">=</span> <span class="fu">topic_model.topics_over_time</span>(data, timestamps, <span class="at">nr_bins =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/dynamics.png" class="img-fluid"></p>
-</section>
-</section>
-<section id="proba-per-document" class="level2">
-<h2 class="anchored" data-anchor-id="proba-per-document">Proba per document</h2>
-<p>Just as for an LDA, we can get the probability for each to document to be linked to a topic.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Topic_distribution <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(probs, <span class="at">columns =</span> [f<span class="st">"Topic_{i}]"</span> <span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(probs.shape[<span class="dv">1</span>])])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Topic_distribution[<span class="st">"Document"</span>] <span class="ot">=</span> data</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Topic_distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/probs_per_docs.png" class="img-fluid"></p>
-</section>
-<section id="hierchical-topic-models" class="level2">
-<h2 class="anchored" data-anchor-id="hierchical-topic-models">Hierchical Topic Models</h2>
-<p>BERTopic allows for a specific type of topic model which takes a hierachy of topics into account. This allows us to visually check what level of aggregation suits us best.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_hier_topic_model <span class="ot">=</span> <span class="fu">topic_model.hierarchical_topics</span>(data)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_hier_topic_model.visualize_hierarchical_documents</span>(data, my_hier_topic_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/hier_topics.png" class="img-fluid"></p>
-<section id="dendrogram-of-the-topics" class="level3">
-<h3 class="anchored" data-anchor-id="dendrogram-of-the-topics">Dendrogram of the topics</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">topic_model.visualize_hierarchy</span>(<span class="at">hierarchical_topics=</span>hierarchical_topics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="imgs/Topic_mod_workshop_images/hier_topics2.png" class="img-fluid"></p>
-</section>
-</section>
-<section id="additional-data-prep-lemmatization" class="level2">
-<h2 class="anchored" data-anchor-id="additional-data-prep-lemmatization">Additional data prep (lemmatization)</h2>
-<p>We need some additional help from other packages to use lemmatization:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>import nltk</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>from nltk.stem import WordNetLemmatizer</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>from nltk.corpus import wordnet</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Download required resources</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'wordnet'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'averaged_perceptron_tagger'</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">nltk.download</span>(<span class="st">'punkt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then we need a function to assign the part-of-speech tags to the text</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to map NLTK position tags to WordNet position tags</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>def <span class="fu">get_wordnet_pos</span>(word)<span class="sc">:</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    tag <span class="ot">=</span> <span class="fu">nltk.pos_tag</span>([word])[<span class="dv">0</span>][<span class="dv">1</span>][<span class="dv">0</span>]<span class="fu">.upper</span>()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    tag_dict <span class="ot">=</span> {</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span><span class="sc">:</span> wordnet.ADJ,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"N"</span><span class="sc">:</span> wordnet.NOUN,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"V"</span><span class="sc">:</span> wordnet.VERB,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"R"</span><span class="sc">:</span> wordnet.ADV</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    return <span class="fu">tag_dict.get</span>(tag, wordnet.NOUN)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>lemmatizer <span class="ot">=</span> <span class="fu">WordNetLemmatizer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>And we need a function that goes over the words to lemmatize them.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">tokenize_text_bert</span>(tmp)<span class="sc">:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tokenize the text into sentences</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    sentences <span class="ot">=</span> <span class="fu">nltk.sent_tokenize</span>(tmp)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lemmatize each word in each sentence with its correct pos tag</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    lemmatized_sentences <span class="ot">=</span> []</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sentence <span class="cf">in</span> sentences<span class="sc">:</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        words <span class="ot">=</span> <span class="fu">nltk.word_tokenize</span>(sentence)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        lemmatized_words <span class="ot">=</span> [<span class="fu">lemmatizer.lemmatize</span>(w, <span class="fu">get_wordnet_pos</span>(w)) <span class="cf">for</span> w <span class="cf">in</span> words]</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        lemmatized_sentence <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_words)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lemmatized_sentences.append</span>(lemmatized_sentence)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Join the lemmatized sentences</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    reconstructed_text <span class="ot">=</span> <span class="st">' '</span><span class="fu">.join</span>(lemmatized_sentences)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    return reconstructed_text</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>W now apply the function to the text, we can then us this data as an input for the embeddings.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>(<span class="fu">map</span>(tokenize_text_bert, data[<span class="st">'Abstract'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The dataset is now ready for use.</p>
 
 
 </section>
