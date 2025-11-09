@@ -458,8 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">0. Overview</a>
-  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">0. Overview</a></li>
   <li><a href="#loading-and-installing-libaries" id="toc-loading-and-installing-libaries" class="nav-link" data-scroll-target="#loading-and-installing-libaries">1. Loading and installing libaries</a></li>
   <li><a href="#create-a-variable" id="toc-create-a-variable" class="nav-link" data-scroll-target="#create-a-variable">2. Create a variable</a></li>
   <li><a href="#text-values-and-variables" id="toc-text-values-and-variables" class="nav-link" data-scroll-target="#text-values-and-variables">3. Text, values and variables</a></li>
@@ -468,12 +467,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#using-functions" id="toc-using-functions" class="nav-link" data-scroll-target="#using-functions">6. Using functions</a>
   <ul class="collapse">
   <li><a href="#using-existing-functions" id="toc-using-existing-functions" class="nav-link" data-scroll-target="#using-existing-functions">6.1 Using existing functions</a></li>
-  </ul></li>
-  <li><a href="#exercices-reading-scripts" id="toc-exercices-reading-scripts" class="nav-link" data-scroll-target="#exercices-reading-scripts">7. Exercices: Reading scripts</a>
+  <li><a href="#working-with-your-own-functions" id="toc-working-with-your-own-functions" class="nav-link" data-scroll-target="#working-with-your-own-functions">6.2 Working with your own functions</a></li>
+  <li><a href="#exercices-reading-scripts" id="toc-exercices-reading-scripts" class="nav-link" data-scroll-target="#exercices-reading-scripts">7. Exercices: Reading scripts</a></li>
+  <li><a href="#exercice-1--" id="toc-exercice-1--" class="nav-link" data-scroll-target="#exercice-1--">7.1 Exercice 1 -</a>
   <ul class="collapse">
-  <li><a href="#exercice-1---python--" id="toc-exercice-1---python--" class="nav-link" data-scroll-target="#exercice-1---python--">7.1 Exercice 1 - Python -</a></li>
-  <li><a href="#exercice-2---python--" id="toc-exercice-2---python--" class="nav-link" data-scroll-target="#exercice-2---python--">7.2 Exercice 2 - Python -</a></li>
-  <li><a href="#exercice-3---python--" id="toc-exercice-3---python--" class="nav-link" data-scroll-target="#exercice-3---python--">7.3 Exercice 3 - Python -</a></li>
+  <li><a href="#exercice-2" id="toc-exercice-2" class="nav-link" data-scroll-target="#exercice-2">7.2 Exercice 2</a></li>
+  <li><a href="#exercice-3" id="toc-exercice-3" class="nav-link" data-scroll-target="#exercice-3">7.3 Exercice 3</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -506,89 +505,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For this first session, the goal for you is to learn the following operations:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 45%">
 <col style="width: 20%">
-<col style="width: 19%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th>R</th>
 <th>Python</th>
-<th>Example R</th>
 <th>Example Python</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>Install a package</td>
+<td><input type="checkbox"></td>
+<td>pip install pandas</td>
+</tr>
+<tr class="even">
 <td>Load a package</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>library(dplyr)</td>
 <td>import pandas as pd</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Create a variable</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>value &lt;- 42</td>
 <td>value = 42</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Difference between text, values, and variables</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>plop &lt;- “42” plop &lt;- 42 plop &lt;- fourtytwo</td>
 <td>plop = “42” plop = 42 plop = fourtytwo</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Paste</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>paste(“the value is”, plop)</td>
-<td>f”The value is {plop}</td>
+<td>f”The value is {plop}”</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Print</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>print(paste(“the value is”, plop))</td>
 <td>print(f”The value is {plop}“)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Basic arithmetics</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
 <td>42 + 48</td>
-<td>42 + 48</td>
-</tr>
-<tr class="odd">
-<td>Use a function</td>
-<td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>max(c(1,2,3,4,68))</td>
-<td>max([1,2,3,4,68])</td>
 </tr>
 <tr class="even">
-<td>Use a function from a script</td>
+<td>Use a function</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td></td>
-<td></td>
+<td>max([1, 2, 3, 4, 68])</td>
 </tr>
 <tr class="odd">
+<td>Use a function from a script</td>
+<td><input type="checkbox"></td>
+<td></td>
+</tr>
+<tr class="even">
 <td>Use logic operators</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
-<td>a != b</td>
 <td>a != b</td>
 </tr>
 </tbody>
 </table>
-<section id="loading-and-installing-libaries" class="level2">
-<h2 class="anchored" data-anchor-id="loading-and-installing-libaries">1. Loading and installing libaries</h2>
+</section>
+<section id="loading-and-installing-libaries" class="level1">
+<h1>1. Loading and installing libaries</h1>
 <p>R and Python come with basic, build-in functions. This means that when you launch R/Python you can use these functions directly. This is the case for the <strong>print</strong> function for example.</p>
 <div class="columns">
 <div class="column" style="width:100%;">
@@ -611,7 +594,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We only have to install packages once. Once they are installed we only need to thell R/Python that we want to use the functions from these packages. we do this in the following way:</p>
+<p>We only have to install packages once. Once they are installed we only need to tell Python that we want to use the functions from these packages. We do this in the following way:</p>
 <div class="columns">
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
@@ -620,13 +603,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>You only have to load the packages once when you start working. Reload is only necessary if you have quit R/Python. Usually when you get the following error messages, this means that you did not load the package and therefore R/python cannot find the function you are trying to load:</p>
+<p>It is common practice to give short names to specific packages. When using functions from packages we need to refer to the package they come from: pandas.function(). With long package names this becomes a bit annoying, so we give the package a short reference name. For pandas we usually use “pd” so we can write pd.function(). We set the name when importing the package in the following way:</p>
 <div class="columns">
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Dataframe()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">NameError</span>: name <span class="st">'pd'</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>You only have to load the packages once when you start working. Reload is only necessary if you have quit Python. Usually when you get the following error messages, this means that you did not load the package and therefore R/python cannot find the function you are trying to load:</p>
+<div class="columns">
+<div class="column" style="width:100%;">
+<p><img src="Pythonlogo.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.Dataframe()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">NameError</span>: name <span class="st">'pd'</span> <span class="kw">is</span> <span class="kw">not</span> defined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -643,9 +635,9 @@ Installing packages in Jupyter
 <p>In Jupyter, installing a package can be done as described above. However, the cell needs to be empty and only contain the pip command. If you want to add comments, or install multiple packages, use: !pip install pandas.</p>
 <p>The ! tells jupyter that you are running a system command not python code. You can then use</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installing packages</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pandas</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install numpy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installing packages</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pandas</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install numpy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -667,8 +659,8 @@ Exercises part 1:
 </div>
 </div>
 </section>
-<section id="create-a-variable" class="level2">
-<h2 class="anchored" data-anchor-id="create-a-variable">2. Create a variable</h2>
+<section id="create-a-variable" class="level1">
+<h1>2. Create a variable</h1>
 <p>A variable is like a container or a labeled storage box that holds data or information. In programming, we use variables to store values—such as numbers, text, or more complex data—so that we can easily refer to and manipulate them throughout our code.</p>
 <p>Why do we create variables?</p>
 <ul>
@@ -680,15 +672,15 @@ Exercises part 1:
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># without variables</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="dv">30</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With variables</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">20</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> a <span class="sc">+</span> b</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># without variables</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="dv">30</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># With variables</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> a <span class="sc">+</span> b</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -697,14 +689,14 @@ Exercises part 1:
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In python we first need to load a package to use a function to create a matrix</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We load numpy</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we create a matrix called "small_matrix"</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This matrix is created by the "zeros" function from the np (numpy) package</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>small_matrix <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(small_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In python we first need to load a package to use a function to create a matrix</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We load numpy</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we create a matrix called "small_matrix"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># This matrix is created by the "zeros" function from the np (numpy) package</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>small_matrix <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(small_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -713,7 +705,7 @@ Exercises part 1:
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Small_matrix <span class="op">=</span> Small_matrix <span class="op">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Small_matrix <span class="op">=</span> Small_matrix <span class="op">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -723,7 +715,7 @@ Exercises part 1:
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Small_matrix_3 <span class="op">=</span> Small_matrix <span class="op">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Small_matrix_3 <span class="op">=</span> Small_matrix <span class="op">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -740,8 +732,8 @@ Important:
 <div class="callout-body-container callout-body">
 <p>What is the difference between a <strong>variable</strong> and an <strong>object</strong>? Why are <code>small_matrix</code> and <code>Small_matrix_3</code> considered both a variable and an object?</p>
 <hr>
-<section id="explanation" class="level4">
-<h4 class="anchored" data-anchor-id="explanation">Explanation:</h4>
+<section id="explanation" class="level3">
+<h3 class="anchored" data-anchor-id="explanation">Explanation:</h3>
 <ul>
 <li><p>A <strong>variable</strong> is a name used to store data. It acts like a label or container for a value. For example, when we write <code>small_matrix = np.zeros((3, 3))</code>, <code>small_matrix</code> is a variable that holds the matrix.</p></li>
 <li><p>An <strong>object</strong> is an instance of a class in Python. In this case, the value stored in <code>small_matrix</code> is an object of the <code>numpy.ndarray</code> class. This object has properties (like its shape) and methods (like matrix operations) that you can use.</p></li>
@@ -771,27 +763,27 @@ Assign the number <code>10</code> to a variable named <code>my_number</code>. Wh
 </div>
 </div>
 </section>
-<section id="text-values-and-variables" class="level2">
-<h2 class="anchored" data-anchor-id="text-values-and-variables">3. Text, values and variables</h2>
+<section id="text-values-and-variables" class="level1">
+<h1>3. Text, values and variables</h1>
 <p>A <strong>variable</strong> is like a labeled container that holds information (data). You give this container a name, and you can store anything inside it—like numbers, words, or even more complex data. An important distinction to make is the difference between numerical values and textual values. When we create a variable and a assign a number, this means we can later use this for mathematical operations. This needs to be differentiated from assigning the textual value “42”.</p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><img src="Rlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning a number</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>variable_numeric <span class="ot">&lt;-</span> <span class="dv">42</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning text</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning a number</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>variable_numeric <span class="ot">&lt;-</span> <span class="dv">42</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning text</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:10%;">
 <!-- empty column to create gap -->
 </div><div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning a number</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>variable_numeric <span class="op">=</span> <span class="dv">42</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning text</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning a number</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>variable_numeric <span class="op">=</span> <span class="dv">42</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># assigning text</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -800,18 +792,18 @@ Assign the number <code>10</code> to a variable named <code>my_number</code>. Wh
 <div class="column" style="width:45%;">
 <p><img src="Rlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>variable_text <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in variable_text * 2 : non-numeric argument to binary operator</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>variable_text <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in variable_text * 2 : non-numeric argument to binary operator</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:10%;">
 <!-- empty column to create gap -->
 </div><div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">'4242'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">'4242'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -821,22 +813,22 @@ Assign the number <code>10</code> to a variable named <code>my_number</code>. Wh
 <div class="column" style="width:45%;">
 <p><img src="Rlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is numeric:</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(variable_text)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is text:</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(variable_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="ot">&lt;-</span> <span class="st">"42"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is numeric:</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>(variable_text)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is text:</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(variable_text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:10%;">
 <!-- empty column to create gap -->
 </div><div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is numeric:</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(variable_text, <span class="bu">float</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is text:</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(variable_text, <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>variable_text <span class="op">=</span> <span class="st">"42"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is numeric:</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(variable_text, <span class="bu">float</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># check if the variable is text:</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(variable_text, <span class="bu">str</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -845,7 +837,7 @@ Assign the number <code>10</code> to a variable named <code>my_number</code>. Wh
 <div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -917,8 +909,8 @@ Exercises part 3:
 </div>
 </div>
 </section>
-<section id="logic-operators" class="level2">
-<h2 class="anchored" data-anchor-id="logic-operators">4. Logic operators</h2>
+<section id="logic-operators" class="level1">
+<h1>4. Logic operators</h1>
 <p>Logical operators are commonly used in data analysis, especially when sub-setting datasets. For example we want to extract documents that are from the year 2000 which have the term “sustainability” and the term “climate change”. In this scenario we would need to check in the data that the year is 2000 (Year <strong>==</strong> 2000), and that both terms are in the data (climate change <strong>and</strong> sustainability). Combining these operators is important, and so is understanding how they work.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -937,22 +929,22 @@ Pay Attention
 <div class="column" style="width:100%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Equal (==)</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> y</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># And </span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">and</span> y <span class="op">==</span> <span class="dv">8</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Or</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">or</span> y <span class="op">==</span> <span class="dv">8</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Not</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> x</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="st">"plop"</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">and</span> (y <span class="op">==</span> <span class="dv">8</span> <span class="kw">or</span> z <span class="op">==</span> <span class="st">"plop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Equal (==)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> y</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># And </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">and</span> y <span class="op">==</span> <span class="dv">8</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Or</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">or</span> y <span class="op">==</span> <span class="dv">8</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Not</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="kw">not</span> x</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> <span class="st">"plop"</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">==</span> <span class="dv">4</span> <span class="kw">and</span> (y <span class="op">==</span> <span class="dv">8</span> <span class="kw">or</span> z <span class="op">==</span> <span class="st">"plop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -984,19 +976,19 @@ Exercises part 4:
 </div>
 </div>
 </section>
-<section id="the-print-and-paste-functions" class="level2">
-<h2 class="anchored" data-anchor-id="the-print-and-paste-functions">5. The print and paste functions</h2>
+<section id="the-print-and-paste-functions" class="level1">
+<h1>5. The print and paste functions</h1>
 <p>The <strong>print</strong> function is crucial in programming because it allows developers to display information to the user or themselves during the development process. It provides immediate feedback, helping programmers debug code by checking the values of variables, verifying the flow of execution, or ensuring that certain conditions are met. Without <strong>print</strong>, it would be challenging to observe how the program behaves internally, making it a vital tool for both learning and real-world software development.</p>
 <p>A very basic example of this is printng out the value of a variable in the context of what it represents. Imagine that we are working on a project in which we start with some raw data, that we clean, step by step before we can start using it for a regression. In this process we remove missing values, outdates values, we might removes some regions etc. To make sure we don’t remove to much data, or even just to be sure we don’t make a mistake, we can decide to print out some information at different steps. The <strong>print</strong> function allows us to print out this type of information:</p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print a numeric value</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(plop)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print text, remember to use "" for text</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Step 3 is done"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print a numeric value</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(plop)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print text, remember to use "" for text</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Step 3 is done"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1005,16 +997,16 @@ Exercises part 4:
 <div class="column" style="width:45%;">
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a random value between 0 and 5 using random.uniform()</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> random.uniform(<span class="dv">0</span>, <span class="dv">5</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the sentence "The number generated was x" using an f-string (formatted string)</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to print a combination of text and variables, put an "f" before the string</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># put the name of the variable between {}:</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"The number generated was  </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a random value between 0 and 5 using random.uniform()</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> random.uniform(<span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the sentence "The number generated was x" using an f-string (formatted string)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to print a combination of text and variables, put an "f" before the string</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># put the name of the variable between {}:</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> <span class="ss">f"The number generated was  </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1047,8 +1039,8 @@ Exercises: Using <code>paste()</code> and <code>print()</code>
 </div>
 </div>
 </section>
-<section id="using-functions" class="level2">
-<h2 class="anchored" data-anchor-id="using-functions">6. Using functions</h2>
+<section id="using-functions" class="level1">
+<h1>6. Using functions</h1>
 <p>R and python can be quite different when it comes to using functions. We will discuss them separately.</p>
 <section id="using-existing-functions" class="level3">
 <h3 class="anchored" data-anchor-id="using-existing-functions">6.1 Using existing functions</h3>
@@ -1056,17 +1048,17 @@ Exercises: Using <code>paste()</code> and <code>print()</code>
 <p>You’re calling a function, and the value between parentheses is an argument being passed to the function. For example, print(“Hello”) calls the print() function with the argument “Hello”.</p>
 <p>In Python, dot notation (.) is used to access attributes or methods (functions) of objects. For example, numpy is a package that provides arrays and various mathematical functions, and you access specific functionality within numpy using dot notation. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a NumPy array</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the shape of the array using dot notation</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)  <span class="co"># Outputs the shape (dimensions) of the array</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a NumPy array</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the shape of the array using dot notation</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data.shape)  <span class="co"># Outputs the shape (dimensions) of the array</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this case, data is a NumPy array object, and data.shape is an attribute (a property) that tells us the dimensions of the array. The dot (.) is used to access this attribute from the data object.</p>
 <p>Similarly, if you call a method of an object (a function that belongs to the object), you also use dot notation with parentheses:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a method to reshape the array</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data_reshaped <span class="op">=</span> data.reshape(<span class="dv">2</span>, <span class="dv">2</span>)  <span class="co"># Calls the reshape method to change the array dimensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a method to reshape the array</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data_reshaped <span class="op">=</span> data.reshape(<span class="dv">2</span>, <span class="dv">2</span>)  <span class="co"># Calls the reshape method to change the array dimensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>np.array(): This is a function from the numpy module that creates an array.</li>
@@ -1090,75 +1082,74 @@ Important:
 </ul>
 </div>
 </div>
-<section id="working-with-your-own-functions" class="level4">
-<h4 class="anchored" data-anchor-id="working-with-your-own-functions">6.2 Working with your own functions</h4>
+</section>
+<section id="working-with-your-own-functions" class="level3">
+<h3 class="anchored" data-anchor-id="working-with-your-own-functions">6.2 Working with your own functions</h3>
 <p>We do not expect you to make your own functions. We only want you to be able to identify costum functions in a script.</p>
 <p>In Python, functions are defined using the <code>def</code> keyword, followed by the function name, parentheses <code>()</code>, and a colon <code>:</code>. Inside the parentheses, you can specify any input parameters (arguments) that the function will take. The code that the function executes is indented, and you can use the <code>return</code> statement to send back a result:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function_name(parameters):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code block (indented)</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function_name(parameters):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Code block (indented)</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For example, we could make a function that returns a greeting when supplied with a name. In other words, when you enter a name, the function will return “Hi, name”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name):</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hi, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"Hi, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We create a function called “greet” which takes one argument which is the name. It then returns the text “Hi, name”.</p>
 <p>If you see a function in a script, all you have to do is run the code once. This will load the function, just like the import function. You are then ready to use the function.</p>
 </section>
-</section>
-</section>
 <section id="exercices-reading-scripts" class="level2">
 <h2 class="anchored" data-anchor-id="exercices-reading-scripts">7. Exercices: Reading scripts</h2>
 <p>These are questions that you might encounter in the remindo exam.</p>
-<section id="exercice-1---python--" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-1---python--">7.1 Exercice 1 - Python -</h3>
+</section>
+<section id="exercice-1--" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1--">7.1 Exercice 1 -</h2>
 <p>You are provided with a script, your aim is to explain the script. For each line of code, comment what the line of code does and then explain what the function does and returns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>distance_by_car <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Distance traveled by car in km</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>distance_by_bus <span class="op">=</span> <span class="dv">30</span>  <span class="co"># Distance traveled by bus in km</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>distance_by_bike <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Distance traveled by bike in km</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>emission_car <span class="op">=</span> <span class="dv">120</span>  <span class="co"># CO₂ per km for a car</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>emission_bus <span class="op">=</span> <span class="dv">68</span>   <span class="co"># CO₂ per km for a bus</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>emission_bike <span class="op">=</span> <span class="dv">0</span>   <span class="co"># CO₂ per km for a bike</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>total_emission_car <span class="op">=</span> distance_by_car <span class="op">*</span> emission_car</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>total_emission_bus <span class="op">=</span> distance_by_bus <span class="op">*</span> emission_bus</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>total_emission_bike <span class="op">=</span> distance_by_bike <span class="op">*</span> emission_bike</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>total_emission <span class="op">=</span> total_emission_car <span class="op">+</span> total_emission_bus <span class="op">+</span> total_emission_bike</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The total CO₂ emissions for the trip are </span><span class="sc">{</span>total_emission<span class="sc">}</span><span class="ss"> grams."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>distance_by_car <span class="op">=</span> <span class="dv">50</span>  <span class="co"># Distance traveled by car in km</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>distance_by_bus <span class="op">=</span> <span class="dv">30</span>  <span class="co"># Distance traveled by bus in km</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>distance_by_bike <span class="op">=</span> <span class="dv">10</span>  <span class="co"># Distance traveled by bike in km</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>emission_car <span class="op">=</span> <span class="dv">120</span>  <span class="co"># CO₂ per km for a car</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>emission_bus <span class="op">=</span> <span class="dv">68</span>   <span class="co"># CO₂ per km for a bus</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>emission_bike <span class="op">=</span> <span class="dv">0</span>   <span class="co"># CO₂ per km for a bike</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>total_emission_car <span class="op">=</span> distance_by_car <span class="op">*</span> emission_car</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>total_emission_bus <span class="op">=</span> distance_by_bus <span class="op">*</span> emission_bus</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>total_emission_bike <span class="op">=</span> distance_by_bike <span class="op">*</span> emission_bike</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>total_emission <span class="op">=</span> total_emission_car <span class="op">+</span> total_emission_bus <span class="op">+</span> total_emission_bike</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The total CO₂ emissions for the trip are </span><span class="sc">{</span>total_emission<span class="sc">}</span><span class="ss"> grams."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="exercice-2---python--" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-2---python--">7.2 Exercice 2 - Python -</h3>
+<section id="exercice-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercice-2">7.2 Exercice 2</h3>
 <p>You are provided with a script, your aim is to explain the script. For each line of code, comment what the line of code does and then explain what the function does and returns:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_energy_savings(incandescent_wattage, led_wattage, hours_per_day, number_of_bulbs):</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    daily_energy_incandescent <span class="op">=</span> incandescent_wattage <span class="op">*</span> hours_per_day <span class="op">*</span> number_of_bulbs</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    daily_energy_led <span class="op">=</span> led_wattage <span class="op">*</span> hours_per_day <span class="op">*</span> number_of_bulbs</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    daily_energy_savings <span class="op">=</span> daily_energy_incandescent <span class="op">-</span> daily_energy_led</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    annual_energy_savings <span class="op">=</span> (daily_energy_savings <span class="op">*</span> <span class="dv">365</span>) <span class="op">/</span> <span class="dv">1000</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> annual_energy_savings</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>incandescent_wattage <span class="op">=</span> <span class="dv">60</span>  </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>led_wattage <span class="op">=</span> <span class="dv">10</span>           </span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>hours_per_day <span class="op">=</span> <span class="dv">5</span>          </span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>number_of_bulbs <span class="op">=</span> <span class="dv">10</span>      </span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>annual_savings <span class="op">=</span> calculate_energy_savings(incandescent_wattage, led_wattage, hours_per_day, number_of_bulbs)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The household saves </span><span class="sc">{</span>annual_savings<span class="sc">}</span><span class="ss"> kilowatt-hours annually by switching to LED bulbs."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_energy_savings(incandescent_wattage, led_wattage, hours_per_day, number_of_bulbs):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    daily_energy_incandescent <span class="op">=</span> incandescent_wattage <span class="op">*</span> hours_per_day <span class="op">*</span> number_of_bulbs</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    daily_energy_led <span class="op">=</span> led_wattage <span class="op">*</span> hours_per_day <span class="op">*</span> number_of_bulbs</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    daily_energy_savings <span class="op">=</span> daily_energy_incandescent <span class="op">-</span> daily_energy_led</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    annual_energy_savings <span class="op">=</span> (daily_energy_savings <span class="op">*</span> <span class="dv">365</span>) <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> annual_energy_savings</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>incandescent_wattage <span class="op">=</span> <span class="dv">60</span>  </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>led_wattage <span class="op">=</span> <span class="dv">10</span>           </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>hours_per_day <span class="op">=</span> <span class="dv">5</span>          </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>number_of_bulbs <span class="op">=</span> <span class="dv">10</span>      </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>annual_savings <span class="op">=</span> calculate_energy_savings(incandescent_wattage, led_wattage, hours_per_day, number_of_bulbs)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The household saves </span><span class="sc">{</span>annual_savings<span class="sc">}</span><span class="ss"> kilowatt-hours annually by switching to LED bulbs."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercice-3---python--" class="level3">
-<h3 class="anchored" data-anchor-id="exercice-3---python--">7.3 Exercice 3 - Python -</h3>
+<section id="exercice-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercice-3">7.3 Exercice 3</h3>
 <p>You are provided with a script, your aim is to explain the script. For each line of code, comment what the line of code does and then explain what the function does and returns:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_water_usage(daily_usage, target_usage):</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    meets_target <span class="op">=</span> daily_usage <span class="op">&lt;=</span> target_usage</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"It is </span><span class="sc">{</span>meets_target<span class="sc">}</span><span class="ss"> that the household's daily water usage meets the sustainability target of </span><span class="sc">{</span>target_usage<span class="sc">}</span><span class="ss"> liters."</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>daily_usage <span class="op">=</span> <span class="dv">150</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>target_usage <span class="op">=</span> <span class="dv">120</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>evaluate_water_usage(daily_usage, target_usage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_water_usage(daily_usage, target_usage):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    meets_target <span class="op">=</span> daily_usage <span class="op">&lt;=</span> target_usage</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"It is </span><span class="sc">{</span>meets_target<span class="sc">}</span><span class="ss"> that the household's daily water usage meets the sustainability target of </span><span class="sc">{</span>target_usage<span class="sc">}</span><span class="ss"> liters."</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>daily_usage <span class="op">=</span> <span class="dv">150</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>target_usage <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>evaluate_water_usage(daily_usage, target_usage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
