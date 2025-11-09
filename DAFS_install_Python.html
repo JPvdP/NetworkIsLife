@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – assignment_text_mining</title>
+<title>NetworkIsLife – Installing all the software</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,9 +67,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -111,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">NLP module Assignment</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">Installing all the software</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -177,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_install_Python.html" class="sidebar-item-text sidebar-link">
+  <a href="./DAFS_install_Python.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Installing all the software</span></a>
   </div>
 </li>
@@ -212,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">NLP module Assignment</span></a>
   </div>
 </li>
@@ -427,16 +424,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#nlp-module-assignment" id="toc-nlp-module-assignment" class="nav-link active" data-scroll-target="#nlp-module-assignment">NLP module Assignment</a>
+  <li><a href="#lets-install-python" id="toc-lets-install-python" class="nav-link active" data-scroll-target="#lets-install-python">1. Let’s install python</a>
   <ul class="collapse">
-  <li><a href="#types-of-analysis" id="toc-types-of-analysis" class="nav-link" data-scroll-target="#types-of-analysis">Types of analysis</a>
-  <ul class="collapse">
-  <li><a href="#technology-focused-analysis" id="toc-technology-focused-analysis" class="nav-link" data-scroll-target="#technology-focused-analysis">Technology-focused Analysis</a></li>
-  <li><a href="#bibliographic-analysis" id="toc-bibliographic-analysis" class="nav-link" data-scroll-target="#bibliographic-analysis">Bibliographic analysis</a></li>
-  <li><a href="#your-own-idea" id="toc-your-own-idea" class="nav-link" data-scroll-target="#your-own-idea">Your own idea</a></li>
-  </ul></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#rubric-for-this-assignment" id="toc-rubric-for-this-assignment" class="nav-link" data-scroll-target="#rubric-for-this-assignment">Rubric for this assignment</a></li>
+  <li><a href="#creating-a-virtual-environment-with-anaconda" id="toc-creating-a-virtual-environment-with-anaconda" class="nav-link" data-scroll-target="#creating-a-virtual-environment-with-anaconda">1.1 Creating a virtual environment with anaconda</a></li>
+  <li><a href="#setting-up-jupyter" id="toc-setting-up-jupyter" class="nav-link" data-scroll-target="#setting-up-jupyter">1.2 Setting up Jupyter</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -444,190 +435,66 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">Installing all the software</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Installing all the software</h1>
+</div>
 
 
 
-<section id="nlp-module-assignment" class="level1">
-<h1>NLP module Assignment</h1>
-<p>For the NLP module you are tasked with the preparation of a short, data-driven report which shall not exceed 2000 words. The assignment is part <strong>individual</strong>, part in <strong>groups</strong>.</p>
-<p>The approach of this assignment is exploratory, this means that you are not required to use a specific theory or theoretical framework. The aim is to explore a topic in a datadriven way, given different data sources. You will however have to specify and explain what you expect to find in specific data sources, why you used them and how you expect to find this information.</p>
-<ul>
-<li>In groups of two:
-<ul>
-<li>you will define a topic on which to do your assignment</li>
-<li>prepare the data sets, run different NLP tasks together</li>
-<li>write the introduction, usage analysis and methodology sections together</li>
-<li>write the analysis of the results</li>
-</ul></li>
-<li>Individually:
-<ul>
-<li>write the conclusion and discussion</li>
-<li>Identify potential ethical issues associated with the dataset or the NLP techniques used. Discuss how these issues could impact the analysis and suggest ways to mitigate them.</li>
-</ul></li>
-</ul>
-<p>The use of Large Language Models (ChatGPT, LLama, Bard) to help with programming is allowed. The main focus is on the quality of the analysis of the results. You are not allowed to use data sets you have entirely generated yourself. You are of course allowed to compute additional data on an existing data set with real data.</p>
-<p>You will use at least two different data sets on a specific topic, and analyse the data. The richer the database, the more value can be extracted. To make things a bit easier, I describe three types of analyses with mandatory data. This ensure that you have enough data to work with. If you have your own idea, this is always an option under the conditions described below and after consultation with me (mainly to ensure feasibility). All types of analysis are graded on the same rubric.</p>
-<ul>
-<li>Your assignment will contain:
-<ul>
-<li>At least two different textual data sources</li>
-<li>A topic model for each of the data sources. With a description of the process that led you to the final topics (steps in data cleaning, and method for the identification of the number of topics)</li>
-<li>A Named Entity Recognition section in which you extract different elements from news articles. You will connect the elements identified to word, topics or other variables in the database in a coherent manner</li>
-<li>Sentiment analysis on the news articles. The sentiment scores can be connected to the other variables identified in both the NER exercise and the topic modelling exercise.</li>
-</ul></li>
-</ul>
-<p>In the table below, some analyses types are presented from which you can chose one. You are free to come up with your own design, but be aware of the time restrictions for this assignment. Using a proposed analysis type ensures data availability and feasibility.</p>
-<section id="types-of-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-analysis">Types of analysis</h2>
-<section id="technology-focused-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="technology-focused-analysis">Technology-focused Analysis</h3>
-<p>In this type of analysis you will focus on a technology that you choose yourself. As a mandatory datasource you will use patent data. Patents are chosen because they contain a lot of valuable data you can analyse (who is doing research on this technology, where are they from, who are they collaborating with, compare companies or regions, quality assessment etc.).</p>
-<p>To complement this data you will at least complement the data with articles from the Lexis Uni database. The main aim of this analysis will be to study a specific technology and show how it is perceived in society.</p>
-<ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li>Lexis Uni can be accesses via the UU website</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-</ul></li>
-</ul>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="lets-install-python" class="level1">
+<h1>1. Let’s install python</h1>
+<section id="creating-a-virtual-environment-with-anaconda" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-virtual-environment-with-anaconda">1.1 Creating a virtual environment with anaconda</h2>
+<p>Imagine that you have a toolbox where you keep all your tools. Each tool has a specific purpose: a hammer for nails, a screwdriver for screws, etc. Now, think of your computer as a large workshop where you can undertake various projects (like building software or analyzing data). For each project, you might need a different set of tools. Some projects might require a hammer and a saw, while others might need a screwdriver and a wrench.</p>
+<p>In the world of programming, especially when working with Python, the “tools” are the various libraries and packages that you use to write your programs (like NumPy for mathematical operations, Pandas for data manipulation, etc.). Just like in a real workshop, using the right tools can make your work much easier.</p>
+<p>However, there’s a catch. Sometimes, different projects require different versions of the same tool. Maybe one project needs a hammer with a wooden handle, but another requires one with a fiberglass handle. If you tried to use the wrong version, it might not work as well or could even mess up your project.</p>
+<p>This is where Anaconda environments come in. An Anaconda environment is like having a separate, smaller toolbox for each project. You can put exactly the tools (libraries and packages) you need for a project into its toolbox, including the right versions. This way, when you work on that project, you know you have all the right tools handy, and they won’t interfere with the tools needed for other projects. It keeps everything organized and ensures that your projects run smoothly without conflicts between different versions of your tools.</p>
+<p>In technical terms, an Anaconda environment is a virtual space on your computer where you can install specific versions of libraries and packages needed for a particular project. This isolation prevents conflicts and makes it easier to manage dependencies, ensuring that you can reproduce your work on another machine without issues.</p>
+<p>Let’s create an anaconda environment for the DAFS course. Start by downloading anaconda from this website:</p>
+<p>https://www.anaconda.com/download/success</p>
+<p>Once it’s done downloading install and launch the program. You should be greeted by a window that looks like this:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_1.png" class="img-fluid"></p>
+<p>Now we start by creating the environment. Click on “Environments” on the left and then on the “create” button on the bottom:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_2.png" class="img-fluid"></p>
+<p>In this window, all the existing environments are listed. As you can see in this image I already have a multitude of environments. Each environment was created for specific projects or tools I wanted to test without risking creating conflicts with other projects. On the right there is a list with packages that allows you to check what is installed in each environment.</p>
+<p>Once you click on the “create” button, you will be prompted to provide some information. First you will have to fill in a name, this is the name that will appear in the list. Second you will need to pick a version of python to use. Any version between 3.9.19 and 3.12.2 should work (I have not tested the previous versions). We will proceed with version 3.12.2.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_3.png" class="img-fluid"></p>
+<p>After a while, the window should load and a green play button should appear next to the enviroment you just created. For the purpose of this tutorial I’ve called the environment “test”, it now has the play button next to it meaning it’s now the active environment. The packages on the right are the packages installed by default in the environment.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_4.png" class="img-fluid"></p>
+<p>Click on the home button on the top left to go back to the home screen:</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_5.png" class="img-fluid"></p>
+<p>You now have the option to install different interfaces to interact with python. For the purpose of this tutorial we will use jupyter. Click the install button below the logo to install.</p>
+<p><img src="imgs/bertopic/Anaconda_bertopic_6.png" class="img-fluid"></p>
+<p>After a while the window should reload and you should now have a “launch” button below jupyter. Jupyter allows you to program in python in your internet browser of choice. This will work even if you’re not connected to the internet.</p>
 </section>
-<section id="bibliographic-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="bibliographic-analysis">Bibliographic analysis</h3>
-<p>This type of analysis allows you to tackle questions that are less technology oriented. Think about questions related to social justice, emotions and climate transition, governance issues,… The idea is to perform a bibliographic analysis on a topic of your choice and connect this with a societal view with the help of articles from lexis uni.</p>
-<p>You can identify who is doing research on this topic, which institutions they work for, what the main topics are, how they evolve over time. This analysis is then connected to an analysis from news sources so analyse the perception of society on the topic chosen.</p>
-<ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.gu.se/en/quality-government">Quality of government</a><br>
-</li>
-<li><a href="https://academic-freedom-index.net">Academic Freedom</a></li>
-<li><a href="https://www.worldvaluessurvey.org/wvs.jsp">Values Survey</a></li>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-<li>Overton (via the UU library)</li>
-<li>Lexis Nexis (via the UU library)</li>
-</ul></li>
-</ul>
-</section>
-<section id="your-own-idea" class="level3">
-<h3 class="anchored" data-anchor-id="your-own-idea">Your own idea</h3>
-<p>If none of the above options suit you, and you have a good idea you would like to pursue, go for it! Read the rubric for the course carefully and ensure that the data you have chosen connects to the rubric. In any case, contact me to explain your idea.</p>
-<ul>
-<li>To avoid issues with the assignment ensure yourself of the following:
-<ul>
-<li>You can find two complementary data sets on your topic.</li>
-<li>The topic relates to sustainability.</li>
-<li>There are enough observations to perform an analysis on. Try to have at least 40 observations in each data set. And ensure that the text of the data is long enough.</li>
-<li>Check the validity of the data you have and check that you have the rights to use the data.</li>
-</ul></li>
-</ul>
-<p>There is a lot of data available on the internet, pay attention to the rights on this data and where it comes from.</p>
-<ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.gu.se/en/quality-government">Quality of government</a></li>
-<li><a href="https://academic-freedom-index.net">Academic Freedom</a></li>
-<li><a href="https://www.worldvaluessurvey.org/wvs.jsp">Values Survey</a></li>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-<li>Overton (via the UU library)</li>
-<li>Lexis Uni (via the UU library)</li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="schedule" class="level2">
-<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p>To keep up with the rapid pace of this course, you can follow the gantt below to check your progress. In each tutorial you will learn new skills that allow you to dig deeper into your data. If you keep up with this schedule you should be able to work on your data in each tutorial and extract new information from your data.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">gantt
-    title Proposed gantt for the assignment
-    dateFormat DD-MM-YYYY
-    axisFormat %d-%m-%y
-    section Assignment
-        Assignment :a1, 02-12-2024, 50d
-    section Steps
-    Tutorial 1- Term Extraction : milestone, m1, 02-12-2024, 0d
-        Topic &amp; data 1 :a2, 02-12-2024, 14d
-    Tutorial 2- Topic Modelling : milestone, m2, 09-12-2024, 0d
-        Usage Analysis:a3, after a2, 7d
-    Tutorial 3- NER : milestone, m3, 16-12-2024, 0d
-        Second Data set:a4, after a3, 7d
-    Tutorial 4- Sentiment : milestone, m4, 06-01-2025, 0d
-        Finalize analysis:a5, after a4, 7d
-    Tutorial 5- LLM : milestone, m5, 15-01-2025, 0d
-        Finish writing:a6, after a5, 14d
-        
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="rubric-for-this-assignment" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-this-assignment">Rubric for this assignment</h2>
-<p>This assignment will be graded on different dimensions. The detailed rubric can be found on blackboard.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Dimension</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Quality of writing</td>
-<td>Spelling, grammar, structure</td>
-</tr>
-<tr class="even">
-<td>Data Choice</td>
-<td>How coherent is the data to the choice of topic</td>
-</tr>
-<tr class="odd">
-<td>Usage Analysis</td>
-<td>Data description: where does it come, which source, any biases?</td>
-</tr>
-<tr class="even">
-<td>Data Preparation</td>
-<td>Which steps did you take to prepare the data for your analysis (lemma, stemming, regex, dico)</td>
-</tr>
-<tr class="odd">
-<td>Data Analysis</td>
-<td>Which indicators and methods did you use to analyse your data. How coherent is the analysis</td>
-</tr>
-<tr class="even">
-<td>Transparency in thresholds</td>
-<td>Explain choices made in the analysis (thresholds, number of topics, filtering of documents)</td>
-</tr>
-<tr class="odd">
-<td>Conclusion-Discussion</td>
-<td>Quality of conclusions pulled from the data.</td>
-</tr>
-<tr class="even">
-<td>Code</td>
-<td>Results from the document should be easy to find the script. The steps should be well documented.</td>
-</tr>
-</tbody>
-</table>
+<section id="setting-up-jupyter" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-jupyter">1.2 Setting up Jupyter</h2>
+<p>In anaconda you will have the choice between different code editors. For the purpose of this course we will use Jupyter. Jupyter is a code editor that opens in your favorite internet browser (it does not require an internet connection to function). To start, click on the “Launch” button below Jupyter as shown below:</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_1.png" class="img-fluid"></p>
+<p>Your navigator should appear with the following page open. On this page we are going to create a new notebook. A notebook is equivalent to a word document, but for programming. You will be able to save all your code in this file.</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_2.png" class="img-fluid"></p>
+<p>Once you have clicked on “Notebook” you will be prompted to select a Kernel. Different versions of python exist and different applications may require different versions of python. For our purpose 3 works. For other packages you might want to use this might be different. Always check the version required for the packages you are going to use.</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_3.png" class="img-fluid"></p>
+<p>Once you’ve selected this (or if you have already done this in the past) you will have the option to create directly a new notebook with this kernel:</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_4.png" class="img-fluid"></p>
+<p>This will open your first notebook. The first action we will take is change the name of the notebook. This can be done by clicking on “untitled1” next to the Jupyter logo on the top left of the page as shown below. You will then be prompted to provide a new name. Let’s give it the name “Bertopic_Tutorial”.</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_5.png" class="img-fluid"></p>
+<p>Some basics on the structure. Jupyter functions with blocks that you can execute one by one. This makes trouble shooting easier. The numbers next to the blocks show the order in which you ran the blocks. If there is no number the block has not yet been run, if there is a star (*) then the block is currently running. Blocks can be easily added and removed as you develop your code. Note that adding comments can be done by starting a line with a #.</p>
+<p><img src="imgs/bertopic/Jupyter_bertopic_6.png" class="img-fluid"></p>
+<p>We should now be good to go!</p>
 
 
 </section>

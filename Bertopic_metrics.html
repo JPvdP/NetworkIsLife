@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="">
+<meta name="author" content="J. van der Pol">
+<meta name="dcterms.date" content="2025-09-11">
 
-<title>NetworkIsLife – assignment_text_mining</title>
+<title>NetworkIsLife – Metrics for Evaluating BERTopic Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,10 +68,36 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -111,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">NLP module Assignment</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Metrics for Evaluating BERTopic Models</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -212,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">NLP module Assignment</span></a>
   </div>
 </li>
@@ -426,208 +453,160 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#nlp-module-assignment" id="toc-nlp-module-assignment" class="nav-link active" data-scroll-target="#nlp-module-assignment">NLP module Assignment</a>
   <ul class="collapse">
-  <li><a href="#types-of-analysis" id="toc-types-of-analysis" class="nav-link" data-scroll-target="#types-of-analysis">Types of analysis</a>
+  <li><a href="#bertopic-evaluation-metrics" id="toc-bertopic-evaluation-metrics" class="nav-link active" data-scroll-target="#bertopic-evaluation-metrics">Bertopic evaluation metrics</a>
   <ul class="collapse">
-  <li><a href="#technology-focused-analysis" id="toc-technology-focused-analysis" class="nav-link" data-scroll-target="#technology-focused-analysis">Technology-focused Analysis</a></li>
-  <li><a href="#bibliographic-analysis" id="toc-bibliographic-analysis" class="nav-link" data-scroll-target="#bibliographic-analysis">Bibliographic analysis</a></li>
-  <li><a href="#your-own-idea" id="toc-your-own-idea" class="nav-link" data-scroll-target="#your-own-idea">Your own idea</a></li>
-  </ul></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#rubric-for-this-assignment" id="toc-rubric-for-this-assignment" class="nav-link" data-scroll-target="#rubric-for-this-assignment">Rubric for this assignment</a></li>
+  <li><a href="#topic-coherence" id="toc-topic-coherence" class="nav-link" data-scroll-target="#topic-coherence">Topic Coherence</a></li>
+  <li><a href="#silhouette-score-clustering-quality" id="toc-silhouette-score-clustering-quality" class="nav-link" data-scroll-target="#silhouette-score-clustering-quality">Silhouette Score (clustering quality)</a></li>
+  <li><a href="#topic-diversity-unique-top-words-ratio" id="toc-topic-diversity-unique-top-words-ratio" class="nav-link" data-scroll-target="#topic-diversity-unique-top-words-ratio">Topic Diversity (unique top-words ratio)</a></li>
+  <li><a href="#cluster-size-statistics" id="toc-cluster-size-statistics" class="nav-link" data-scroll-target="#cluster-size-statistics">Cluster Size Statistics</a></li>
+  <li><a href="#topic-entropy-normalized" id="toc-topic-entropy-normalized" class="nav-link" data-scroll-target="#topic-entropy-normalized">Topic Entropy (normalized)</a></li>
+  <li><a href="#practical-reading-guide" id="toc-practical-reading-guide" class="nav-link" data-scroll-target="#practical-reading-guide">Practical Reading Guide</a></li>
+  <li><a href="#typical-ranges-rule-of-thumb" id="toc-typical-ranges-rule-of-thumb" class="nav-link" data-scroll-target="#typical-ranges-rule-of-thumb">Typical Ranges (rule-of-thumb)</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Bertopic_metrics.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="Bertopic_metrics.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Metrics for Evaluating BERTopic Models</h1>
+</div>
 
 
 
-<section id="nlp-module-assignment" class="level1">
-<h1>NLP module Assignment</h1>
-<p>For the NLP module you are tasked with the preparation of a short, data-driven report which shall not exceed 2000 words. The assignment is part <strong>individual</strong>, part in <strong>groups</strong>.</p>
-<p>The approach of this assignment is exploratory, this means that you are not required to use a specific theory or theoretical framework. The aim is to explore a topic in a datadriven way, given different data sources. You will however have to specify and explain what you expect to find in specific data sources, why you used them and how you expect to find this information.</p>
-<ul>
-<li>In groups of two:
-<ul>
-<li>you will define a topic on which to do your assignment</li>
-<li>prepare the data sets, run different NLP tasks together</li>
-<li>write the introduction, usage analysis and methodology sections together</li>
-<li>write the analysis of the results</li>
-</ul></li>
-<li>Individually:
-<ul>
-<li>write the conclusion and discussion</li>
-<li>Identify potential ethical issues associated with the dataset or the NLP techniques used. Discuss how these issues could impact the analysis and suggest ways to mitigate them.</li>
-</ul></li>
-</ul>
-<p>The use of Large Language Models (ChatGPT, LLama, Bard) to help with programming is allowed. The main focus is on the quality of the analysis of the results. You are not allowed to use data sets you have entirely generated yourself. You are of course allowed to compute additional data on an existing data set with real data.</p>
-<p>You will use at least two different data sets on a specific topic, and analyse the data. The richer the database, the more value can be extracted. To make things a bit easier, I describe three types of analyses with mandatory data. This ensure that you have enough data to work with. If you have your own idea, this is always an option under the conditions described below and after consultation with me (mainly to ensure feasibility). All types of analysis are graded on the same rubric.</p>
-<ul>
-<li>Your assignment will contain:
-<ul>
-<li>At least two different textual data sources</li>
-<li>A topic model for each of the data sources. With a description of the process that led you to the final topics (steps in data cleaning, and method for the identification of the number of topics)</li>
-<li>A Named Entity Recognition section in which you extract different elements from news articles. You will connect the elements identified to word, topics or other variables in the database in a coherent manner</li>
-<li>Sentiment analysis on the news articles. The sentiment scores can be connected to the other variables identified in both the NER exercise and the topic modelling exercise.</li>
-</ul></li>
-</ul>
-<p>In the table below, some analyses types are presented from which you can chose one. You are free to come up with your own design, but be aware of the time restrictions for this assignment. Using a proposed analysis type ensures data availability and feasibility.</p>
-<section id="types-of-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-analysis">Types of analysis</h2>
-<section id="technology-focused-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="technology-focused-analysis">Technology-focused Analysis</h3>
-<p>In this type of analysis you will focus on a technology that you choose yourself. As a mandatory datasource you will use patent data. Patents are chosen because they contain a lot of valuable data you can analyse (who is doing research on this technology, where are they from, who are they collaborating with, compare companies or regions, quality assessment etc.).</p>
-<p>To complement this data you will at least complement the data with articles from the Lexis Uni database. The main aim of this analysis will be to study a specific technology and show how it is perceived in society.</p>
-<ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li>Lexis Uni can be accesses via the UU website</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-</ul></li>
-</ul>
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>J. van der Pol </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025-09-11</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="bertopic-evaluation-metrics" class="level1">
+<h1>Bertopic evaluation metrics</h1>
+<p>This note summarizes the main diagnostics you’re computing for BERTopic models—what each metric measures, how it’s defined, and how to interpret it in practice. Throughout, remember that BERTopic (via HDBSCAN/UMAP) assigns <code>-1</code> to outliers; exclude <code>-1</code> from cluster-based metrics to avoid skewing results.</p>
+<hr>
+<section id="topic-coherence" class="level2">
+<h2 class="anchored" data-anchor-id="topic-coherence">Topic Coherence</h2>
+<section id="c_v-coherence" class="level3">
+<h3 class="anchored" data-anchor-id="c_v-coherence">C_V coherence</h3>
+<p><strong>Idea:</strong> Measures the semantic consistency of the top words in each topic using <strong>word co-occurrence</strong> (within a sliding window) and <strong>Pointwise mutual information</strong>-based word vectors; coherence is the average cosine similarity among these vectors.</p>
+<p><strong>Sketch of formulation.</strong><br>
+1. Build word–context vectors with entries given by NPMI between a word and all other words (estimated from the corpus).<br>
+2. For a topic <span class="math inline">\(t\)</span> with top words <span class="math inline">\(W_t = {w_1,\dots,w_m}\)</span>, compute mean pairwise cosine similarities:<br>
+<span class="math display">\[
+\text{C}_V(t) = \frac{2}{m(m-1)} \sum_{i&lt;j} \cos\!\big(\phi(w_i),\,\phi(w_j)\big)
+\]</span> where <span class="math inline">\(\phi(w)\)</span> is the NPMI-based vector of word <span class="math inline">\(w\)</span>. 3. Aggregate across topics: <span class="math inline">\(\text{C}_V = \frac{1}{T}\sum_t \text{C}_V(t)\)</span>.<br>
+</p>
+<p><strong>Range &amp; interpretation.</strong> 0 – 1 (higher is better). Rough guide: <span class="math inline">\(&gt; 0.5\)</span> = moderate, <span class="math inline">\(&gt; 0.6\)</span> = good. This is very sensitive to preprocessing (stopwords, n-grams).</p>
+<hr>
 </section>
-<section id="bibliographic-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="bibliographic-analysis">Bibliographic analysis</h3>
-<p>This type of analysis allows you to tackle questions that are less technology oriented. Think about questions related to social justice, emotions and climate transition, governance issues,… The idea is to perform a bibliographic analysis on a topic of your choice and connect this with a societal view with the help of articles from lexis uni.</p>
-<p>You can identify who is doing research on this topic, which institutions they work for, what the main topics are, how they evolve over time. This analysis is then connected to an analysis from news sources so analyse the perception of society on the topic chosen.</p>
+<section id="umass-coherence" class="level3">
+<h3 class="anchored" data-anchor-id="umass-coherence">UMass coherence</h3>
+<p><strong>Idea:</strong> Probability-based coherence using <strong>document co-occurrence</strong> counts. Typically more conservative (often negative values).</p>
+<p><strong>Formulation:</strong> For ordered word pairs <span class="math inline">\((w_i, w_j)\)</span> from a topic (with <span class="math inline">\(w_j\)</span> treated as a “conditioning” word), let:<br>
+- <span class="math inline">\(D(w_j)\)</span> = number of documents containing <span class="math inline">\(w_j\)</span><br>
+- <span class="math inline">\(D(w_i, w_j)\)</span> = number of documents containing both</p>
+<p>Then for topic <span class="math inline">\(t\)</span> with word list <span class="math inline">\(w_1,\dots,w_m\)</span>: <span class="math display">\[
+\text{C}_{\text{UMass}}(t)= \frac{2}{m(m-1)} \sum_{i&gt;j} \log \frac{D(w_i, w_j) + \epsilon}{D(w_j)}
+\]</span> with small <span class="math inline">\(\epsilon\)</span> (e.g., 1) for smoothing. Average across topics for the model score.</p>
+<p><strong>Range &amp; interpretation.</strong> Typically <span class="math inline">\(({-}\infty, 0]\)</span>. <strong>Closer to 0 is better.</strong> Very negative = weak co-occurrence.</p>
+<hr>
+</section>
+</section>
+<section id="silhouette-score-clustering-quality" class="level2">
+<h2 class="anchored" data-anchor-id="silhouette-score-clustering-quality">Silhouette Score (clustering quality)</h2>
+<p><strong>Idea:</strong> How well documents fit their assigned topic vs.&nbsp;the nearest alternative topic, based on distances in <strong>embedding space</strong>.</p>
+<p><strong>Formulation.</strong> For document <span class="math inline">\(i\)</span>: - <span class="math inline">\(a(i)\)</span> = mean distance to all other points in the <strong>same</strong> cluster - <span class="math inline">\(b(i)\)</span> = lowest mean distance to points in <strong>any other</strong> cluster</p>
+<p><span class="math display">\[
+s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}} \in [-1,1].
+\]</span></p>
+<p>Model score is the mean <span class="math inline">\(s(i)\)</span> over all non-outlier documents.</p>
+<p><strong>Distance choice.</strong> With sentence embeddings, use <strong>cosine distance</strong>: <span class="math display">\[
+d_{\cos}(x,y) = 1 - \frac{x\cdot y}{\|x\|\,\|y\|}.
+\]</span></p>
+<p><strong>Interpretation:</strong> <span class="math inline">\(&gt;0.5\)</span> strong structure, <span class="math inline">\(0.2\)</span>–<span class="math inline">\(0.5\)</span> weak/moderate, <span class="math inline">\(\le 0\)</span> poor separation. In high-dimensional text embeddings, expect modest values; compare <strong>relatively</strong> across parameter/model choices.</p>
+<hr>
+</section>
+<section id="topic-diversity-unique-top-words-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="topic-diversity-unique-top-words-ratio">Topic Diversity (unique top-words ratio)</h2>
+<p><strong>Idea:</strong> Measures redundancy across topics’ top-<span class="math inline">\(n\)</span> words.</p>
+<p><strong>Formulation.</strong> If there are <span class="math inline">\(T\)</span> topics (excluding <span class="math inline">\(-1\)</span>) and you take the top <span class="math inline">\(n\)</span> words per topic, <span class="math display">\[
+\text{Diversity} = \frac{\left|\bigcup_{t=1}^{T} \text{Top}_n(t)\right|}{T \times n} \in [0,1].
+\]</span></p>
+<p><strong>Interpretation.</strong> Higher = less reuse of the same words across topics (more distinct vocabularies). Very high diversity with <strong>very small</strong> topics can indicate over-fragmentation; very low diversity suggests overlapping or generic topics.</p>
+<hr>
+</section>
+<section id="cluster-size-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-size-statistics">Cluster Size Statistics</h2>
+<p><strong>Idea.</strong> Describes how many documents fall into each topic.</p>
+<p><strong>Formulation.</strong> Let <span class="math inline">\(c_1,\dots,c_T\)</span> be the sizes of non-outlier clusters. Report:<br>
+</p>
 <ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.gu.se/en/quality-government">Quality of government</a><br>
+<li><strong>Mean size:</strong> <span class="math inline">\(\bar{c} = \frac{1}{T}\sum_{t=1}^{T} c_t\)</span><br>
 </li>
-<li><a href="https://academic-freedom-index.net">Academic Freedom</a></li>
-<li><a href="https://www.worldvaluessurvey.org/wvs.jsp">Values Survey</a></li>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-<li>Overton (via the UU library)</li>
-<li>Lexis Nexis (via the UU library)</li>
-</ul></li>
+<li><strong>Min size:</strong> <span class="math inline">\(\min_t c_t\)</span><br>
+</li>
+<li><strong>Max size:</strong> <span class="math inline">\(\max_t c_t\)</span><br>
+</li>
 </ul>
+<p><strong>Interpretation.</strong> - Many tiny clusters → potential over-clustering (e.g., too small <code>min_cluster_size</code>, too few neighbors). - One or two huge clusters → under-clustering or overly aggressive parameters (e.g., very large <code>min_cluster_size</code>, too many neighbors).</p>
+<p>Use these alongside silhouette and coherence to tune parameters such as <code>min_cluster_size</code>, <code>min_samples</code>, <code>n_neighbors</code>, and UMAP dimensionality.</p>
+<hr>
 </section>
-<section id="your-own-idea" class="level3">
-<h3 class="anchored" data-anchor-id="your-own-idea">Your own idea</h3>
-<p>If none of the above options suit you, and you have a good idea you would like to pursue, go for it! Read the rubric for the course carefully and ensure that the data you have chosen connects to the rubric. In any case, contact me to explain your idea.</p>
+<section id="topic-entropy-normalized" class="level2">
+<h2 class="anchored" data-anchor-id="topic-entropy-normalized">Topic Entropy (normalized)</h2>
+<p><strong>Idea.</strong> How evenly documents are distributed across topics.</p>
+<p><strong>Formulation.</strong> With cluster counts <span class="math inline">\(c_1,\dots,c_T\)</span> and <span class="math inline">\(p_t = c_t / \sum_{k=1}^T c_k\)</span>: <span class="math display">\[
+H = -\sum_{t=1}^{T} p_t \log_2 p_t,
+\qquad
+H_{\text{norm}} = \frac{H}{\log_2 T} \in [0,1].
+\]</span></p>
+<p><strong>Interpretation.</strong><br>
+- <span class="math inline">\(\approx 0\)</span>: one/few topics dominate (imbalanced).<br>
+- <span class="math inline">\(\approx 1\)</span>: documents spread evenly (balanced).</p>
+<p>Balance is not always “better”—aim for a distribution that matches domain expectations.</p>
+<hr>
+</section>
+<section id="practical-reading-guide" class="level2">
+<h2 class="anchored" data-anchor-id="practical-reading-guide">Practical Reading Guide</h2>
 <ul>
-<li>To avoid issues with the assignment ensure yourself of the following:
-<ul>
-<li>You can find two complementary data sets on your topic.</li>
-<li>The topic relates to sustainability.</li>
-<li>There are enough observations to perform an analysis on. Try to have at least 40 observations in each data set. And ensure that the text of the data is long enough.</li>
-<li>Check the validity of the data you have and check that you have the rights to use the data.</li>
-</ul></li>
+<li><strong>Compare relatively.</strong> Use these scores to <strong>rank</strong> model/parameter settings trained on the <strong>same corpus</strong> and preprocessing.</li>
+<li><strong>Trade-offs are normal.</strong> Increasing semantic tightness (↑ coherence) can reduce separation (↓ silhouette) or increase overlap (↓ diversity).</li>
+<li><strong>Preprocessing matters.</strong> Stopword handling, n-grams, lemmatization, and rare-word pruning strongly affect coherence and diversity.</li>
+<li><strong>Mind outliers (<span class="math inline">\(-1\)</span>).</strong> Exclude them for silhouette, entropy, and size stats; report the <strong>outlier rate</strong> separately when useful.</li>
 </ul>
-<p>There is a lot of data available on the internet, pay attention to the rights on this data and where it comes from.</p>
+<hr>
+</section>
+<section id="typical-ranges-rule-of-thumb" class="level2">
+<h2 class="anchored" data-anchor-id="typical-ranges-rule-of-thumb">Typical Ranges (rule-of-thumb)</h2>
 <ul>
-<li><p>Some data sources to check out:</p>
-<ul>
-<li><a href="https://www.gu.se/en/quality-government">Quality of government</a></li>
-<li><a href="https://academic-freedom-index.net">Academic Freedom</a></li>
-<li><a href="https://www.worldvaluessurvey.org/wvs.jsp">Values Survey</a></li>
-<li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
-<li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
-<li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
-<li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-<li>Overton (via the UU library)</li>
-<li>Lexis Uni (via the UU library)</li>
-</ul></li>
+<li><strong>C_V:</strong> <span class="math inline">\(0\)</span>–<span class="math inline">\(1\)</span>; higher is better (often <span class="math inline">\(0.5\)</span>–<span class="math inline">\(0.7+\)</span> after good preprocessing).</li>
+<li><strong>UMass:</strong> <span class="math inline">\(\le 0\)</span>; closer to <span class="math inline">\(0\)</span> is better (very negative = poor co-occurrence).</li>
+<li><strong>Silhouette:</strong> <span class="math inline">\([-1,1]\)</span>; <span class="math inline">\(&gt;0.2\)</span> modest, <span class="math inline">\(&gt;0.5\)</span> strong (text often yields modest values).</li>
+<li><strong>Diversity:</strong> <span class="math inline">\([0,1]\)</span>; <span class="math inline">\(&gt;0.85\)</span> suggests distinct vocabularies, but check for over-fragmentation.</li>
+<li><strong>Entropy (norm):</strong> <span class="math inline">\([0,1]\)</span>; closer to <span class="math inline">\(1\)</span> = balanced topic sizes; closer to <span class="math inline">\(0\)</span> = dominance by few topics.</li>
 </ul>
-</section>
-</section>
-<section id="schedule" class="level2">
-<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p>To keep up with the rapid pace of this course, you can follow the gantt below to check your progress. In each tutorial you will learn new skills that allow you to dig deeper into your data. If you keep up with this schedule you should be able to work on your data in each tutorial and extract new information from your data.</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">gantt
-    title Proposed gantt for the assignment
-    dateFormat DD-MM-YYYY
-    axisFormat %d-%m-%y
-    section Assignment
-        Assignment :a1, 02-12-2024, 50d
-    section Steps
-    Tutorial 1- Term Extraction : milestone, m1, 02-12-2024, 0d
-        Topic &amp; data 1 :a2, 02-12-2024, 14d
-    Tutorial 2- Topic Modelling : milestone, m2, 09-12-2024, 0d
-        Usage Analysis:a3, after a2, 7d
-    Tutorial 3- NER : milestone, m3, 16-12-2024, 0d
-        Second Data set:a4, after a3, 7d
-    Tutorial 4- Sentiment : milestone, m4, 06-01-2025, 0d
-        Finalize analysis:a5, after a4, 7d
-    Tutorial 5- LLM : milestone, m5, 15-01-2025, 0d
-        Finish writing:a6, after a5, 14d
-        
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="rubric-for-this-assignment" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-for-this-assignment">Rubric for this assignment</h2>
-<p>This assignment will be graded on different dimensions. The detailed rubric can be found on blackboard.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Dimension</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Quality of writing</td>
-<td>Spelling, grammar, structure</td>
-</tr>
-<tr class="even">
-<td>Data Choice</td>
-<td>How coherent is the data to the choice of topic</td>
-</tr>
-<tr class="odd">
-<td>Usage Analysis</td>
-<td>Data description: where does it come, which source, any biases?</td>
-</tr>
-<tr class="even">
-<td>Data Preparation</td>
-<td>Which steps did you take to prepare the data for your analysis (lemma, stemming, regex, dico)</td>
-</tr>
-<tr class="odd">
-<td>Data Analysis</td>
-<td>Which indicators and methods did you use to analyse your data. How coherent is the analysis</td>
-</tr>
-<tr class="even">
-<td>Transparency in thresholds</td>
-<td>Explain choices made in the analysis (thresholds, number of topics, filtering of documents)</td>
-</tr>
-<tr class="odd">
-<td>Conclusion-Discussion</td>
-<td>Quality of conclusions pulled from the data.</td>
-</tr>
-<tr class="even">
-<td>Code</td>
-<td>Results from the document should be easy to find the script. The steps should be well documented.</td>
-</tr>
-</tbody>
-</table>
+<p>Use these together—no single metric tells the whole story.</p>
 
 
 </section>
