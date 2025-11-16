@@ -455,8 +455,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">2. Importing data</a>
   <ul class="collapse">
   <li><a href="#txt-.csv-.tsv" id="toc-txt-.csv-.tsv" class="nav-link" data-scroll-target="#txt-.csv-.tsv">2.1 .txt, .csv &amp; .tsv</a></li>
-  <li><a href="#xls-.xlsx" id="toc-xls-.xlsx" class="nav-link" data-scroll-target="#xls-.xlsx">2.2 .xls &amp; .xlsx</a></li>
-  <li><a href="#json-and-.jsonl" id="toc-json-and-.jsonl" class="nav-link" data-scroll-target="#json-and-.jsonl">2.3 .json and .jsonl</a></li>
   </ul></li>
   <li><a href="#dataframes-and-matrices" id="toc-dataframes-and-matrices" class="nav-link" data-scroll-target="#dataframes-and-matrices">3. Dataframes and Matrices</a>
   <ul class="collapse">
@@ -696,6 +694,7 @@ Exercises part 1:
 <section id="txt-.csv-.tsv" class="level2">
 <h2 class="anchored" data-anchor-id="txt-.csv-.tsv">2.1 .txt, .csv &amp; .tsv</h2>
 <p>package required <strong>openpyxl</strong>, <strong>pandas</strong></p>
+<p>Data comes in many different formats. The most basic formats are .txt and .csv. CSV stands for “Comma Separates Values”, which means, as you may have guessed, that each column of your data is separated by a “,”. The annoying part is that csv can have different separators (also called delimiters). Nowadays this is often a semicolon: “;”. because we don’t always know what the separator is, we add an argument to the function to indicate how the data should be read: <em>sep = “;”</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -706,48 +705,30 @@ Exercises part 1:
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Import TXT File (Space-Separated)</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>txt_file <span class="op">=</span> <span class="st">"sample_data.txt"</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df_txt <span class="op">=</span> pd.read_csv(txt_file, sep<span class="op">=</span><span class="st">" "</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Import TSV File (Tab-Separated)</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>tsv_file <span class="op">=</span> <span class="st">"sample_data.tsv"</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>df_tsv <span class="op">=</span> pd.read_csv(tsv_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Import XLS (Excel) File</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>xls_file <span class="op">=</span> <span class="st">"sample_data.xlsx"</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>df_xls <span class="op">=</span> pd.read_excel(xls_file)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_xls)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>json_file <span class="op">=</span> <span class="st">"sample_data.json"</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>df_json <span class="op">=</span> pd.read_json(json_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>df_txt <span class="op">=</span> pd.read_csv(txt_file, sep<span class="op">=</span><span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="xls-.xlsx" class="level2">
-<h2 class="anchored" data-anchor-id="xls-.xlsx">2.2 .xls &amp; .xlsx</h2>
-<p>Excel files can be imported with help from the pandas package. If you do not specify a sheet to import, the first sheet will be taken. You can specify the sheet with the argument: <em>sheet_name=‘Sheet1’</em></p>
+<p>TSV is normal text file in which the separator is a Tab. So to open this file we can use the csv function with the tab as a delimiter. A tab is written “ in python.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import XLS (Excel) File</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_xls <span class="op">=</span> pd.read_excel(<span class="st">"sample_data.xlsx"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_xls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import TSV File (Tab-Separated)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>tsv_file <span class="op">=</span> <span class="st">"sample_data.tsv"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_tsv <span class="op">=</span> pd.read_csv(tsv_file, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="json-and-.jsonl" class="level2">
-<h2 class="anchored" data-anchor-id="json-and-.jsonl">2.3 .json and .jsonl</h2>
+<p>We also often find data that has been created or manipulated in Microsoft Excel, this results in .xls or .xlsx files. The file structure underlying this data is a lot more complex that a simple csv or text file, since Excel adds information about the columns, the cells, functions, colors etc. In reality it is a XML file, that is hard to read for mere humans. This is why we need a specific function to read the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>json_file <span class="op">=</span> <span class="st">"sample_data.json"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_json <span class="op">=</span> pd.read_json(json_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import XLS (Excel) File</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>xls_file <span class="op">=</span> <span class="st">"sample_data.xlsx"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_xls <span class="op">=</span> pd.read_excel(xls_file)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_xls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The previous file formats usually contain simple tables (just like an excel sheet, with one observation per row/column combination). For more complex datasets we could have table in each cell. Imagine for example a dataframe in with a patent on each row, each patent can have multiple assignees, with addresses and inventors associated to them. This means that we could have a dataframe inside of the dataframe. To accommodate this type of complex data, the JSON file format has been developed. It was developped specifically for complex data structures.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jsonlines</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First we open the file and provide it with a name (data_from_jsonl)</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> jsonlines.<span class="bu">open</span>(<span class="st">'data_test.jsonl'</span>, <span class="st">'r'</span>) <span class="im">as</span> data_from_jsonl:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="co"># extract the information from each row and put into object</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     results <span class="op">=</span> [row <span class="cf">for</span> row <span class="kw">in</span> data_from_jsonl] </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>data_from_jsonl.close() <span class="co"># close the file again</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>json_file <span class="op">=</span> <span class="st">"sample_data.json"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_json <span class="op">=</span> pd.read_json(json_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
