@@ -460,15 +460,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#dataframes-and-matrices" id="toc-dataframes-and-matrices" class="nav-link" data-scroll-target="#dataframes-and-matrices">3. Dataframes and Matrices</a>
   <ul class="collapse">
-  <li><a href="#dataframes-matrices-and-lists-in-r" id="toc-dataframes-matrices-and-lists-in-r" class="nav-link" data-scroll-target="#dataframes-matrices-and-lists-in-r">3.1 Dataframes, Matrices and lists in R</a>
+  <li><a href="#dataframes-matrices-and-lists-in-python" id="toc-dataframes-matrices-and-lists-in-python" class="nav-link" data-scroll-target="#dataframes-matrices-and-lists-in-python">3.1 Dataframes, Matrices and lists in Python</a>
   <ul class="collapse">
-  <li><a href="#creating-a-dataframe" id="toc-creating-a-dataframe" class="nav-link" data-scroll-target="#creating-a-dataframe">3.1.1 Creating a dataframe</a></li>
-  <li><a href="#creating-a-matrix" id="toc-creating-a-matrix" class="nav-link" data-scroll-target="#creating-a-matrix">3.1.2 Creating a Matrix</a></li>
-  <li><a href="#creating-a-list-in-r" id="toc-creating-a-list-in-r" class="nav-link" data-scroll-target="#creating-a-list-in-r">3.1.3 Creating a list in R</a></li>
-  </ul></li>
-  <li><a href="#dataframes-matrices-and-lists-in-python" id="toc-dataframes-matrices-and-lists-in-python" class="nav-link" data-scroll-target="#dataframes-matrices-and-lists-in-python">3.2 Dataframes, Matrices and lists in Python</a>
-  <ul class="collapse">
-  <li><a href="#creating-a-dataframe-in-python" id="toc-creating-a-dataframe-in-python" class="nav-link" data-scroll-target="#creating-a-dataframe-in-python">3.2.1 Creating a dataframe in Python</a></li>
+  <li><a href="#creating-a-dataframe-in-python" id="toc-creating-a-dataframe-in-python" class="nav-link" data-scroll-target="#creating-a-dataframe-in-python">3.1.1 Creating a dataframe in Python</a></li>
   <li><a href="#creating-a-matrix-in-python" id="toc-creating-a-matrix-in-python" class="nav-link" data-scroll-target="#creating-a-matrix-in-python">3.2.2 Creating a matrix in Python</a></li>
   <li><a href="#creating-a-list" id="toc-creating-a-list" class="nav-link" data-scroll-target="#creating-a-list">3.2.3 Creating a list</a></li>
   <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries">3.2.4 Dictionaries</a></li>
@@ -537,51 +531,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>pd.read_csv()</td>
 </tr>
 <tr class="even">
+<td>Import package with alias</td>
+<td><input type="checkbox"></td>
+<td>import pandas as pd</td>
+</tr>
+<tr class="odd">
 <td>Create a dataframe and list</td>
 <td><input type="checkbox"></td>
 <td>pd.df()</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Create a matrix and vector</td>
 <td><input type="checkbox"></td>
 <td>np.matrix()</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Remove columns</td>
 <td><input type="checkbox"></td>
 <td>print(f”The value is {plop}“)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Extract columns</td>
 <td><input type="checkbox"></td>
 <td>[1,2,3,4,68]</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Dictionaries</td>
 <td><input type="checkbox"></td>
 <td>data = {}</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Lists</td>
 <td><input type="checkbox"></td>
 <td>data = []</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Merge</td>
 <td><input type="checkbox"></td>
 <td>merge()</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Export data</td>
 <td><input type="checkbox"></td>
 <td>df.to_csv(‘output.csv’)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Subset a dataframe</td>
 <td><input type="checkbox"></td>
 <td>df[df[‘Year’] == 2023]</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Use if, else, elif</td>
 <td><input type="checkbox"></td>
 <td>if x &gt; 10:</td>
@@ -761,11 +760,6 @@ Exercises part 2:
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><strong>Loading data in R</strong>:
-<ol type="i">
-<li><strong>Loading</strong>: On blackboard you will find multiple files with different extensions (csv, tsv, json). Load each of these files into R.</li>
-<li>Print the dataframes to see if the imports completed correctly</li>
-</ol></li>
 <li><strong>Loading data in Python</strong>:
 <ol type="i">
 <li><strong>Loading</strong>: On blackboard you will find multiple files with different extensions (csv, tsv, json). Load each of these files into python.</li>
@@ -784,107 +778,36 @@ Exercises part 2:
 <p>This is the preferred format in data analysis.</p>
 <p>An alternative, that often looks visually identical, but is quite different, is the matrix. While the dataframe is a specific structure to arrange data, a matrix is a mathematical object. This means that we can perform mathematical operations on it (matrix multiplication, inversion). Different functions in R will sometimes require a matrix and sometimes a dataframe (or accept both).</p>
 <p>In R, a matrix can accept any form of data (just like a dataframe), while in python a matrix can only accept numerical values.</p>
-<section id="dataframes-matrices-and-lists-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="dataframes-matrices-and-lists-in-r">3.1 Dataframes, Matrices and lists in R</h2>
-<section id="creating-a-dataframe" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-dataframe">3.1.1 Creating a dataframe</h3>
-<p>In R we create a dataframe by specifying the names of the columns and then the data we want in each column. The <strong>data.frame()</strong> function allows us to create the dataframe and takes as argument the name of the column and the data:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Identifier =</span> <span class="fu">c</span>(<span class="st">"ID1"</span>, <span class="st">"ID2"</span>, <span class="st">"ID3"</span>, <span class="st">"ID4"</span>), <span class="at">Date =</span> <span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>, <span class="dv">2009</span>, <span class="dv">2010</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This creates a dataframe called <em>data</em> with two columns, a first called “Identifier”, a second called “Date”. There will be 4 rows in this dataframe.</p>
-<p>When data is loaded into R using one of the functions we saw previously, most of the time the data will be loaded as a dataframe. To make sure you have the right format, use the <strong>class()</strong> function to check which format it is. This is especially useful when you need to supply a specific data format to a function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "data.frame"</code></pre>
-</div>
-</div>
-<p>A dataframe can be transformed into a matrix:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(data)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     Identifier Date  
-[1,] "ID1"      "2002"
-[2,] "ID2"      "2003"
-[3,] "ID3"      "2009"
-[4,] "ID4"      "2010"</code></pre>
-</div>
-</div>
-<p>In most cases, when you load data from a csv/xls/tsv/json file have the dataframe class when loaded into R.</p>
-</section>
-<section id="creating-a-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-matrix">3.1.2 Creating a Matrix</h3>
-<p>An empty matrix is created by specifying a number of rows and columns (the dimension of the matrix):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="dv">42</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]   42   42   42   42
-[2,]   42   42   42   42
-[3,]   42   42   42   42</code></pre>
-</div>
-</div>
-<p>If we have information on the numbers we want to see inside the matrix we can use a vector of values to create the matrix:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A matrix can be transformed into a dataframe:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="creating-a-list-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-list-in-r">3.1.3 Creating a list in R</h3>
-<p>Lists look similar to vectors but they are more versatile. A list can contain any type of object. We can make a list of matrices, a list of graphs, a list of lists etc.</p>
-<p>A list is created with the <strong>list()</strong> function:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plop <span class="ot">=</span> <span class="fu">list</span>() <span class="co"># this creates an empty list</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># we can also create a list with all the date we have previously loaded</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plop <span class="ot">=</span> <span class="fu">list</span>(csv_file, txt_file, json_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Once we have a list we refer to the elements contained in it using brackets, similar to matrices:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if we want to extract the value in the second position in the list we use double brackets</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>element_2 <span class="ot">=</span> plop[[<span class="dv">2</span>]]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plop[[<span class="dv">2</span>]]) <span class="co"># this will show you the class of the object</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># if you use simple brackets, you will get a list with only the second element</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plop[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
 <section id="dataframes-matrices-and-lists-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="dataframes-matrices-and-lists-in-python">3.2 Dataframes, Matrices and lists in Python</h2>
+<h2 class="anchored" data-anchor-id="dataframes-matrices-and-lists-in-python">3.1 Dataframes, Matrices and lists in Python</h2>
 <section id="creating-a-dataframe-in-python" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-dataframe-in-python">3.2.1 Creating a dataframe in Python</h3>
+<h3 class="anchored" data-anchor-id="creating-a-dataframe-in-python">3.1.1 Creating a dataframe in Python</h3>
 <p>Similar to R, a dataframe in Python can contain any type of data. While we don’t need a package to create them in R, we do need one in Python. First we create what is called a <em>dictionary</em> by specifying the names of the columns we want to have, followed by a vector that contains the data. We then transform this dictionary into a dataframe. The <em>dictionary</em> object in itself is already useful and can be used for analysis. The transformation into a pandas dataframe allows us to use all the functions from the pandas package, specifically aimed at data analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we load the package</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a dictionnary</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>],</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">24</span>, <span class="dv">27</span>, <span class="dv">22</span>],</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Score'</span>: [<span class="fl">85.5</span>, <span class="fl">91.2</span>, <span class="fl">78.3</span>]</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a pandas dataframe</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we load the package</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a dictionnary</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>],</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">24</span>, <span class="dv">27</span>, <span class="dv">22</span>],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Score'</span>: [<span class="fl">85.5</span>, <span class="fl">91.2</span>, <span class="fl">78.3</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a pandas dataframe</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-a-matrix-in-python" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-matrix-in-python">3.2.2 Creating a matrix in Python</h3>
 <p>A matrix is a mathematical object. Functions related to matrices can be found in the <em>numpy</em> package. The <strong>matrix</strong> function, creates a matrix from a list of lists. A list is created by putting values between brackets. In the example below, [1,2,3] is a list, and [[1, 2, 3], [4, 5, 6], [7,8,9]] is a list of three lists. The matrix functions combines them into a matrix.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>np_matrix <span class="op">=</span> np.matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>np_matrix <span class="op">=</span> np.matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we want to create an empty matrix because we have a script thatw ill fill it in later, we can use functions from the numpy package as well:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>empty_matrix <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this will create a 3x3 matrix filled with zeros</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>empty_matrix <span class="op">=</span> np.zeros((<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this will create a 3x3 matrix filled with zeros</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -915,29 +838,29 @@ Exercises part 3:
 <p>A list in Python is a data structure used to store multiple items in a single variable. You can think of it as a container that keeps things organized like a box with labeled compartments where you can put different objects.</p>
 <p>We use lists because sometimes we don’t want to make lots of separate variables like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Techno_1 <span class="op">=</span> <span class="st">"Wind Energy"</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Techno_2 <span class="op">=</span> <span class="st">"Solar Energy"</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Techno_3 <span class="op">=</span> <span class="st">"Water Energy"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Techno_1 <span class="op">=</span> <span class="st">"Wind Energy"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Techno_2 <span class="op">=</span> <span class="st">"Solar Energy"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Techno_3 <span class="op">=</span> <span class="st">"Water Energy"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can store the same information in a <em>list</em>, this results in only one object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Technologies <span class="op">=</span> [<span class="st">"Wind Energy"</span>, <span class="st">"Solar Energy"</span>, <span class="st">"Water Energy"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Technologies <span class="op">=</span> [<span class="st">"Wind Energy"</span>, <span class="st">"Solar Energy"</span>, <span class="st">"Water Energy"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see, a list is created using brackets and can contain any type of object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an empty list</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> []</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a list with previously loaded data (assuming variables are defined)</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> [csv_file, txt_file, json_file]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an empty list</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> []</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a list with previously loaded data (assuming variables are defined)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plop <span class="op">=</span> [csv_file, txt_file, json_file]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Accessing elements from the list can be done with numbers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the value in the second position (index 1)</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>element_2 <span class="op">=</span> plop[<span class="dv">1</span>]</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the type (class) of the object</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(plop[<span class="dv">1</span>]))  <span class="co"># This shows the class of the object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the value in the second position (index 1)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>element_2 <span class="op">=</span> plop[<span class="dv">1</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the type (class) of the object</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(plop[<span class="dv">1</span>]))  <span class="co"># This shows the class of the object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dictionaries" class="level3">
@@ -945,22 +868,22 @@ Exercises part 3:
 <p>While lists are very handy when we need to go through them one by one, or when searching position is enough, they remain limited with more complex data structures. It would be helful if we could access elements by a key rather than a number, for example if we have data about technologies, that we could search by “technology” rather than an index (0, 1, 2, etc,).</p>
 <p>This is where dictionaries come in, a <em>dictionary</em> is more like a labelled box system: you give each box a special name (a key) and store a value in it. You access the value by using its <em>key</em>, not by counting positions. Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>technology_efficiency <span class="op">=</span> {<span class="st">"Solar"</span>: <span class="dv">24</span>, <span class="st">"Wind"</span>: <span class="dv">19</span>, <span class="st">"Water"</span>: <span class="dv">22</span>}</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(technology_efficiency[<span class="st">"Solar"</span>])  <span class="co"># prints 24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>technology_efficiency <span class="op">=</span> {<span class="st">"Solar"</span>: <span class="dv">24</span>, <span class="st">"Wind"</span>: <span class="dv">19</span>, <span class="st">"Water"</span>: <span class="dv">22</span>}</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(technology_efficiency[<span class="st">"Solar"</span>])  <span class="co"># prints 24</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A dictionary in Python is a collection that holds data in key-value pairs, making it easy to look up values by their associated keys. Dictionaries are especially useful when you need a collection with named elements rather than numerical indices, as in lists.</p>
 <p>Use a dictionary when you want to look up items quickly by a meaningful label (key), not by a number. Dictionaries support very fast lookup by key while with a list if you search by value it may take a lot longer for large lists.</p>
 <p>To create a dictionary, use curly braces {} with key-value pairs separated by colons :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an empty dictionary</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {}</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a dictionary with initial data</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"Alice"</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: <span class="dv">30</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"job"</span>: <span class="st">"Data Scientist"</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an empty dictionary</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {}</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a dictionary with initial data</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"Alice"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: <span class="dv">30</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"job"</span>: <span class="st">"Data Scientist"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -1021,15 +944,15 @@ Exercises part 3:
 </div>
 <p>We would prefer to have this information in one set. Combining the two datasets means that we need to make sure that the population of the Netherlands is matched to to pollution in the Netherlands. Since we cannot assume that all the observations are always in the right order, we will use specific functions that match observations based on a key. In this example, the key would be <em>Country</em>, we want to add observations from the second dataframe to the first based on the <em>Country</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are multiple ways to merge dataframes, we can specify how we want to merge by adding the “how” argument to the function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"inner"</span>)   <span class="co"># Only matching IDs (default)</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"left"</span>)    <span class="co"># Keep all from 'students'</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"right"</span>)   <span class="co"># Keep all from 'grades'</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"outer"</span>)   <span class="co"># Keep all from both</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"inner"</span>)   <span class="co"># Only matching IDs (default)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"left"</span>)    <span class="co"># Keep all from 'students'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"right"</span>)   <span class="co"># Keep all from 'grades'</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>pd.merge(df_1, df_2, on<span class="op">=</span><span class="st">"Country"</span>, how<span class="op">=</span><span class="st">"outer"</span>)   <span class="co"># Keep all from both</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1044,100 +967,100 @@ Exercises part 3:
 <h3 class="anchored" data-anchor-id="selecting-columns-and-rows">5.1 Selecting columns and rows</h3>
 <p>Just as in R, Python allows for the extraction of columns both by their name and by their index. Locations in dataframes are accessed by the use of <strong>[[]]</strong>, the first argument between brackets will refer to the rows, the second to the columns. If you want to extract all rows for a given column (or simply put, you want to extract a specific column), you would write <strong>[[“column_name”]]</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eve'</span>],</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">24</span>],</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gender'</span>: [<span class="st">'Female'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Female'</span>]</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting one Column in Python</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df[[<span class="st">'Name'</span>]]</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting multiple Columns in Python</span></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df[[<span class="st">'Name'</span>, <span class="st">'Age'</span>]]</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eve'</span>],</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">24</span>],</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gender'</span>: [<span class="st">'Female'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Female'</span>]</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting one Column in Python</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df[[<span class="st">'Name'</span>]]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting multiple Columns in Python</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df[[<span class="st">'Name'</span>, <span class="st">'Age'</span>]]</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the index of the columns is also a possibility. For this case we will need to use the <strong>.iloc</strong> function. <strong>.iloc</strong> is used when we are addressing a dataframe by the index of the rows and columns, <em>i.e</em> by the number corresponding to the location in the dataframe. We need to provide two arguments for this function, the rows we want to select and the columns we want to select. On the contrary of the previous example, we need to specify rows when we use <strong>.iloc</strong>. If we want to extract all rows for a given column, we can do so by using <strong>:</strong>.</p>
 <p>If we want to use a combination of both names and indexes, we need to use the <strong>.loc</strong> function which does not expect numbers as arguments.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eve'</span>],</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">24</span>],</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gender'</span>: [<span class="st">'Female'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Female'</span>]</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting Columns by Index in Python</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># We use ":" in the first argument to specify that we want all rows. We then specify the columns we want (here 0 and 1).</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df.iloc[:,[<span class="dv">0</span>, <span class="dv">1</span>]]</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="co"># If we do not specify which rows we want, Python will</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># interpret the numbers as being rows and not columns.</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>filtered_rows <span class="op">=</span> df.iloc[[<span class="dv">0</span>, <span class="dv">4</span>]]</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filtered_rows)</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co"># A combination of both is also possible:</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>row3 <span class="op">=</span> df.loc[<span class="dv">0</span>, <span class="st">"Name"</span>]</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(row3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a sample DataFrame</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Name'</span>: [<span class="st">'Alice'</span>, <span class="st">'Bob'</span>, <span class="st">'Charlie'</span>, <span class="st">'David'</span>, <span class="st">'Eve'</span>],</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: [<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">24</span>],</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gender'</span>: [<span class="st">'Female'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Male'</span>, <span class="st">'Female'</span>]</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting Columns by Index in Python</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># We use ":" in the first argument to specify that we want all rows. We then specify the columns we want (here 0 and 1).</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>selected_columns <span class="op">=</span> df.iloc[:,[<span class="dv">0</span>, <span class="dv">1</span>]]</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(selected_columns)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># If we do not specify which rows we want, Python will</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co"># interpret the numbers as being rows and not columns.</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>filtered_rows <span class="op">=</span> df.iloc[[<span class="dv">0</span>, <span class="dv">4</span>]]</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filtered_rows)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># A combination of both is also possible:</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>row3 <span class="op">=</span> df.loc[<span class="dv">0</span>, <span class="st">"Name"</span>]</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(row3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="filtering-your-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-your-dataframe">5.2 Filtering your dataframe</h3>
 <p>We will use filtering on a pandas dataframe. As discussed in the chapter about basic operations, the logic operators will change compared to the base logic operators. Mainly: we will use <strong>&amp;</strong> for <strong>and</strong>, <strong>|</strong> for <strong>or</strong> and <strong>~</strong> for <strong>not</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a small dataframe</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Pat_num'</span>: [<span class="st">"WO200214562"</span>, <span class="st">"WO2023738962"</span>, <span class="st">"EP2023778962"</span>, <span class="st">"FR2019272698"</span>, <span class="st">"FR201922671"</span>],</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span>: [<span class="dv">2002</span>, <span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2019</span>, <span class="dv">2019</span>],</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Domain'</span>: [<span class="st">"B60C"</span>, <span class="st">"B60C"</span>, <span class="st">"B29D"</span>, <span class="st">"C08K"</span>, <span class="st">"C08K"</span>]</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract only patents from 2023</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> <span class="dv">2023</span>]</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract patent in domain "B60C"</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co"># with year &gt;= 2019</span></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[(df[<span class="st">'Year'</span>] <span class="op">&gt;=</span> <span class="dv">2019</span>) <span class="op">&amp;</span> (df[<span class="st">'Domain'</span>] <span class="op">==</span> <span class="st">"B60C"</span>)]</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract patent NOT in domain "B60C"</span></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[<span class="op">~</span>(df[<span class="st">'Domain'</span>] <span class="op">==</span> <span class="st">"B60C"</span>)]</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a small dataframe</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Pat_num'</span>: [<span class="st">"WO200214562"</span>, <span class="st">"WO2023738962"</span>, <span class="st">"EP2023778962"</span>, <span class="st">"FR2019272698"</span>, <span class="st">"FR201922671"</span>],</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span>: [<span class="dv">2002</span>, <span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2019</span>, <span class="dv">2019</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Domain'</span>: [<span class="st">"B60C"</span>, <span class="st">"B60C"</span>, <span class="st">"B29D"</span>, <span class="st">"C08K"</span>, <span class="st">"C08K"</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract only patents from 2023</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[df[<span class="st">'Year'</span>] <span class="op">==</span> <span class="dv">2023</span>]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract patent in domain "B60C"</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># with year &gt;= 2019</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[(df[<span class="st">'Year'</span>] <span class="op">&gt;=</span> <span class="dv">2019</span>) <span class="op">&amp;</span> (df[<span class="st">'Domain'</span>] <span class="op">==</span> <span class="st">"B60C"</span>)]</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="co"># subset the dataframe to extract patent NOT in domain "B60C"</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> df[<span class="op">~</span>(df[<span class="st">'Domain'</span>] <span class="op">==</span> <span class="st">"B60C"</span>)]</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="adding-columns-and-rows" class="level3">
 <h3 class="anchored" data-anchor-id="adding-columns-and-rows">5.3 Adding columns and rows</h3>
 <p>In a DataFrame, we refer to columns by their names within brackets ([]). We can use this method to create a new column in a DataFrame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the new column with the computed values</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>Data[<span class="st">'new_column'</span>] <span class="op">=</span> Data[<span class="st">'Fuel_consumption'</span>] <span class="op">/</span> Data[<span class="st">'Population'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the new column with the computed values</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Data[<span class="st">'new_column'</span>] <span class="op">=</span> Data[<span class="st">'Fuel_consumption'</span>] <span class="op">/</span> Data[<span class="st">'Population'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This creates a new column called “new_column” in the Data DataFrame. The values in this column will be the result of dividing Fuel_consumption by Population. By default, Python’s pandas library will apply this operation row-wise.</p>
 <p>For numpy matrices, we cannot refer to columns by name, as columns in matrices don’t have labels. To add a column to a matrix, we can use the np.column_stack() function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing numpy</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating the average consumption</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>average_consumption <span class="op">=</span> Fuel_consumption <span class="op">/</span> Population</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the new column to the matrix</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>Data <span class="op">=</span> np.column_stack((Data, average_consumption))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing numpy</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating the average consumption</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>average_consumption <span class="op">=</span> Fuel_consumption <span class="op">/</span> Population</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the new column to the matrix</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>Data <span class="op">=</span> np.column_stack((Data, average_consumption))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="further-actions-grouping-and-summarising" class="level3">
@@ -1145,20 +1068,20 @@ Exercises part 3:
 <p>With real data we often need to regroup observations by year, organisation, region, or any other entity. For example if we have a set of scientific publications and we want to know how many publications we have per author per year, we need to regroup the observations in both those dimensions. In Python we will do this using the <strong>pandas</strong> package. Mainly we will focus on four functions, <strong>groupby</strong>, <strong>agg</strong>, <strong>count</strong> and <strong>reset_index</strong>.</p>
 <p><strong>groupby</strong> focuses on grouping observations according to a specific value. We can the compute values based on the created groups. For example, if we have a database with researchers and their publications, if we want to know how many publications each of them has, we would first have to create a subset per researcher, count how many publications he/she has, store this information, then move to the next one and so on. <strong>groupby</strong> allows us to create these subsets and <strong>agg</strong> allows us to compute on these sets:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> {</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Pat_num'</span><span class="sc">:</span> [<span class="st">"WO200214562"</span>, <span class="st">"WO2023738962"</span>, <span class="st">"EP2023778962"</span>, <span class="st">"FR2019272698"</span>, <span class="st">"FR201922671"</span>],</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span><span class="sc">:</span> [<span class="dv">2002</span>, <span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2019</span>, <span class="dv">2019</span>],</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Domain'</span><span class="sc">:</span> [<span class="st">"B60C"</span>, <span class="st">"B60C"</span>, <span class="st">"B29D"</span>, <span class="st">"C08K"</span>, <span class="st">"C08K"</span>]</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>grouped_set <span class="ot">=</span> <span class="fu">df.groupby</span>(<span class="st">'Domain'</span>)[<span class="st">'Year'</span>]<span class="fu">.agg</span>([min, max])<span class="fu">.reset_index</span>()</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grouped_set)</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>grouped_set <span class="ot">=</span> <span class="fu">df.groupby</span>(<span class="st">'Domain'</span>)<span class="fu">.count</span>()<span class="fu">.reset_index</span>()</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grouped_set)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Pat_num'</span><span class="sc">:</span> [<span class="st">"WO200214562"</span>, <span class="st">"WO2023738962"</span>, <span class="st">"EP2023778962"</span>, <span class="st">"FR2019272698"</span>, <span class="st">"FR201922671"</span>],</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Year'</span><span class="sc">:</span> [<span class="dv">2002</span>, <span class="dv">2023</span>, <span class="dv">2023</span>, <span class="dv">2019</span>, <span class="dv">2019</span>],</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'Domain'</span><span class="sc">:</span> [<span class="st">"B60C"</span>, <span class="st">"B60C"</span>, <span class="st">"B29D"</span>, <span class="st">"C08K"</span>, <span class="st">"C08K"</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>grouped_set <span class="ot">=</span> <span class="fu">df.groupby</span>(<span class="st">'Domain'</span>)[<span class="st">'Year'</span>]<span class="fu">.agg</span>([min, max])<span class="fu">.reset_index</span>()</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grouped_set)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>grouped_set <span class="ot">=</span> <span class="fu">df.groupby</span>(<span class="st">'Domain'</span>)<span class="fu">.count</span>()<span class="fu">.reset_index</span>()</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(grouped_set)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1192,25 +1115,25 @@ Exercises part 4 &amp; 5:
 <h1>6. Exporting data</h1>
 <p>Once we are done with our data operations we often want to export the results so that we can share them, save them, or prepare them for treatment in other software. In this section, we will cover how to export data from Python to various common formats such as CSV, TXT, Excel, JSON, and Pickle. We’ll use the pandas library for these operations as it provides convenient functions to handle different formats. The location where the file will end up depends on the path you supply in the function. If you only supply the name of the file, it will save in the same location as your script.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to CSV</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'output.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to CSV</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'output.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to TSV</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'output.txt'</span>, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to TSV</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'output.txt'</span>, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to Excel</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openpyxl</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df.to_excel(<span class="st">'output.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to Excel</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openpyxl</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df.to_excel(<span class="st">'output.xlsx'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to Excel</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df.to_json(<span class="st">'output.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to Excel</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df.to_json(<span class="st">'output.json'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In Python, the pickle module is used for serializing and deserializing Python objects, which means converting Python objects to a byte stream (serialization) and back to their original format (deserialization). This allows you to save complex data types, like dictionaries, lists, or custom objects, to a file so you can easily load them later without needing to re-define or re-calculate the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df.to_pickle(<span class="st">'output.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df.to_pickle(<span class="st">'output.pkl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercice-part-6" class="level1">
@@ -1227,93 +1150,93 @@ Exercises part 4 &amp; 5:
 <h2 class="anchored" data-anchor-id="a-script-on-waste-levels-in-python">7.1 A script on waste levels in Python</h2>
 <p>Read the following script, your aim is to understand what the script does. Describe each line of the script</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>waste_data <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country"</span>: [<span class="st">"CountryA"</span>, <span class="st">"CountryB"</span>, <span class="st">"CountryC"</span>, <span class="st">"CountryD"</span>, <span class="st">"CountryE"</span>],</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total_Waste"</span>: [<span class="fl">2.5</span>, <span class="fl">1.8</span>, <span class="fl">4.0</span>, <span class="fl">3.1</span>, <span class="fl">1.2</span>],  <span class="co"># Tons per capita</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recycling_Rate"</span>: [<span class="dv">65</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">85</span>, <span class="dv">20</span>]  <span class="co"># Percentage</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"Moderate"</span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Total_Waste"</span>] <span class="op">&lt;</span> <span class="dv">2</span>, <span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"Low"</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Total_Waste"</span>] <span class="op">&gt;</span> <span class="dv">3</span>, <span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"High"</span></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Sustainable_Practices"</span>] <span class="op">=</span> <span class="st">"No"</span></span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Recycling_Rate"</span>] <span class="op">&gt;</span> <span class="dv">50</span>, <span class="st">"Sustainable_Practices"</span>] <span class="op">=</span> <span class="st">"Yes"</span></span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>high_waste_no_recycling <span class="op">=</span> waste_data[</span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>    (waste_data[<span class="st">"Waste_Level"</span>] <span class="op">==</span> <span class="st">"High"</span>) <span class="op">&amp;</span> (waste_data[<span class="st">"Sustainable_Practices"</span>] <span class="op">==</span> <span class="st">"No"</span>)</span>
-<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Countries with high waste and no sustainable practices:"</span>)</span>
-<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(high_waste_no_recycling)</span>
-<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>average_recycling <span class="op">=</span> waste_data[<span class="st">"Recycling_Rate"</span>].mean()</span>
-<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Above_Average_Recycling"</span>] <span class="op">=</span> waste_data[<span class="st">"Recycling_Rate"</span>] <span class="op">&gt;</span> average_recycling</span>
-<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>waste_data.to_csv(<span class="st">"waste_management_analysis.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Waste Management Analysis DataFrame:"</span>)</span>
-<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(waste_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>waste_data <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country"</span>: [<span class="st">"CountryA"</span>, <span class="st">"CountryB"</span>, <span class="st">"CountryC"</span>, <span class="st">"CountryD"</span>, <span class="st">"CountryE"</span>],</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Total_Waste"</span>: [<span class="fl">2.5</span>, <span class="fl">1.8</span>, <span class="fl">4.0</span>, <span class="fl">3.1</span>, <span class="fl">1.2</span>],  <span class="co"># Tons per capita</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recycling_Rate"</span>: [<span class="dv">65</span>, <span class="dv">30</span>, <span class="dv">50</span>, <span class="dv">85</span>, <span class="dv">20</span>]  <span class="co"># Percentage</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"Moderate"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Total_Waste"</span>] <span class="op">&lt;</span> <span class="dv">2</span>, <span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"Low"</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Total_Waste"</span>] <span class="op">&gt;</span> <span class="dv">3</span>, <span class="st">"Waste_Level"</span>] <span class="op">=</span> <span class="st">"High"</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Sustainable_Practices"</span>] <span class="op">=</span> <span class="st">"No"</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>waste_data.loc[waste_data[<span class="st">"Recycling_Rate"</span>] <span class="op">&gt;</span> <span class="dv">50</span>, <span class="st">"Sustainable_Practices"</span>] <span class="op">=</span> <span class="st">"Yes"</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>high_waste_no_recycling <span class="op">=</span> waste_data[</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    (waste_data[<span class="st">"Waste_Level"</span>] <span class="op">==</span> <span class="st">"High"</span>) <span class="op">&amp;</span> (waste_data[<span class="st">"Sustainable_Practices"</span>] <span class="op">==</span> <span class="st">"No"</span>)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Countries with high waste and no sustainable practices:"</span>)</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(high_waste_no_recycling)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>average_recycling <span class="op">=</span> waste_data[<span class="st">"Recycling_Rate"</span>].mean()</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>waste_data[<span class="st">"Above_Average_Recycling"</span>] <span class="op">=</span> waste_data[<span class="st">"Recycling_Rate"</span>] <span class="op">&gt;</span> average_recycling</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>waste_data.to_csv(<span class="st">"waste_management_analysis.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Waste Management Analysis DataFrame:"</span>)</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(waste_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-script-on-solar-energy-production" class="level2">
 <h2 class="anchored" data-anchor-id="a-script-on-solar-energy-production">7.2 A script on solar energy production</h2>
 <p>Read the following script, your aim is to understand what the script does. Describe each line of the script</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>solar_data <span class="op">=</span> pd.read_csv(<span class="st">"data/solar_production.csv"</span>)</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>solar_data <span class="op">=</span> solar_data[[<span class="st">"country"</span>, <span class="st">"date"</span>, <span class="st">"production_mwh"</span>]]</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>solar_data[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(solar_data[<span class="st">"date"</span>]).dt.year</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>country_year <span class="op">=</span> solar_data.groupby([<span class="st">"country"</span>, <span class="st">"year"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"production_mwh"</span>].mean()</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>country_year <span class="op">=</span> country_year.rename(columns<span class="op">=</span>{<span class="st">"production_mwh"</span>: <span class="st">"avg_production"</span>})</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>recent_data <span class="op">=</span> country_year[country_year[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2018</span>]</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>recent_data.to_csv(<span class="st">"data/avg_solar_production_recent.csv"</span>, sep<span class="op">=</span><span class="st">";"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Average solar production per country since 2018 has been saved."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>solar_data <span class="op">=</span> pd.read_csv(<span class="st">"data/solar_production.csv"</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>solar_data <span class="op">=</span> solar_data[[<span class="st">"country"</span>, <span class="st">"date"</span>, <span class="st">"production_mwh"</span>]]</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>solar_data[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(solar_data[<span class="st">"date"</span>]).dt.year</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>country_year <span class="op">=</span> solar_data.groupby([<span class="st">"country"</span>, <span class="st">"year"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"production_mwh"</span>].mean()</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>country_year <span class="op">=</span> country_year.rename(columns<span class="op">=</span>{<span class="st">"production_mwh"</span>: <span class="st">"avg_production"</span>})</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>recent_data <span class="op">=</span> country_year[country_year[<span class="st">"year"</span>] <span class="op">&gt;=</span> <span class="dv">2018</span>]</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>recent_data.to_csv(<span class="st">"data/avg_solar_production_recent.csv"</span>, sep<span class="op">=</span><span class="st">";"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Average solar production per country since 2018 has been saved."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-script-on-wind-energy-production." class="level2">
 <h2 class="anchored" data-anchor-id="a-script-on-wind-energy-production.">7.3 A script on wind energy production.</h2>
 <p>Read the following script, your aim is to understand what the script does. Describe each line of the script.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>wind <span class="op">=</span> pd.read_csv(<span class="st">"data/wind_generation.csv"</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>capacity <span class="op">=</span> pd.read_csv(<span class="st">"data/installed_capacity.csv"</span>)</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>wind <span class="op">=</span> wind[[<span class="st">"region"</span>, <span class="st">"date"</span>, <span class="st">"generation_mwh"</span>]]</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>capacity <span class="op">=</span> capacity[[<span class="st">"region"</span>, <span class="st">"capacity_mw"</span>]]</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>wind[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(wind[<span class="st">"date"</span>]).dt.year</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>wind_year <span class="op">=</span> wind.groupby([<span class="st">"region"</span>, <span class="st">"year"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"generation_mwh"</span>].<span class="bu">sum</span>()</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>wind_year <span class="op">=</span> wind_year.rename(columns<span class="op">=</span>{<span class="st">"generation_mwh"</span>: <span class="st">"total_generation"</span>})</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(wind_year, capacity, on<span class="op">=</span><span class="st">"region"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"utilization_rate"</span>] <span class="op">=</span> merged[<span class="st">"total_generation"</span>] <span class="op">/</span> (merged[<span class="st">"capacity_mw"</span>] <span class="op">*</span> <span class="dv">8760</span>)</span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> merged.sort_values(by<span class="op">=</span><span class="st">"utilization_rate"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>merged.to_csv(<span class="st">"data/wind_utilization.csv"</span>, sep<span class="op">=</span><span class="st">";"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>wind <span class="op">=</span> pd.read_csv(<span class="st">"data/wind_generation.csv"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>capacity <span class="op">=</span> pd.read_csv(<span class="st">"data/installed_capacity.csv"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>wind <span class="op">=</span> wind[[<span class="st">"region"</span>, <span class="st">"date"</span>, <span class="st">"generation_mwh"</span>]]</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>capacity <span class="op">=</span> capacity[[<span class="st">"region"</span>, <span class="st">"capacity_mw"</span>]]</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>wind[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(wind[<span class="st">"date"</span>]).dt.year</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>wind_year <span class="op">=</span> wind.groupby([<span class="st">"region"</span>, <span class="st">"year"</span>], as_index<span class="op">=</span><span class="va">False</span>)[<span class="st">"generation_mwh"</span>].<span class="bu">sum</span>()</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>wind_year <span class="op">=</span> wind_year.rename(columns<span class="op">=</span>{<span class="st">"generation_mwh"</span>: <span class="st">"total_generation"</span>})</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> pd.merge(wind_year, capacity, on<span class="op">=</span><span class="st">"region"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"utilization_rate"</span>] <span class="op">=</span> merged[<span class="st">"total_generation"</span>] <span class="op">/</span> (merged[<span class="st">"capacity_mw"</span>] <span class="op">*</span> <span class="dv">8760</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> merged.sort_values(by<span class="op">=</span><span class="st">"utilization_rate"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>merged.to_csv(<span class="st">"data/wind_utilization.csv"</span>, sep<span class="op">=</span><span class="st">";"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged.head(<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
