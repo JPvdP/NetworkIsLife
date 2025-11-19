@@ -102,35 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -482,13 +453,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">0. Overview</a></li>
-  <li><a href="#looping-functions" id="toc-looping-functions" class="nav-link" data-scroll-target="#looping-functions">1. Looping functions</a></li>
-  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">1. Loops</a></li>
-  <li><a href="#for-loops-in-r" id="toc-for-loops-in-r" class="nav-link" data-scroll-target="#for-loops-in-r">1.1 <strong>For</strong> Loops in R</a></li>
-  <li><a href="#for-loops-in-python" id="toc-for-loops-in-python" class="nav-link" data-scroll-target="#for-loops-in-python">1.2 for loops in Python</a></li>
+  <li><a href="#looping-functions" id="toc-looping-functions" class="nav-link" data-scroll-target="#looping-functions">1. Looping functions</a>
+  <ul class="collapse">
+  <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">1.1 For loops</a></li>
+  </ul></li>
   <li><a href="#while-loops" id="toc-while-loops" class="nav-link" data-scroll-target="#while-loops">2. While loops</a></li>
-  <li><a href="#while-loops-in-r" id="toc-while-loops-in-r" class="nav-link" data-scroll-target="#while-loops-in-r">2.1 While loops in R</a></li>
-  <li><a href="#while-loops-in-python" id="toc-while-loops-in-python" class="nav-link" data-scroll-target="#while-loops-in-python">2.2 While loops in Python</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">3. Exercises</a>
   <ul class="collapse">
   <li><a href="#multiples-of-3-and-5" id="toc-multiples-of-3-and-5" class="nav-link" data-scroll-target="#multiples-of-3-and-5">3.1 Multiples of 3 and 5</a></li>
@@ -498,10 +467,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#exam-type-questions" id="toc-exam-type-questions" class="nav-link" data-scroll-target="#exam-type-questions">4. Exam-type questions</a>
   <ul class="collapse">
-  <li><a href="#exercise-1-reading-code-in-r" id="toc-exercise-1-reading-code-in-r" class="nav-link" data-scroll-target="#exercise-1-reading-code-in-r">4.1 Exercise 1: reading code in R</a></li>
-  <li><a href="#exercise-2-reading-code-in-r" id="toc-exercise-2-reading-code-in-r" class="nav-link" data-scroll-target="#exercise-2-reading-code-in-r">4.2 Exercise 2: reading code in R</a></li>
-  <li><a href="#exercise-3-reading-code-in-python" id="toc-exercise-3-reading-code-in-python" class="nav-link" data-scroll-target="#exercise-3-reading-code-in-python">4.3 Exercise 3: reading code in Python</a></li>
-  <li><a href="#exercise-4-reading-code-in-python" id="toc-exercise-4-reading-code-in-python" class="nav-link" data-scroll-target="#exercise-4-reading-code-in-python">4.4 Exercise 4: reading code in Python</a></li>
+  <li><a href="#reading-code-in-python-1" id="toc-reading-code-in-python-1" class="nav-link" data-scroll-target="#reading-code-in-python-1">4.1 Reading code in Python 1</a></li>
+  <li><a href="#reading-code-in-python" id="toc-reading-code-in-python" class="nav-link" data-scroll-target="#reading-code-in-python">4.2 Reading code in Python</a></li>
   <li><a href="#exercise-5-write-code" id="toc-exercise-5-write-code" class="nav-link" data-scroll-target="#exercise-5-write-code">4.5 Exercise 5: write code</a></li>
   </ul></li>
   </ul>
@@ -533,16 +500,14 @@ window.Quarto = {
 <h1>0. Overview</h1>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 2%">
-<col style="width: 5%">
-<col style="width: 25%">
-<col style="width: 29%">
+<col style="width: 37%">
+<col style="width: 6%">
+<col style="width: 26%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th>R</th>
 <th>Python</th>
 <th>Example R</th>
 <th>Example Python</th>
@@ -552,13 +517,11 @@ window.Quarto = {
 <tr class="odd">
 <td>for loop</td>
 <td><input type="checkbox"></td>
-<td><input type="checkbox"></td>
 <td>for(){}</td>
 <td>for i in range():</td>
 </tr>
 <tr class="even">
 <td>While loop</td>
-<td><input type="checkbox"></td>
 <td><input type="checkbox"></td>
 <td>while(){}</td>
 <td>while i&lt;5:</td>
@@ -568,14 +531,9 @@ window.Quarto = {
 </section>
 <section id="looping-functions" class="level1">
 <h1>1. Looping functions</h1>
-</section>
-<section id="loops" class="level1">
-<h1>1. Loops</h1>
 <p>Loops are a fundamental part of programming in data science because they allow you to efficiently perform repetitive tasks on large datasets. Instead of writing repetitive code manually, loops enable automation by iterating over data structures like lists, dataframes, or arrays. This is particularly important when processing datasets with thousands or millions of entries, as it saves time and reduces the risk of errors. Loops also allow for dynamic analysis, enabling you to apply functions, calculations, or transformations to each element in a dataset, making them a powerful tool for scalability and flexibility in data analysis.</p>
 <p>Imagine you are analyzing the carbon footprint of 1,000 households to assess their environmental impact. Each household has data on electricity consumption, gas usage, and travel habits. Your task is to calculate the total carbon emissions for each household using a simple formula:</p>
-<p><span class="math display">\[
-CarbonEmissions=(Electricity(kWh) × 0.5) + (Gas(m³) × 2.1) + (Travel(km)×0.2)
-\]</span></p>
+<p>CarbonEmissions=(Electricity(kWh) × 0.5) + (Gas(m³) × 2.1) + (Travel(km)×0.2)</p>
 <p>Without loops, you would need to manually calculate this formula for each household, which is tedious and impractical. Instead, with a loop, you can automate the process.</p>
 <p>Imagine that we have measurements of forestation over time:</p>
 <table class="caption-top table">
@@ -618,259 +576,86 @@ CarbonEmissions=(Electricity(kWh) × 0.5) + (Gas(m³) × 2.1) + (Travel(km)×0.2
 </table>
 <p>If we want to compute the change in ha over time we would have to compute each year of change individually. Using a loop we automate this process by sequentially moving over the dataframe and computing the change rate. Let’s see this can be done in Python and R.</p>
 <p>There are two main techniques for looping: a <strong>while</strong> loop and a <strong>for</strong> loop. The <strong>while</strong> loop needs a condition, while this condition is Ttrue, the loop will continue to run. The <strong>for</strong> loop is used when you want to repeat a task a specific number of times or iterate over a sequence (like a list, range, or string). It works by stepping through each element in the sequence until it reaches the end. Let’s have a look in detail:</p>
-</section>
-<section id="for-loops-in-r" class="level1">
-<h1>1.1 <strong>For</strong> Loops in R</h1>
-<p><img src="Rlogo.png" class="img-fluid"></p>
-<p>A loop in R starts with the <strong>for</strong> operator. This is followed by an argument that determines how the loop runs (“the loop runs for…”). We start by defining a variable that will take the different values in the loop. Suppose we want to print the value 1 to 5. This requires a loop that takes a variables that starts at 1, and increases by one with each iteration. The <strong>in</strong> operator is used to define the values the variables will take.</p>
-<p>In the following code we will show different ways to loop:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range of numbers</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1
-[1] 2
-[1] 3
-[1] 4
-[1] 5</code></pre>
-</div>
-</div>
-<p>In this first example the code will start with i = 1, then it runs that code between brackets, so it will print out “1”. It then automatically moves to 2, prints, moves to 3 etc. until i = 5. You can put any number of operations between the curly brackets:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># range of numbers</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>j <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  j <span class="ot">=</span> j <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(j)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1
-[1] 1
-[1] 2
-[1] 2
-[1] 3
-[1] 3
-[1] 4
-[1] 4
-[1] 5
-[1] 5</code></pre>
-</div>
-</div>
-<p>By default the <strong>for</strong> operator will use a step of 1 (1, 2, 3, 4, 5). We can use different steps by setting th second argument as a vector that only contains the elements that we want i to take. <strong>seq(1, 10, by = 2)</strong> creates a vector starting at 1 stopping at 10 with a step of 2, this means that it creates a vector with: 1,3,5,7,9. i then iterates over this list taking only those values:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># custom step</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) {</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Odd number:"</span>, i))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Odd number: 1"
-[1] "Odd number: 3"
-[1] "Odd number: 5"
-[1] "Odd number: 7"
-[1] "Odd number: 9"</code></pre>
-</div>
-</div>
-<p>The elements we use for the loop do not have to be numbers, they can also take the form of text, instead of using a vector with numbers, we use a vector with words for example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># items in a vector</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"date"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (fruit <span class="cf">in</span> fruits) {</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(fruit)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "apple"
-[1] "banana"
-[1] "cherry"
-[1] "date"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop with an index</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>languages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Python"</span>, <span class="st">"Java"</span>, <span class="st">"C++"</span>, <span class="st">"Ruby"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(languages)) {</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Language"</span>, i, <span class="st">"is"</span>, languages[i], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Language 1 is Python 
-Language 2 is Java 
-Language 3 is C++ 
-Language 4 is Ruby </code></pre>
-</div>
-</div>
-<p>Of course it is possible to complexify loops by nesting them.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nested loops</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"i ="</span>, i, <span class="st">", j ="</span>, j, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  }}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>i = 1 , j = 1 
-i = 1 , j = 2 
-i = 2 , j = 1 
-i = 2 , j = 2 
-i = 3 , j = 1 
-i = 3 , j = 2 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># break statement</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it is possible to stop the loop given a certain condition</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (num <span class="cf">in</span> numbers) {</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (num <span class="sc">==</span> <span class="dv">9</span>) {</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Found 9. Exiting the loop.</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Processing"</span>, num, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Processing 3 
-Processing 7 
-Processing 1 
-Found 9. Exiting the loop.</code></pre>
-</div>
-</div>
-</section>
-<section id="for-loops-in-python" class="level1">
-<h1>1.2 for loops in Python</h1>
+<section id="for-loops" class="level2">
+<h2 class="anchored" data-anchor-id="for-loops">1.1 For loops</h2>
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <p>A loop in Python starts with the <strong>for</strong> operator. This is followed by a condition that determines how long the loop runs (“the loop runs for…”). We start by defining a variable that will take the different values in the loop. Suppose we want to print the value 0 to 4. This requires a loop that takes a variables that starts at 0, and increases by one with each iteration. The <strong>in</strong> operator is used to define the values the variables will take. The end of the condition is identified with an <strong>:</strong> at the end of the line. A basic loop in python takes the following structure:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Iteration"</span>, i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">5</span>)<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Iteration"</span>, i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The main difference with R resides in the indentation of the code. You have to make sure that everything that you want to be part of the loop is indented at the same level.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Indented"</span>, i)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Not Indented"</span>, i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">5</span>)<span class="sc">:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Indented"</span>, i)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Not Indented"</span>, i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In this script the <strong>for</strong> loop will run from 0 to 4, and runs print(“Indented”, i) 5 times. The final line print(“Not Indented”, i) is not considered as part of the loop and will therefor by executed once the loop is done. At the point i = 4, and the code will print “Not Indented 4”.</p>
 <p>For the other variations the logic is the same as with R, we can use text and numbers, vectors of elements and ranges to loop over.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># items in a list</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="op">=</span> [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"date"</span>]</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fruit <span class="kw">in</span> fruits:</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"I like"</span>, fruit)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># with an index</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>languages <span class="op">=</span> [<span class="st">"Python"</span>, <span class="st">"Java"</span>, <span class="st">"C++"</span>, <span class="st">"Ruby"</span>]</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, language <span class="kw">in</span> <span class="bu">enumerate</span>(languages):</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Language"</span>, i <span class="op">+</span> <span class="dv">1</span>, <span class="st">"is"</span>, language)</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># with a custom step</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> number <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">2</span>):</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Odd number:"</span>, number)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Nested loops</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"i ="</span>, i, <span class="st">", j ="</span>, j)</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co"># a break statement</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">2</span>]</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="kw">in</span> numbers:</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">9</span>:</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Found 9. Exiting the loop."</span>)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Processing"</span>, num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># items in a list</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">=</span> [<span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span>, <span class="st">"date"</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fruit <span class="cf">in</span> fruits<span class="sc">:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"I like"</span>, fruit)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># with an index</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>languages <span class="ot">=</span> [<span class="st">"Python"</span>, <span class="st">"Java"</span>, <span class="st">"C++"</span>, <span class="st">"Ruby"</span>]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, language <span class="cf">in</span> <span class="fu">enumerate</span>(languages)<span class="sc">:</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Language"</span>, i <span class="sc">+</span> <span class="dv">1</span>, <span class="st">"is"</span>, language)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># with a custom step</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> number <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>, <span class="dv">2</span>)<span class="sc">:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Odd number:"</span>, number)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Nested loops</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">3</span>)<span class="sc">:</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">2</span>)<span class="sc">:</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"i ="</span>, i, <span class="st">", j ="</span>, j)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># a break statement</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">=</span> [<span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">4</span>, <span class="dv">2</span>]</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="cf">in</span> numbers<span class="sc">:</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> num <span class="sc">==</span> <span class="dv">9</span><span class="sc">:</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Found 9. Exiting the loop."</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Processing"</span>, num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 </section>
 <section id="while-loops" class="level1">
 <h1>2. While loops</h1>
 <p><strong>While</strong> loops continue to loop as long as a specific condition is satisfied. They therefore differ from the <strong>for</strong> loops which have a specified stopping point. The danger with these loops is that they can theoretically run forever if the conditions is always verified. The basic logic of these loops is: <strong>while</strong> followed by a condition and then the code to execute while this condition is verified:</p>
-</section>
-<section id="while-loops-in-r" class="level1">
-<h1>2.1 While loops in R</h1>
-<p><img src="Rlogo.png" class="img-fluid"></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Simple while loop</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>count <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (count <span class="sc">&lt;=</span> <span class="dv">5</span>) {</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Iteration"</span>, count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  count <span class="ot">&lt;-</span> count <span class="sc">+</span> <span class="dv">1</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration 1 
-Iteration 2 
-Iteration 3 
-Iteration 4 
-Iteration 5 </code></pre>
-</div>
-</div>
-<p>The main point of the while loops is that the execution of the code should update something that bring the condition closer to being verified. In the example above, we increase the <em>count</em> variable each time we run the loop until it’s equal to a certain value. If you use a while loop but nothing in the script is updated, the loop will run forever.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 2: Loop with a condition and next statement (equivalent to continue in Python)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;</span> <span class="dv">10</span>) {</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span> }  <span class="co"># Skip even numbers</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(i, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1 
-3 
-5 
-7 
-9 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: Nested while loops</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>row <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (row <span class="sc">&lt;=</span> <span class="dv">3</span>) {</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  col <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (col <span class="sc">&lt;=</span> <span class="dv">3</span>) {</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"Row"</span>, row, <span class="st">"Column"</span>, col, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    col <span class="ot">&lt;-</span> col <span class="sc">+</span> <span class="dv">1</span> }</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  row <span class="ot">&lt;-</span> row <span class="sc">+</span> <span class="dv">1</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Row 1 Column 1 
-Row 1 Column 2 
-Row 1 Column 3 
-Row 2 Column 1 
-Row 2 Column 2 
-Row 2 Column 3 
-Row 3 Column 1 
-Row 3 Column 2 
-Row 3 Column 3 </code></pre>
-</div>
-</div>
-</section>
-<section id="while-loops-in-python" class="level1">
-<h1>2.2 While loops in Python</h1>
 <p><img src="Pythonlogo.png" class="img-fluid"></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Simple while loop</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> count <span class="op">&lt;=</span> <span class="dv">5</span>:</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Iteration"</span>, count)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: Loop with a condition and continue statement</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span>  <span class="co"># Skip even numbers</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4: Nested while loops</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> row <span class="op">&lt;=</span> <span class="dv">3</span>:</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    col <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> col <span class="op">&lt;=</span> <span class="dv">3</span>:</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Row"</span>, row, <span class="st">"Column"</span>, col)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>        col <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    row <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 1: Simple while loop</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>count <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> count <span class="sc">&lt;=</span> <span class="dv">5</span><span class="sc">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Iteration"</span>, count)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    count <span class="sc">+</span><span class="er">=</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 3: Loop with a condition and continue statement</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="sc">&lt;</span> <span class="dv">10</span><span class="sc">:</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    i <span class="sc">+</span><span class="er">=</span> <span class="dv">1</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i % <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span><span class="sc">:</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        continue  <span class="co"># Skip even numbers</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Example 4: Nested while loops</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>row <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> row <span class="sc">&lt;=</span> <span class="dv">3</span><span class="sc">:</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    col <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> col <span class="sc">&lt;=</span> <span class="dv">3</span><span class="sc">:</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Row"</span>, row, <span class="st">"Column"</span>, col)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        col <span class="sc">+</span><span class="er">=</span> <span class="dv">1</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    row <span class="sc">+</span><span class="er">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercises" class="level1">
@@ -928,14 +713,14 @@ Row 3 Column 3 </code></pre>
 </section>
 <section id="working-with-real-data" class="level2">
 <h2 class="anchored" data-anchor-id="working-with-real-data">3.4 working with real data</h2>
-<p>On blackboard you wil find a dataset with energy production per county. Your task is to analyze this data to gain insights into the energy trends of these regions.</p>
+<p>On Brightspace you will find a dataset with energy production per county. Your task is to analyze this data to gain insights into the energy trends of these regions.</p>
 <ul>
 <li>Load and Inspect the Data
 <ul>
 <li>Import the dataset into your programming environment.</li>
 <li>Display the first 10 rows of the dataset to understand its structure.</li>
 <li>Identify the columns and their data types.</li>
-<li>In R you can use the summary() function to have a quick look at the data, in Python you can use the print(mydata.describe()) function.</li>
+<li>You can use the print(mydata.describe()) function.</li>
 </ul></li>
 <li>Subset the Data
 <ul>
@@ -972,72 +757,35 @@ Row 3 Column 3 </code></pre>
 <li>The third type consists in <strong>finding an error</strong>. We will provide you with a script, you will be requested to identify the error and explain how to adjust the code.</li>
 <li>The final question type consists in <strong>writing</strong> a short script. You will be provided with a task, you are requested to write a script that performs the task. You may pick the language.</li>
 </ul>
-<section id="exercise-1-reading-code-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1-reading-code-in-r">4.1 Exercise 1: reading code in R</h2>
-<p>You are provided with an R script. Explain each line of code of the script.</p>
+<section id="reading-code-in-python-1" class="level2">
+<h2 class="anchored" data-anchor-id="reading-code-in-python-1">4.1 Reading code in Python 1</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>factorials <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  fact <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  counter <span class="ot">&lt;-</span> n</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (counter <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    fact <span class="ot">&lt;-</span> fact <span class="sc">*</span> counter</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    counter <span class="ot">&lt;-</span> counter <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  factorials[[<span class="fu">as.character</span>(n)]] <span class="ot">&lt;-</span> fact</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(factorials)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>total_attempts <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>target_reached <span class="ot">=</span> False</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> not target_reached<span class="sc">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    die1 <span class="ot">=</span> <span class="fu">random.randint</span>(<span class="dv">1</span>, <span class="dv">6</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    die2 <span class="ot">=</span> <span class="fu">random.randint</span>(<span class="dv">1</span>, <span class="dv">6</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    sum_dice <span class="ot">=</span> die1 <span class="sc">+</span> die2</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    total_attempts <span class="ot">=</span> total_attempts <span class="sc">+</span> <span class="dv">1</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sum_dice <span class="sc">==</span> <span class="dv">7</span><span class="sc">:</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        target_reached <span class="ot">=</span> True</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(f<span class="st">"Sum of 7 reached after {total_attempts} attempts."</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(f<span class="st">"Attempt {total_attempts}: Sum = {sum_dice}"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="exercise-2-reading-code-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-2-reading-code-in-r">4.2 Exercise 2: reading code in R</h2>
+<section id="reading-code-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="reading-code-in-python">4.2 Reading code in Python</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>discounted_prices <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(products)) {</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  price <span class="ot">&lt;-</span> products<span class="sc">$</span>Price[i]</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  in_stock <span class="ot">&lt;-</span> products<span class="sc">$</span>InStock[i]</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (price <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;&amp;</span> in_stock) {</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    new_price <span class="ot">&lt;-</span> price <span class="sc">*</span> <span class="fl">0.9</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (price <span class="sc">&lt;=</span> <span class="dv">50</span> <span class="sc">&amp;&amp;</span> in_stock) {</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    new_price <span class="ot">&lt;-</span> price <span class="sc">*</span> <span class="fl">0.95</span> </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    new_price <span class="ot">&lt;-</span> price</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  discounted_prices <span class="ot">&lt;-</span> <span class="fu">c</span>(discounted_prices, new_price)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>products<span class="sc">$</span>DiscountedPrice <span class="ot">&lt;-</span> discounted_prices</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(products)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-3-reading-code-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-3-reading-code-in-python">4.3 Exercise 3: reading code in Python</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>total_attempts <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>target_reached <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="kw">not</span> target_reached:</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    die1 <span class="op">=</span> random.randint(<span class="dv">1</span>, <span class="dv">6</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    die2 <span class="op">=</span> random.randint(<span class="dv">1</span>, <span class="dv">6</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    sum_dice <span class="op">=</span> die1 <span class="op">+</span> die2</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    total_attempts <span class="op">=</span> total_attempts <span class="op">+</span> <span class="dv">1</span> </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sum_dice <span class="op">==</span> <span class="dv">7</span>:</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        target_reached <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Sum of 7 reached after </span><span class="sc">{</span>total_attempts<span class="sc">}</span><span class="ss"> attempts."</span>)</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Attempt </span><span class="sc">{</span>total_attempts<span class="sc">}</span><span class="ss">: Sum = </span><span class="sc">{</span>sum_dice<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="exercise-4-reading-code-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-4-reading-code-in-python">4.4 Exercise 4: reading code in Python</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> student <span class="kw">in</span> students:</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    avg_score <span class="op">=</span> (student[<span class="st">'Math'</span>] <span class="op">+</span> student[<span class="st">'Science'</span>] <span class="op">+</span> student[<span class="st">'English'</span>]) <span class="op">/</span> <span class="dv">3</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> avg_score <span class="op">&gt;=</span> <span class="dv">60</span>:</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        student[<span class="st">'Passed'</span>] <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        student[<span class="st">'Passed'</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> student <span class="kw">in</span> students:</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> student <span class="cf">in</span> students<span class="sc">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    avg_score <span class="ot">=</span> (student[<span class="st">'Math'</span>] <span class="sc">+</span> student[<span class="st">'Science'</span>] <span class="sc">+</span> student[<span class="st">'English'</span>]) <span class="sc">/</span> <span class="dv">3</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> avg_score <span class="sc">&gt;=</span> <span class="dv">60</span><span class="sc">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        student[<span class="st">'Passed'</span>] <span class="ot">=</span> True</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        student[<span class="st">'Passed'</span>] <span class="ot">=</span> False</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> student <span class="cf">in</span> students<span class="sc">:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(student)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exercise-5-write-code" class="level2">

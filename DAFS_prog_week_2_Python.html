@@ -189,6 +189,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_3_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Loops and exercises</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -723,7 +729,7 @@ Exercises part 1:
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_xls <span class="op">=</span> pd.read_excel(xls_file)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_xls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The previous file formats usually contain simple tables (just like an excel sheet, with one observation per row/column combination). For more complex datasets we could have table in each cell. Imagine for example a dataframe in with a patent on each row, each patent can have multiple assignees, with addresses and inventors associated to them. This means that we could have a dataframe inside of the dataframe. To accommodate this type of complex data, the JSON file format has been developed. It was developped specifically for complex data structures.</p>
+<p>The previous file formats usually contain simple tables (just like an excel sheet, with one observation per row/column combination). For more complex datasets we could have table in each cell. Imagine for example a dataframe in with a patent on each row, each patent can have multiple assignees, with addresses and inventors associated to them. This means that we could have a dataframe inside of the dataframe. To accommodate this type of complex data, the JSON file format has been developed. It was developed specifically for complex data structures.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Import JSON File</span></span>
