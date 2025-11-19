@@ -102,6 +102,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -539,7 +568,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>1. Looping functions</h1>
 <p>Loops are a fundamental part of programming in data science because they allow you to efficiently perform repetitive tasks on large datasets. Instead of writing repetitive code manually, loops enable automation by iterating over data structures like lists, dataframes, or arrays. This is particularly important when processing datasets with thousands or millions of entries, as it saves time and reduces the risk of errors. Loops also allow for dynamic analysis, enabling you to apply functions, calculations, or transformations to each element in a dataset, making them a powerful tool for scalability and flexibility in data analysis.</p>
 <p>Imagine you are analyzing the carbon footprint of 1,000 households to assess their environmental impact. Each household has data on electricity consumption, gas usage, and travel habits. Your task is to calculate the total carbon emissions for each household using a simple formula:</p>
-<p>CarbonEmissions=(Electricity(kWh) × 0.5) + (Gas(m³) × 2.1) + (Travel(km)×0.2)</p>
+<p><span class="math display">\[
+CarbonEmissions=(Electricity(kWh) × 0.5) + (Gas(m³) × 2.1) + (Travel(km)×0.2)
+\]</span></p>
 <p>Without loops, you would need to manually calculate this formula for each household, which is tedious and impractical. Instead, with a loop, you can automate the process.</p>
 <p>Imagine that we have measurements of forestation over time:</p>
 <table class="caption-top table">
