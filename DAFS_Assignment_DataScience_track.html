@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – Data Science track Assignment</title>
+<title>NetworkIsLife – Data Analytics for Sustainability – data science track assignment (in pairs)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data Science track Assignment</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Data Analytics for Sustainability – data science track assignment (in pairs)</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -195,14 +195,32 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_1_python_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions Python week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./DAFS_prog_week_2_Python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_2_python_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions Python week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./DAFS_prog_week_3_Python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3: Loops and exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_3_python_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions Python week 3</span></a>
   </div>
 </li>
       </ul>
@@ -439,15 +457,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#types-of-analysis" id="toc-types-of-analysis" class="nav-link active" data-scroll-target="#types-of-analysis">Types of analysis</a>
+  <li><a href="#overview-of-the-assignment" id="toc-overview-of-the-assignment" class="nav-link active" data-scroll-target="#overview-of-the-assignment">Overview of the assignment</a>
   <ul class="collapse">
-  <li><a href="#technology-focused-analysis" id="toc-technology-focused-analysis" class="nav-link" data-scroll-target="#technology-focused-analysis">Technology-focused Analysis</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#what-should-the-report-contain" id="toc-what-should-the-report-contain" class="nav-link" data-scroll-target="#what-should-the-report-contain">What should the report contain?</a></li>
+  <li><a href="#what-should-be-handed-in" id="toc-what-should-be-handed-in" class="nav-link" data-scroll-target="#what-should-be-handed-in">What should be handed in?</a></li>
+  <li><a href="#additional-requirements" id="toc-additional-requirements" class="nav-link" data-scroll-target="#additional-requirements">Additional Requirements</a></li>
+  </ul></li>
+  <li><a href="#types-of-analysis" id="toc-types-of-analysis" class="nav-link" data-scroll-target="#types-of-analysis">Types of analysis</a>
+  <ul class="collapse">
+  <li><a href="#geospatial-analysis" id="toc-geospatial-analysis" class="nav-link" data-scroll-target="#geospatial-analysis">Geospatial analysis</a></li>
+  <li><a href="#technology-focused-analysis" id="toc-technology-focused-analysis" class="nav-link" data-scroll-target="#technology-focused-analysis">Technology-focused Analysis</a>
+  <ul class="collapse">
   <li><a href="#bibliographic-analysis" id="toc-bibliographic-analysis" class="nav-link" data-scroll-target="#bibliographic-analysis">Bibliographic analysis</a></li>
   <li><a href="#your-own-idea" id="toc-your-own-idea" class="nav-link" data-scroll-target="#your-own-idea">Your own idea</a></li>
   </ul></li>
   <li><a href="#ai" id="toc-ai" class="nav-link" data-scroll-target="#ai">AI</a></li>
   <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
   <li><a href="#rubric-for-this-assignment" id="toc-rubric-for-this-assignment" class="nav-link" data-scroll-target="#rubric-for-this-assignment">Rubric for this assignment</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -456,7 +484,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Data Science track Assignment</h1>
+<h1 class="title">Data Analytics for Sustainability – data science track assignment (in pairs)</h1>
 </div>
 
 
@@ -473,44 +501,85 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this data science track you are tasked with the preparation of a short, data-driven report which shall not exceed 4000 words. # Goal is to compare two different regions. The approach of this assignment is exploratory, this means that you are not required to use a specific theory or theoretical framework you are however required to use specific techniques. The aim is to explore a topic in a data driven way, combining geographical analysis with Natural Language Processing. The assignment should show that you master the different techniques thought in during the Data Science Track.</p>
+<section id="overview-of-the-assignment" class="level1">
+<h1>Overview of the assignment</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In the data science track of Data Analytics for Sustainability we have practiced with the collection, import, analysis and visualisation of geographic and textual data. In this assignment we will apply these skills to analyse and visualize patterns on any topic related to sustainability. The central idea is that you investigate the (spatial) relationship between two variables. The relationship can be analysed in a specific region, or you can compare two regions (e.g.&nbsp;Amsterdam and Utrecht) or compare scales (e.g.&nbsp;province vs.&nbsp;country) or time periods. The aim is to explore your chosen relatioship in a data driven way, combining geospatial analysis with Natural Language Processing.</p>
+</section>
+<section id="what-should-the-report-contain" class="level2">
+<h2 class="anchored" data-anchor-id="what-should-the-report-contain">What should the report contain?</h2>
 <ul>
-<li>In groups of two:
-<ul>
-<li>you will define a topic on which to do your assignment. The topic requires a geographical dimension and rely at least in part on textual data.</li>
-<li>prepare the data sets, run NLP tasks, implement geospatial analyses, visualize and/or map the results.</li>
-<li>the report should contain: Introduction, methods &amp; data section, results, discussion &amp; conclusion.</li>
-</ul></li>
+<li>Text (max. 4000 words). The text should contain the following sections: introduction, data and methods, results, discussion, conclusion.</li>
+<li>Code. Clean and annotated code. Make sure to include only the code that was used to actually do the processing, analysis, and visualizations. Just like any other report, you don’t need to include everything you tried, but rather be transparent about the steps you took to generate your results. In addition, make sure to annotate the code using hashtags (#) to explain what you did.</li>
+<li>Visualizations. Strive for a maximum of 4 visualizations. Depending on the scope of your project, these visualizations could be maps, graphs, etc.</li>
 </ul>
-<p>You will use at least two different data sets on a specific topic, and analyse the data. The richer the database, the more value can be extracted. To make things a bit easier, we describe three types of analyses with mandatory data. This ensure that you have enough data to work with. If you have your own idea, this is always an option under the conditions described below and after consultation with us (mainly to ensure feasibility). All types of analysis are graded on the same rubric.</p>
+</section>
+<section id="what-should-be-handed-in" class="level2">
+<h2 class="anchored" data-anchor-id="what-should-be-handed-in">What should be handed in?</h2>
+<p>You will hand in a .zip file containing three things:</p>
 <ul>
-<li>Your assignment will contain:
-<ul>
-<li>At least two different datasets with at least one textual scope and one geograpical scope.</li>
-<li>A topic model for each of the data sources. With a description of the process that led you to the final topics (steps in data cleaning, and method for the identification of the number of topics)</li>
-<li>Either: (1) A Named Entity Recognition section in which you extract different elements from news articles. You will connect the elements identified to word, topics or other variables in the database in a coherent manner. Or (2) a Sentiment analysis on news articles. The sentiment scores can be connected to the other variables identified in both the NER exercise and the topic modelling exercise.</li>
-<li></li>
-</ul></li>
+<li>The .html file generated from your Quarto document containing explanatory text and code.</li>
+<li>A folder that is automatically generated when rendering your .html file (i.e.&nbsp;the associated files of your .html file, NOT the input data)</li>
+<li>The Quarto file itself (.qmd)</li>
 </ul>
-<p>In the table below, some analyses types are presented from which you can chose one. You are free to come up with your own design, but be aware of the time restrictions for this assignment. Using a proposed analysis type ensures data availability and feasibility.</p>
-<section id="types-of-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="types-of-analysis">Types of analysis</h2>
-<section id="technology-focused-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="technology-focused-analysis">Technology-focused Analysis</h3>
+<p>You can generate a .html file from your Quarto document by clicking the ‘Render’ Button. At the beginning of your Quarto document, you should specify: format: html echo: true These settings ensure that the generated .html file shows the code you wrote to generate your visualizations. Make sure to try this out (Render), and don’t wait with this until the last day before the deadline.</p>
+</section>
+<section id="additional-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="additional-requirements">Additional Requirements</h2>
+<p>Use at least two different datasets with at least one textual scope and one geograpical scope.</p>
+<p><em>Textual analysis:</em> + A topic model for each of the data sources. With a description of the process that led you to the final topics (steps in data cleaning, and method for the identification of the number of topics) + Either: (1) A Named Entity Recognition section in which you extract different elements from news articles. You will connect the elements identified to word, topics or other variables in the database in a coherent manner. Or (2) a Sentiment analysis on news articles. The sentiment scores can be connected to the other variables identified in both the NER exercise and the topic modelling exercise.</p>
+<p><em>Geospatial analysis:</em> + Combine at least two different geographic data types (raster/vector) and/or at least two different geometry types (points, lines, polygons). For example: analyse points in polygons, extract and summarize raster values within polygons, calculate distance between points and lines, etc. + Calculate an index to summarize and/or visualize the spatial relationship between variables of interest (e.g.&nbsp;density of points within polygons, change of value with distance, etc.)</p>
+</section>
+</section>
+<section id="types-of-analysis" class="level1">
+<h1>Types of analysis</h1>
+<p>Below, we present some possible types of analysis and data sources that you may use in your assignment (obviously you will combine geospatial analyses with NLP). You are free to come up with your own design, but be aware of the time restrictions for this assignment. Using a proposed analysis type ensures data availability and feasibility.</p>
+<section id="geospatial-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="geospatial-analysis">Geospatial analysis</h2>
+<p>In this type of analysis you will focus on a spatial relationship that inspires you. For example, you could assess the relationship between income and greenness, air pollution and roads, etc. Select data sources that are relevant to the relationship under investigation. Subset/crop the data to the area of interest. Choose a scale that’s feasible in the context of this assignment (larger datasets take more time to process). Depending on the input data and type of analysis, this could be a city, province, or country (or a comparison between them). Analyse the spatial relationship between different variables. The relationship can be analysed in a specific region, or you can compare two regions (e.g.&nbsp;Amsterdam and Utrecht) or compare scales (e.g.&nbsp;province vs.&nbsp;country) or time periods. Create a map (or multiple maps) to visualize your results and interpret the spatial patterns. Some data sources to check out: <strong>Global</strong>:</p>
+<ul>
+<li><a href="https://www.naturalearthdata.com">NaturalEarth</a></li>
+<li><a href="https://docs.ropensci.org/osmdata/">Open Street Map</a></li>
+<li><a href="https://gadm.org/data.html">Administrative areas (countries, districts, etc.)</a></li>
+<li><a href="https://www.gbif.org">Biodiversity - GBIF</a></li>
+<li><a href="https://hydrography.org/hydrography90m/hydrography90m_layers">Hydrography/rivers</a></li>
+<li><a href="https://amber.international/european-barrier-atlas/">River barriers</a></li>
+<li><a href="https://worldclim.org/data/worldclim21.html">Historical climate</a></li>
+<li><a href="https://worldclim.org/data/cmip6/cmip6climate.html">Future climate</a></li>
+<li><a href="https://anthroecology.org/datasets/">Anthromes</a></li>
+<li><a href="https://datadryad.org/dataset/doi:10.5061/dryad.dk1j0">Human development index and GDP (gridded)</a></li>
+<li><a href="https://portal.opentopography.org/dataspace/dataset?opentopoID=OTDS.012020.4326.1">Geomorphology (90m)</a></li>
+<li><a href="https://doi.pangaea.de/10.1594/PANGAEA.899135">Geomorphology (250m)</a></li>
+<li><a href="https://zenodo.org/records/3748350">Crop suitability</a></li>
+<li><a href="https://www.worldwildlife.org/publications/">Ecoregions</a></li>
+<li><a href="https://glottolog.org/meta/downloads">Languages</a></li>
+</ul>
+<p><strong>Countries:</strong> Many countries have a (geo)data portal. For the Netherlands there is a lot of data available on <a href="https://www.pdok.nl/datasets">PDOK</a>.</p>
+<p><strong>Cities and provinces</strong>. Many cities have a (geo)data portal. Examples for Utrecht:</p>
+<ul>
+<li><a href="https://utrecht.incijfers.nl/viewer">Utrecht jive</a> contains data for the city of Utrecht on many different subjects, much of the data is spatial (or can be joined to polygons by name)</li>
+<li><a href="https://geo-point.provincie-utrecht.nl/pages/open-data">Utrecht province geodata</a></li>
+<li><a href="https://open.utrecht.nl/search/query/-/filters/type%3Adataset/page/1n">Utrecht bats</a></li>
+<li><a href="https://open.utrecht.nl/search/query/-/filters/type%3Adataset/page/1">Utrecht swifts</a></li>
+</ul>
+</section>
+<section id="technology-focused-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="technology-focused-analysis">Technology-focused Analysis</h2>
 <p>In this type of analysis you will focus on a technology that you choose yourself. As a mandatory datasource you will use patent data. Patents are chosen because they contain a lot of valuable data you can analyse (who is doing research on this technology, where are they from, who are they collaborating with, compare companies or regions, quality assessment etc.).</p>
 <p>To complement this data you will at least complement the data with articles from the Lexis Uni database. The main aim of this analysis will be to study a specific technology and show how it is perceived in society.</p>
 <ul>
 <li><p>Some data sources to check out:</p>
 <ul>
 <li><a href="https://www.eea.europa.eu/en/datahub?size=n_10_n&amp;filters%5B0%5D%5Bfield%5D=issued.date&amp;filters%5B0%5D%5Btype%5D=any&amp;filters%5B0%5D%5Bvalues%5D%5B0%5D=All%20time">European Environment agency data Hub</a> (Data related to specific technologies)</li>
-<li>Lexis Uni can be accesses via the UU website</li>
+<li>Lexis Uni has news paper articles and can be accessed via the UU library website</li>
 <li><a href="https://db.nomics.world">DBnomics</a> (various databases)</li>
 <li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
 <li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
 <li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
+<li>On demand we have a dataset with all dutch patents, geolocated at the NUTS3 &amp; NUTS 4 level.</li>
 </ul></li>
 </ul>
-</section>
 <section id="bibliographic-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="bibliographic-analysis">Bibliographic analysis</h3>
 <p>This type of analysis allows you to tackle questions that are less technology oriented. Think about questions related to social justice, emotions and climate transition, governance issues,… The idea is to perform a bibliographic analysis on a topic of your choice and connect this with a societal view with the help of articles from lexis uni.</p>
@@ -529,7 +598,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
 <li>Overton (via the UU library)</li>
 <li>Lexis Nexis (via the UU library)</li>
-<li>[…] add some geographical data &gt;—&lt;</li>
+<li>Geographical data sources are presented in the slides of the lectures</li>
 </ul></li>
 </ul>
 </section>
@@ -557,41 +626,48 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://ec.europa.eu/eurostat/data/database">Eurostat</a></li>
 <li><a href="Lens.org">Lens.org</a> (for Patents and Scientific Publications)</li>
 <li><a href="https://research-and-innovation.ec.europa.eu/projects/project-databases_en">CORDIS</a> (european research project databases)</li>
-<li>Overton (via the UU library)</li>
+<li>Overton.io (via the UU library)</li>
 <li>Lexis Uni (via the UU library)</li>
+<li>On demand we have a dataset with company descriptions that have the B-corp Label. they also have a location</li>
+<li>On demand we have a dataset with startup descriptions &amp; location</li>
+<li>NWO database with Dutch research projects</li>
+<li>A datasate with all dutch patents, geolocated at the NUTS3 &amp; NUTS 4 level.</li>
 </ul></li>
 </ul>
 </section>
 </section>
 <section id="ai" class="level2">
 <h2 class="anchored" data-anchor-id="ai">AI</h2>
-<p>The use of Large Language Models (ChatGPT, LLama, Bard) to help with programming is allowed. The main focus is on the quality of the analysis of the results. You are not allowed to use data sets you have entirely generated yourself. You are of course allowed to compute additional data on an existing data set with real data.</p>
+<p>The use of Large Language Models (ChatGPT, LLama, Bard) to help with programming is allowed. The main focus is on the quality of the analysis of the results. You are not allowed to use data sets you have entirely generated yourself. You are of course allowed to compute additional data on an existing data set with real data. Analysis of the data should be your own work and not assisted by AI (i.e you cannot use AI to generate the analysis for you). If the teachers have a doubt with regards to the use of AI, they can request a discussion where students will be asked to present and discuss the results orally.</p>
 </section>
 <section id="schedule" class="level2">
 <h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p>To keep up with the rapid pace of this course, you can follow the gantt below to check your progress. In each tutorial you will learn new skills that allow you to dig deeper into your data. If you keep up with this schedule you should be able to work on your data in each tutorial and extract new information from your data.</p>
+<p>To keep up with the rapid pace of this course, you can follow the GANTT below to check your progress. In each tutorial you will learn new skills that allow you to dig deeper into your data. If you keep up with this schedule you should be able to work on your data in each tutorial and extract new information from your data.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">gantt
-    title Proposed gantt for the assignment
+    title Proposed GANTT for the assignment
     dateFormat DD-MM-YYYY
     axisFormat %d-%m-%y
-    section Assignment
-        Assignment :a1, 02-12-2024, 50d
+    section DAFS
+        Assignment :a1, 03-12-2025, 50d
     section Steps
-    Tutorial 1- Term Extraction : milestone, m1, 02-12-2024, 0d
-        Topic &amp; data 1 :a2, 02-12-2024, 14d
-    Tutorial 2- Topic Modelling : milestone, m2, 09-12-2024, 0d
-        Usage Analysis:a3, after a2, 7d
-    Tutorial 3- NER : milestone, m3, 16-12-2024, 0d
-        Second Data set:a4, after a3, 7d
-    Tutorial 4- Sentiment : milestone, m4, 06-01-2025, 0d
-        Finalize analysis:a5, after a4, 7d
-    Tutorial 5- LLM : milestone, m5, 15-01-2025, 0d
-        Finish writing:a6, after a5, 14d
+    Tutorial 1- Topic Modelling : milestone, m1, 03-12-2025, 0d
+        Find Topic :a2, 03-12-2025, 14d
+    Tutorial 2- Geo Data &amp; Visualisation: milestone, m2, 10-12-2025, 0d
+        Find Topic + geo data:a3, after a2, 7d
+    Tutorial 3- Data Harvesting: milestone, m3, 17-12-2025, 0d
+        Analysis :a4, after a3, 7d
+    Tutorial 4- Sentiment + NER : milestone, m4, 07-01-2026, 0d
+        Analysis:a5, after a4, 7d
+    Tutorial 5- Geometric : milestone, m5, 14-01-2026, 0d
+        Finish writing 1:a6, after a5, 7d
+    Tutorial 6- LLMs : milestone, m5, 21-01-2026, 0d
+        Finish writing 2:a7, after a6, 7d
+
         
 </pre>
 </div>
@@ -602,55 +678,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rubric-for-this-assignment" class="level2">
 <h2 class="anchored" data-anchor-id="rubric-for-this-assignment">Rubric for this assignment</h2>
-<p>This assignment will be graded on different dimensions. The detailed rubric can be found on blackboard.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Dimension</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Quality of writing</td>
-<td>Spelling, grammar, structure</td>
-</tr>
-<tr class="even">
-<td>Data Choice</td>
-<td>How coherent is the data to the choice of topic</td>
-</tr>
-<tr class="odd">
-<td>Usage Analysis</td>
-<td>Data description: where does it come, which source, any biases?</td>
-</tr>
-<tr class="even">
-<td>Data Preparation</td>
-<td>Which steps did you take to prepare the data for your analysis (lemma, stemming, regex, dico)</td>
-</tr>
-<tr class="odd">
-<td>Data Analysis</td>
-<td>Which indicators and methods did you use to analyse your data. How coherent is the analysis</td>
-</tr>
-<tr class="even">
-<td>Transparency in thresholds</td>
-<td>Explain choices made in the analysis (thresholds, number of topics, filtering of documents)</td>
-</tr>
-<tr class="odd">
-<td>Conclusion-Discussion</td>
-<td>Quality of conclusions pulled from the data.</td>
-</tr>
-<tr class="even">
-<td>Code</td>
-<td>Results from the document should be easy to find the script. The steps should be well documented.</td>
-</tr>
-</tbody>
-</table>
+<p>The rubric for the assignemt will be posted on Brightspace in the same folder as the assignment.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

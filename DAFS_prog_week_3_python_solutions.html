@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife</title>
+<title>NetworkIsLife – Solutions Python week 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -90,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -108,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NetworkIsLife</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_3_python_solutions.html">Solutions Python week 3</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -216,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_3_python_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./DAFS_prog_week_3_python_solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Solutions Python week 3</span></a>
   </div>
 </li>
@@ -449,15 +483,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">3.1</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">3.2</a></li>
+  <li><a href="#guess-the-secret-number" id="toc-guess-the-secret-number" class="nav-link" data-scroll-target="#guess-the-secret-number">3.3: Guess the secret number</a></li>
+  <li><a href="#working-with-real-data" id="toc-working-with-real-data" class="nav-link" data-scroll-target="#working-with-real-data">3.4 Working with real data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_3_python_solutions.html">Solutions Python week 3</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">NetworkIsLife</h1>
+<h1 class="title">Solutions Python week 3</h1>
 </div>
 
 
@@ -474,9 +517,210 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="networkislife.jpg" class="img-fluid"></p>
+<section id="section" class="level1">
+<h1>3.1</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 1: For loop – print numbers divisible by 3 or 5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>numbers_divisible <span class="ot">=</span> []  <span class="co"># we will store the numbers divisible by 3 or 5 here</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">1</span>, <span class="dv">51</span>)<span class="sc">:</span>  <span class="co"># numbers from 1 to 50</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (n <span class="sc">% 3 == 0) or (n %</span> <span class="dv">5</span> <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(n)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">numbers_divisible.append</span>(n)  <span class="co"># remember this number for later</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 2: While loop – cumulative sum of these numbers until it exceeds 200</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cumulative_sum <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span>  <span class="co"># index for the list</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="sc">&lt;</span> <span class="fu">len</span>(numbers_divisible) and cumulative_sum <span class="sc">&lt;=</span> <span class="dv">200</span><span class="sc">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    cumulative_sum <span class="ot">=</span> cumulative_sum <span class="sc">+</span> numbers_divisible[i]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span>  <span class="co"># move to the next number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-1" class="level1">
+<h1>3.2</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># using the following dataframe</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Region"</span><span class="sc">:</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"A"</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"EnergyUsage"</span><span class="sc">:</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sustainable"</span><span class="sc">:</span> [True, False, True, False, True, False, True]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Full DataFrame:"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Part 1: For loop – print rows with Sustainable == True and EnergyUsage &gt; 20 </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Rows where Sustainable is True and EnergyUsage &gt; 20:"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># We loop over the row indices: 0, 1, 2, ...</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="fu">len</span>(df))<span class="sc">:</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    row <span class="ot">=</span> df.iloc[i]  <span class="co"># get the i-th row</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (row[<span class="st">"Sustainable"</span>] <span class="sc">==</span> True) <span class="fu">and</span> (row[<span class="st">"EnergyUsage"</span>] <span class="sc">&gt;</span> <span class="dv">20</span>)<span class="sc">:</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(row)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Part 2: While loop – cumulative EnergyUsage for Sustainable rows</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>cumulative_energy <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>contributing_indices <span class="ot">=</span> []  <span class="co"># we will store the row indices that contribute</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co"># We continue while i is inside the dataframe AND cumulative_energy &lt;= 50</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="sc">&lt;</span> <span class="fu">len</span>(df) and cumulative_energy <span class="sc">&lt;=</span> <span class="dv">50</span><span class="sc">:</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    row <span class="ot">=</span> df.iloc[i]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> row[<span class="st">"Sustainable"</span>] <span class="sc">==</span> True<span class="sc">:</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        cumulative_energy <span class="ot">=</span> cumulative_energy <span class="sc">+</span> row[<span class="st">"EnergyUsage"</span>]</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">contributing_indices.append</span>(i)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Cumulative EnergyUsage from sustainable rows (stopped when &gt; 50):"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_energy)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Rows that contributed to this cumulative EnergyUsage:"</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df.iloc[contributing_indices])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="guess-the-secret-number" class="level1">
+<h1>3.3: Guess the secret number</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>import random</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select a secret number between 1 and 20</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>secret_number <span class="ot">=</span> <span class="fu">random.randint</span>(<span class="dv">1</span>, <span class="dv">20</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>attempts <span class="ot">=</span> <span class="dv">0</span>          <span class="co"># how many guesses the user has made</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>max_attempts <span class="ot">=</span> <span class="dv">5</span>      <span class="co"># maximum number of allowed guesses</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"I have chosen a number between 1 and 20. Can you guess it?"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a while loop to allow the user to guess</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> attempts <span class="sc">&lt;</span> max_attempts<span class="sc">:</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    guess <span class="ot">=</span> <span class="fu">int</span>(<span class="fu">input</span>(<span class="st">"Enter your guess: "</span>))</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    attempts <span class="ot">=</span> attempts <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> guess <span class="sc">&gt;</span> secret_number<span class="sc">:</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Too high!"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    elif guess <span class="sc">&lt;</span> secret_number<span class="sc">:</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Too low!"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Correct!"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"You guessed it in"</span>, attempts, <span class="st">"attempt(s)."</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span>  <span class="co"># stop the loop if the guess is correct</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># This runs if the loop ends without a correct guess</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> attempts <span class="sc">==</span> max_attempts and guess <span class="sc">!=</span> secret_number<span class="sc">:</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Game Over!"</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"The secret number was:"</span>, secret_number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="working-with-real-data" class="level1">
+<h1>3.4 Working with real data</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This was not part of the exercise, but to ensure you can run the script we create some data here to ensure it will always work.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Country"</span><span class="sc">:</span> [<span class="st">"Netherlands"</span>, <span class="st">"Belgium"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Spain"</span>, <span class="st">"USA"</span>, <span class="st">"China"</span>, <span class="st">"Sweden"</span>],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Continent"</span><span class="sc">:</span> [<span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"Europe"</span>, <span class="st">"North America"</span>, <span class="st">"Asia"</span>, <span class="st">"Europe"</span>],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"renewable_energy"</span><span class="sc">:</span> [<span class="dv">50</span>, <span class="dv">30</span>, <span class="dv">40</span>, np.nan, <span class="dv">25</span>, <span class="dv">80</span>, <span class="dv">100</span>, <span class="dv">60</span>],   <span class="co"># some values, one missing (Germany)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"total_energy"</span><span class="sc">:</span>     [<span class="dv">120</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, np.nan, <span class="dv">300</span>, <span class="dv">500</span>, <span class="dv">90</span>]  <span class="co"># some values, one missing (Spain)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into a pandas dataframe for the functions to work</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Inspect the data</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"First 10 rows of the dataset:"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">df.head</span>(<span class="dv">10</span>))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Column types:"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df.dtypes)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Summary statistics (describe):"</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">df.describe</span>())</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Subset the data to European countries</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>EU_data <span class="ot">=</span> df[df[<span class="st">"Continent"</span>] <span class="sc">==</span> <span class="st">"Europe"</span>]<span class="fu">.copy</span>()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Data for European countries (EU_data):"</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(EU_data)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Compute renewable energy percentage</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#     renewable_percentage = (renewable_energy / total_energy) * 100</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>EU_data[<span class="st">"renewable_percentage"</span>] <span class="ot">=</span> (EU_data[<span class="st">"renewable_energy"</span>] <span class="sc">/</span> EU_data[<span class="st">"total_energy"</span>]) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"EU_data with renewable_percentage:"</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(EU_data)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Classify countries by renewable_percentage</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#    &gt; 50%  -&gt; "High Renewable"</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#    20–50% -&gt; "Medium Renewable"</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#    else   -&gt; "Low Renewable"</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>def <span class="fu">classify_renewable</span>(pct)<span class="sc">:</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pct <span class="sc">&gt;</span> <span class="dv">50</span><span class="sc">:</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>        return <span class="st">"High Renewable"</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    elif pct <span class="sc">&gt;=</span> <span class="dv">20</span> and pct <span class="sc">&lt;=</span> <span class="dv">50</span><span class="sc">:</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>        return <span class="st">"Medium Renewable"</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>        return <span class="st">"Low Renewable"</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>EU_data[<span class="st">"renewable_category"</span>] <span class="ot">=</span> EU_data[<span class="st">"renewable_percentage"</span>]<span class="fu">.apply</span>(classify_renewable)</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"EU_data with renewable_category:"</span>)</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(EU_data)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Using if/else to check for missing values</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">#    in renewable_energy or total_energy</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>missing_mask <span class="ot">=</span> EU_data[<span class="st">"renewable_energy"</span>]<span class="fu">.isna</span>() <span class="sc">|</span> EU_data[<span class="st">"total_energy"</span>]<span class="fu">.isna</span>()</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>n_missing <span class="ot">=</span> <span class="fu">missing_mask.sum</span>()</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> n_missing <span class="sc">&gt;</span> <span class="dv">0</span><span class="sc">:</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"There are"</span>, n_missing, <span class="st">"rows with missing values in renewable_energy or total_energy."</span>)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"There are no missing values in renewable_energy or total_energy."</span>)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: show the incomplete rows</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> n_missing <span class="sc">&gt;</span> <span class="dv">0</span><span class="sc">:</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Rows with missing values:"</span>)</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(EU_data[missing_mask])</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Group and summarize data</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="co">#    Group by renewable_category and compute the average</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co">#    renewable_percentage for each category</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------------------------------------------</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>summary <span class="ot">=</span> (</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>    EU_data</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.groupby</span>(<span class="st">"renewable_category"</span>)[<span class="st">"renewable_percentage"</span>]</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.mean</span>()</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>    <span class="fu">.reset_index</span>()</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Average renewable_percentage by renewable_category:"</span>)</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

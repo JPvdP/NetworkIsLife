@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife</title>
+<title>NetworkIsLife – Solutions Python week 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -90,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -108,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NetworkIsLife</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_1_python_solutions.html">Solutions Python week 1</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -192,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_1_python_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./DAFS_prog_week_1_python_solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Solutions Python week 1</span></a>
   </div>
 </li>
@@ -449,15 +483,51 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#exercices-part-2" id="toc-exercices-part-2" class="nav-link active" data-scroll-target="#exercices-part-2">Exercices Part 2:</a>
+  <ul class="collapse">
+  <li><a href="#create-a-4x4-matrix-filled-with-zeros" id="toc-create-a-4x4-matrix-filled-with-zeros" class="nav-link" data-scroll-target="#create-a-4x4-matrix-filled-with-zeros">1. Create a 4x4 matrix filled with zeros</a></li>
+  <li><a href="#variable-assignment" id="toc-variable-assignment" class="nav-link" data-scroll-target="#variable-assignment">2. Variable Assignment</a></li>
+  <li><a href="#matrix-operations" id="toc-matrix-operations" class="nav-link" data-scroll-target="#matrix-operations">3 Matrix Operations</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">3.1</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">3.2</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises-part-3" id="toc-exercises-part-3" class="nav-link" data-scroll-target="#exercises-part-3">Exercises part 3:</a>
+  <ul class="collapse">
+  <li><a href="#check-numeric-values" id="toc-check-numeric-values" class="nav-link" data-scroll-target="#check-numeric-values">1. Check numeric values</a>
+  <ul class="collapse">
+  <li><a href="#assign-numeric-values-to-two-variables" id="toc-assign-numeric-values-to-two-variables" class="nav-link" data-scroll-target="#assign-numeric-values-to-two-variables">1.1 Assign numeric values to two variables</a></li>
+  <li><a href="#assign-numeric-values-to-two-variables-1" id="toc-assign-numeric-values-to-two-variables-1" class="nav-link" data-scroll-target="#assign-numeric-values-to-two-variables-1">1.2 Assign numeric values to two variables</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1.3</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercises-part-4" id="toc-exercises-part-4" class="nav-link" data-scroll-target="#exercises-part-4">Exercises part 4</a>
+  <ul class="collapse">
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">4.1</a></li>
+  </ul></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">4.2</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">4.3</a></li>
+  <li><a href="#exercises-part-5" id="toc-exercises-part-5" class="nav-link" data-scroll-target="#exercises-part-5">Exercises part 5</a>
+  <ul class="collapse">
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">5.1</a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">5.2</a></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">5.3</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_Python.html">DAFS - ESM track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_1_python_solutions.html">Solutions Python week 1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">NetworkIsLife</h1>
+<h1 class="title">Solutions Python week 1</h1>
 </div>
 
 
@@ -474,9 +544,196 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="networkislife.jpg" class="img-fluid"></p>
+<section id="exercices-part-2" class="level1">
+<h1>Exercices Part 2:</h1>
+<section id="create-a-4x4-matrix-filled-with-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-4x4-matrix-filled-with-zeros">1. Create a 4x4 matrix filled with zeros</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>import numpy as np  <span class="co"># we need numpy for matrices</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 4x4 matrix filled with zeros</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>matrix <span class="ot">=</span> <span class="fu">np.zeros</span>((<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">type</span>(matrix))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variable-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="variable-assignment">2. Variable Assignment</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a new value (20) to the same variable</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">20</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="matrix-operations" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-operations">3 Matrix Operations</h2>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section">3.1</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add 5 to each element in the matrix</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>matrix_plus_5 <span class="ot">=</span> matrix <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix_plus_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1">3.2</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix multiplication: matrix_plus_5 times matrix_plus_5</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>matrix_squared <span class="ot">=</span> matrix_plus_5 <span class="sc">@</span> matrix_plus_5</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(matrix_squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercises-part-3" class="level1">
+<h1>Exercises part 3:</h1>
+<section id="check-numeric-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-numeric-values">1. Check numeric values</h2>
+<section id="assign-numeric-values-to-two-variables" class="level3">
+<h3 class="anchored" data-anchor-id="assign-numeric-values-to-two-variables">1.1 Assign numeric values to two variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign numeric values</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fl">3.5</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">type</span>(text1))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">type</span>(text2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="assign-numeric-values-to-two-variables-1" class="level3">
+<h3 class="anchored" data-anchor-id="assign-numeric-values-to-two-variables-1">1.2 Assign numeric values to two variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign numeric values</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"plop"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="fl">3.5</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">*</span> b</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>TypeError<span class="sc">:</span> can<span class="st">'t multiply sequence by non-int of type '</span>float<span class="st">'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A TypeError means that there is problem with the type of the variables you are using!</p>
+</section>
+<section id="section-2" class="level3">
+<h3 class="anchored" data-anchor-id="section-2">1.3</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with a number</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>number_value <span class="ot">=</span> <span class="dv">42</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(number_value)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">type</span>(number_value))  <span class="co"># should be int</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the number into text (string)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>text_value <span class="ot">=</span> <span class="fu">str</span>(number_value)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(text_value)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">type</span>(text_value))    <span class="co"># should be str</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if number_value is an integer</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">isinstance</span>(number_value, int))   <span class="co"># Expected: True</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if text_value is a string</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">isinstance</span>(text_value, str))     <span class="co"># Expected: True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercises-part-4" class="level1">
+<h1>Exercises part 4</h1>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">4.1</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two variables with different values</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if x is not equal to y</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> (x <span class="sc">!=</span> y)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="section-4" class="level1">
+<h1>4.2</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two variables with any numbers</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">7</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if a is equal to b</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> (a <span class="sc">==</span> b)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-5" class="level1">
+<h1>4.3</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set temperature and humidity</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">=</span> <span class="dv">25</span>   <span class="co"># greater than 20</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>humidity <span class="ot">=</span> <span class="dv">40</span>      <span class="co"># less than 50</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check both conditions using 'and'</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> (temperature <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="fu">and</span> (humidity <span class="sc">&lt;</span> <span class="dv">50</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercises-part-5" class="level1">
+<h1>Exercises part 5</h1>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6">5.1</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">python</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">import random</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at"># Generate a random number between 4 and 87 (can be decimal)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">number = random.uniform(4, 87)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">print("The generated number is " + str(number))</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at"># Generate a random integer between 1 and 70</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">integer_number = random.randint(1, 70)</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">print("The generated integer is " + str(integer_number))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7">5.2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two variables</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">8</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sum, difference, and product</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>sum_ab <span class="ot">=</span> a <span class="sc">+</span> b</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>difference_ab <span class="ot">=</span> a <span class="sc">-</span> b</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>product_ab <span class="ot">=</span> a <span class="sc">*</span> b</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results in sentences</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The sum of a and b is "</span> <span class="sc">+</span> <span class="fu">str</span>(sum_ab))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The difference of a and b is "</span> <span class="sc">+</span> <span class="fu">str</span>(difference_ab))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The product of a and b is "</span> <span class="sc">+</span> <span class="fu">str</span>(product_ab))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-8" class="level2">
+<h2 class="anchored" data-anchor-id="section-8">5.3</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two numbers</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="dv">7</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if x is greater than y</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>comparison_result <span class="ot">=</span> (x <span class="sc">&gt;</span> y)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the result in a sentence</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"It is "</span> <span class="sc">+</span> <span class="fu">str</span>(comparison_result) <span class="sc">+</span> <span class="st">" that x is greater than y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife</title>
+<title>NetworkIsLife – DAFS exam type questions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -90,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -108,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">NetworkIsLife</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">DAFS exam type questions</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -449,15 +483,42 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mcq---python" id="toc-mcq---python" class="nav-link active" data-scroll-target="#mcq---python">MCQ - Python:</a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  </ul></li>
+  <li><a href="#mcq---r" id="toc-mcq---r" class="nav-link" data-scroll-target="#mcq---r">MCQ - R:</a>
+  <ul class="collapse">
+  <li><a href="#question-1-1" id="toc-question-1-1" class="nav-link" data-scroll-target="#question-1-1">Question 1</a></li>
+  <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
+  </ul></li>
+  <li><a href="#explain-a-script.-there-are-already-many-online-so-i-only-add-one-example-here." id="toc-explain-a-script.-there-are-already-many-online-so-i-only-add-one-example-here." class="nav-link" data-scroll-target="#explain-a-script.-there-are-already-many-online-so-i-only-add-one-example-here.">Explain a script. There are already many online, so i only add one example here.</a>
+  <ul class="collapse">
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
+  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
+  </ul></li>
+  <li><a href="#identify-errors" id="toc-identify-errors" class="nav-link" data-scroll-target="#identify-errors">Identify error(s)</a>
+  <ul class="collapse">
+  <li><a href="#python-1" id="toc-python-1" class="nav-link" data-scroll-target="#python-1">Python</a></li>
+  <li><a href="#r-1" id="toc-r-1" class="nav-link" data-scroll-target="#r-1">R</a></li>
+  </ul></li>
+  <li><a href="#write-a-script" id="toc-write-a-script" class="nav-link" data-scroll-target="#write-a-script">Write a script:</a></li>
+  <li><a href="#r-python" id="toc-r-python" class="nav-link" data-scroll-target="#r-python">R &amp; Python:</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">NetworkIsLife</h1>
+<h1 class="title">DAFS exam type questions</h1>
 </div>
 
 
@@ -474,9 +535,158 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="networkislife.jpg" class="img-fluid"></p>
+<section id="mcq---python" class="level1">
+<h1>MCQ - Python:</h1>
+<p>These are some examples of the types of questions you might get at the exam. This is not a full mock exam, it’s just to give you an idea of what to expect. In the real exam you will have questions specific to your language (for the Python track you will only see the python questions and for the R track you will only see the R questions).</p>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>What does the following python code return?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="cf">in</span> <span class="fu">range</span>(<span class="dv">5</span>)<span class="sc">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> i <span class="sc">==</span> <span class="dv">3</span><span class="sc">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    continue</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>A. <span class="dv">21</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>B. <span class="dv">27</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>C. <span class="dv">33</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>D. <span class="dv">39</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>What does the following python code return?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="sc">&gt;</span> <span class="dv">10</span><span class="sc">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Greater"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>elif x <span class="sc">==</span> <span class="dv">10</span><span class="sc">:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Equal"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span><span class="sc">:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Smaller"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>A. Greater</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>B. Equal</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>C. Smaller</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>D. Error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="mcq---r" class="level1">
+<h1>MCQ - R:</h1>
+<section id="question-1-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-1">Question 1</h2>
+<p>What does the following R code return?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">35</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">70</span>, <span class="dv">95</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">25</span> <span class="sc">&amp;</span> df<span class="sc">$</span>Score <span class="sc">&gt;</span> <span class="dv">85</span>, ]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>A. <span class="dv">35</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>B. <span class="dv">67</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>C. <span class="dv">29</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>D. Error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-2-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-1">Question 2</h2>
+<p>In R, how do you remove rows from a data frame df where the value in column X is greater than 10?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A. df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>X <span class="sc">&lt;=</span> <span class="dv">10</span>, ]  </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>B. df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, X <span class="sc">&lt;=</span> <span class="dv">10</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>C. df <span class="ot">&lt;-</span> df[<span class="sc">!</span>(df<span class="sc">$</span>X <span class="sc">&gt;</span> <span class="dv">10</span>), ] </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>D. All of the above</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="explain-a-script.-there-are-already-many-online-so-i-only-add-one-example-here." class="level1">
+<h1>Explain a script. There are already many online, so i only add one example here.</h1>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">R</h2>
+<p>You are provided with the following R script. Explain each line of code in this script. You do not have to explain what the output it, or what a Fibonacci sequence is.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>generate_fibonacci <span class="ot">&lt;-</span> <span class="cf">function</span>(limit) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  next_value <span class="ot">&lt;-</span> fib_sequence[<span class="dv">1</span>] <span class="sc">+</span> fib_sequence[<span class="dv">2</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (next_value <span class="sc">&lt;=</span> limit) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(fib_sequence, next_value)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    next_value <span class="ot">&lt;-</span> <span class="fu">tail</span>(fib_sequence, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">tail</span>(fib_sequence, <span class="at">n =</span> <span class="dv">2</span>)[<span class="dv">1</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(fib_sequence)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fib_seq <span class="ot">&lt;-</span> <span class="fu">generate_fibonacci</span>(<span class="dv">3</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Fibonacci sequence up to 3:"</span>, fib_seq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="python" class="level2">
+<h2 class="anchored" data-anchor-id="python">Python</h2>
+<p>You are provided with the following Python script. Explain each line of code in this script. We have a csv file with different measure of water pollution in different countries in the world. There can be multiple measures per country (countries can have multiple water bodies). The values are fictitious. Explain each line of code in this script. There is no need to compute any values, or explain/show the output.</p>
+<p><img src="exam_image.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">pd.read_csv</span>(“waterpollutiondata.csv”, <span class="at">sep =</span> “;”)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> df[df[<span class="st">'Region'</span>] <span class="sc">==</span> <span class="st">'EU'</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">res.groupby</span>(<span class="st">'Country'</span>)[<span class="st">'WaterPollution'</span>]<span class="fu">.mean</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> res[res <span class="sc">&gt;</span> <span class="dv">50</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="identify-errors" class="level1">
+<h1>Identify error(s)</h1>
+<section id="python-1" class="level2">
+<h2 class="anchored" data-anchor-id="python-1">Python</h2>
+<ol type="1">
+<li>Identify the error(s) in the script.</li>
+<li>Propose a solution for each error.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> { <span class="st">'Country'</span><span class="sc">:</span> [<span class="st">'France'</span>, <span class="st">'Germany'</span>, <span class="st">'Netherlands'</span>, <span class="st">'Italy'</span>, <span class="st">'Spain'</span>], </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Emissions'</span> <span class="sc">:</span> [<span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">21</span>, <span class="dv">45</span>, <span class="dv">21</span>]}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(data)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>def <span class="fu">calculate_total_emissions</span>(dataframe)<span class="sc">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">sum</span>(dataframe[<span class="st">'Emission'</span>])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>return result</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="ot">=</span> <span class="fu">calculate_total_emissions</span>(df)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="r-1" class="level2">
+<h2 class="anchored" data-anchor-id="r-1">R</h2>
+<ol type="1">
+<li>Identify the error(s) in the script.</li>
+<li>Propose a solution for each error.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">dataframe</span>(“country” <span class="ot">=</span> <span class="fu">c</span>(“NL”, “BE”,”FR”,”DE”), “emission” <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">32</span>,<span class="dv">14</span>,<span class="dv">14</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(data))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Result <span class="ot">=</span> <span class="fu">sum</span>(dataframe<span class="sc">$</span>emission)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>return <span class="fu">sum</span>(dataframe[<span class="st">'Emission'</span>])  </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="ot">=</span> <span class="fu">calculate_total_emissions</span>(df) </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="write-a-script" class="level1">
+<h1>Write a script:</h1>
+</section>
+<section id="r-python" class="level1">
+<h1>R &amp; Python:</h1>
+<p>You are provided with a dataset containing information about a group of people. The data is in csv format. The data includes names, ages, and test scores. Your task is to write a program that classifies each person based on specific criteria. The dataset contains 3 columns: ‘Name’, ‘Age’ and ‘Score’. Classify the people in 2 categories, a first category for people with a score lower than 42, a second with people with a score higher or equal to 42. The final dataset should have 4 columns: Name, Age, Score, Category. You can decide what to call the categories. You can consider that the data has already been loaded, all required packages have been installed and loaded.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
