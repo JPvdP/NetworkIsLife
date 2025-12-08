@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – dafs_nlp_ner</title>
+<title>NetworkIsLife – Solutions R week 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -142,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Assignment_Text_mining.html">DAFS - NLP</a></li><li class="breadcrumb-item"><a href="./DAFS_NLP_NER.html">Session 3: Named Entity Recognition</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_2_R_solutions.html">Solutions R week 2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -197,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_2_R_solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./DAFS_prog_week_2_R_solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Solutions R week 2</span></a>
   </div>
 </li>
@@ -309,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_NLP_NER.html" class="sidebar-item-text sidebar-link active">
+  <a href="./DAFS_NLP_NER.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Session 3: Named Entity Recognition</span></a>
   </div>
 </li>
@@ -506,15 +472,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#session-3-named-entity-recognition" id="toc-session-3-named-entity-recognition" class="nav-link active" data-scroll-target="#session-3-named-entity-recognition">Session 3: Named Entity Recognition</a>
+  <li><a href="#exercises-part-1" id="toc-exercises-part-1" class="nav-link active" data-scroll-target="#exercises-part-1">Exercises part 1</a>
   <ul class="collapse">
-  <li><a href="#technical-dimension" id="toc-technical-dimension" class="nav-link" data-scroll-target="#technical-dimension">Technical dimension</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a>
-  <ul class="collapse">
-  <li><a href="#pipelines" id="toc-pipelines" class="nav-link" data-scroll-target="#pipelines">Pipelines</a></li>
-  <li><a href="#applying-to-larger-datasets" id="toc-applying-to-larger-datasets" class="nav-link" data-scroll-target="#applying-to-larger-datasets">Applying to larger datasets</a></li>
+  <li><a href="#carbon-emission-category-checker" id="toc-carbon-emission-category-checker" class="nav-link" data-scroll-target="#carbon-emission-category-checker">1. Carbon Emission Category Checker</a></li>
+  <li><a href="#water-conservation-awareness" id="toc-water-conservation-awareness" class="nav-link" data-scroll-target="#water-conservation-awareness">2. Water Conservation Awareness</a></li>
   </ul></li>
-  <li><a href="#examples-of-models" id="toc-examples-of-models" class="nav-link" data-scroll-target="#examples-of-models">Examples of models</a></li>
+  <li><a href="#exercises-part-2" id="toc-exercises-part-2" class="nav-link" data-scroll-target="#exercises-part-2">Exercises part 2</a>
+  <ul class="collapse">
+  <li><a href="#create-a-10-by-10-matrix-filled-with-1s" id="toc-create-a-10-by-10-matrix-filled-with-1s" class="nav-link" data-scroll-target="#create-a-10-by-10-matrix-filled-with-1s">1. Create a 10 by 10 matrix filled with 1s</a></li>
+  <li><a href="#multiply-each-element-of-this-matrix-by-5" id="toc-multiply-each-element-of-this-matrix-by-5" class="nav-link" data-scroll-target="#multiply-each-element-of-this-matrix-by-5">2. Multiply each element of this matrix by 5</a></li>
+  <li><a href="#compute-the-sum-of-all-elements-in-this-matrix" id="toc-compute-the-sum-of-all-elements-in-this-matrix" class="nav-link" data-scroll-target="#compute-the-sum-of-all-elements-in-this-matrix">3. Compute the sum of all elements in this matrix</a></li>
+  <li><a href="#create-a-3-by-3-matrix-filled-with-random-values-runif" id="toc-create-a-3-by-3-matrix-filled-with-random-values-runif" class="nav-link" data-scroll-target="#create-a-3-by-3-matrix-filled-with-random-values-runif">4. Create a 3 by 3 matrix filled with random values (runif)</a></li>
+  <li><a href="#create-a-dataframe-with-3-columns-id-country-value" id="toc-create-a-dataframe-with-3-columns-id-country-value" class="nav-link" data-scroll-target="#create-a-dataframe-with-3-columns-id-country-value">5. Create a dataframe with 3 columns: ID, Country, Value</a></li>
+  <li><a href="#multiply-the-first-column-of-the-matrix-from-question-4-with-the-value-column-of-the-dataframe" id="toc-multiply-the-first-column-of-the-matrix-from-question-4-with-the-value-column-of-the-dataframe" class="nav-link" data-scroll-target="#multiply-the-first-column-of-the-matrix-from-question-4-with-the-value-column-of-the-dataframe">6. Multiply the first column of the matrix (from question 4) with the Value column of the dataframe</a></li>
+  </ul></li>
+  <li><a href="#exercises-part-4" id="toc-exercises-part-4" class="nav-link" data-scroll-target="#exercises-part-4">Exercises part 4</a>
+  <ul class="collapse">
+  <li><a href="#how-many-columns-are-there-was-it-imported-correctly" id="toc-how-many-columns-are-there-was-it-imported-correctly" class="nav-link" data-scroll-target="#how-many-columns-are-there-was-it-imported-correctly">2.How many columns are there? Was it imported correctly?</a></li>
+  <li><a href="#whats-the-averaghe-number-of-citations" id="toc-whats-the-averaghe-number-of-citations" class="nav-link" data-scroll-target="#whats-the-averaghe-number-of-citations">3. What’s the averaghe number of citations?</a></li>
+  <li><a href="#pick-a-year-how-many-publications" id="toc-pick-a-year-how-many-publications" class="nav-link" data-scroll-target="#pick-a-year-how-many-publications">4. Pick a year: how many publications</a></li>
+  <li><a href="#how-many-publications-are-there-of-each-type" id="toc-how-many-publications-are-there-of-each-type" class="nav-link" data-scroll-target="#how-many-publications-are-there-of-each-type">5. How many publications are there of each type?</a></li>
+  <li><a href="#how-many-publications-were-in-open-access-each-year" id="toc-how-many-publications-were-in-open-access-each-year" class="nav-link" data-scroll-target="#how-many-publications-were-in-open-access-each-year">6. How many publications were in open access each year?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -522,269 +500,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_prog_week_2_R_solutions.html">Solutions R week 2</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Solutions R week 2</h1>
+</div>
 
 
 
-<section id="session-3-named-entity-recognition" class="level1">
-<h1>Session 3: Named Entity Recognition</h1>
-<p>In an age where digital news outlets produce a constant stream of information, extracting meaningful insights from this vast amount of text has become essential for organizations, researchers, and individuals. Named Entity Recognition (NER), a foundational technique in natural language processing (NLP), offers an effective way to analyze, structure, and understand unstructured news data by identifying and classifying named entities in text, such as people, locations, organizations, dates, and more.</p>
-<p>NER is particularly valuable in the context of news data because it enables the extraction of actionable insights from articles that span diverse topics and narratives. By identifying and categorizing entities, NER facilitates tasks such as trend analysis, information retrieval, and sentiment analysis, allowing users to make sense of complex and dynamic news landscapes.</p>
-<p>For instance, let’s look at the sample text below. There are multiple elements of interest in this text, they are highlighted, they represent the types of terms that can be automatically extracted from the text.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Sample text
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In the small town of <span style="color:red;">Greenfield</span>, located near the <span style="color:red;">Northumberland Coast</span>, heated debates are unfolding over the construction of new wind turbines by the energy company <span style="color:green;">EcoGen Ltd.</span>. While supporters highlight the environmental benefits, a vocal group of residents argues that the project raises significant social and aesthetic concerns.</p>
-<p>At a town hall meeting on <span style="color:purple;">Tuesday</span>, <span style="color:blue;">Dr.&nbsp;Laura Simmons</span>, an environmental scientist from <span style="color:green;">Durham University</span>, emphasized the importance of renewable energy for combating climate change. “<span style="color:red;">The United Kingdom</span> has pledged to reduce its carbon emissions by 68% by <span style="color:purple;">2030</span> under the <span style="color:orange;">Paris Agreement</span>, and wind power is a crucial part of meeting those goals,” said <span style="color:blue;">Simmons</span>.</p>
-</div>
-</div>
-<p>Suppose that we have a corpus of documents on a specific topic (protein transition for instance), then we could quickly see who is being talked about, who is expressing a meaning, locations and companies mentioned in context of the topic etc. We can then compute statistics on these entities to see mentions over time, frequencies etc.</p>
-<p>The information can also be linked to the topics that come from Bertopic. We can then see who is mentioned in the context of which topic, which location is linked to which topic and so on.</p>
-<section id="technical-dimension" class="level2">
-<h2 class="anchored" data-anchor-id="technical-dimension">Technical dimension</h2>
-<p>Named Entity Recognition is a task that boils down to classifying tokens into categories. This type of task is similar to the Part of Speech tagging that we did in the first session. In POS tagging, tokens are classified in terms of their nature (verb, noun, proper noun, adjective etc.). Here we aim to classify them into location, date, company, person etc. The specific classes depend on the model. Some mainly identify company names, other provide a broader range of entities including dates, products and so on.</p>
-<p>For a long time, NER was based on lists of entities that were tagged by humans. Basically each token was compared to a list and the class was returned. With the advent of deep learning techniques, these lists have been used to train models to classify based on the context of the word and the manner in which it is written. This means that the models are capable of identifying entities even if they were not part of the training data. They can identify based on the context of the sentence.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Example
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>The Amazon river is a long river.</p></li>
-<li><p>Amazon is selling a lot of products during the holidays</p></li>
-</ol>
-</div>
-</div>
-<p>Based on the context of these sentences, the model will be able to differentiate between Amazon the company and Amazon the river, classifying the first as a location, the second as a company.</p>
-<p>As you can imagine, the performance of the model depends heavily on the data it was trained on. This means that both the type of data, the topic and the language are vital. A model that was trained on entities extracted from news articles on from the 1800s will not perform as well as a model trained on recent data. If we train the model on data from the US, or on a specific sector, the results might not be as good for different sectors. Always try to find a model as close to your use-case as possible. In any case try to check the data the model was trained on and how well it performs.</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="exercises-part-1" class="level1">
+<h1>Exercises part 1</h1>
+<section id="carbon-emission-category-checker" class="level2">
+<h2 class="anchored" data-anchor-id="carbon-emission-category-checker">1. Carbon Emission Category Checker</h2>
 </section>
-<section id="implementation" class="level2">
-<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
-<section id="pipelines" class="level3">
-<h3 class="anchored" data-anchor-id="pipelines">Pipelines</h3>
-<p>There a many different models to perform NER and more will come out in the future. The difficulty for us as analysts is that each model can have a different training background. Some will have been trained on full words, others on subtokens. This means that we need to implement a different tokeniser to ensure that the model functions correctly. In addition, the output of the model itself might be presented in a less than efficient way for our purpose. A model that has been trained on subtokens might return entities at the level of the subtoken, resulting in us having to past together parts of words. See here an example:</p>
-<p>Suppose we have the following text: “Hugging Face Inc.&nbsp;is based in New York City. They were founded in 2016.” Then we would like to extract “Hugging Face Inc as an organisation. In the output below you will see that in fact that”Hugging Face Inc.” has been split into different tokens. start/end indicate the letter positions of the subtoken, the score is the confidence the model has in the classification (I-ORG for organisation, I-LOC for location).</p>
-<p><img src="NER_images/DAFS_NER_raw_output.png" class="img-fluid"></p>
-<p>If we want to use this information, we need to group the first four subtokens together so that we have the information we want. Luckyly for us there is an easy solution to this (but it’s important to understand how the models are trained so keep this in mind). The solution is called a <strong>pipeline</strong>. A <strong>pipeline</strong> streamlines the process of downloading the model, loading the model, tokenize the text, truncate the text, perform the NER and aggregate the subtokens into one function. The pipeline does <strong>NOT</strong> remove stopwords, clean the text, and in most cases it does not lemmatize.</p>
-<p>A pipeline takes 2 arguments:</p>
-<ul>
-<li>The model that we will use: This means that we supply a link to a model. For our purpose this means that we supply a link to a model that we find on the hugging face website. In the lecture we discussed how to find these models. We will use <em>“dbmdz/bert-large-cased-finetuned-conll03-english”</em> in the tutorial. The model will only be downloaded once.</li>
-<li>The type of task we want to perform with the model. Some models are capable of performing different tasks. And we can use pipelines for different tasks as well. For NER, the task is written: <em>“ner”</em>.</li>
-<li>We will add an argument in the function to specify that we want full words as an output instead of subtokens: <em>aggregation_strategy=“simple”</em></li>
-</ul>
-<p>The full pipeline then looks like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ner_pipeline <span class="ot">=</span> <span class="fu">pipeline</span>(<span class="st">"ner"</span>, <span class="at">model=</span><span class="st">"dbmdz/bert-large-cased-finetuned-conll03-english"</span>, <span class="at">aggregation_strategy=</span><span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The pipeline is stored in a variable that you can name as you wish. It’s this variable name we will use to call the pipeline to perform the task.</p>
-<p>For example if we have a text object:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>test_text <span class="ot">=</span> <span class="st">"Hugging Face Inc. is based in New York City. They were founded in 2016."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then we supply the text to the NER pipeline</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">ner_pipeline</span>(test_text)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>results</em> then contains the output of the model, in list format:</p>
-<p><img src="NER_images/DAFS_NER_raw_aggregoutput.png" class="img-fluid"></p>
-<p>All that’s left for us is to transform this into a dataframe to make it easier to work with.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="NER_images/DAFS_NER_raw_dfoutput.png" class="img-fluid"></p>
-</section>
-<section id="applying-to-larger-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="applying-to-larger-datasets">Applying to larger datasets</h3>
-<p>The previous section shows how NER pipelines work on one piece of text. We usually want to perform this type of exercise on a larger dataset of hundreds or even thousands of texts. There a two ways to do this. A first it to create a function that takes a text performs NER and organises the results. We can the apply this function to all texts at once via the apply function. The second is by creating a loop that goes through the text, document by document and aggregates.</p>
-<p>From a programming perspective, creating a function and applying it is more efficient. It uses less resources and should be faster. However, data is unpredictable, and running the code can still take a long time. The main issue with the apply method is that if an error occurs 30min into running the script, we don’t always know where the error occurs. When working with text we often face issues where texts are too long, too short, contain characters functions do not like. Using the apply method means that we have to run everything again, with the hypothesis that we can actually find which document is the issue. Using a loop ensures that the loop stops at the level of the document that causes the issue, you can then quickly identify what went wrong, and continue the loop from where it stopped. No time is lost recomputing. In addition, you can print out the number of the observation the loop is at to see if it’s still running and this will also give you an idea of how long computation takes. Once you know you have ironed out all the issues. You can use the apply method for the subsequent analyses.</p>
-<p>For these reasons we will take the loop approach.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-WARNING -&gt; Document ID
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>We subset the data to keep only an ID for the document and the text. The ID of the document is vital, without it there is no way for you to know which entity came from which document. Connecting to years, authors, other entities will become impossible. Always check where the ID of the document is, if there is none , create one!</p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">articles_df.to_csv</span>(<span class="st">"shale_gas_articles.csv"</span>, <span class="at">index=</span>False)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> articles_df[[<span class="st">'ID'</span>,<span class="st">'Article'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Just in case you add a step here where you remove documents for whatever reason, reindex the dataframe.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.reset_index</span>(<span class="at">drop=</span>True)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Because we are using a loop, we will need to add the results of the NER of each document to a dataframe that will have all the results. We create an empty list in which we will store these results.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an empty list</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>all_results <span class="ot">=</span> []</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now we create the loop:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we want to loop over the rows</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .iterrows is a pandas method that allows us to loop over the rows</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># .iterrows return the row index (i) and the data from that row (row)</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row <span class="cf">in</span> <span class="fu">data.iterrows</span>()<span class="sc">:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Perform NER</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we select the 'Article' column from the row</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we use it as an argument for the ner_pipeline</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the results are stored in ner_results</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ner_results <span class="ot">=</span> <span class="fu">ner_pipeline</span>(row[<span class="st">'Article'</span>])</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the results do not have an identifier for the document</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We add it now:</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> result <span class="cf">in</span> ner_results<span class="sc">:</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        result[<span class="st">'ID'</span>] <span class="ot">=</span> row[<span class="st">'ID'</span>]  <span class="co"># Add the document ID to the result</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The results of the pipeline come in a list</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we add the results to the all_results list</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># were all the results are stored</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">all_results.extend</span>(ner_results)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># finally we transform the final list into a df so we export it</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>all_results <span class="ot">=</span> <span class="fu">pd.DataFrame</span>(all_results)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">all_results.to_csv</span>(<span class="st">"NER_results.csv"</span>, <span class="at">index=</span>False)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="NER_images/DAFS_NER_raw_aggregoutput_id.png" class="img-fluid"> ### Analysis</p>
-<p>The dataframe that we have just created can be used directly for analysis. For example,</p>
-<ul>
-<li>We can check how many mentions there are per entity (barplot, wordcloud)</li>
-<li>Which regions are mentioned and how frequently (A map can be created)</li>
-<li>Which co-occurrences of mentions can we see (barplot, network)</li>
-<li>Which entities are mentioned the most (visualize with a wordcloud, or a barplot)</li>
-<li>Critical assessment of the results: what is the confidence distribution per entity type.</li>
-<li>Which are the companies most mentioned per region.</li>
-</ul>
-<p>We can also link this information to other data in the set</p>
-<ul>
-<li>Year of publication: when did we start/stop mentioning</li>
-<li>Outlet, political orientation of the outlets: do specific outlets mention specific people/companies</li>
-<li>Classifications given by the database: link sectors to companies/people</li>
-</ul>
-<p>Or link to other data you created:</p>
-<ul>
-<li>How do mentions of regions change accord to topics</li>
-<li>How do mentions of companies change according to technological classifications</li>
-<li>Which companies are most linked to central terms?</li>
-</ul>
-<section id="examples-based-on-the-ner-results-alone" class="level4">
-<h4 class="anchored" data-anchor-id="examples-based-on-the-ner-results-alone">Examples based on the NER results alone</h4>
+<section id="water-conservation-awareness" class="level2">
+<h2 class="anchored" data-anchor-id="water-conservation-awareness">2. Water Conservation Awareness</h2>
 </section>
 </section>
+<section id="exercises-part-2" class="level1">
+<h1>Exercises part 2</h1>
+<p>No solutions here, just use dim(name_of_your_df) to check that everything is ok # Exercises part 3</p>
+<section id="create-a-10-by-10-matrix-filled-with-1s" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-10-by-10-matrix-filled-with-1s">1. Create a 10 by 10 matrix filled with 1s</h2>
 </section>
-<section id="examples-of-models" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-models">Examples of models</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Description</th>
-<th>Use Cases</th>
-<th>Model Link</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>BioBERT</strong></td>
-<td>Pretrained on PubMed and PMC articles, specializing in biomedical text.</td>
-<td>Gene/protein names, diseases, drugs, and more.</td>
-<td><a href="https://huggingface.co/dmis-lab/biobert-base-cased-v1.1">BioBERT</a></td>
-</tr>
-<tr class="even">
-<td><strong>SciSpacy</strong></td>
-<td>SpaCy extension with models trained on biomedical and scientific text.</td>
-<td>Chemicals, diseases, genes, and more.</td>
-<td><a href="https://allenai.github.io/scispacy/">SciSpacy</a></td>
-</tr>
-<tr class="odd">
-<td><strong>ClinicalBERT</strong></td>
-<td>Fine-tuned for clinical notes using MIMIC-III data.</td>
-<td>Patients, procedures, medications in clinical text.</td>
-<td><a href="https://huggingface.co/emilyalsentzer/clinicalbert">ClinicalBERT</a></td>
-</tr>
-<tr class="even">
-<td><strong>Legal-BERT</strong></td>
-<td>Pretrained on legal documents for case laws, statutes, and contracts.</td>
-<td>Case analysis, legal research, compliance.</td>
-<td><a href="https://huggingface.co/nlpaueb/legal-bert-base-uncased">Legal-BERT</a></td>
-</tr>
-<tr class="odd">
-<td><strong>LexNLP</strong></td>
-<td>NLP library for legal and regulatory text.</td>
-<td>Extracting clauses, financial terms, legislation.</td>
-<td><a href="https://github.com/LexPredict/lexpredict-lexnlp">LexNLP</a></td>
-</tr>
-<tr class="even">
-<td><strong>FinBERT</strong></td>
-<td>Fine-tuned on financial reports.</td>
-<td>Financial terms, companies, currencies, events.</td>
-<td><a href="https://huggingface.co/ProsusAI/finbert">FinBERT</a></td>
-</tr>
-<tr class="odd">
-<td><strong>Finer</strong></td>
-<td>Financial-specific NER model built on BERT.</td>
-<td>Entity extraction from financial news/reports.</td>
-<td><a href="https://github.com/philipperemy/financial-entity-extraction">Finer</a></td>
-</tr>
-<tr class="even">
-<td><strong>SciBERT</strong></td>
-<td>Pretrained on scientific text from Semantic Scholar.</td>
-<td>Methods, datasets, results in research papers.</td>
-<td><a href="https://huggingface.co/allenai/scibert_scivocab_uncased">SciBERT</a></td>
-</tr>
-<tr class="odd">
-<td><strong>MatBERT</strong></td>
-<td>Pretrained on materials science text.</td>
-<td>Materials, properties, methods in material science.</td>
-<td><a href="https://huggingface.co/lbnlp/matscibert">MatBERT</a></td>
-</tr>
-<tr class="even">
-<td><strong>ProductBERT</strong></td>
-<td>Fine-tuned for e-commerce platforms.</td>
-<td>Product attributes like brand, color, size.</td>
-<td>Custom fine-tuning required. No direct link.</td>
-</tr>
-<tr class="odd">
-<td><strong>GeoBERT</strong></td>
-<td>Trained on geospatial and environmental datasets.</td>
-<td>Place names, environmental terms, climate topics.</td>
-<td>Fine-tuned from standard models (e.g., RoBERTa).</td>
-</tr>
-<tr class="even">
-<td><strong>Spacy-GeoNER</strong></td>
-<td>SpaCy pipeline for geospatial terms and place names.</td>
-<td>Location mapping, policy documents.</td>
-<td><a href="https://github.com/mayhewsw/GeoNamesNER">GeoNER</a></td>
-</tr>
-<tr class="odd">
-<td><strong>TweetNER7</strong></td>
-<td>Trained on social media data to identify informal entities.</td>
-<td>Social media analysis, trend detection.</td>
-<td><a href="https://huggingface.co/cardiffnlp/twitter-roberta-base-dec2021">TweetNER7</a></td>
-</tr>
-<tr class="even">
-<td><strong>BERTweet</strong></td>
-<td>Pretrained on Twitter data for social media text understanding.</td>
-<td>Hashtags, user mentions, and event tracking.</td>
-<td><a href="https://huggingface.co/VinAIResearch/BERTweet-base">BERTweet</a></td>
-</tr>
-</tbody>
-</table>
+<section id="multiply-each-element-of-this-matrix-by-5" class="level2">
+<h2 class="anchored" data-anchor-id="multiply-each-element-of-this-matrix-by-5">2. Multiply each element of this matrix by 5</h2>
+</section>
+<section id="compute-the-sum-of-all-elements-in-this-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="compute-the-sum-of-all-elements-in-this-matrix">3. Compute the sum of all elements in this matrix</h2>
+</section>
+<section id="create-a-3-by-3-matrix-filled-with-random-values-runif" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-3-by-3-matrix-filled-with-random-values-runif">4. Create a 3 by 3 matrix filled with random values (runif)</h2>
+</section>
+<section id="create-a-dataframe-with-3-columns-id-country-value" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-dataframe-with-3-columns-id-country-value">5. Create a dataframe with 3 columns: ID, Country, Value</h2>
+</section>
+<section id="multiply-the-first-column-of-the-matrix-from-question-4-with-the-value-column-of-the-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="multiply-the-first-column-of-the-matrix-from-question-4-with-the-value-column-of-the-dataframe">6. Multiply the first column of the matrix (from question 4) with the Value column of the dataframe</h2>
+</section>
+</section>
+<section id="exercises-part-4" class="level1">
+<h1>Exercises part 4</h1>
+<p>In reality you would do: lens_data &lt;- read.csv(“lens_export.csv”)</p>
+<p>For the solutions, we create a small toy dataframe: lens_data &lt;- data.frame( lens_id = c(“L1”, “L2”, “L3”, “L4”, “L5”, “L6”), Year = c(2018, 2019, 2019, 2020, 2020, 2020), Citations = c(5, 0, 12, 3, 25, 7), <code>Publication Type</code> = c(“Journal Article”, “Conference Proceeding”, “Journal Article”, “Book Chapter”, “Journal Article”, “Conference Proceeding”), Open.Access = c(TRUE, FALSE, TRUE, FALSE, TRUE, TRUE) )</p>
+<section id="how-many-columns-are-there-was-it-imported-correctly" class="level2">
+<h2 class="anchored" data-anchor-id="how-many-columns-are-there-was-it-imported-correctly">2.How many columns are there? Was it imported correctly?</h2>
+</section>
+<section id="whats-the-averaghe-number-of-citations" class="level2">
+<h2 class="anchored" data-anchor-id="whats-the-averaghe-number-of-citations">3. What’s the averaghe number of citations?</h2>
+</section>
+<section id="pick-a-year-how-many-publications" class="level2">
+<h2 class="anchored" data-anchor-id="pick-a-year-how-many-publications">4. Pick a year: how many publications</h2>
+</section>
+<section id="how-many-publications-are-there-of-each-type" class="level2">
+<h2 class="anchored" data-anchor-id="how-many-publications-are-there-of-each-type">5. How many publications are there of each type?</h2>
+</section>
+<section id="how-many-publications-were-in-open-access-each-year" class="level2">
+<h2 class="anchored" data-anchor-id="how-many-publications-were-in-open-access-each-year">6. How many publications were in open access each year?</h2>
 
 
 </section>
