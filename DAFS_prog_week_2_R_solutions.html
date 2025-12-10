@@ -534,6 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#how-many-publications-are-there-of-each-type" id="toc-how-many-publications-are-there-of-each-type" class="nav-link" data-scroll-target="#how-many-publications-are-there-of-each-type">5. How many publications are there of each type?</a></li>
   <li><a href="#how-many-publications-were-in-open-access-each-year" id="toc-how-many-publications-were-in-open-access-each-year" class="nav-link" data-scroll-target="#how-many-publications-were-in-open-access-each-year">6. How many publications were in open access each year?</a></li>
   </ul></li>
+  <li><a href="#exercices-part-7-explain-the-code" id="toc-exercices-part-7-explain-the-code" class="nav-link" data-scroll-target="#exercices-part-7-explain-the-code">Exercices part 7 (explain the code)</a></li>
   </ul>
 </nav>
     </div>
@@ -695,9 +696,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(lens_data<span class="sc">$</span>Year[lens_data<span class="sc">$</span>Open.Access <span class="sc">==</span> <span class="cn">TRUE</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-
 </section>
+</section>
+<section id="exercices-part-7-explain-the-code" class="level1">
+<h1>Exercices part 7 (explain the code)</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sustainability_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"sustainability_data.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sustainability_data<span class="sc">$</span>Emissions_Category <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  sustainability_data<span class="sc">$</span>CO2_Emissions <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">"Low"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(sustainability_data<span class="sc">$</span>CO2_Emissions <span class="sc">&lt;=</span> <span class="dv">10</span>, <span class="st">"Moderate"</span>, <span class="st">"High"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>sustainability_data<span class="sc">$</span>Renewable_Contribution <span class="ot">&lt;-</span> sustainability_data<span class="sc">$</span>CO2_Emissions <span class="sc">/</span> sustainability_data<span class="sc">$</span>Renewable_Energy_Percent</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>emissions_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">9</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>adjusted_emissions_matrix <span class="ot">&lt;-</span> emissions_matrix <span class="sc">*</span> <span class="fl">0.05</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>total_offset <span class="ot">&lt;-</span> <span class="fu">sum</span>(adjusted_emissions_matrix)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total Offset Contribution:"</span>, total_offset))</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>high_emissions_high_renewable <span class="ot">&lt;-</span> <span class="fu">subset</span>(sustainability_data, </span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                                        Emissions_Category <span class="sc">==</span> <span class="st">"High"</span> <span class="sc">&amp;</span> Renewable_Energy_Percent <span class="sc">&gt;</span> <span class="dv">40</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Countries with high CO₂ emissions and &gt;40% renewable energy:"</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(high_emissions_high_renewable)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(sustainability_data, <span class="st">"sustainability_data_updated.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>average_renewable <span class="ot">&lt;-</span> <span class="fu">mean</span>(sustainability_data<span class="sc">$</span>Renewable_Energy_Percent)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Average Renewable Energy Usage:"</span>, average_renewable, <span class="st">"%"</span>))</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>sustainability_data<span class="sc">$</span>Sustainability_Strategy <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  sustainability_data<span class="sc">$</span>Renewable_Energy_Percent <span class="sc">&gt;</span> average_renewable, <span class="st">"Proactive"</span>, <span class="st">"Reactive"</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sustainability_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>L1: A csv file is loaded and stored into an object called sustainability_data L2-L5: Creates a new column called Emissions_Category which takes the value “low” if the emissions are lower than 5, “Moderate” if the emissions are are higher than 5 and lower than 10, “high” if they exceed 10.</p>
+<p>L6: Creates a new column which is the result of the division of the CO2_Emissions column and the Renewable_energy_percent column</p>
+<p>L7: Creates a matrix with 9 random numbers, 3 rows, 3 columns</p>
+<p>L8: Creates a new matrix that is the result of the multiplication of each value by 0.05</p>
+<p>L9: Creates a variable that contains the sum of all emissions from the matrix</p>
+<p>L10: Prints out the total offset</p>
+<p>L11: Creates a subset with only the rows where the category is high and the percentage is &gt; 40 L12: Prints a sentence L13: Prints the data frame</p>
+<p>L14: Writes the data to a csv file</p>
+<p>L15: Compute the average of the renewable energy percents column</p>
+<p>L16: Prints the results</p>
+<p>L17: Creates a new column with either the tag “Proactive” or “Reactive” if the Value in the Renewable_Energy_Percent column is higher than the average_renewable</p>
+<p>L1: solar_data &lt;- read_csv(“data/solar_production.csv”) Reads a CSV file into R as a tibble and assigns it to the variable solar_data. L2: solar_data &lt;- select(solar_data, country, date, production_mwh) Subsets the dataframe by keeping only the specified columns (country, date, production_mwh). L3: solar_data &lt;- mutate(solar_data, year = format(as.Date(date), “%Y”)) Creates a new column called year by converting the date column to a Date object and extracting the year as text. L4: country_year &lt;- group_by(solar_data, country, year) Groups the dataframe by country and year so that subsequent operations (e.g., summarise) are performed within each group. L5: country_year &lt;- summarise(country_year, avg_production = mean(production_mwh, na.rm = TRUE)) Aggregates each group to a single row by computing the mean of production_mwh while ignoring missing values; stores the result in avg_production. L6: recent_data &lt;- filter(country_year, year &gt;= 2018) Filters the grouped summary to keep only rows where the year is 2018 or later. L7: write.csv2(recent_data, “data/avg_solar_production_recent.csv”) Exports the dataframe recent_data to a CSV file using semicolon separators (CSV2 format). L8: print(“Average solar production per country since 2018 has been saved.”) Prints a text message to the console.</p>
+<div class="cell" data-inlcude="true">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wind_generation.csv"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>capacity <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/installed_capacity.csv"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">&lt;-</span> <span class="fu">select</span>(wind, region, date, generation_mwh)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>capacity <span class="ot">&lt;-</span> <span class="fu">select</span>(capacity, region, capacity_mw)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>wind <span class="ot">&lt;-</span> <span class="fu">mutate</span>(wind, <span class="at">year =</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(date), <span class="st">"%Y"</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>wind_year <span class="ot">&lt;-</span> <span class="fu">group_by</span>(wind, region, year)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>wind_year <span class="ot">&lt;-</span> <span class="fu">summarise</span>(wind_year, <span class="at">total_generation =</span> <span class="fu">sum</span>(generation_mwh, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">left_join</span>(wind_year, capacity, <span class="at">by =</span> <span class="st">"region"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">mutate</span>(merged, <span class="at">utilization_rate =</span> total_generation <span class="sc">/</span> (capacity_mw <span class="sc">*</span> <span class="dv">8760</span>))</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>merged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(merged, <span class="fu">desc</span>(utilization_rate))</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(merged, <span class="st">"data/wind_utilization.csv"</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(merged, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>L1: library(dplyr) Loads the dplyr package so its data manipulation functions become available.</p>
+<p>L2: library(readr) Loads the readr package to enable fast reading of CSV files.</p>
+<p>L3: wind &lt;- read_csv(“data/wind_generation.csv”) Reads a CSV file into a tibble and assigns it to the variable wind.</p>
+<p>L4: capacity &lt;- read_csv(“data/installed_capacity.csv”) Reads another CSV file into a tibble, stored in the variable capacity.</p>
+<p>L5: wind &lt;- select(wind, region, date, generation_mwh) Subsets the wind dataframe to retain only the columns region, date, and generation_mwh.</p>
+<p>L6: capacity &lt;- select(capacity, region, capacity_mw) Subsets the capacity dataframe to keep only region and capacity_mw.</p>
+<p>L7: wind &lt;- mutate(wind, year = format(as.Date(date), “%Y”)) Creates a new column year by converting date into a Date object and extracting the year as text.</p>
+<p>L8: wind_year &lt;- group_by(wind, region, year) Groups the wind dataframe by region and year so later operations act within each group.</p>
+<p>L9: wind_year &lt;- summarise(wind_year, total_generation = sum(generation_mwh, na.rm = TRUE)) Aggregates each group to a single row by computing the total (sum) of generation_mwh, ignoring missing values.</p>
+<p>L10: merged &lt;- left_join(wind_year, capacity, by = “region”) Performs a left join, matching each row in wind_year with the corresponding row in capacity based on region; keeps all rows from wind_year.</p>
+<p>L11: merged &lt;- mutate(merged, utilization_rate = total_generation / (capacity_mw * 8760)) Adds a new column utilization_rate, computed as total yearly generation divided by installed capacity times 8760 (hours per year).</p>
+<p>L12: merged &lt;- arrange(merged, desc(utilization_rate)) Sorts the dataframe in descending order of utilization_rate.</p>
+<p>L13: write.csv2(merged, “data/wind_utilization.csv”) Exports the final dataframe to a CSV file using semicolon separators (CSV2 format).</p>
+<p>L14: print(head(merged, 5)) Prints the first five rows of the dataframe to the console.</p>
+
+
 </section>
 
 </main> <!-- /main -->
