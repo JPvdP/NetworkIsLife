@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – Installing all the software</title>
+<title>NetworkIsLife – Named Entity Recognition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_install_R.html">Installing all the software</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Named Entity Recognition</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DAFS_install_R.html" class="sidebar-item-text sidebar-link active">
+  <a href="./DAFS_install_R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Installing all the software</span></a>
   </div>
 </li>
@@ -484,11 +484,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lets-install-r" id="toc-lets-install-r" class="nav-link active" data-scroll-target="#lets-install-r">1. Let’s install R</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
   <ul class="collapse">
-  <li><a href="#go-to-httpsmirrors.evoluso.comcran" id="toc-go-to-httpsmirrors.evoluso.comcran" class="nav-link" data-scroll-target="#go-to-httpsmirrors.evoluso.comcran">1.1 Go to https://mirrors.evoluso.com/CRAN/</a></li>
-  <li><a href="#go-to-httpsposit.codownloadrstudio-desktop" id="toc-go-to-httpsposit.codownloadrstudio-desktop" class="nav-link" data-scroll-target="#go-to-httpsposit.codownloadrstudio-desktop">1.2 Go to https://posit.co/download/rstudio-desktop/</a></li>
-  <li><a href="#some-basics-on-rstudio" id="toc-some-basics-on-rstudio" class="nav-link" data-scroll-target="#some-basics-on-rstudio">1.3 Some basics on Rstudio:</a></li>
+  <li><a href="#illustration" id="toc-illustration" class="nav-link" data-scroll-target="#illustration">Illustration</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -496,9 +495,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_install_R.html">Installing all the software</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Installing all the software</h1>
+<h1 class="title">Named Entity Recognition</h1>
 </div>
 
 
@@ -515,33 +514,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lets-install-r" class="level1">
-<h1>1. Let’s install R</h1>
-<p>For this course we use a combination of R and Rstudio. If we think of this as a car, then R is the engine, and rstudio is the carrosserie that makes many things easier and more comfortable. For Rstudio to work, we first need to install R.</p>
-<section id="go-to-httpsmirrors.evoluso.comcran" class="level2">
-<h2 class="anchored" data-anchor-id="go-to-httpsmirrors.evoluso.comcran">1.1 Go to https://mirrors.evoluso.com/CRAN/</h2>
-<p>For mac users: <img src="DAFS_install/R_mac_1.png" class="img-fluid"></p>
-<p>For windows users, first click on “install R for the first time”</p>
-<p><img src="DAFS_install/R_Windows_1.png" class="img-fluid"></p>
-<p>Then download the latest version:</p>
-<p><img src="DAFS_install/R_Windows_2.png" class="img-fluid"></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Named Entity Recognition (NER) is a text-analysis technique that automatically finds and labels “things” mentioned in written text. Those “things” are called entities—for example people (Greta Thunberg), organizations (Utrecht University), locations (Amsterdam), dates (5 January 2026), or sometimes more specific categories such as products, events, or laws, depending on the model you use. A practical way to think about NER is: it turns unstructured text into structured data. Humans can easily read a sentence and notice who it is about, where it happens, and which organizations are involved. Computers do not “understand” text in that way by default. NER provides a bridge by converting text into a list of detected entities plus their types and positions in the text.</p>
+<p>For example, in the sentence:</p>
+<p>“Utrecht University announced a new partnership in Amsterdam on 5 January 2026.” an NER system might extract something like:</p>
+<p>“Utrecht University” is an Organization “Amsterdam” is a Location “5 January 2026” is a Date</p>
+<p>Once entities are identified, you can start doing analyses that would otherwise be tedious or impossible at scale, such as:</p>
+<ul>
+<li>Counting how often certain people or organizations are mentioned across thousands of documents</li>
+<li>Mapping which organizations are discussed together (co-occurrence networks)</li>
+<li>Tracking where attention is geographically concentrated (locations over time)</li>
+<li>Filtering or summarizing documents by which entities appear in them</li>
+</ul>
+<p>In this course, you will learn how to run NER in R and transform the results into tidy, analysis-ready tables. The key idea is not just to “detect entities,” but to use them as building blocks for downstream tasks such as visualization, trend analysis, and network analysis. By the end, you should be able to take a collection of texts and answer concrete questions like: Which actors are most prominent? Which places are most frequently discussed? And how do these patterns change over time or differ across sources?</p>
 </section>
-<section id="go-to-httpsposit.codownloadrstudio-desktop" class="level2">
-<h2 class="anchored" data-anchor-id="go-to-httpsposit.codownloadrstudio-desktop">1.2 Go to https://posit.co/download/rstudio-desktop/</h2>
-<p>Here you can download R studio. The download button should adapt directly to your operating system</p>
-<p><img src="DAFS_install/Rstudio_1.png" class="img-fluid"></p>
-<p>Run the installers and you should be good to go. You only need to launch Rstudio. You never need to launch R.</p>
-</section>
-<section id="some-basics-on-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="some-basics-on-rstudio">1.3 Some basics on Rstudio:</h2>
-<p>The interface has 4 panels, each with a purpose:</p>
-<p><img src="DAFS_install/Rstudio_interface_1.png" class="img-fluid"></p>
-<p>Once we start programming, we create variables and objects that are stored in the memory of the computer. The objects can be accessed in the upper right panel.</p>
-<p><img src="DAFS_install/Rstudio_interface_2.png" class="img-fluid"></p>
-<p>When working on a project, we like to keep everything in the same place, your data, your scripts, R. This can be done with an Rproj file:</p>
-<p><img src="DAFS_install/Rstudio_interface_4.png" class="img-fluid"> This is how you create an rproj. Once you have created this, everytime you quit en relaunch R, all your data and scripts will be loaded.</p>
-<p><img src="DAFS_install/Rstudio_interface_5.png" class="img-fluid"></p>
-<p>We should now be good to go!</p>
+<section id="setup" class="level1">
+<h1>Setup</h1>
+<p>First we need to start the python environment so that we can run the models</p>
+<p>Now we can start downloading the models. Let’s start by loading a bert model trained for NER. We add the argument aggregation_strategy= “simple to get an output that inclused readable tokens and not a list of syllable level tokens (cf.&nbsp;slides from the lecture). For NER, we will use the following model: bert-base-NER. If you have more patience and computation power bert-large-NER is also an option. The hf_load_pipeline will download the models directly and put them to use.</p>
+<p>We can do the same with a different model that is capable of treating multiple languages. The basic structure is the same. We change the links to the models, and adjust what we download (tensor or pytorch):</p>
+<section id="illustration" class="level2">
+<h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
 
 
 </section>
