@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -108,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Named Entity Recognition</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_DST_NER.html">Named Entity Recognition</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -195,6 +229,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./DAFS_DST_Sentiment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sentiment Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_NER.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Named Entity Recognition</span></a>
   </div>
 </li>
       </ul>
@@ -495,7 +535,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_install_R.html">DAFS - Data Science Track</a></li><li class="breadcrumb-item"><a href="./DAFS_DST_NER.html">Named Entity Recognition</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Named Entity Recognition</h1>
 </div>
@@ -532,10 +572,96 @@ ul.task-list li input[type="checkbox"] {
 <section id="setup" class="level1">
 <h1>Setup</h1>
 <p>First we need to start the python environment so that we can run the models</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the python environment we need to run the models</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_virtualenv</span>(<span class="st">"bertopic_r_env_spacy"</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now we can start downloading the models. Let’s start by loading a bert model trained for NER. We add the argument aggregation_strategy= “simple to get an output that inclused readable tokens and not a list of syllable level tokens (cf.&nbsp;slides from the lecture). For NER, we will use the following model: bert-base-NER. If you have more patience and computation power bert-large-NER is also an option. The hf_load_pipeline will download the models directly and put them to use.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>NER_extract <span class="ot">&lt;-</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"dslim/bert-large-NER"</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">task =</span> <span class="st">"ner"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregation_strategy =</span> <span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+
+dslim/bert-large-NER is ready for ner</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"The 2024 edition of The European 5G Conference will take place on 30-31 January at the Hotel nhow Brussels Bloom. Now, in its 8th year, the conference has an established reputation as Brussels’ leading meeting place for discussion on 5G policy. Registration is now available – secure your place today. The event will, once again, provide the opportunity to hear from high-level policymakers and industry stakeholders on key themes such as investment, security, sustainability, emerging business models, and connectivity. It will provide an update on progress that has been made towards the 2030 ‘Path to the Digital Decade’ targets, as well as offering a first opportunity to examine the outcomes from WRC-23 and at what this may mean for the future connectivity environment around 5G and future technologies. By looking back at the lessons learnt to date and forward to the path towards 5G Advanced and 6G, the event will provide a comprehensive insight into all the key policy aspects that are shaping the 5G ecosystem in Europe."</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> <span class="fu">NER_extract</span>(text)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#transform output into something readable:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(extracted_NE, data.frame)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>extracted_NE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   entity_group     score                       word start  end
+1          MISC 0.9934977                        The    20   23
+2          MISC 0.8844852     European 5G Conference    24   46
+3           LOC 0.8335097                      Hotel    87   92
+4           LOC 0.4823331                      ##how    94   97
+5           LOC 0.9036454             Brussels Bloom    98  112
+6           LOC 0.9993755                   Brussels   184  192
+7          MISC 0.5425278                          5   234  235
+8          MISC 0.6118014                          ‘   595  596
+9          MISC 0.9522038 Path to the Digital Decade   596  622
+10         MISC 0.9099922                        WRC   702  705
+11         MISC 0.5324202                          5   888  889
+12          LOC 0.9994928                     Europe  1024 1030</code></pre>
+</div>
+</div>
 <p>We can do the same with a different model that is capable of treating multiple languages. The basic structure is the same. We change the links to the models, and adjust what we download (tensor or pytorch):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>multilanguage_NER <span class="ot">=</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">tokenizer =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">task =</span> <span class="st">"ner"</span>, <span class="at">aggregation_strategy=</span><span class="st">"simple"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+
+Babelscape/wikineural-multilingual-ner is ready for ner</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> <span class="fu">multilanguage_NER</span>(text)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(test_multi, data.frame)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>test_multi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  entity_group     score                       word start  end
+1         MISC 0.8881885 The European 5G Conference    20   46
+2          LOC 0.9967667  Hotel nhow Brussels Bloom    87  112
+3          LOC 0.8897377                   Brussels   184  192
+4         MISC 0.9636981 Path to the Digital Decade   596  622
+5          LOC 0.9381566                     Europe  1024 1030</code></pre>
+</div>
+</div>
 <section id="illustration" class="level2">
 <h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"/Users/janpieter/Desktop/Teachings/NetworkIsLife2/NetworkIsLife/LN_dataframe.rdata"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the text we want to analyse is in the "Article" column</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>safe_ner <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(NER_extract, <span class="at">otherwise =</span> <span class="fu">list</span>())</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> climate_change_speeches <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">entities =</span> <span class="fu">map</span>(text, safe_ner)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(speech_id, entities) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_longer</span>(entities) <span class="sc">%&gt;%</span>                 <span class="co"># one list element per entity</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(entities) <span class="sc">%&gt;%</span>                  <span class="co"># columns like entity_group, word, score, start, end</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(speech_id)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>NER_results_climatechangespeeches <span class="ot">&lt;-</span> res</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(NER_results_climatechangespeeches, <span class="at">file =</span> <span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(NER_results_climatechangespeeches)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  speech_id entity_group     score                  word start  end
+1         1          ORG 0.4085696                 House    29   34
+2         1          ORG 0.3730169                 House   165  170
+3         1          LOC 0.3669575                 House   338  343
+4         1         MISC 0.9975488   European Green Deal   932  951
+5         1         MISC 0.9970733 Net Zero Industry Act   962  983
+6         1          ORG 0.3932655                 House  1869 1874</code></pre>
+</div>
+</div>
 
 
 </section>
