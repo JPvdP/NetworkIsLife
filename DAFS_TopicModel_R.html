@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Janpieter van der Pol">
-<meta name="dcterms.date" content="2025-12-02">
+<meta name="dcterms.date" content="2026-01-18">
 
 <title>NetworkIsLife – Using BERTopic from R</title>
 <style>
@@ -238,6 +238,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./DAFS_DST_NER.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Named Entity Recognition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using LLMs in R for data analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -584,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 2, 2025</p>
+      <p class="date">January 18, 2026</p>
     </div>
   </div>
   
@@ -650,10 +656,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now that the enviroment is active, we can run a topic model. A topic model takes a certain number of arguments:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 16%">
-<col style="width: 24%">
-<col style="width: 35%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -755,10 +761,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There is a lot going on in this function. The first arguments are just to specify the columns names.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 18%">
-<col style="width: 21%">
-<col style="width: 34%">
+<col style="width: 23%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1385,7 +1391,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="in">devtools::install_github("JPvdP/NetworkIsLifeR")</span></span>
 <span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>This package contains many function related to UU data courses including, but not limited to, Topic modelling, data import, visualisations, network and more. We are mainly using it here for the Natural Language Processing functions. </span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>This package contains many function related to UU data courses including, but not limited to, Topic modelling, data import, visualisations, network and more. We are mainly using it here for the Natural Language Processing functions.</span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Create a bertopic environment.</span></span>
 <span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
@@ -1403,7 +1409,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1 Activating the enviroment</span></span>
 <span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>We need to tell R that we want to connect to the python environment to use some of the functions. For this we need to activate the environment first. How we do this depends on how python was installed, which in turn depends on the operation system. </span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>We need to tell R that we want to connect to the python environment to use some of the functions. For this we need to activate the environment first. How we do this depends on how python was installed, which in turn depends on the operation system.</span>
 <span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>By default the name of the enviroment is "bertopic_r_env_spacy" change this argument if you have a different python environment name.</span>
 <span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
@@ -1413,28 +1419,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="in">reticulate::use_condaenv("bertopic_r_env_spacy", required = TRUE)</span></span>
 <span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>On Mac,  use:</span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="in">reticulate::use_virtualenv("bertopic_r_env_spacy", required = TRUE)</span></span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2 Load some data</span></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>On Brightspace you will find some news articles on the protein transition. We will use those for this first test.</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>On Mac, use:</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="in">reticulate::use_virtualenv("bertopic_r_env_spacy", required = TRUE)</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2 Load some data</span></span>
 <span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3 Now we run bertopic</span></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>Now that the enviroment is active, we can run a topic model. A topic model takes a certain number of arguments:</span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>| Argument             | Type              | Default | Description |</span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>|---------|------|---------|-------------|</span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>| <span class="in">`texts`</span>              | character vector  | —       | The input texts on which topic modelling is performed. Each element is a document (e.g. a sentence, abstract, or full text). These are converted into embeddings and then clustered into topics. |</span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>| <span class="in">`n_neighbors`</span>        | integer           | 15      | Number of neighbors used by UMAP to learn the local structure of the embedding space. Higher values emphasize global structure and typically yield fewer, larger clusters; lower values emphasize local structure and may produce more, smaller clusters. |</span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>| <span class="in">`n_components`</span>       | integer           | 10      | Dimensionality of the UMAP projection. The original high-dimensional embeddings are reduced to <span class="in">`n_components`</span> dimensions before clustering. Lower values compress the space more strongly, which can make clusters easier to detect for HDBSCAN. |</span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>| <span class="in">`minPts`</span>             | integer           | 10      | Minimum number of points required by HDBSCAN to form a cluster. Higher values lead to fewer, more robust clusters; lower values allow smaller clusters but may introduce more noise. |</span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>| <span class="in">`assign_by_membership`</span> | logical         | FALSE   | Controls how documents are assigned to topics. If <span class="in">`FALSE`</span>, the hard HDBSCAN labels are used, including topic <span class="in">`-1`</span> for noise (some documents may have no topic). If <span class="in">`TRUE`</span>, each document is assigned to the topic for which it has the highest membership probability, so every document gets a topic and there is no <span class="in">`-1`</span> noise topic. |</span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>|<span class="in">`model_name `</span>| string| "all-MiniLM-L6-v2"| The embedding model used to embed the text into a semantic space|</span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>On Brightspace you will find some news articles on the protein transition. We will use those for this first test.</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3 Now we run bertopic</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>Now that the enviroment is active, we can run a topic model. A topic model takes a certain number of arguments:</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>| Argument | Type | Default | Description |</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>|-----------------|-----------------|-----------------|-----------------------|</span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>| <span class="in">`texts`</span> | character vector | — | The input texts on which topic modelling is performed. Each element is a document (e.g. a sentence, abstract, or full text). These are converted into embeddings and then clustered into topics. |</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>| <span class="in">`n_neighbors`</span> | integer | 15 | Number of neighbors used by UMAP to learn the local structure of the embedding space. Higher values emphasize global structure and typically yield fewer, larger clusters; lower values emphasize local structure and may produce more, smaller clusters. |</span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>| <span class="in">`n_components`</span> | integer | 10 | Dimensionality of the UMAP projection. The original high-dimensional embeddings are reduced to <span class="in">`n_components`</span> dimensions before clustering. Lower values compress the space more strongly, which can make clusters easier to detect for HDBSCAN. |</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>| <span class="in">`minPts`</span> | integer | 10 | Minimum number of points required by HDBSCAN to form a cluster. Higher values lead to fewer, more robust clusters; lower values allow smaller clusters but may introduce more noise. |</span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>| <span class="in">`assign_by_membership`</span> | logical | FALSE | Controls how documents are assigned to topics. If <span class="in">`FALSE`</span>, the hard HDBSCAN labels are used, including topic <span class="in">`-1`</span> for noise (some documents may have no topic). If <span class="in">`TRUE`</span>, each document is assigned to the topic for which it has the highest membership probability, so every document gets a topic and there is no <span class="in">`-1`</span> noise topic. |</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>| <span class="in">`model_name`</span> | string | "all-MiniLM-L6-v2" | The embedding model used to embed the text into a semantic space |</span>
 <span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
 <span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="in">model_1 &lt;- identify_topics_coord(texts, </span></span>
@@ -1455,129 +1461,115 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="in">topic_assignment &lt;- model_1$documents</span></span>
 <span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>And has the following structure:</span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/identify_topics_output_2.png)</span></span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>*doc_id* allows you to match back to the initial database, the text is there to ensure all is still in the same place, and cluster provides the topic number. </span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>The coordinates of the documents are mainly used to create a visualization of the space. They can however be extracted using:</span>
-<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="in">doc_coordinates &lt;- model_1$doc_coordinates</span></span>
-<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>And have the following structure:</span>
-<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/identify_topics_output_3.png)</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>And has the following structure: <span class="al">![](Bertopic_images/identify_topics_output_2.png)</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>*doc_id* allows you to match back to the initial database, the text is there to ensure all is still in the same place, and cluster provides the topic number.</span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>The coordinates of the documents are mainly used to create a visualization of the space. They can however be extracted using:</span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="in">doc_coordinates &lt;- model_1$doc_coordinates</span></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>And have the following structure: <span class="al">![](Bertopic_images/identify_topics_output_3.png)</span></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>Here you see that we keep doc_id as the reference. Each *dim\_* column has the coordinate for one dimension in the space. There are as many dimensions as you put in the topic model extraction.</span>
 <span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>Here you see that we keep doc_id as the reference. Each *dim_* column has the coordinate for one dimension in the space. There are as many dimensions as you put in the topic model extraction. </span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Describe the topics.</span></span>
 <span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Describe the topics.</span></span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>Now we have the topics, but it's still difficult to make sense out of the information we have. We need some better insights. We do this by applying text mining techniques to the documents in each topic. In other words, we group the document from each topic together and extract the most salient terms to describe the topic.</span>
 <span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>Now we have the topics, but it's still difficult to make sense out of the information we have. We need some better insights. We do this by applying text mining techniques to the documents in each topic. In other words, we group the document from each topic together and extract the most salient terms to describe the topic. </span>
-<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">test1 &lt;- compute_topic_tf_idf_spacy_py4( data,</span></span>
-<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="in">                                         doc_col        = "doc_id",</span></span>
-<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="in">                                         topic_col      = "cluster",</span></span>
-<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a><span class="in">                                         text_col       = "text",</span></span>
-<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="in">                                         exclude_topics = NULL,</span></span>
-<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="in">                                         pos_keep       = c("NOUN", "PROPN"),</span></span>
-<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_char       = 3,</span></span>
-<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_term_freq  = 1,</span></span>
-<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="in">                                         top_n          = 100,</span></span>
-<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_ngram      = 2L,</span></span>
-<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a><span class="in">                                         max_ngram      = 4L)</span></span>
-<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a><span class="in">test1 &lt;- compute_topic_tf_idf_spacy_py4( data,</span></span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="in">                                         doc_col        = "doc_id",</span></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a><span class="in">                                         topic_col      = "cluster",</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="in">                                         text_col       = "text",</span></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="in">                                         exclude_topics = NULL,</span></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a><span class="in">                                         pos_keep       = c("NOUN", "PROPN"),</span></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_char       = 3,</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_term_freq  = 1,</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="in">                                         top_n          = 100,</span></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a><span class="in">                                         min_ngram      = 2L,</span></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a><span class="in">                                         max_ngram      = 4L)</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>There is a lot going on in this function. The first arguments are just to specify the columns names.</span>
 <span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>There is a lot going on in this function. The first arguments are just to specify the columns names. </span>
-<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>| Argument        | Type              | Default                 | Description |</span>
-<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>|----------|-------|--------|-------------|</span>
-<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pos_keep`</span>      | character vector  | <span class="in">`c("NOUN", "PROPN")`</span>     | Parts-of-speech to keep when extracting terms. Typically nouns and proper nouns, because they carry the most semantic meaning in topic representations. |</span>
-<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_char`</span>      | integer           | <span class="in">`3`</span>                      | Minimum number of characters a token must have to be included. Prevents very short or uninformative terms such as “an”, “of”, “to”. |</span>
-<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_term_freq`</span> | integer           | <span class="in">`1`</span>                      | Minimum frequency a term must appear across all documents (within a topic) to be considered. Higher values remove rare terms that may not be representative. |</span>
-<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>| <span class="in">`top_n`</span>         | integer           | <span class="in">`100`</span>                    | Maximum number of terms to keep per topic, ranked by importance (frequency, TF-IDF, or whichever metric is used). |</span>
-<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_ngram`</span>     | integer           | <span class="in">`2`</span>                      | Minimum length of n-grams to extract. For example, <span class="in">`2`</span> means only bigrams and larger (e.g. “machine learning”). |</span>
-<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>| <span class="in">`max_ngram`</span>     | integer           | <span class="in">`4`</span>                      | Maximum length of n-grams to extract. Setting to <span class="in">`4`</span> allows extraction of bigrams, trigrams, and 4-grams (e.g. “large language model”). |</span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>| Argument | Type | Default | Description |</span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a>|-----------------|----------------|----------------|-----------------------|</span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>| <span class="in">`pos_keep`</span> | character vector | <span class="in">`c("NOUN", "PROPN")`</span> | Parts-of-speech to keep when extracting terms. Typically nouns and proper nouns, because they carry the most semantic meaning in topic representations. |</span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_char`</span> | integer | <span class="in">`3`</span> | Minimum number of characters a token must have to be included. Prevents very short or uninformative terms such as “an”, “of”, “to”. |</span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_term_freq`</span> | integer | <span class="in">`1`</span> | Minimum frequency a term must appear across all documents (within a topic) to be considered. Higher values remove rare terms that may not be representative. |</span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>| <span class="in">`top_n`</span> | integer | <span class="in">`100`</span> | Maximum number of terms to keep per topic, ranked by importance (frequency, TF-IDF, or whichever metric is used). |</span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>| <span class="in">`min_ngram`</span> | integer | <span class="in">`2`</span> | Minimum length of n-grams to extract. For example, <span class="in">`2`</span> means only bigrams and larger (e.g. “machine learning”). |</span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>| <span class="in">`max_ngram`</span> | integer | <span class="in">`4`</span> | Maximum length of n-grams to extract. Setting to <span class="in">`4`</span> allows extraction of bigrams, trigrams, and 4-grams (e.g. “large language model”). |</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>The output of this function is shown below. For each topic, there are a number of top terms and their associated scored. This dataframe gives you the entire list of terms for all the topics. We can here see that topic 0 relates to food systems, protein transition, sugar beets and aleph farms. <span class="al">![](Bertopic_images/extract_terms_1.png)</span> While valuable, still not the easiest way to see the topics. So we now move to visualizing this information. For this we use the **plot_topic_terms_grid** function. Here you can specify how many topics you want to visualize and how many terms.</span>
 <span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>The output of this function is shown below. For each topic, there are a number of top terms and their associated scored. This dataframe gives you the entire list of terms for all the topics. We can here see that topic 0 relates to food systems, protein transition, sugar beets and aleph farms.</span>
-<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/extract_terms_1.png)</span></span>
-<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>While valuable, still not the easiest way to see the topics. So we now move to visualizing this information. For this we use the **plot_topic_terms_grid** function. Here you can specify how many topics you want to visualize and how many terms. </span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a><span class="in">plot_topic_terms_grid(test1, n_topics = 6, n_terms  = 10,)</span></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a><span class="in">plot_topic_terms_grid(test1, n_topics = 6, n_terms  = 10,)</span></span>
-<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/extract_terms_2.png)</span></span>
-<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a>This should allow you to get a good idea of the names you could provide to the topics. </span>
-<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Visualising the space</span></span>
-<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>Now that we have the topics, let's have a look at the space. We can visualize the space with the **plot_topic_space_interactive()** function. This function shows the first two dimensions of the semantic space. We can supply a df with topic labels to make the space more easily readable.</span>
-<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="in">plot_topic_space_interactive(doc_coordinates, </span></span>
-<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="in">                             topic_labels = topic_labels_plot,</span></span>
-<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a><span class="in">                             text = topic_assignment$text,          # optional vector of full texts for hover</span></span>
-<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a><span class="in">                             x_col = "dim_1",</span></span>
-<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="in">                             y_col = "dim_2",</span></span>
-<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="in">                             cluster_col = "cluster",</span></span>
-<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a><span class="in">                             show_ids = TRUE  )</span></span>
-<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/extract_terms_2.png)</span></span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>This should allow you to get a good idea of the names you could provide to the topics.</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Visualising the space</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>Now that we have the topics, let's have a look at the space. We can visualize the space with the **plot_topic_space_interactive()** function. This function shows the first two dimensions of the semantic space. We can supply a df with topic labels to make the space more easily readable.</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="in">plot_topic_space_interactive(doc_coordinates, </span></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="in">                             topic_labels = topic_labels_plot,</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="in">                             text = topic_assignment$text,          # optional vector of full texts for hover</span></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="in">                             x_col = "dim_1",</span></span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">                             y_col = "dim_2",</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="in">                             cluster_col = "cluster",</span></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="in">                             show_ids = TRUE  )</span></span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/Visualise_space.png)</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Testing to find the right model</span></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a>From all the previous steps, you will see that we often need to check different combinations of parameters before we find a space that is well divided. We might also want to test different embedding models. Using the **identify_topics_grid** function you can test different combinations of parameters and export some variables to see the performance.</span>
 <span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/Visualise_space.png)</span></span>
-<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6. Testing to find the right model</span></span>
-<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a>From all the previous steps, you will see that we often need to check different combinations of parameters before we find a space that is well divided. We might also want to test different embedding models. Using the **identify_topics_grid** function you can test different combinations of parameters and export some variables to see the performance.  </span>
-<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
-<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">test &lt;- identify_topics_grid(Protein_LU_2000_2024$Article, </span></span>
-<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="in">                     model_name           = "all-MiniLM-L6-v2",</span></span>
-<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="in">                     n_neighbors          = c(10, 15),                   </span></span>
-<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="in">                     n_components         = c(5, 10),                   </span></span>
-<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="in">                     metric               = "cosine",</span></span>
-<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="in">                     minPts               = c(10, 20) )  </span></span>
-<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = F}</span></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in">test &lt;- identify_topics_grid(Protein_LU_2000_2024$Article, </span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">                     model_name           = "all-MiniLM-L6-v2",</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="in">                     n_neighbors          = c(10, 15),                   </span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">                     n_components         = c(5, 10),                   </span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="in">                     metric               = "cosine",</span></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">                     minPts               = c(10, 20) )  </span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/testing_parameters.png)</span></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise: Your turn!</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### Get data</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>Go to Scopus and search for publications on a topic of your interest. If you can't think of anything use one of the following:</span>
 <span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="al">![](Bertopic_images/testing_parameters.png)</span></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>blob, slime mold, amoeboid movement, liquid marbles, non-Newtonian blobs, The Blob (biological organism) • “micromobility”, “bicycle infrastructure”, “smart traffic systems” • “machine learning medical diagnosis”, “AI radiology”, “deep learning MRI” • “serious games education”, “gamification learning”</span>
 <span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise: Your turn!</span></span>
-<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### Get data</span></span>
-<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>Go to Scopus and search for publications on a topic of your interest. If you can't think of anything use one of the following:</span>
-<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>blob, slime mold, amoeboid movement, liquid marbles, non-Newtonian blobs, The Blob (biological organism)</span>
-<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>•   “micromobility”, “bicycle infrastructure”, “smart traffic systems”</span>
-<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a>•   “machine learning medical diagnosis”,   “AI radiology”, “deep learning MRI”</span>
-<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>•   “serious games education”, “gamification learning”</span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prepare the data</span></span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a>Perform topic modelling on this dataset. Before you do, check the abstract column, you will have to remove rows with missing information, or missing abstracts.</span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### Run topic modeling</span></span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a>Now run the modeling function to extract the topics. <span class="sc">\#</span>## Extract the terms per topic Extract the terms, remember to shorten the text if necessary. You might have to remove words and run again.</span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### Create the topic space</span></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>Create the topic space, interpret the dimensions.</span>
 <span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prepare the data</span></span>
-<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>Perform topic modelling on this dataset. Before you do, check the abstract column, you will have to remove rows with missing information, or missing abstracts. </span>
-<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a><span class="fu">### Run topic modeling</span></span>
-<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>Now run the modeling function to extract the topics. </span>
-<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extract the terms per topic</span></span>
-<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a>Extract the terms, remember to shorten the text if necessary. You might have to remove words and run again. </span>
-<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a><span class="fu">### Create the topic space</span></span>
-<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a>Create the topic space, interpret the dimensions. </span>
-<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### Connect to other variables</span></span>
-<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>Once you have matched the topics to the publications, you can create a second dataset from the first using the *split_scopus_affiliations()* function. This function will extract the affiliations and their country. </span>
-<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Connect to other variables</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>Once you have matched the topics to the publications, you can create a second dataset from the first using the *split_scopus_affiliations()* function. This function will extract the affiliations and their country.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -239,6 +239,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using LLMs in R for data analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./DAFS_LexisUniImport.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Import &amp; Export Lexis Uni data</span></a>
   </div>
@@ -1043,13 +1049,16 @@ $c
 <p>The main advantage of <strong>map()</strong> is that it is a one format solution while the base R functions (apply, lappply, sapply and tapply) all have different syntaxes and behaviour. <strong>map()</strong> works on all and behaves identically on all datastructures.</p>
 <p>Here is an example of how to use this function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">=</span> <span class="fu">list</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>)</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># we will apply the sqrt() function to these numbers</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_data, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'purrr' was built under R version 4.4.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">=</span> <span class="fu">list</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we will apply the sqrt() function to these numbers</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_data, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 1.732051
@@ -1069,9 +1078,9 @@ $c
 </div>
 <p>It also works for dataframes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>test_dataframe <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"value"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>))</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_dataframe, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>test_dataframe <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"value"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>))</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_dataframe, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$value
 [1] 1.732051 3.000000 3.464102 3.872983 4.242641</code></pre>
@@ -1079,9 +1088,9 @@ $c
 </div>
 <p>It also works for a matrix:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>test_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_matrix, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>test_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>test_data_sqrt <span class="ot">=</span> <span class="fu">map</span>(test_matrix, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_data_sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 1.732051
@@ -1113,9 +1122,9 @@ Pay Attention
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>test_dataframe <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"value"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>), <span class="st">"year"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2000</span>,<span class="dv">2004</span>,<span class="dv">2018</span>,<span class="dv">2021</span>,<span class="dv">2025</span>))</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>test_dataframe<span class="sc">$</span>value <span class="ot">=</span> <span class="fu">map</span>(test_dataframe<span class="sc">$</span>value, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_dataframe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>test_dataframe <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">"value"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>), <span class="st">"year"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2000</span>,<span class="dv">2004</span>,<span class="dv">2018</span>,<span class="dv">2021</span>,<span class="dv">2025</span>))</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>test_dataframe<span class="sc">$</span>value <span class="ot">=</span> <span class="fu">map</span>(test_dataframe<span class="sc">$</span>value, <span class="sc">~</span> <span class="fu">sqrt</span>(.))</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_dataframe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     value year
 1 1.732051 2000
@@ -1126,11 +1135,11 @@ Pay Attention
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>test_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>,<span class="dv">2000</span>,<span class="dv">2004</span>,<span class="dv">2018</span>,<span class="dv">2021</span>,<span class="dv">2025</span>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>test_matrix[,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">map</span>(test_matrix[,<span class="dv">1</span>],  <span class="sc">~</span> <span class="fu">sqrt</span>(.)))</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pipes we can also write an equivalent form:</span></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test_matrix[,1] = test_matrix[,1] %&gt;% map( ~ sqrt(.)) %&gt;% unlist()</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>test_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">18</span>,<span class="dv">2000</span>,<span class="dv">2004</span>,<span class="dv">2018</span>,<span class="dv">2021</span>,<span class="dv">2025</span>), <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>test_matrix[,<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">unlist</span>(<span class="fu">map</span>(test_matrix[,<span class="dv">1</span>],  <span class="sc">~</span> <span class="fu">sqrt</span>(.)))</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pipes we can also write an equivalent form:</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test_matrix[,1] = test_matrix[,1] %&gt;% map( ~ sqrt(.)) %&gt;% unlist()</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(test_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         [,1] [,2]
 [1,] 1.732051 2000
