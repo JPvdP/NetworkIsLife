@@ -8,7 +8,7 @@
 
 <meta name="author" content="">
 
-<title>NetworkIsLife – Exam_DAFS_programming</title>
+<title>NetworkIsLife – Extracting Patent Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,35 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -171,7 +142,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Exam_DAFS_programming</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Package_patents.html">NetWorkIsLifeR Package</a></li><li class="breadcrumb-item"><a href="./Package_patents.html">Extracting Patent Data</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -202,7 +173,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Package_patents.html" class="sidebar-item-text sidebar-link">
+  <a href="./Package_patents.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Extracting Patent Data</span></a>
   </div>
 </li>
@@ -588,43 +559,25 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mutliple-choice-questions" id="toc-mutliple-choice-questions" class="nav-link active" data-scroll-target="#mutliple-choice-questions">1. Mutliple Choice Questions</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">1.1</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1.2</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1.3</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">1.4</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">1.5</a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">1.6</a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">1.7</a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">1.8</a></li>
-  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">1.9</a></li>
-  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">1.10</a></li>
-  </ul></li>
-  <li><a href="#part-2-explaining-scripts" id="toc-part-2-explaining-scripts" class="nav-link" data-scroll-target="#part-2-explaining-scripts">Part 2: Explaining scripts</a>
-  <ul class="collapse">
-  <li><a href="#explain-a-python-script" id="toc-explain-a-python-script" class="nav-link" data-scroll-target="#explain-a-python-script">2.1: Explain a python script</a></li>
-  <li><a href="#explain-an-r-script" id="toc-explain-an-r-script" class="nav-link" data-scroll-target="#explain-an-r-script">2.2: Explain an R script</a></li>
-  </ul></li>
-  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a>
-  <ul class="collapse">
-  <li><a href="#write-a-script-that-does-the-following" id="toc-write-a-script-that-does-the-following" class="nav-link" data-scroll-target="#write-a-script-that-does-the-following">3.1 Write a script that does the following:</a></li>
-  <li><a href="#write-a-script" id="toc-write-a-script" class="nav-link" data-scroll-target="#write-a-script">3.2 Write a script</a></li>
-  </ul></li>
-  <li><a href="#part-4-identify-errors" id="toc-part-4-identify-errors" class="nav-link" data-scroll-target="#part-4-identify-errors">Part 4: Identify errors</a>
-  <ul class="collapse">
-  <li><a href="#error-in-python" id="toc-error-in-python" class="nav-link" data-scroll-target="#error-in-python">4.1 Error in Python</a></li>
-  <li><a href="#error-in-r" id="toc-error-in-r" class="nav-link" data-scroll-target="#error-in-r">4.2 Error in R</a></li>
-  </ul></li>
+  <li><a href="#export-data-from-lens.org" id="toc-export-data-from-lens.org" class="nav-link active" data-scroll-target="#export-data-from-lens.org">1. Export data from lens.org</a></li>
+  <li><a href="#loading-the-data-into-r." id="toc-loading-the-data-into-r." class="nav-link" data-scroll-target="#loading-the-data-into-r.">2. Loading the data into R.</a></li>
+  <li><a href="#installing-the-package" id="toc-installing-the-package" class="nav-link" data-scroll-target="#installing-the-package">2.1 Installing the package</a></li>
+  <li><a href="#extract-basic-patent-information" id="toc-extract-basic-patent-information" class="nav-link" data-scroll-target="#extract-basic-patent-information">2.2 Extract basic patent information</a></li>
+  <li><a href="#extract-specific-tables" id="toc-extract-specific-tables" class="nav-link" data-scroll-target="#extract-specific-tables">2.3 Extract specific tables</a></li>
+  <li><a href="#extract-assignee-level-information" id="toc-extract-assignee-level-information" class="nav-link" data-scroll-target="#extract-assignee-level-information">2.3.1 Extract assignee level information</a></li>
+  <li><a href="#cleaning-assignee-names" id="toc-cleaning-assignee-names" class="nav-link" data-scroll-target="#cleaning-assignee-names">2.3.2 Cleaning assignee names</a></li>
+  <li><a href="#adjusting-the-cleaning-table" id="toc-adjusting-the-cleaning-table" class="nav-link" data-scroll-target="#adjusting-the-cleaning-table">2.3.3 Adjusting the cleaning table</a></li>
+  <li><a href="#extract-geographical-information" id="toc-extract-geographical-information" class="nav-link" data-scroll-target="#extract-geographical-information">2.3.1 Extract geographical information</a></li>
+  <li><a href="#extract-classification-information" id="toc-extract-classification-information" class="nav-link" data-scroll-target="#extract-classification-information">3. Extract classification information</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Package_patents.html">NetWorkIsLifeR Package</a></li><li class="breadcrumb-item"><a href="./Package_patents.html">Extracting Patent Data</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exam_DAFS_programming</h1>
+<h1 class="title">Extracting Patent Data</h1>
 </div>
 
 
@@ -641,420 +594,286 @@ window.Quarto = {
 </header>
 
 
-<section id="mutliple-choice-questions" class="level1">
-<h1>1. Mutliple Choice Questions</h1>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">1.1</h2>
-<p>What will the following script print?</p>
+<p>This page shows how to extract information from patent sets exported from lens.org. Using functions from the NetworkIsLifeR package we will show here how to extract and organise data from the jsonl files exported from lens in order to perform innovation science analyses.</p>
+<section id="export-data-from-lens.org" class="level1">
+<h1>1. Export data from lens.org</h1>
+<p>After you are happy with the query you build to find relevant patents you will arrive at the final result of your search. In the image below you see the screen you should have arrived at.</p>
+<p><img src="Package_images/Lens_1.png" class="img-fluid"></p>
+<p>You will notice that there are three main numbers reflecting the observations that were identified. The best option is to click on “Simple Families”. This options groups patents from the same family together. This avoids issues where you end up with 10 patents that are fundamentally the same, but applied for in 10 different countries. The simple family option allows us to count those as one patent. This is standard practive in innovation sciences.\ Your screen should now show the number of simple families as the first number in the list:</p>
+<p><img src="Package_images/Lens_2.png" class="img-fluid"></p>
+<p>Once that is done you can click on the “Export” button. A popup window will be displayed giving you a variety of options. Depending on how many search results you had, pick the correct number of documents to export. If your search returned 9000 patents, pick 10K, if it was more tha 10K, pick 50K.<br>
+</p>
+<p>The format of the export is important since it defines the information that will be exported. The CSV format will have a lot of valuable information but does not contain textual information or geographical information for the patents. This is however information that we would like to work with. This means that we need to pick the jsonl file format, this is the only format that exports all available information.</p>
+<p><img src="Package_images/Lens_3.png" class="img-fluid"> Once you’re done. Click on “Export”.</p>
+</section>
+<section id="loading-the-data-into-r." class="level1">
+<h1>2. Loading the data into R.</h1>
+<p>The jsonl formats are both very handy and quite annoying data formats. On the one hand it’s an amazing format to store complex data structures, on the other hand, it makes extracting this information into tabular form a complicated task when the data is not homogenous (which it very much isn’t in the case here.).\</p>
+<p>Patents contain many different datapoints (citations, classifications, authors, assignees, countries, abstracts) and because all patents are different the datables in which the information for each patent is stored do not always match in terms of dimensions. The table with assignees can be 2 x 4 on one patent and 3 x 2 for another. It’s hence difficult to create one nice table with all assignee information. This is where the NetworkIsLifeR package comes in. It contains functions that extract information from the jsonl format and puts it back into 2 dimensional tables that are easier to work with for specific analyses. In what follows we will show you how to extract specific tables from the jsonl files in R.</p>
+</section>
+<section id="installing-the-package" class="level1">
+<h1>2.1 Installing the package</h1>
+<p>The package is currently hosted on github. To download and install the package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> x <span class="op">&lt;</span> y:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span>  <span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"jpvdp/NetworkIsLifeR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li><ol type="A">
-<li>7</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>9</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>11 *</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>10</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">1.2</h2>
-<p>In R, given a dataframe df with columns A, B, and C, which command correctly adds a new column D that is the sum of columns A and B?</p>
-<ul>
-<li><ol type="A">
-<li>df<span class="math inline">\(D &lt;- df\)</span>A + df$B</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>df[“D”] &lt;- df[“A”] + df[“B”]</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>df &lt;- mutate(df, D = A + B)</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>All of the above *</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">1.3</h2>
-<p>In R, how do you remove rows from a dataframe df, where the value in column X is greater than 10?</p>
-<ul>
-<li><ol type="A">
-<li>df &lt;- df[df$X &lt;= 10, ] *</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>df &lt;- df[df$X &lt;= 10]</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>df &lt;- df[(df$X &gt; 10), ]</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>All of the above</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">1.4</h2>
-<p>I want to adjust the loop in the image so that it prints a sentence that says “value is now 1”, “value is now 2” each time i is increased. Which line of code should i add?</p>
-<ul>
-<li><ol type="A">
-<li>print(“value is now i”)</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>print(f”value is now {i}“) *</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>print: “value is now i”</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>print: f”value is now {i}”</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4">1.5</h2>
-<p>What will the following script print?</p>
+<p>Once installed we load the package as we normally would:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">3</span>:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NetworkIsLifeR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li><ol type="A">
-<li>0 1 2</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>0 1 2 3 4</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>0 1 2 4 *</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>1 2 4</li>
-</ol></li>
-</ul>
 </section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5">1.6</h2>
-<p>What value is returned by compute(6) in the following script?</p>
+<section id="extract-basic-patent-information" class="level1">
+<h1>2.2 Extract basic patent information</h1>
+<p>If we are interested in the basic information from the patents we can use the <strong>process_patent_jsonl_fast</strong> function that will extract a dataframe with the most relevant data points from the patents.</p>
+<p>The function requires one argument: the path the a jsonl file. If the path points to a folder, then all the jsonl files will be taken and used to create</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute(n):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> i <span class="op">&lt;</span> n:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">3</span>:</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>(i)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>compute(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>patents <span class="ot">=</span> <span class="fu">process_patent_jsonl</span>(<span class="st">"/Users/janpieter/Patents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li><ol type="A">
-<li>1</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>6 *</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>7</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>None of the above</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-6" class="level2">
-<h2 class="anchored" data-anchor-id="section-6">1.7</h2>
-<p>What is printed by the following scritp?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="dv">35</span>),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">70</span>, <span class="dv">95</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">25</span> <span class="sc">&amp;</span> df<span class="sc">$</span>Score <span class="sc">&gt;=</span> <span class="dv">85</span>, ]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Age)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><ol type="A">
-<li>32.5 *</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>67</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>29</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>Error</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-7" class="level2">
-<h2 class="anchored" data-anchor-id="section-7">1.8</h2>
-<p>What is printed by the following script?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">'Employee'</span>: [<span class="st">'Anna'</span>, <span class="st">'Ben'</span>, <span class="st">'Clara'</span>, <span class="st">'Dan'</span>],</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Department'</span>: [<span class="st">'IT'</span>, <span class="st">'IT'</span>, <span class="st">'HR'</span>, <span class="st">'HR'</span>],</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Salary'</span>: [<span class="dv">50000</span>, <span class="dv">60000</span>, <span class="dv">55000</span>, <span class="dv">65000</span>]}</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df.groupby(<span class="st">'Department'</span>)[<span class="st">'Salary'</span>].mean()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><ol type="A">
-<li>Department HR 52500 IT 62500</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>Department HR 120000 IT 110000</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>Department Salary HR 55000 IT 50000 HR 65000 IT 60000</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li><ul>
-<li>Department HR 60000 IT 55000</li>
-</ul></li>
-</ol></li>
-</ul>
-</section>
-<section id="section-8" class="level2">
-<h2 class="anchored" data-anchor-id="section-8">1.9</h2>
-<p>I want to create a dataframe that contains only students with grades higher than 85, how can I do this in R?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">&lt;-</span> data.frame(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  Student <span class="op">=</span> c(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"Diana"</span>),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  Math <span class="op">=</span> c(<span class="dv">90</span>, <span class="dv">80</span>, <span class="dv">85</span>, <span class="dv">95</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  English <span class="op">=</span> c(<span class="dv">85</span>, <span class="dv">88</span>, <span class="dv">80</span>, <span class="dv">90</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><ol type="A">
-<li>subset(df, Math &gt; 85 | English &gt; 85)</li>
-</ol></li>
-<li><ol start="2" type="A">
-<li>df[df<span class="math inline">\(Math &gt; 85 &amp; df\)</span>English &gt; 85, ]</li>
-</ol></li>
-<li><ol start="3" type="A">
-<li>df[df<span class="math inline">\(Math &gt;= 85 &amp; df\)</span>English &gt;= 85, ]</li>
-</ol></li>
-<li><ol start="4" type="A">
-<li>subset(df, Math &gt; 85 &amp; English &gt; 85) *</li>
-</ol></li>
-</ul>
-</section>
-<section id="section-9" class="level2">
-<h2 class="anchored" data-anchor-id="section-9">1.10</h2>
-<p>What does the following script give as an output?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">10</span>:</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Greater"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">==</span> <span class="dv">10</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Equal"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Smaller"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Options: + A) Greater + B) Equal * + C) Smaller + D) Error</p>
-</section>
-</section>
-<section id="part-2-explaining-scripts" class="level1">
-<h1>Part 2: Explaining scripts</h1>
-<section id="explain-a-python-script" class="level2">
-<h2 class="anchored" data-anchor-id="explain-a-python-script">2.1: Explain a python script</h2>
-<p>You are provided with the following Python script. Explain each line of code in this script.</p>
-<p>We have a csv file with different measure of water pollution in different countries in the world. There can be multiple measures per country (countries can have multiple water bodies). The values are fictitious. Explain each line of code in this script</p>
+<p>This function will create a dataframe with multiple variables:</p>
+<p><img src="Package_images/NIL_pat_1.png" class="img-fluid"> The full data extracted is:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Country</th>
-<th>Region</th>
-<th>WaterPollution</th>
-<th>Airpollution</th>
+<th>Variable name</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>A</td>
-<td>EU</td>
-<td>45</td>
-<td>2.1</td>
+<td><code>lens_id</code></td>
+<td>Unique identifier for the patent record in the Lens dataset (Lens.org ID).</td>
 </tr>
 <tr class="even">
-<td>B</td>
-<td>EU</td>
-<td>50</td>
-<td>2.1</td>
+<td><code>jurisdiction</code></td>
+<td>Patent office / authority code indicating where the document is published or filed (often a country/region code such as EP, US, WO).</td>
 </tr>
 <tr class="odd">
-<td>C</td>
-<td>Non-EU</td>
-<td>70</td>
-<td>3.2</td>
+<td><code>doc_number</code></td>
+<td>The publication document number within the jurisdiction (the numeric/alphanumeric part of the publication identifier).</td>
 </tr>
 <tr class="even">
-<td>C</td>
-<td>Non-EU</td>
-<td>65</td>
-<td>2.1</td>
+<td><code>kind</code></td>
+<td>Kind code indicating the publication stage/type (e.g., application publication vs grant; exact semantics depend on office).</td>
 </tr>
 <tr class="odd">
-<td>D</td>
-<td>EU</td>
-<td>60</td>
-<td>1.1</td>
+<td><code>date_published</code></td>
+<td>Publication date of the document (typically the date the document was made public).</td>
 </tr>
 <tr class="even">
-<td>E</td>
-<td>Non-EU</td>
-<td>80</td>
-<td>1.0</td>
+<td><code>lang</code></td>
+<td>Language code of the textual fields (e.g., title/abstract language, where available).</td>
 </tr>
 <tr class="odd">
-<td>E</td>
-<td>Non-EU</td>
-<td>45</td>
-<td>4.0</td>
+<td><code>title</code></td>
+<td>Patent title text (usually the primary title in the record’s language).</td>
 </tr>
 <tr class="even">
-<td>F</td>
-<td>EU</td>
-<td>40</td>
-<td>3.4</td>
+<td><code>abstract</code></td>
+<td>Patent abstract text.</td>
 </tr>
 <tr class="odd">
-<td>G</td>
-<td>EU</td>
-<td>55</td>
-<td>12.1</td>
+<td><code>app_doc_number</code></td>
+<td>Application document number (the application identifier, as distinct from the publication number).</td>
 </tr>
 <tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td></td>
+<td><code>app_date</code></td>
+<td>Filing date of the application (application date).</td>
 </tr>
 <tr class="odd">
-<td>W</td>
-<td>EU</td>
-<td>67</td>
-<td>3.4</td>
+<td><code>priority_date</code></td>
+<td>Earliest claimed priority date (often used as a proxy for the invention’s earliest filing date).</td>
 </tr>
 <tr class="even">
-<td>X</td>
-<td>EU</td>
-<td>42</td>
-<td>4.2</td>
+<td><code>applicants</code></td>
+<td>Applicant/assignee entity or entities associated with the application (often a list collapsed to a string or a structured field, depending on your extractor).</td>
 </tr>
 <tr class="odd">
-<td>Y</td>
-<td>EU</td>
-<td>31</td>
-<td>9.1</td>
+<td><code>inventors</code></td>
+<td>Inventor name(s) associated with the document (often a list collapsed to a string or a structured field, depending on your extractor).</td>
 </tr>
 <tr class="even">
-<td>Z</td>
-<td>Non-EU</td>
-<td>52</td>
-<td>10.1</td>
+<td><code>ipc_classifications</code></td>
+<td>IPC codes assigned to the document (may include multiple classes/subclasses/groups).</td>
+</tr>
+<tr class="odd">
+<td><code>patent_status</code></td>
+<td>High-level legal/procedural status as represented in the source (e.g., pending, granted, lapsed), depending on availability.</td>
+</tr>
+<tr class="even">
+<td><code>granted</code></td>
+<td>Logical indicator for whether the document has been granted (TRUE/FALSE).</td>
+</tr>
+<tr class="odd">
+<td><code>grant_date</code></td>
+<td>Grant date (if granted), otherwise typically <code>NA</code>.</td>
+</tr>
+<tr class="even">
+<td><code>cited_by_count</code></td>
+<td>Count of citations received by this patent (forward citations) as reported in the source.</td>
+</tr>
+<tr class="odd">
+<td><code>simple_family_size</code></td>
+<td>Size of the “simple” patent family (typically count of publications in the family under a narrower family definition).</td>
+</tr>
+<tr class="even">
+<td><code>extended_family_size</code></td>
+<td>Size of the “extended” patent family (typically broader INPADOC-style family count, depending on source definition).</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="extract-specific-tables" class="level1">
+<h1>2.3 Extract specific tables</h1>
+<p>There a different functions in the package that allow for the extraction of tables related to specific data points in the patent dataset.</p>
+</section>
+<section id="extract-assignee-level-information" class="level1">
+<h1>2.3.1 Extract assignee level information</h1>
+<p>The assignee function extract information at the assignee level from the jsonl files. The tables that are exported from the data will have one row per assignee, instead of one row per patent. Also, the geographical information is extracted when available.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(“waterpollutiondata.csv”, sep <span class="op">=</span> “<span class="op">;</span>”)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data) </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> df[df[<span class="st">'Region'</span>] <span class="op">==</span> <span class="st">'EU'</span>] </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> res.groupby(<span class="st">'Country'</span>)[<span class="st">'WaterPollution'</span>].mean() </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> res[res <span class="op">&gt;</span> <span class="dv">50</span>] </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>applicants <span class="ot">=</span> <span class="fu">extract_applicants_table</span>(<span class="st">"/Users/janpieter/Documents/testing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="Package_images/NIL_applicant1.png" class="img-fluid"></p>
+<p>The function returns the names of the assignees of the patents as written on the patent. The Country has a good coverage overall, but as shown in the image above, the details of the address is another question. Coverage of the latter is extremely low. Below are the explanations of the columns:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lens_id</code></td>
+<td>Unique identifier for the patent record in the Lens dataset (Lens.org ID); used to link applicants back to the originating patent.</td>
+</tr>
+<tr class="even">
+<td><code>sequence</code></td>
+<td>Applicant order on the patent record (1 = first listed applicant/assignee, 2 = second, etc.).</td>
+</tr>
+<tr class="odd">
+<td><code>name</code></td>
+<td>Extracted applicant/assignee/owner name (typically the normalized “extracted name” value from the JSON record).</td>
+</tr>
+<tr class="even">
+<td><code>residence</code></td>
+<td>Applicant country as provided in the record (often a country code or location string; may be missing).</td>
+</tr>
+<tr class="odd">
+<td><code>address</code></td>
+<td>Extracted applicant address as provided in the record (may be missing and/or unstructured).</td>
+</tr>
+</tbody>
+</table>
+<p>Linking the assignees to the other patent tables can be done through the lens_id.</p>
+</section>
+<section id="cleaning-assignee-names" class="level1">
+<h1>2.3.2 Cleaning assignee names</h1>
+<p>The names of the companies are not clean. They appear as written by the applicants, or as read by machines from handwritten documents. As a results we have many variations of company names that actually refer to the same company. For example in a patent set on semiconductors, these are some variations of philips:</p>
+<p><img src="Package_images/NIL_applicant2.png" class="img-fluid"> The issue here is that if we want to count how many patents Philips has, or with whom they are collaborating, we would end up with incorrect numbers or a very segmented view of the company which is not always useful. We hence want to clean/harmonise this data as much as we can. For this we proceed in three steps:</p>
+<ul>
+<li>First we remove any legal indications for the companies (NV, GMBH, SARL, CO). We do this because a lot of the variation of company names come from BV, B.V., B V, B.V etc. The information these elements contain are not useful in many cases.</li>
+<li>Second we harmonise specific terms. It’s common for companies when writing their names to put abbreviations for certain terms: Tech (technologies), Dev (Development), Res (Research), MGT (Management), INS (Institute), IND (Industry). We replace terms by their short form to harmonise these words throughout the dataset.</li>
+<li>Finally, we create cleaning and harmonisation rules. There rules take the form of combinations of terms. For the case of philips for example, we know that if the company name contains Philips (given the focus of the dataset), we are almost certain that it’s a Signify patent. So we create a rule that if “philips” is a word in the name, then we replace it with signify. For more complex cases, we can require multiple terms to be combined in a name. For example Utrecht and a string that starts with Uni, will be replaced with Utrecht University. By creating these rules we can significantly reduce the number of variations of names in the dataset and remove significant errors.</li>
+</ul>
+<p>These steps are summarised in a function called <strong>clean_company_names</strong>. This function will load a list with rules supplied with the package, or a custom set of rules supplied the user. The list supplied with the package only contains names for big tech companies. It’s recommended for the user to create their own list of rules by taking the file supplied as a template.</p>
+<p>As an input the function requires a dataframe with one column with company names. The <em>company_col</em> argument allows you to specify in which column the company names are stored. The initial names will be preserved, the function adds a new column with the cleaned name.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>applicants <span class="ot">=</span> <span class="fu">clean_company_names</span>(applicants, <span class="at">company_col =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the screenshot below you can see that the function added a name_raw column with the initial names, and a name_clean column that contains the new name as specified by the rules in the file.</p>
+<p><img src="Package_images/NIL_applicant3.png" class="img-fluid"></p>
+</section>
+<section id="adjusting-the-cleaning-table" class="level1">
+<h1>2.3.3 Adjusting the cleaning table</h1>
+<p>The cleaning table provided with the package does not cover all companies in the world of course. When working on a domain or region, one can improve the cleaning by adjusting the cleaning set fit for purpose. In the following we will explain how to manually adjust the reference list.</p>
+<p>There reference list comes in the form of an R file, to make it easily amendable. The file is named “company_rule.R” and can be found in the inst folder.</p>
+<p>The script in the file creates a tibble with five columns. Before looking into the details of the columns, you can already see the logic, we define tokens (proper nouns or part of proper nouns) that allow us to identify a specific organisation in imperfect strings and replace it with a canonical reference name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rules <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>priority, <span class="sc">~</span>type,  <span class="sc">~</span>tokens, <span class="sc">~</span>pattern, <span class="sc">~</span>canonical,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"TECHNISCHE"</span>, <span class="st">"HOCHSCHULE"</span>, <span class="st">"AACHEN"</span>)), <span class="cn">NA</span>, <span class="st">"RHEINISCH-WESTFAELISCHE TECHNISCHE HOCHSCHULE (RWTH)"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"COSUN"</span>)), <span class="cn">NA</span>, <span class="st">"KONINKLIJKE COOEPERATIE COSUN"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"philips|signify|filips koninklejke"</span>)), <span class="cn">NA</span>, <span class="st">"Signify N.V."</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"asml|asmlnetherlands"</span>)), <span class="cn">NA</span>, <span class="st">"ASML Netherlands B.V."</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bnxp</span><span class="sc">\\</span><span class="st">b"</span>)), <span class="cn">NA</span>, <span class="st">"NXP B.V."</span>,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The tibble contains five columns that define how the system works:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">priority</td>
+<td style="text-align: left;">Sets the order in which the rules should be applied.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">type</td>
+<td style="text-align: left;"><code>"ALL"</code> means all conditions must be met. <code>"ANY"</code> means at least one must be met.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tokens</td>
+<td style="text-align: left;">The names (or parts of names) used for cleaning.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pattern</td>
+<td style="text-align: left;">Optional regex pattern used for matching (if provided).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">canonical</td>
+<td style="text-align: left;">The harmonised name to use as the reference.</td>
+</tr>
+</tbody>
+</table>
+<p>For example: we noticed many variations of the name of philips earlier on: philips, lumileds, konikl philips, filips. We want to replace all these with a reference name, which for our purpose here will be Signify N.V. To achieve this we need to create a list of tokens that allow us to identify these variations and replace them. We build this with a combination of logic and regex operators.</p>
+<p>We saw many more variations with also mistakes in “koninklijke” (koninkl, konink, koninkijk, for these case we need to find a common root. Here this could be “konink”. Setting <em>konink</em> as a token we will consider for instance that all strings that contain a token starting with konink and have philips, will be considered philips. To specify that we want all strings that start with <em>konink</em> we use “.*”. This operators comes from the Regex language, and means “match any number of any characters” after what precedes. So it will match all the variations we saw before. We want to combine this with <em>philips</em> to make sure that we only replace koninklijke philips and not any other company name that might contain a generic name such as “koninklijke”.</p>
+<p>For these cases we combine two tokens. We want both to be included, so we set the second argument to “ALL” with the tokens as we just described them. This results in a line that will replace all strings that contain at least koning and a token “philips”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"konink.*"</span>, <span class="st">"philips"</span>)), <span class="cn">NA</span>, <span class="st">"Signify N.V."</span>,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This example is however not optimal, we can also consider that any company name that contains “philips” will in fact refer to signify, the same goes for lumileds. So we can say that if the string contains philips or lumileds, then we want to replace with signify. In this example, signify is the canonical form, philips and lumileds are the tokens.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="st">"ALL"</span>,  <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"philips|lumileds"</span>)), <span class="cn">NA</span>, <span class="st">"Signify N.V."</span>,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With this line, the script replace any string that contains philips or lumileds and replace it with Signify N.V.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cleaning recommendations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The cleaning/harmonisation of company names is highly context dependent. Depending on the topic/focus of your project you might consider different levels of cleaning. In the case of Philips, for a European-level analyis, I am happy enough with all subsidiaries being replaced with Signify.</p>
+<p>In more detailed analyses, we might want to keep Lumiled, Philips, Signify, Philips Electronics as separate entities.</p>
+<p>Because of this highly context dependant nature, cleaning still has an important manual component. The method provided here allows to automate as much as possible while keeping the possibility to adjust to the focus of your analysis.</p>
+</div>
 </div>
 </section>
-<section id="explain-an-r-script" class="level2">
-<h2 class="anchored" data-anchor-id="explain-an-r-script">2.2: Explain an R script</h2>
-<p>You are provided with the following R script that aims to compute the fibonacci sequence. Explain each line of code in this script. Provide the output of the script. Note: you are not requested to explain how the sequence is computed (i.e explain why we store values, why they are added, what a sequence is), only what a line of code does.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>generate_fibonacci <span class="ot">&lt;-</span> <span class="cf">function</span>(limit) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  prev <span class="ot">&lt;-</span> fib_sequence[<span class="dv">1</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  curr <span class="ot">&lt;-</span> fib_sequence[<span class="dv">2</span>]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  next_value <span class="ot">&lt;-</span> prev <span class="sc">+</span> curr</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (next_value <span class="sc">&lt;=</span> limit) {</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    fib_sequence <span class="ot">&lt;-</span> <span class="fu">c</span>(fib_sequence, next_value)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    prev <span class="ot">&lt;-</span> curr</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    curr <span class="ot">&lt;-</span> next_value</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    next_value <span class="ot">&lt;-</span> prev <span class="sc">+</span> curr</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(fib_sequence)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>fib_seq <span class="ot">&lt;-</span> <span class="fu">generate_fibonacci</span>(<span class="dv">3</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fib_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="extract-geographical-information" class="level1">
+<h1>2.3.1 Extract geographical information</h1>
 </section>
-</section>
-<section id="part-3" class="level1">
-<h1>Part 3</h1>
-<section id="write-a-script-that-does-the-following" class="level2">
-<h2 class="anchored" data-anchor-id="write-a-script-that-does-the-following">3.1 Write a script that does the following:</h2>
-<p>You have a variable that contains a 4x4 matrix filled containing only the number 5 (the matrix is filled with 5). You are requested to write a program that : - removes the second and third column - removes the second and third row - multiples all values in the remaining matrix by 5 - sums up all elements of the matrix - prints the results</p>
-</section>
-<section id="write-a-script" class="level2">
-<h2 class="anchored" data-anchor-id="write-a-script">3.2 Write a script</h2>
-<p>You are provided with a dataset containing information about a group of people in csv format. The data includes names, ages, and test scores. Your task is to write a program that imports this data into either R or Python and classifies each person based on specific criteria. The dataset contains 3 columns: ‘Name’, ‘Age’ and ‘Score’. Classify the people in 2 categories, a first category for people with a score lower than 42, a second with people with a score higher or equal to 42. The final dataset should have 4 columns: Name, Age, Score, Category. You can decide what to call the categories.</p>
-<p>for i in range(1,4): print(i)</p>
-</section>
-</section>
-<section id="part-4-identify-errors" class="level1">
-<h1>Part 4: Identify errors</h1>
-<section id="error-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="error-in-python">4.1 Error in Python</h2>
-<p>The following is a python script resulting in an error. Identify and explain the error. Then provide a solution.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> { <span class="st">'Country'</span>: [<span class="st">'France'</span>, <span class="st">'Germany'</span>, <span class="st">'Netherlands'</span>, <span class="st">'Italy'</span>, <span class="st">'Spain'</span>], </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Region'</span>: [<span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>, <span class="st">'EU'</span>], </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Emission'</span>: [<span class="dv">200</span>, <span class="dv">250</span>, <span class="dv">220</span>, <span class="dv">230</span>, <span class="dv">180</span>] } </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(data) </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_total_emissions(dataframe): </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="bu">sum</span>(dataframe[<span class="st">'Emission'</span>])  </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> result</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="op">=</span> calculate_total_emissions(df) </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="error-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="error-in-r">4.2 Error in R</h2>
-<p>The following is an R script resulting in an error. Identify and explain the error. Then provide a solution.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">dataframe</span>(“country” <span class="ot">=</span> <span class="fu">c</span>(“NL”, “BE”,”FR”,”DE”), “emission” <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">32</span>,<span class="dv">14</span>,<span class="dv">14</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(data))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Result <span class="ot">=</span> <span class="fu">sum</span>(dataframe<span class="sc">$</span>emission)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>return <span class="fu">sum</span>(dataframe[<span class="st">'Emission'</span>])  </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>total_emissions <span class="ot">=</span> <span class="fu">calculate_total_emissions</span>(df) </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Total emissions for EU countries:"</span>, total_emissions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="extract-classification-information" class="level1">
+<h1>3. Extract classification information</h1>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
