@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="">
+<meta name="author" content="Janpieter van der Pol">
 
 <title>NetworkIsLife – Extracting Patent Data</title>
 <style>
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles2.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -113,6 +113,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./imgs/logo5.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">NetworkIsLife</span>
     </a>
@@ -124,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -155,6 +158,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./imgs/logo5.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -567,7 +575,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#extract-assignee-level-information" id="toc-extract-assignee-level-information" class="nav-link" data-scroll-target="#extract-assignee-level-information">2.3.1 Extract assignee level information</a></li>
   <li><a href="#cleaning-assignee-names" id="toc-cleaning-assignee-names" class="nav-link" data-scroll-target="#cleaning-assignee-names">2.3.2 Cleaning assignee names</a></li>
   <li><a href="#adjusting-the-cleaning-table" id="toc-adjusting-the-cleaning-table" class="nav-link" data-scroll-target="#adjusting-the-cleaning-table">2.3.3 Adjusting the cleaning table</a></li>
-  <li><a href="#extract-geographical-information" id="toc-extract-geographical-information" class="nav-link" data-scroll-target="#extract-geographical-information">2.3.1 Extract geographical information</a></li>
+  <li><a href="#extract-geographical-information" id="toc-extract-geographical-information" class="nav-link" data-scroll-target="#extract-geographical-information">2.3.1 Extract geographical information</a>
+  <ul class="collapse">
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The Problem</a></li>
+  <li><a href="#function-1-assign_most_frequent" id="toc-function-1-assign_most_frequent" class="nav-link" data-scroll-target="#function-1-assign_most_frequent">Function 1: <code>assign_most_frequent()</code></a>
+  <ul class="collapse">
+  <li><a href="#what-it-does" id="toc-what-it-does" class="nav-link" data-scroll-target="#what-it-does">What it does</a></li>
+  <li><a href="#when-to-use-it" id="toc-when-to-use-it" class="nav-link" data-scroll-target="#when-to-use-it">When to use it</a></li>
+  <li><a href="#input" id="toc-input" class="nav-link" data-scroll-target="#input">Input</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  </ul></li>
+  <li><a href="#function-2-assignee_country_summary" id="toc-function-2-assignee_country_summary" class="nav-link" data-scroll-target="#function-2-assignee_country_summary">Function 2: <code>assignee_country_summary()</code></a>
+  <ul class="collapse">
+  <li><a href="#what-it-does-1" id="toc-what-it-does-1" class="nav-link" data-scroll-target="#what-it-does-1">What it does</a></li>
+  <li><a href="#when-to-use-it-1" id="toc-when-to-use-it-1" class="nav-link" data-scroll-target="#when-to-use-it-1">When to use it</a></li>
+  <li><a href="#input-1" id="toc-input-1" class="nav-link" data-scroll-target="#input-1">Input</a></li>
+  <li><a href="#output-1" id="toc-output-1" class="nav-link" data-scroll-target="#output-1">Output</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#key-points-1" id="toc-key-points-1" class="nav-link" data-scroll-target="#key-points-1">Key points</a></li>
+  </ul></li>
+  <li><a href="#choosing-between-the-functions" id="toc-choosing-between-the-functions" class="nav-link" data-scroll-target="#choosing-between-the-functions">Choosing Between the Functions</a></li>
+  <li><a href="#practical-workflow" id="toc-practical-workflow" class="nav-link" data-scroll-target="#practical-workflow">Practical Workflow</a></li>
+  <li><a href="#common-questions" id="toc-common-questions" class="nav-link" data-scroll-target="#common-questions">Common Questions</a></li>
+  </ul></li>
   <li><a href="#extract-classification-information" id="toc-extract-classification-information" class="nav-link" data-scroll-target="#extract-classification-information">3. Extract classification information</a></li>
   </ul>
 </nav>
@@ -584,6 +616,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
     
   
     
@@ -863,12 +901,198 @@ Cleaning recommendations
 <div class="callout-body-container callout-body">
 <p>The cleaning/harmonisation of company names is highly context dependent. Depending on the topic/focus of your project you might consider different levels of cleaning. In the case of Philips, for a European-level analyis, I am happy enough with all subsidiaries being replaced with Signify.</p>
 <p>In more detailed analyses, we might want to keep Lumiled, Philips, Signify, Philips Electronics as separate entities.</p>
-<p>Because of this highly context dependant nature, cleaning still has an important manual component. The method provided here allows to automate as much as possible while keeping the possibility to adjust to the focus of your analysis.</p>
+<p>Because of this highly context dependent nature, cleaning still has an important manual component. The method provided here allows to automate as much as possible while keeping the possibility to adjust to the focus of your analysis.</p>
 </div>
 </div>
 </section>
 <section id="extract-geographical-information" class="level1">
 <h1>2.3.1 Extract geographical information</h1>
+<p>When working with patent data, you’ll often encounter datasets where each patent can have multiple assignees, and each assignee may appear multiple times across different patents with varying location information. These two functions help you consolidate and analyze assignee location data.</p>
+<section id="the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
+<p>Patent databases typically structure assignee data with one row per assignee per patent. This means:</p>
+<ul>
+<li>The same company may appear hundreds of times across different patents</li>
+<li>The same company may be listed with different countries (e.g., “USA”, “Germany”, “Japan”)</li>
+<li>The same company may have different addresses across patents</li>
+<li>You need to decide: “What is the ‘main’ country for each assignee?”</li>
+</ul>
+</section>
+<section id="function-1-assign_most_frequent" class="level2">
+<h2 class="anchored" data-anchor-id="function-1-assign_most_frequent">Function 1: <code>assign_most_frequent()</code></h2>
+<section id="what-it-does" class="level3">
+<h3 class="anchored" data-anchor-id="what-it-does">What it does</h3>
+<p>This function assigns <strong>one country and one address</strong> to each unique assignee name based on which appears most frequently in your data.</p>
+</section>
+<section id="when-to-use-it" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-it">When to use it</h3>
+<p>Use this function when you want to: - Create a clean assignee master list with one location per assignee - Simplify your data by treating each assignee as having a single “home” location - Join assignee location data to other datasets</p>
+</section>
+<section id="input" class="level3">
+<h3 class="anchored" data-anchor-id="input">Input</h3>
+<p>A data frame with these columns: - <code>name</code>: Assignee name (e.g., “Samsung Electronics”) - <code>residence</code>: Country (e.g., “South Korea”) - <code>address</code>: Address (e.g., “Suwon”)</p>
+<p>You may also have <code>lens_id</code> and <code>sequence</code> columns, but the function doesn’t use them.</p>
+</section>
+<section id="output" class="level3">
+<h3 class="anchored" data-anchor-id="output">Output</h3>
+<p>A data frame with one row per assignee containing: - <code>name</code>: Assignee name - <code>country</code>: Most frequent country for this assignee - <code>country_pct</code>: What percentage of this assignee’s patents come from this country - <code>address</code>: Most frequent address for this assignee - <code>address_pct</code>: What percentage of this assignee’s patents list this address - <code>total_records</code>: How many patent records this assignee has in total</p>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p><strong>Input data:</strong></p>
+<pre><code>name              residence    address
+Acme Corporation  USA          New York
+Acme Corporation  USA          New York
+Acme Corporation  USA          Boston
+Acme Corporation  Canada       Toronto
+Acme Corporation  USA          New York</code></pre>
+<p><strong>Code:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yourpackagename)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">assign_most_frequent</span>(patent_data)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output:</strong></p>
+<pre><code>name              country  country_pct  address   address_pct  total_records
+Acme Corporation  USA      80.0         New York  60.0         5</code></pre>
+<p><strong>Interpretation:</strong> - Acme Corporation appears in 5 patent records - 80% of these records list USA as the country - 60% list New York as the address - Therefore, we assign USA and New York as Acme’s “main” location</p>
+</section>
+<section id="key-points" class="level3">
+<h3 class="anchored" data-anchor-id="key-points">Key points</h3>
+<ul>
+<li><strong>Percentage matters</strong>: A low <code>country_pct</code> (e.g., 35%) suggests the assignee has operations in multiple countries. A high percentage (e.g., 95%) indicates a clear home country.</li>
+<li><strong>Missing data</strong>: If an assignee has all NA values for country or address, those fields will be NA in the output.</li>
+<li><strong>Ties</strong>: If two countries appear equally often, the function picks the first one alphabetically.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="function-2-assignee_country_summary" class="level2">
+<h2 class="anchored" data-anchor-id="function-2-assignee_country_summary">Function 2: <code>assignee_country_summary()</code></h2>
+<section id="what-it-does-1" class="level3">
+<h3 class="anchored" data-anchor-id="what-it-does-1">What it does</h3>
+<p>This function creates <strong>one row for each assignee-country combination</strong>, showing you the geographic distribution of each assignee’s patents.</p>
+</section>
+<section id="when-to-use-it-1" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-it-1">When to use it</h3>
+<p>Use this function when you want to: - Understand the geographic spread of multinational companies - See how many patents each company has filed from different countries - Identify which assignees are truly multinational vs.&nbsp;concentrated in one location - Analyze location patterns across your dataset</p>
+</section>
+<section id="input-1" class="level3">
+<h3 class="anchored" data-anchor-id="input-1">Input</h3>
+<p>Same as Function 1: a data frame with <code>name</code>, <code>residence</code>, and <code>address</code> columns.</p>
+</section>
+<section id="output-1" class="level3">
+<h3 class="anchored" data-anchor-id="output-1">Output</h3>
+<p>A data frame with one row per unique assignee-country pair containing: - <code>name</code>: Assignee name - <code>residence</code>: Country - <code>country_records</code>: Number of patents for this name-country combination - <code>country_pct</code>: Percentage of this assignee’s total patents from this country - <code>total_records</code>: Total patents for this assignee across all countries - <code>address</code>: Most frequent address for this name-country pair - <code>address_pct</code>: Percentage of records with this address (within this country)</p>
+<p>The output is sorted by assignee name, then by descending <code>country_records</code> (most patents first).</p>
+</section>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<p><strong>Input data:</strong></p>
+<pre><code>name          residence    address
+Global Tech   USA          California
+Global Tech   USA          California
+Global Tech   USA          Texas
+Global Tech   Germany      Munich
+Global Tech   Germany      Munich
+Global Tech   Japan        Tokyo
+Local Inc     Canada       Toronto</code></pre>
+<p><strong>Code:</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">assignee_country_summary</span>(patent_data)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Output:</strong></p>
+<pre><code>name         residence  country_records  country_pct  total_records  address     address_pct
+Global Tech  USA        3                50.0         6              California  66.7
+Global Tech  Germany    2                33.3         6              Munich      100.0
+Global Tech  Japan      1                16.7         6              Tokyo       100.0
+Local Inc    Canada     1                100.0        1              Toronto     100.0</code></pre>
+<p><strong>Interpretation:</strong> - Global Tech is multinational: 50% USA, 33% Germany, 17% Japan - Local Inc operates only in Canada (100%) - Within the USA operations, Global Tech files most patents from California (67%)</p>
+</section>
+<section id="key-points-1" class="level3">
+<h3 class="anchored" data-anchor-id="key-points-1">Key points</h3>
+<ul>
+<li><strong>Geographic diversity</strong>: You can quickly see which assignees operate in multiple countries</li>
+<li><strong>Dominant locations</strong>: The rows are sorted so you see the most important countries first</li>
+<li><strong>Missing data</strong>: Rows with NA in <code>name</code> or <code>residence</code> are filtered out automatically</li>
+<li><strong>Comparison</strong>: Unlike Function 1, this doesn’t force a single country assignment—you see the full distribution</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="choosing-between-the-functions" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-between-the-functions">Choosing Between the Functions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Use This Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I need one location per assignee for merging with other data</td>
+<td><code>assign_most_frequent()</code></td>
+</tr>
+<tr class="even">
+<td>I want to see the geographic distribution of assignees</td>
+<td><code>assignee_country_summary()</code></td>
+</tr>
+<tr class="odd">
+<td>I’m creating a master assignee table</td>
+<td><code>assign_most_frequent()</code></td>
+</tr>
+<tr class="even">
+<td>I’m analyzing multinational patent strategies</td>
+<td><code>assignee_country_summary()</code></td>
+</tr>
+<tr class="odd">
+<td>I want a simple, clean dataset</td>
+<td><code>assign_most_frequent()</code></td>
+</tr>
+<tr class="even">
+<td>I want to preserve information about all locations</td>
+<td><code>assignee_country_summary()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="practical-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="practical-workflow">Practical Workflow</h2>
+<p>A common workflow might be:</p>
+<ol type="1">
+<li><p><strong>First</strong>, use <code>assignee_country_summary()</code> to explore your data</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See the distribution</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">assignee_country_summary</span>(patent_data)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Find highly multinational assignees</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>multinational <span class="ot">&lt;-</span> summary_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(name) <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="co"># Assignees in 4+ countries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Then</strong>, use <code>assign_most_frequent()</code> for your main analysis</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create clean master list</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>assignee_master <span class="ot">&lt;-</span> <span class="fu">assign_most_frequent</span>(patent_data)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag assignees with low country concentration</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>assignee_master <span class="ot">&lt;-</span> assignee_master <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">multinational =</span> country_pct <span class="sc">&lt;</span> <span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<hr>
+</section>
+<section id="common-questions" class="level2">
+<h2 class="anchored" data-anchor-id="common-questions">Common Questions</h2>
+<p><strong>Q: What if an assignee has 50% of patents in USA and 50% in Germany?</strong><br>
+A: <code>assign_most_frequent()</code> will pick one (alphabetically, so Germany). Check the <code>country_pct</code> column—if it’s around 50%, you know it was a close call.</p>
+<p><strong>Q: Should I clean the country names before using these functions?</strong><br>
+A: Yes! Make sure “USA”, “US”, and “United States” are standardized to one value first, otherwise they’ll be treated as different countries.</p>
+<p><strong>Q: What about assignees that changed countries over time?</strong><br>
+A: These functions look at frequency, not time. If you care about temporal patterns, you may need to split your data by time period first.</p>
+<p><strong>Q: Can I use these functions for other types of data?</strong><br>
+A: Absolutely! The logic works for any dataset where you have entities (names) with multiple locations. Just make sure your columns are named <code>name</code>, <code>residence</code>, and <code>address</code>.</p>
+</section>
 </section>
 <section id="extract-classification-information" class="level1">
 <h1>3. Extract classification information</h1>
