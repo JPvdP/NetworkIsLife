@@ -8,7 +8,7 @@
 
 <meta name="author" content="Janpieter van der Pol">
 
-<title>NetworkIsLife – text_networks</title>
+<title>NetworkIsLife – Textual Networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles2.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -129,7 +129,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./imgs/logo5.png" alt="" class="navbar-logo">
+    <img src="././imgs/logo5.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">NetworkIsLife</span>
@@ -142,12 +142,24 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">Programming</span></a>
+    <a class="nav-link" href="./package.html"> 
+<span class="menu-text">R Package</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./network.html" aria-current="page"> 
+<span class="menu-text">Network Theory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-dst.html"> 
+<span class="menu-text">Data Science Track</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-esm.html"> 
+<span class="menu-text">ESM Track</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -160,418 +172,48 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">Network Analysis</a></li><li class="breadcrumb-item"><a href="./Text_networks.html">Textual Networks</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Text_networks.html">Textual Networks</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      <img src="./imgs/logo5.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">NetWorkIsLifeR Package</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Package_patents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Extracting Patent Data</span></a>
+  <a href="./network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Analysis for Decision-Making</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">DAFS - Data Science Track</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_install_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing all the software</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_1_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1: The programming basics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_1_R_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions R week 1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_2_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_2_R_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions R week 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_3_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 3: Loops and exercises</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_3_R_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions R week 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_exam_type_questions_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DAFS exam type questions - solutions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_TopicModel_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using BERTopic from R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_DST_Sentiment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sentiment Analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_DST_NER.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Named Entity Recognition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_DST_LLM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using LLMs in R for data analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_LexisUniImport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Import &amp; Export Lexis Uni data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_DST_Python_Trouble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python in R (reticulate) — Operations Cheatsheet</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">DAFS - ESM track</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_install_Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing all the software</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_1_python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 1: The programming basics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_1_python_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions Python week 1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_2_Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_2_python_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions Python week 2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_3_Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 3: Loops and exercises</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_prog_week_3_python_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Solutions Python week 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_exam_type_questions_solutions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DAFS exam type questions - solutions</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">DAFS - NLP</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Assignment_Text_mining.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">NLP module Assignment</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_NPL_Feature_Extraction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 1: Feature Extraction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_NLP_session1_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 1: Tutorial</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_Bertopic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 2: Topic Modelling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_NLP_NER.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 3: Named Entity Recognition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_NLP_sentiment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Session 4: Sentiment analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./DAFS_LexisUniImport.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Import &amp; Export Lexis Uni data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Bertopic_metrics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Metrics for Evaluating BERTopic Models</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Network Analysis</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Network_analysis_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The basics of Network Analysis</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Text_networks.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Textual Networks</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Intro to Programming</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_basic_operations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Operations</span></a>
+  <a href="./Network_manual_chap_citations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Citation Network Analysis for Decision-Making</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_DataImportAndPrep.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Import and preparation</span></a>
+  <a href="./Network_manual_chap_collaborations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaboration Networks</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_Databasemanip.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Database Manipulation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Making functions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_loops_ifelse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Loops, if-else and Mapping</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Intro_programming_visualisation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data visualisation</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Text Mining</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./feature_extraction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Feature Extraction with R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_lda.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Topic Modelling</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./NER.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Named Entity Recognition</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Text_networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Textual Networks</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">State of Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./State_of_data_04062024.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State of Data</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Topic Modelling Workshop</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bertopic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Installing Bertopic</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bert_practise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create the model (detailed)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_bertopic_nodetails.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Create the model (TL;DR version)</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Topic_modelling_run_bertopic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Run Bertopic</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -582,8 +224,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#textual-networks" id="toc-textual-networks" class="nav-link active" data-scroll-target="#textual-networks">Textual Networks</a></li>
-  <li><a href="#direct-indicators" id="toc-direct-indicators" class="nav-link" data-scroll-target="#direct-indicators">Direct indicators</a>
+  <li><a href="#direct-indicators" id="toc-direct-indicators" class="nav-link active" data-scroll-target="#direct-indicators">Direct indicators</a>
   <ul class="collapse">
   <li><a href="#raw-cooccurrences" id="toc-raw-cooccurrences" class="nav-link" data-scroll-target="#raw-cooccurrences">raw cooccurrences</a></li>
   <li><a href="#the-cramer-indicator" id="toc-the-cramer-indicator" class="nav-link" data-scroll-target="#the-cramer-indicator">The Cramer indicator</a></li>
@@ -603,8 +244,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Network_analysis_basics.html">Network Analysis</a></li><li class="breadcrumb-item"><a href="./Text_networks.html">Textual Networks</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<h1 class="title">Textual Networks</h1>
 </div>
 
 
@@ -627,14 +269,11 @@ window.Quarto = {
 </header>
 
 
-<section id="textual-networks" class="level2">
-<h2 class="anchored" data-anchor-id="textual-networks">Textual Networks</h2>
 <p>We’ll now turn our attention to methods for identifying which links to retain in order to create a network between terms/tokens in a corpus. To do this, we will present different types of indicators (direct and indirect) which either propose a textual network or a semantic network. A textual network shows the terms present in the corpus and links them with other terms present in the same unit of analysis (document, paragraph, sentence). This type of network shows us which words/tokens appear in close proximity. A semantic network identifies words that appear together with the same other words. The idea is that when two terms always appear with the same other terms, they have a close semantic meaning. In what follows, we’ll look at 6 indicators, 4 direct, 2 indirect. These indicators are automatically calculated in the free Cortext software. We’ll go into the details of how these indicators are calculated, to ensure a detailed understanding of their advantages and limitations, so that the analyst can choose the right indicator for the right use case. For those who don’t wish to deal with the technical side, the final section offers a summary table presenting the interpretation, advantages and limitations of each indicator.</p>
 <p>To enable readers who wish to repeat the calculations to make sure they have mastered the formulas, we will take an example of 5 documents with short text to enable manual calculation and to illustrate things a little more simply. In the chapters on use cases, examples will be presented using larger corpora, but based on a basic understanding of the indicators as presented here.</p>
 <p>For the remainder of this chapter, we’ll use the corpus shown in figure <span class="math inline">\(\ref{5_docs}\)</span>. This corpus contains 5 documents of varying text length. In these texts, we’ve colored the words “tire” and “geometry”, as we’ll be using them in the examples to interpret the indicators.</p>
 <p>All the indicators we present here are based in one way or another on , i.e.&nbsp;the number of times two terms appear together in the same unit of analysis. In what follows, we use the document as the unit of analysis, although it is possible to choose the chapter, paragraph or sentence as required.</p>
 <p><img src="5_docs.png" class="img-fluid"></p>
-</section>
 <section id="direct-indicators" class="level2">
 <h2 class="anchored" data-anchor-id="direct-indicators">Direct indicators</h2>
 <section id="raw-cooccurrences" class="level3">
@@ -804,13 +443,13 @@ Remark
 <h3 class="anchored" data-anchor-id="the-cramer-indicator">The Cramer indicator</h3>
 <p>This is an indicator developed by <span class="citation" data-cites="cramer1979some">(<a href="#ref-cramer1979some" role="doc-biblioref">Cramer and Nicewander 1979</a>)</span>. It is an indicator that is automatically calculated in the Cortext Manager text analysis software.</p>
 <p>This indicator aims to remove language bias. In a given language, certain words occur more often than others, creating high co-occurrences for these words, which are <em>de facto</em> highlighted to the detriment of words that have lower frequencies but may be of interest. To correct for these biases, raw co-occurrences will be compared with expected co-occurrences. In other words, if a term is frequent in the text, it will have more co-occurrences by definition. An infrequent term will have fewer co-occurrences. The number of co-occurrences we can expect can be estimated by a statistical calculation:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 e(i,j) = \frac{n(i) \cdot n(j)}{n}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>In this equation, <span class="math inline">\(n(i)\)</span> corresponds to the number of co-occurrences of token <span class="math inline">\(i\)</span> and <span class="math inline">\(n\)</span> to the number of co-occurrences in the corpus as a whole. In our example, <span class="math inline">\(n\)</span> amounts to summing the matrix and dividing by two (the matrix being symmetrical). <span class="math inline">\(n(i)\)</span> means summing the row or column corresponding to <span class="math inline">\(i\)</span>. In extracting the matrix <span class="math inline">\(n(tire) = 13\)</span>, <span class="math inline">\(n(geometry) = 12\)</span>, <span class="math inline">\(n=56\)</span>. The calculation of this indicator only makes sense if we mobilize the values of the entire corpus, so we’ll use the bold values in the matrix:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 e(tire,geometry) = \frac{n(tire) \cdot n(geometry)}{n} = \frac{105 \cdot 90}{2744} = \frac{9450}{2744} = 3.44
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>The number of times we expect to see “tire” and “geometry” together in the same unit (document, paragraph, sentence) is 3.44. By calculating this value for the matrix endpoints, we obtain the following results:</p>
 <table class="caption-top table">
 <colgroup>
@@ -910,10 +549,10 @@ e(tire,geometry) = \frac{n(tire) \cdot n(geometry)}{n} = \frac{105 \cdot 90}{274
 </table>
 <p><em>Table 1: Matrice des valeurs attendues pour les 5 documents du corpus;</em></p>
 <p>The second step in the formula is then to compare this expected (or hoped-for) number with the observed number. The latter is the number of co-occurrences found in the co-occurrence matrix:</p>
-<span class="math display">\[\begin{eqnarray}
+<p><span class="math display">\[\begin{eqnarray}
 \frac{n(i,j) - e(i,j)}{e(i,j)} &amp;=&amp; \frac{n(i,j)}{e(i,j)}-1\\
 \frac{4}{3.44} - 1 &amp;=&amp; 0.16
-\end{eqnarray}\]</span>
+\end{eqnarray}\]</span></p>
 <p>The result shows that the number of co-occurrences is higher than expected (result <span class="math inline">\(&gt;0\)</span>). In fact, the number is 16% higher than expected. Conversely, the same calculation for the “pull” and “adjacent” terms gives a negative result: <span class="math inline">\(-0.33\)</span>, implying here that the number is 67% lower than expected. The set of values for the matrix is represented in table <span class="math inline">\(\ref{table_cramer}\)</span>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1032,9 +671,9 @@ Remark
 <section id="chi2" class="level3">
 <h3 class="anchored" data-anchor-id="chi2"><span class="math inline">\(\chi^2\)</span></h3>
 <p>The <span class="math inline">\(\chi^2\)</span> indicator is well known in statistics, where it is commonly used to identify whether a deviation from an expected value is statistically significant. In this sense, the indicator is close to Cramer’s. The difference is in the denominator, where the root function is applied.</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 \chi^2(i,j) = \frac{n(i,j) - e(i,j)}{{sqrt{e(i,j)}}\\}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>A value below what’s expected will give rise to negative values, values above what’s expected will give rise to positive values, close to 0 we’re in the expected zone. The results are in the <span class="math inline">\(\ref{Matrice_chi2}\)</span> table. The higher the absolute value, the more it deviates from what’s expected.</p>
 <ul>
 <li>“Adjacent” and “Axial” have the highest positive score, implying that these two terms are found together more often in the same document than expected, so their association should be retained.</li>
@@ -1255,9 +894,9 @@ Remark
 <section id="mutual-information" class="level3">
 <h3 class="anchored" data-anchor-id="mutual-information">Mutual Information</h3>
 <p>A final indicator is Mutual information, which is characterized by the following formula: \</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 I_{i,j} = log(\frac{n(i,j)}{e(i,j)})    
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>More than a deviation from an observed value (like <span class="math inline">\(\chi^2\)</span> or the Cramer indicator), Mutual Information identifies a multiplication. In other words, by how many times the observed number is greater than the expected number. The <span class="math inline">\(log(\cdot)\)</span> function applied here initially transforms a value less than 1 ( value less than expected) into a negative value, while smoothing out high values. Figure <span class="math inline">\(\ref{information_criterion}\)</span> illustrates this principle. A value <span class="math inline">\(&gt; 1\)</span> implies that the observed value is higher than expected and will receive a positive value. The log function reduces high values and in so doing also reduces the gaps between values.</p>
 <p><img src="Adjustement_text_mining.png" class="img-fluid"></p>
 <p>Applying this indicator to our sample, we obtain the matrix in table <span class="math inline">\(\ref{nw_semantic_MI}\)</span>. We notice in this matrix the presence of “-Inf” values corresponding to <span class="math inline">\(-\infty\)</span>. This value emerges when we divide by <span class="math inline">\(0\)</span>, which is the case here for some values. We find negative values corresponding to values lower than expected, and positive values corresponding to values higher than expected. Given the nature of the formula, this indicator gives a negative value to the same values as <span class="math inline">\(\chi^2\)</span> and <span class="math inline">\(Cramer\)</span>. In a first approach, we’ll find the same network structure, since the same links (with negative values) will be removed from the network.</p>
@@ -1280,16 +919,16 @@ Remark
 <section id="comparing-the-indicators" class="level3">
 <h3 class="anchored" data-anchor-id="comparing-the-indicators">Comparing the indicators</h3>
 <p>In the previous subsections, we showed how to calculate three indicators to identify links for a text network. We have seen that the networks extracted are identical even if the weights on the links change. To better understand the difference between these indicators and which indicator to choose in which case, let’s take a closer look at these three indicators and what makes them different. First, let’s focus on the formulas to identify what the real difference is in terms of values. To do this, we’ll make the following calculation. We’d like to know by how much we need to multiply one indicator to obtain another. For example, for <span class="math inline">\(\chi^2\)</span> and Cramer, by how much must we multiply <span class="math inline">\(\chi^2\)</span> to obtain Cramer’s score:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 \chi^2 \cdot factor = Cramer    
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>By doing this exercise for the three indicators, we obtain the results in the matrix <span class="math inline">\(\ref{indicators_comparison_table}\)</span>. In this matrix, we can read that we need to multiply Cramer by <span class="math inline">\(\sqrt{e}\)</span> to obtain <span class="math inline">\(\chi^2\)</span>, and multiply <span class="math inline">\(\chi^2\)</span> by <span class="math inline">\(\frac{1}{\sqrt{e}}\)</span> to obtain Cramer.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 20%">
 <col style="width: 23%">
-<col style="width: 30%">
-<col style="width: 25%">
+<col style="width: 23%">
+<col style="width: 29%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1338,16 +977,16 @@ Remark
 <p>The first indicator we’ll be looking at here is cosine, a well-known and widely used indicator in scientometrics <span class="citation" data-cites="eck2009normalize">(<a href="#ref-eck2009normalize" role="doc-biblioref">Eck and Waltman 2009</a>)</span> and economics <span class="citation" data-cites="jaffe1986technological">(<a href="#ref-jaffe1986technological" role="doc-biblioref">Jaffe 1986</a>)</span>, <span class="citation" data-cites="engelsman1991mapping">(<a href="#ref-engelsman1991mapping" role="doc-biblioref">Engelsman and Raan 1991</a>)</span>, <span class="citation" data-cites="breschi2003knowledge">(<a href="#ref-breschi2003knowledge" role="doc-biblioref">Breschi, Lissoni, and Malerba 2003</a>)</span>. In a later chapter, we’ll show how we use this same indicator to understand technological proximity based on technological classifications. In this chapter, we focus on the application to textual analysis. Let’s go back to the co-occurrence matrix, which we recall here for fluency:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1478,12 +1117,12 @@ Remark
 <p>Direct measurements compared observed co-occurrences with expected co-occurrences, so we were interested only in the individual cells of each matrix. The idea behind an indirect measure is to say that two terms are close because they appear together with other terms. In this sense, we’re more interested in semantic proximity: two terms that are surrounded by the same terms have a high probability of having the same meaning. To put this idea into practice, we need to compare all indirect co-occurrences between two terms. In other words, we need to identify with which other words each word co-occurs. If we want to know whether the word “tire” is close to the word “body”, we’ll have to check whether both are linked with “geometry”, “adjacent”, “edge”, “axial”, “radius” and so on for all the terms in the corpus. The reasoning and calculation will therefore mobilize vectors to facilitate the calculation of indicators. In what follows, we’ll move straight on to explaining the calculation. For a more intuitive explanation of this indicator, you can read the chapter on technological proximity, which explains the construction of the indicator step by step and explains the intuition behind each step.</p>
 <p>The formula we’ll use here is<br>
 </p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
     cos(\theta) = \frac{\sum_{k \neq i,j}^{} n(i,k) \cdot n(j, k)}{\sqrt{\sum_{k \neq i,j}^{} n(i,k)^2}\cdot \sqrt{\sum_{k \neq i,j}^{} n(j,k)^2}}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>The denominator of this indicator counts the number of times two terms appear together with a third term. <span class="math inline">\(n(i,k)\)</span> represents the frequency with which terms <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> appear together and <span class="math inline">\(n(j,k)\)</span> the frequency for terms <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span>. Multiplication implies that if there is no direct link between <span class="math inline">\(i\)</span> (or <span class="math inline">\(j\)</span>) and <span class="math inline">\(k\)</span>, the product will be zero, so the value of the numerator does not increase. Note that even if a direct link exists ( <span class="math inline">\(n(i,j \neq 0\)</span>) this does not increase the numerator.</p>
 <p>Let’s take the example of the terms “tire” and “body” (but let’s stay within the framework of the restricted matrix so as not to fill entire pages with lines of calculation):</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
 \begin{split}
 \sum_{k=1}^{k} cooc_{ik} \cdot cooc_{jk} &amp; = \sum_{k=1}^{5} cooc_{tire,k} \cdot cooc_{body, k}\\
 &amp; = (Cooc_{tire - geometry} \cdot Cooc_{body - geometry})\\
@@ -1493,10 +1132,10 @@ Remark
 &amp; + (Cooc_{tire - radius} \cdot Cooc_{body - radius}) \\
 &amp; = (4 \cdot 2) + (1 \cdot 1) + (3 \cdot 1) + (1 \cdot 1) + (2 \cdot 0)\\&amp; = 13
 \end{split}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>There is no observed link between “radius” and “body”, so the product is zero. It becomes clear here that manual calculation is relatively time-consuming, especially if we have to do this for a corpus with thousands of words.</p>
 <p>To calculate the final proximity between two CIB codes, divide by the norm of the two codes. Following on from our example :</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
     \begin{split}
         cos(\theta) &amp; = \frac{\sum_{k=1}^{5} cooc_{tire,k} \cdot cooc_{body, k}}{\sqrt{\sum_{k=1}^{5} cooc_{tire,k}^2}\cdot \sqrt{\sum_{k=1}^{5} cooc_{body, k}^2}}\\       
                     &amp; = \frac{1}{\sqrt{\sum_{k=1}^{5} cooc_{tire,k}^2}\cdot \sqrt{\sum_{k=1}^{5} cooc_{body, k}^2}}\\
@@ -1505,7 +1144,7 @@ Remark
                     &amp; = 0.88
     \end{split}
     \label{proxi_nominateur2}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>There’s a point of caution here: in the classic cosine measure, the sum excludes only the <span class="math inline">\(i\)</span> term and keeps <span class="math inline">\(j\)</span>. A comparison with a software program may give a slightly different result following this modification of the formula: <span class="math inline">\(\sqrt{\sum_{k \neq i,\textcolor{red}{j}} cooc(k,j)^2}\)</span>.\\}</p>
 <p>The values for the submatrix we’ve been following since the beginning can be found in the table <span class="math inline">\(\ref{cosinus_matrix}\)</span>. We note here the symmetry of the matrix, as with the other indicators. The higher the score, the closer the two terms are. In the case of indicator <span class="math inline">\(\in [0,1]\)</span>, we have perfect proximity between the terms “axial” and “adjacent”. This implies that the two terms appear together with exactly the same terms throughout the corpus. In no case does this imply that the terms appear together, as the score does not allow us to infer on this question. If a term appears with no other terms, the score will be <span class="math inline">\(0\)</span>.</p>
 <table class="caption-top table">
@@ -1613,18 +1252,18 @@ Remark
 <section id="distributional" class="level3">
 <h3 class="anchored" data-anchor-id="distributional">Distributional</h3>
 <p>The cosine indicator is based on raw co-occurrences between terms. Like cosine, the “Distributional” indicator aims to identify semantic meaning between terms. Instead of relying on raw counts, “Distributional” bases its calculation on the “Mutual Information” indicator. The indicator was proposed by and takes the following formula:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
     \frac{\sum_{k\neq i,j, I(i,k) &gt; 0}min(I(i,k),I(j,k)))}{\sum_{k\neq i,j, I(i,k) &gt; 0} I(i,k)}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>As with cosine, this indicator targets indirect links. We thus find calculations based on <span class="math inline">\(I(i,k)\)</span> and <span class="math inline">\(I(j,k)\)</span>, where <span class="math inline">\(k\)</span> is the term in common. When two terms have a third in common, we take the minimum between the weights. The indicator is then normalized by the sum of the weights (in this case, mutual information).</p>
 <p>To illustrate the calculation, we calculate the score for the terms “tire” and “geometry” in figure <span class="math inline">\(\ref{illu_lien_indirecte}\)</span>. In the figure, the scores correspond to the mutual information scores.</p>
 <p><img src="distributional_mi_illustration.png" class="img-fluid"></p>
 <p>Illustration of the “distributional” indicator principle. The weights on the links correspond to the “Mutual information” indicator of the <span class="math inline">\(\ref{nw_semantic_MI}\)</span> matrix. Here, we seek to calculate the value for the terms “tire” and “geometry”. The network shows that the two terms have two others in common: “body” and “edge”.</p>
 <p>The numerator is calculated by summing the minimum values for each triptych, keeping only the positive values. As a reminder, a negative value in mutual information implies a co-occurrence above the expected, to identify a semantic meaning we only wish to keep the co-occurrences which are more important than expected. In our example we therefore obtain:</p>
-<span class="math display">\[\begin{eqnarray}
+<p><span class="math display">\[\begin{eqnarray}
 Distr(tire, geometry) &amp;= \frac{min(0.014) + min(0.031, 0.185)}{0.031} = 5.516\\
 Distr(geometry, tire) &amp;= \frac{min(0.14) + min(0.031, 0.185)}{0.14 + 0.185} = 0.5261
-\end{eqnarray}\]</span>
+\end{eqnarray}\]</span></p>
 <p>Note that because of the formulation of the denominator, the scores are asymmetric, implying that the matrix containing the values will be asymmetric as well. The matrix is presented in the table <span class="math inline">\(\ref{distrib_matrix}\)</span>. The higher the score, the stronger the proximity. A score of 0 implies that the two terms do not appear together with a third term. As the score increases, the number of triads increases and the IM scores become more similar.</p>
 <table class="caption-top table">
 <colgroup>
