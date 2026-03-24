@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R Tutor — Learn R Programming</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Fraunces:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1117;
+    --surface: #161b27;
+    --surface2: #1e2535;
+    --border: #2a3347;
+    --accent: #4ecdc4;
+    --accent2: #ff6b6b;
+    --accent3: #ffd93d;
+    --text: #e8edf5;
+    --text-dim: #7a8aaa;
+    --text-muted: #4a5568;
+    --success: #6bcb77;
+    --error: #ff6b6b;
+    --r-blue: #276DC3;
+    --r-gray: #75AADB;
+    --font-code: 'JetBrains Mono', monospace;
+    --font-display: 'Fraunces', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-code);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(78,205,196,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(78,205,196,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .r-badge {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--r-blue), var(--r-gray));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 20px rgba(39,109,195,0.4);
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .logo-text span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .progress-area {
+    text-align: right;
+  }
+
+  .progress-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .progress-track {
+    width: 160px;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--r-blue));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-text {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  /* Question card */
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 20px;
+    position: relative;
+    animation: slideIn 0.4s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .q-number {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 4px 10px;
+    border: 1px solid rgba(78,205,196,0.3);
+    border-radius: 20px;
+  }
+
+  .q-topic {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: var(--surface2);
+    border-radius: 20px;
+  }
+
+  .q-difficulty {
+    margin-left: auto;
+    display: flex;
+    gap: 3px;
+  }
+
+  .diff-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+
+  .diff-dot.filled { background: var(--accent3); }
+
+  .question-text {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .question-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-left: 3px solid var(--border);
+    line-height: 1.6;
+  }
+
+  .question-hint code {
+    color: var(--accent3);
+    background: rgba(255,217,61,0.1);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* Code editor area */
+  .editor-section {
+    margin-bottom: 20px;
+  }
+
+  .editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+    padding: 10px 16px;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  .editor-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .editor-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .editor-wrapper {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+  }
+
+  .line-numbers {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: rgba(0,0,0,0.2);
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .line-num {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 24px;
+    text-align: right;
+    font-family: var(--font-code);
+  }
+
+  #code-input {
+    width: 100%;
+    min-height: 140px;
+    background: var(--surface);
+    color: var(--text);
+    border: none;
+    outline: none;
+    padding: 16px 16px 16px 52px;
+    font-family: var(--font-code);
+    font-size: 14px;
+    line-height: 24px;
+    resize: vertical;
+    caret-color: var(--accent);
+    tab-size: 2;
+  }
+
+  #code-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  #code-input:focus {
+    box-shadow: inset 0 0 0 1px rgba(78,205,196,0.2);
+  }
+
+  /* Buttons */
+  .actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0e1117;
+  }
+
+  .btn-primary:hover {
+    background: #3db8b0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(78,205,196,0.3);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+
+  .btn-next {
+    background: linear-gradient(135deg, var(--success), #4aab56);
+    color: #0e1117;
+    margin-left: auto;
+  }
+
+  .btn-next:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(107,203,119,0.3);
+  }
+
+  /* Feedback */
+  .feedback-card {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.3s ease;
+    display: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback-card.success {
+    background: rgba(107,203,119,0.08);
+    border: 1px solid rgba(107,203,119,0.3);
+  }
+
+  .feedback-card.error {
+    background: rgba(255,107,107,0.08);
+    border: 1px solid rgba(255,107,107,0.3);
+  }
+
+  .feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .feedback-icon {
+    font-size: 18px;
+  }
+
+  .feedback-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .feedback-card.success .feedback-title { color: var(--success); }
+  .feedback-card.error .feedback-title { color: var(--error); }
+
+  .feedback-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .feedback-body code {
+    font-family: var(--font-code);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--accent3);
+    font-size: 12px;
+  }
+
+  /* Loading state */
+  .checking-indicator {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Score / completion */
+  .completion-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 32px;
+    animation: slideIn 0.5s ease;
+  }
+
+  .completion-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+    animation: bounce 0.6s ease 0.3s both;
+  }
+
+  @keyframes bounce {
+    from { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .completion-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+
+  .completion-subtitle {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .score-display {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 16px 32px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+  }
+
+  .score-number {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--accent3);
+    line-height: 1;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Sidebar stats */
+  .stats-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .stat-chip {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .stat-value.correct { color: var(--success); }
+  .stat-value.attempts { color: var(--accent3); }
+
+  .stat-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="r-badge">R</div>
+      <div class="logo-text">R<span>tutor</span></div>
+    </div>
+    <div class="progress-area">
+      <div class="progress-label">Progress</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="progress-text" id="progress-text">Question 1 of 10</div>
+    </div>
+  </header>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-chip">
+      <div class="stat-value correct" id="stat-correct">0</div>
+      <div class="stat-desc">Correct</div>
+    </div>
+    <div class="stat-chip">
+      <div class="stat-value attempts" id="stat-attempts">0</div>
+      <div class="stat-desc">Attempts</div>
+    </div>
+    <div class="stat-chip">
+      <div class="stat-value" id="stat-remaining">10</div>
+      <div class="stat-desc">Remaining</div>
+    </div>
+  </div>
+
+  <!-- Main question area -->
+  <div id="main-content">
+    <div class="question-card" id="question-card">
+      <div class="question-meta">
+        <span class="q-number" id="q-number">Q 1</span>
+        <span class="q-topic" id="q-topic">Basics</span>
+        <div class="q-difficulty" id="q-difficulty">
+          <div class="diff-dot filled"></div>
+          <div class="diff-dot"></div>
+          <div class="diff-dot"></div>
+        </div>
+      </div>
+      <div class="question-text" id="question-text">Loading question...</div>
+      <div class="question-hint" id="question-hint" style="display:none"></div>
+    </div>
+
+    <div class="editor-section">
+      <div class="editor-header">
+        <div class="editor-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="editor-label">your_answer.R</div>
+      </div>
+      <div class="editor-wrapper">
+        <div class="line-numbers" id="line-numbers">
+          <div class="line-num">1</div>
+        </div>
+        <textarea id="code-input" placeholder="# Write your R code here..." spellcheck="false"></textarea>
+      </div>
+    </div>
+
+    <div class="feedback-card" id="feedback-card">
+      <div class="feedback-header">
+        <span class="feedback-icon" id="feedback-icon"></span>
+        <span class="feedback-title" id="feedback-title"></span>
+      </div>
+      <div class="feedback-body" id="feedback-body"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="check-btn" onclick="checkAnswer()">
+        ▶ Run &amp; Check
+      </button>
+      <div class="checking-indicator" id="checking-indicator" style="display:none">
+        <div class="spinner"></div>
+        Checking...
+      </div>
+      <button class="btn btn-secondary" onclick="showHint()" id="hint-btn">
+        💡 Hint
+      </button>
+      <button class="btn btn-next" id="next-btn" onclick="nextQuestion()" style="display:none">
+        Next Question →
+      </button>
+    </div>
+  </div>
+
+  <!-- Completion screen -->
+  <div class="completion-screen" id="completion-screen">
+    <div class="completion-icon">🎓</div>
+    <div class="completion-title">Well done!</div>
+    <div class="completion-subtitle">You've completed all R programming exercises.<br>Keep practising to sharpen your skills.</div>
+    <div class="score-display">
+      <div class="score-number" id="final-score">—</div>
+      <div class="score-label">/ 10</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" onclick="restartQuiz()">↺ Restart Quiz</button>
+  </div>
+</div>
+
+<script>
+// ─── Normalisation helpers ────────────────────────────────────────────────────
+
+// Strip comments, collapse whitespace, normalise quotes & assignment operators
+function normalise(code) {
+  return code
+    .replace(/#[^\n]*/g, '')           // remove comments
+    .replace(/['"]/g, '"')             // unify quotes
+    .replace(/\s*=\s*/g, ' = ')        // space around =
+    .replace(/<-/g, '<-')              // keep <- intact
+    .replace(/\s*<-\s*/g, ' <- ')     // space around <-
+    .replace(/\s+/g, ' ')             // collapse whitespace
+    .replace(/\(\s+/g, '(')           // tidy inside parens
+    .replace(/\s+\)/g, ')')
+    .replace(/,\s+/g, ', ')
+    .trim()
+    .toLowerCase();
+}
+
+// Check that a variable name is assigned (either <- or =)
+function assigns(code, varName) {
+  const rx = new RegExp(`\\b${varName}\\s*(<-|=)(?!=)`, 'i');
+  return rx.test(code);
+}
+
+// Check that a specific function is called
+function calls(code, fnName) {
+  const rx = new RegExp(`\\b${fnName}\\s*\\(`, 'i');
+  return rx.test(code);
+}
+
+// Check that certain literal values appear in the code
+function hasValues(code, values) {
+  return values.every(v => code.includes(String(v)));
+}
+
+// ─── Questions ────────────────────────────────────────────────────────────────
+
+const QUESTIONS = [
+  {
+    topic: "Variables",
+    difficulty: 1,
+    text: "Assign the value <code>42</code> to a variable named <code>x</code> using the R assignment operator <code><-</code>.",
+    hint: "In R, we use <code><-</code> to assign values. Example: <code>name <- value</code>",
+    check(code) {
+      const n = normalise(code);
+      if (!assigns(code, 'x'))
+        return { ok: false, msg: "You need to assign to a variable called <code>x</code>. Use the <code><-</code> operator." };
+      if (!n.includes('42'))
+        return { ok: false, msg: "The value assigned should be <code>42</code>. Check the right-hand side of your assignment." };
+      if (!/<-/.test(code))
+        return { ok: false, msg: "Use the R assignment operator <code><-</code> rather than <code>=</code>." };
+      return { ok: true, msg: "Great start! <code>x <- 42</code> is the idiomatic R assignment." };
+    }
+  },
+  {
+    topic: "Vectors",
+    difficulty: 1,
+    text: "Create a numeric vector named <code>scores</code> containing the values 10, 20, 30, 40, and 50.",
+    hint: "Use the <code>c()</code> function to combine values: <code>c(val1, val2, ...)</code>",
+    check(code) {
+      if (!assigns(code, 'scores'))
+        return { ok: false, msg: "Name your variable <code>scores</code> and use <code><-</code> to assign to it." };
+      if (!calls(code, 'c'))
+        return { ok: false, msg: "Use the <code>c()</code> function to create a vector, e.g. <code>c(10, 20, ...)</code>." };
+      if (!hasValues(code, [10, 20, 30, 40, 50]))
+        return { ok: false, msg: "Make sure all five values — 10, 20, 30, 40, 50 — are inside <code>c()</code>." };
+      return { ok: true, msg: "Spot on! <code>c()</code> is the standard way to build vectors in R." };
+    }
+  },
+  {
+    topic: "Functions",
+    difficulty: 1,
+    text: "Calculate the mean of the vector <code>c(4, 8, 15, 16, 23)</code> and store the result in a variable called <code>avg</code>.",
+    hint: "R has a built-in <code>mean()</code> function: <code>avg <- mean(c(...))</code>",
+    check(code) {
+      if (!assigns(code, 'avg'))
+        return { ok: false, msg: "Store your result in a variable named <code>avg</code>." };
+      if (!calls(code, 'mean'))
+        return { ok: false, msg: "Use R's built-in <code>mean()</code> function to compute the average." };
+      if (!hasValues(code, [4, 8, 15, 16, 23]))
+        return { ok: false, msg: "Pass the correct values — 4, 8, 15, 16, 23 — to <code>mean()</code>." };
+      return { ok: true, msg: "Correct! <code>mean()</code> is one of R's most useful built-in functions." };
+    }
+  },
+  {
+    topic: "Strings",
+    difficulty: 1,
+    text: 'Create a character variable named <code>greeting</code> that holds the string <code>"Hello, R!"</code>.',
+    hint: "Wrap strings in double or single quotes: <code>greeting <- \"Hello, R!\"</code>",
+    check(code) {
+      if (!assigns(code, 'greeting'))
+        return { ok: false, msg: "Name your variable <code>greeting</code> and assign to it with <code><-</code>." };
+      if (!/("|')Hello, R!("|')/.test(code))
+        return { ok: false, msg: 'The string must be exactly <code>"Hello, R!"</code> — watch the comma and exclamation mark.' };
+      return { ok: true, msg: "Perfect! Strings in R can use single or double quotes — both work." };
+    }
+  },
+  {
+    topic: "Conditionals",
+    difficulty: 2,
+    text: 'Write an if-else statement: if <code>x &gt; 10</code>, assign <code>"big"</code> to <code>result</code>, otherwise assign <code>"small"</code> to <code>result</code>.',
+    hint: "R syntax: <code>if (condition) { ... } else { ... }</code>",
+    check(code) {
+      if (!/\bif\s*\(/.test(code))
+        return { ok: false, msg: "Start with an <code>if (...)</code> statement. Don't forget the parentheses around the condition." };
+      if (!/\belse\b/.test(code))
+        return { ok: false, msg: "You need an <code>else</code> branch for when the condition is false." };
+      if (!(/x\s*>\s*10/.test(code)))
+        return { ok: false, msg: "The condition should be <code>x > 10</code>." };
+      if (!assigns(code, 'result'))
+        return { ok: false, msg: "Assign to a variable called <code>result</code> inside both branches." };
+      if (!/("|')big("|')/.test(code) || !/("|')small("|')/.test(code))
+        return { ok: false, msg: 'Both branches should assign the strings <code>"big"</code> or <code>"small"</code> to <code>result</code>.' };
+      return { ok: true, msg: "Well done! Your if-else correctly branches on <code>x > 10</code>." };
+    }
+  },
+  {
+    topic: "Loops",
+    difficulty: 2,
+    text: "Write a <code>for</code> loop that iterates over the values 1 to 5 and prints each value using <code>print()</code>.",
+    hint: "R for-loop: <code>for (i in 1:5) { print(i) }</code>",
+    check(code) {
+      if (!/\bfor\s*\(/.test(code))
+        return { ok: false, msg: "Use a <code>for (...)</code> loop. Example structure: <code>for (i in ...) { ... }</code>." };
+      if (!/\bin\s+1:5\b|\bin\s+seq\(1,\s*5/.test(code))
+        return { ok: false, msg: "Iterate over <code>1:5</code> (or <code>seq(1,5)</code>) to go from 1 to 5." };
+      if (!calls(code, 'print'))
+        return { ok: false, msg: "Call <code>print()</code> inside the loop body to display each value." };
+      return { ok: true, msg: "Excellent! <code>1:5</code> is a handy shorthand for creating integer sequences in R." };
+    }
+  },
+  {
+    topic: "Data Frames",
+    difficulty: 2,
+    text: 'Create a data frame named <code>df</code> with two columns: <code>name</code> containing <code>c("Alice", "Bob")</code> and <code>age</code> containing <code>c(25, 30)</code>.',
+    hint: "Use <code>data.frame(col1 = ..., col2 = ...)</code> to create a data frame.",
+    check(code) {
+      if (!assigns(code, 'df'))
+        return { ok: false, msg: "Name your data frame <code>df</code> and assign it with <code><-</code>." };
+      if (!calls(code, 'data.frame'))
+        return { ok: false, msg: "Use the <code>data.frame()</code> function to create the data frame." };
+      if (!/\bname\s*=/.test(code))
+        return { ok: false, msg: "Include a column called <code>name</code> inside <code>data.frame()</code>." };
+      if (!/\bage\s*=/.test(code))
+        return { ok: false, msg: "Include a column called <code>age</code> inside <code>data.frame()</code>." };
+      if (!/("|')Alice("|')/.test(code) || !/("|')Bob("|')/.test(code))
+        return { ok: false, msg: 'The <code>name</code> column should contain <code>"Alice"</code> and <code>"Bob"</code>.' };
+      if (!hasValues(code, [25, 30]))
+        return { ok: false, msg: "The <code>age</code> column should contain <code>25</code> and <code>30</code>." };
+      return { ok: true, msg: "Correct! Data frames are R's core data structure — each column can hold a different type." };
+    }
+  },
+  {
+    topic: "Functions",
+    difficulty: 2,
+    text: "Define a function named <code>square</code> that takes one argument <code>n</code> and returns <code>n</code> squared.",
+    hint: "R function syntax: <code>name <- function(arg) { return(value) }</code>. Use <code>n^2</code> or <code>n*n</code>.",
+    check(code) {
+      if (!assigns(code, 'square'))
+        return { ok: false, msg: "Name your function <code>square</code> and assign it with <code><-</code>." };
+      if (!calls(code, 'function'))
+        return { ok: false, msg: "Use the <code>function()</code> keyword to define your function." };
+      if (!/\bfunction\s*\(\s*n\s*\)/.test(code))
+        return { ok: false, msg: "Your function should accept a single argument called <code>n</code>: <code>function(n)</code>." };
+      if (!(/n\^2/.test(code) || /n\s*\*\s*n/.test(code)))
+        return { ok: false, msg: "Square <code>n</code> using <code>n^2</code> or <code>n*n</code> inside your function body." };
+      return { ok: true, msg: "Nice work! Functions are first-class objects in R — you can pass them around just like variables." };
+    }
+  },
+  {
+    topic: "String Ops",
+    difficulty: 3,
+    text: 'Use <code>paste()</code> to combine <code>"Hello"</code> and <code>"World"</code> with a space separator and store the result in <code>msg</code>.',
+    hint: "<code>paste(\"Hello\", \"World\", sep=\" \")</code> — the default sep is already a space, so <code>sep=\" \"</code> is optional.",
+    check(code) {
+      if (!assigns(code, 'msg'))
+        return { ok: false, msg: "Store the result in a variable named <code>msg</code>." };
+      if (!calls(code, 'paste'))
+        return { ok: false, msg: "Use the <code>paste()</code> function to concatenate the strings." };
+      if (!/("|')Hello("|')/.test(code) || !/("|')World("|')/.test(code))
+        return { ok: false, msg: 'Pass both <code>"Hello"</code> and <code>"World"</code> as arguments to <code>paste()</code>.' };
+      return { ok: true, msg: "Well done! <code>paste()</code> uses a space by default — <code>paste0()</code> concatenates with no separator." };
+    }
+  },
+  {
+    topic: "Apply",
+    difficulty: 3,
+    text: "Use <code>sapply()</code> to apply the <code>sqrt</code> function to each element of <code>c(1, 4, 9, 16)</code> and store the result in <code>roots</code>.",
+    hint: "<code>sapply(vector, function)</code> applies a function element-wise and simplifies the result to a vector.",
+    check(code) {
+      if (!assigns(code, 'roots'))
+        return { ok: false, msg: "Store the result in a variable named <code>roots</code>." };
+      if (!calls(code, 'sapply'))
+        return { ok: false, msg: "Use <code>sapply()</code> to apply a function to each element of the vector." };
+      if (!hasValues(code, [1, 4, 9, 16]))
+        return { ok: false, msg: "Pass <code>c(1, 4, 9, 16)</code> as the first argument to <code>sapply()</code>." };
+      if (!/\bsqrt\b/.test(code))
+        return { ok: false, msg: "Pass <code>sqrt</code> (without parentheses) as the function argument to <code>sapply()</code>." };
+      return { ok: true, msg: "Excellent! The apply family (<code>sapply</code>, <code>lapply</code>, <code>vapply</code>) is R's idiomatic alternative to loops." };
+    }
+  }
+];
+
+// ─── State ────────────────────────────────────────────────────────────────────
+
+let current = 0;
+let correctCount = 0;
+let totalAttempts = 0;
+let hintVisible = false;
+
+// ─── UI helpers ───────────────────────────────────────────────────────────────
+
+function loadQuestion() {
+  const q = QUESTIONS[current];
+  hintVisible = false;
+
+  document.getElementById('q-number').textContent = `Q ${current + 1}`;
+  document.getElementById('q-topic').textContent = q.topic;
+  document.getElementById('question-text').innerHTML = q.text;
+
+  const hintEl = document.getElementById('question-hint');
+  hintEl.innerHTML = `💡 <strong>Hint:</strong> ${q.hint}`;
+  hintEl.style.display = 'none';
+
+  const dots = document.querySelectorAll('.diff-dot');
+  dots.forEach((d, i) => d.classList.toggle('filled', i < q.difficulty));
+
+  document.getElementById('code-input').value = '';
+  updateLineNumbers();
+  hideFeedback();
+
+  const pct = (current / QUESTIONS.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `Question ${current + 1} of ${QUESTIONS.length}`;
+  document.getElementById('stat-remaining').textContent = QUESTIONS.length - current;
+
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('check-btn').style.display = 'inline-flex';
+  document.getElementById('check-btn').disabled = false;
+  document.getElementById('checking-indicator').style.display = 'none';
+}
+
+function showHint() {
+  const hintEl = document.getElementById('question-hint');
+  hintEl.style.display = hintVisible ? 'none' : 'block';
+  hintVisible = !hintVisible;
+}
+
+function hideFeedback() {
+  document.getElementById('feedback-card').style.display = 'none';
+}
+
+function updateLineNumbers() {
+  const textarea = document.getElementById('code-input');
+  const lines = textarea.value.split('\n').length;
+  const container = document.getElementById('line-numbers');
+  container.innerHTML = '';
+  for (let i = 1; i <= Math.max(lines, 1); i++) {
+    const div = document.createElement('div');
+    div.className = 'line-num';
+    div.textContent = i;
+    container.appendChild(div);
+  }
+}
+
+document.getElementById('code-input').addEventListener('input', updateLineNumbers);
+document.getElementById('code-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const s = this.selectionStart;
+    this.value = this.value.substring(0, s) + '  ' + this.value.substring(this.selectionEnd);
+    this.selectionStart = this.selectionEnd = s + 2;
+    updateLineNumbers();
+  }
+});
+
+// ─── Checking ─────────────────────────────────────────────────────────────────
+
+function checkAnswer() {
+  const userCode = document.getElementById('code-input').value.trim();
+  if (!userCode) {
+    showFeedback('error', '⚠️', 'Empty answer', 'Please write some R code before checking.');
+    return;
+  }
+
+  totalAttempts++;
+  document.getElementById('stat-attempts').textContent = totalAttempts;
+
+  const q = QUESTIONS[current];
+  const result = q.check(userCode);
+
+  if (result.ok) {
+    correctCount++;
+    document.getElementById('stat-correct').textContent = correctCount;
+    showFeedback('success', '✓', 'Correct!', result.msg);
+    document.getElementById('next-btn').style.display = 'inline-flex';
+    document.getElementById('check-btn').style.display = 'none';
+  } else {
+    showFeedback('error', '✗', 'Not quite right', result.msg);
+  }
+}
+
+function showFeedback(type, icon, title, body) {
+  const card = document.getElementById('feedback-card');
+  card.className = `feedback-card ${type}`;
+  document.getElementById('feedback-icon').textContent = icon;
+  document.getElementById('feedback-title').textContent = title;
+  document.getElementById('feedback-body').innerHTML = body;
+  card.style.display = 'block';
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showCompletion();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showCompletion() {
+  document.getElementById('main-content').style.display = 'none';
+  document.getElementById('completion-screen').style.display = 'block';
+  document.getElementById('final-score').textContent = correctCount;
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-text').textContent = 'Complete!';
+  document.getElementById('stat-remaining').textContent = '0';
+}
+
+function restartQuiz() {
+  current = 0;
+  correctCount = 0;
+  totalAttempts = 0;
+  document.getElementById('stat-correct').textContent = '0';
+  document.getElementById('stat-attempts').textContent = '0';
+  document.getElementById('stat-remaining').textContent = QUESTIONS.length;
+  document.getElementById('completion-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+  loadQuestion();
+}
+
+// Init
+loadQuestion();
+</script>
+</body>
+</html>

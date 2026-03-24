@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Janpieter van der Pol">
-<meta name="dcterms.date" content="2026-03-24">
 
-<title>Introduction: Text Classification with Embeddings + Random Forest – NetworkIsLife</title>
+<title>Check your skills here: – NetworkIsLife</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -77,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles2.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -111,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Network Theory</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./dafs-dst.html"> 
+    <a class="nav-link active" href="./dafs-dst.html" aria-current="page"> 
 <span class="menu-text">Data Science Track</span></a>
   </li>  
   <li class="nav-item">
@@ -124,29 +123,133 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DAFS_training_app.html">Check your skills here:</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul class="collapse">
-  <li><a href="#what-well-cover-quickly" id="toc-what-well-cover-quickly" class="nav-link" data-scroll-target="#what-well-cover-quickly">What we’ll cover (quickly)</a></li>
-  </ul></li>
-  </ul>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dafs-dst.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Analytics for Sustainability - Data Science Track</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_install_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing all the software</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_1_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1: The programming basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_1_R_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions R week 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_2_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2: If, loading data &amp; data operations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_2_R_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions R week 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_3_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3: Loops and exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_prog_week_3_R_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions R week 3</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_training_app.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Check your skills here:</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_exam_type_questions_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DAFS exam type questions - solutions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_TopicModel_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using BERTopic from R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_Sentiment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sentiment Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_NER.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Named Entity Recognition</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using LLMs in R for data analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_LexisUniImport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Import &amp; Export Lexis Uni data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DAFS_DST_Python_Trouble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python in R (reticulate) — Operations Cheatsheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
 </nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introduction: Text Classification with Embeddings + Random Forest</h1>
+<h1 class="title">Check your skills here:</h1>
 </div>
 
 
@@ -160,12 +263,6 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -175,50 +272,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>This mini-tutorial shows how to turn unstructured text into a working classifier by combining <strong>semantic embeddings</strong> with a <strong>random forest</strong>. In plain terms: we’ll first convert each piece of text into a dense numeric vector that captures its meaning (so “EV battery” ends up near “lithium-ion cell”), then train a tree-based model to predict labels from those vectors (e.g., topic, sentiment, category).</p>
-<p>Why this setup? Embeddings give you rich, language-aware features without hand-crafting keywords, while random forests are fast to train, robust to noise, and require little parameter tuning. Together they make a strong, pragmatic baseline for text classification—often “good enough” to ship, and a great foundation to iterate on.</p>
-<p>By the end, you’ll be able to:</p>
-<ul>
-<li><strong>Explain</strong> how semantic embeddings represent text in vector space.<br>
-</li>
-<li><strong>Build</strong> an end-to-end pipeline: load data → embed text → train a random forest → evaluate.<br>
-</li>
-<li><strong>Assess</strong> model quality with accuracy, F1, and a confusion matrix.<br>
-</li>
-<li><strong>Deploy</strong> the pipeline to score new, unseen text.</li>
-</ul>
-<section id="what-well-cover-quickly" class="level2">
-<h2 class="anchored" data-anchor-id="what-well-cover-quickly">What we’ll cover (quickly)</h2>
-<ol type="1">
-<li>Prepare a small labeled text dataset.<br>
-</li>
-<li>Generate embeddings with a pre-trained encoder.<br>
-</li>
-<li>Train a random-forest classifier on the embeddings.<br>
-</li>
-<li>Evaluate and avoid common pitfalls (leakage, class imbalance).<br>
-</li>
-<li>Package inference (embed → predict) for real-world use.</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Prerequisites
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Basic Python or R, a labeled text column with target labels, and common ML libraries (e.g., Python: <code>sentence-transformers</code> + <code>scikit-learn</code>; or R: <code>text2vec</code> + <code>ranger</code>). No GPU required, and no deep-learning training—just smart features plus trees.</p>
-</div>
-</div>
+<iframe src="Apps/r_tutor.html" width="100%" height="750px" style="border: none; border-radius: 12px;">
+</iframe>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
