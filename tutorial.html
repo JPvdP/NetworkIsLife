@@ -465,8 +465,9 @@ Tip
 <h3 class="anchored" data-anchor-id="scibert-sentence-transformer-scientific-text">SciBERT sentence transformer (scientific text)</h3>
 <p>For research abstracts, <code>NetworkIsLife/SciBert_sentence_transformer</code> is the recommended choice. It is fine-tuned from AllenAI’s <a href="https://huggingface.co/allenai/scibert_scivocab_uncased">SciBERT</a> — a BERT model pre-trained on 1.14 million scientific papers — and further trained as a sentence transformer for semantic similarity. The result is 768-dimensional embeddings that capture domain-specific vocabulary (gene names, chemical terms, methodology jargon) far better than a general-purpose model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">load_hf_bert</span>(<span class="st">"NetworkIsLife/SciBert_sentence_transformer"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(enc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>torch<span class="sc">::</span><span class="fu">install_torch</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">load_hf_bert</span>(<span class="st">"NetworkIsLife/SciBert_sentence_transformer"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(enc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <pre><code>&lt;bert_encoder&gt;
   model_type  : bert  (12 layers)
@@ -720,7 +721,7 @@ Tip
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full topic metadata (includes representative documents)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>topic_info <span class="ot">&lt;-</span> <span class="fu">get_topic_info</span>(fit)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(topic_info[, <span class="fu">c</span>(<span class="st">"Topic"</span>, <span class="st">"Count"</span>, <span class="st">"Name"</span>, <span class="st">"Representative_Docs"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(topic_info[, <span class="fu">c</span>(<span class="st">"Topic"</span>, <span class="st">"Count"</span>, <span class="st">"Name"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1073,7 +1074,7 @@ satellite-derived rainfall data..."</code></pre>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">normalize =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Parameter sweep (cap n_components at 5; require at least 8 topics)</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>sw   <span class="ot">&lt;-</span> <span class="fu">sweep_topics</span>(docs, emb,</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>sw   <span class="ot">&lt;-</span> <span class="fu">sweep_topics</span>(<span class="at">docs =</span> docs, <span class="at">emb =</span> emb,</span>
 <span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n_neighbors  =</span> <span class="fu">c</span>(<span class="dv">10</span>L, <span class="dv">15</span>L, <span class="dv">20</span>L),</span>
 <span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n_components =</span> <span class="fu">c</span>(<span class="dv">3</span>L, <span class="dv">5</span>L),</span>
 <span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">min_pts      =</span> <span class="fu">c</span>(<span class="dv">5</span>L, <span class="dv">10</span>L, <span class="dv">15</span>L),</span>
@@ -1081,7 +1082,7 @@ satellite-derived rainfall data..."</code></pre>
 <span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">seed =</span> <span class="dv">42</span>L)</span>
 <span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fit model</span></span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>fit  <span class="ot">&lt;-</span> <span class="fu">fit_bertopic</span>(docs, <span class="at">embeddings =</span> emb,</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>fit  <span class="ot">&lt;-</span> <span class="fu">fit_bertopic</span>(<span class="at">docs =</span> docs, <span class="at">embeddings =</span> emb,</span>
 <span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">umap_n_neighbors  =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_neighbors,</span>
 <span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">umap_n_components =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_components,</span>
 <span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>                     <span class="at">hdbscan_min_pts   =</span> sw<span class="sc">$</span>best<span class="sc">$</span>min_pts,</span>
