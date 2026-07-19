@@ -137,8 +137,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./rhobots.html"> 
+<span class="menu-text">Rhobots</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./package.html"> 
-<span class="menu-text">R Package</span></a>
+<span class="menu-text">NIL Package</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./network.html"> 
@@ -350,13 +354,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the python environment we need to run the models</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">use_virtualenv</span>(<span class="st">"bertopic_r_env_spacy"</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The request to
+`use_python("/Users/janpieter/.virtualenvs/bertopic_r_env_spacy/bin/python")`
+will be ignored because the environment variable RETICULATE_PYTHON is set to
+"/Users/janpieter/.virtualenvs/r-vad/bin/python"</code></pre>
+</div>
 </div>
 <p>Now we can start downloading the models. Let’s start by loading a bert model trained for NER. We add the argument aggregation_strategy= “simple to get an output that inclused readable tokens and not a list of syllable level tokens (cf.&nbsp;slides from the lecture). For NER, we will use the following model: bert-base-NER. If you have more patience and computation power bert-large-NER is also an option. The hf_load_pipeline will download the models directly and put them to use.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>NER_extract <span class="ot">&lt;-</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"dslim/bert-large-NER"</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">task =</span> <span class="st">"ner"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregation_strategy =</span> <span class="st">"simple"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>NER_extract <span class="ot">&lt;-</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"dslim/bert-large-NER"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">task =</span> <span class="st">"ner"</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">aggregation_strategy =</span> <span class="st">"simple"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 
@@ -364,11 +374,11 @@ dslim/bert-large-NER is ready for ner</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"The 2024 edition of The European 5G Conference will take place on 30-31 January at the Hotel nhow Brussels Bloom. Now, in its 8th year, the conference has an established reputation as Brussels’ leading meeting place for discussion on 5G policy. Registration is now available – secure your place today. The event will, once again, provide the opportunity to hear from high-level policymakers and industry stakeholders on key themes such as investment, security, sustainability, emerging business models, and connectivity. It will provide an update on progress that has been made towards the 2030 ‘Path to the Digital Decade’ targets, as well as offering a first opportunity to examine the outcomes from WRC-23 and at what this may mean for the future connectivity environment around 5G and future technologies. By looking back at the lessons learnt to date and forward to the path towards 5G Advanced and 6G, the event will provide a comprehensive insight into all the key policy aspects that are shaping the 5G ecosystem in Europe."</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> <span class="fu">NER_extract</span>(text)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#transform output into something readable:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(extracted_NE, data.frame)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>extracted_NE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"The 2024 edition of The European 5G Conference will take place on 30-31 January at the Hotel nhow Brussels Bloom. Now, in its 8th year, the conference has an established reputation as Brussels’ leading meeting place for discussion on 5G policy. Registration is now available – secure your place today. The event will, once again, provide the opportunity to hear from high-level policymakers and industry stakeholders on key themes such as investment, security, sustainability, emerging business models, and connectivity. It will provide an update on progress that has been made towards the 2030 ‘Path to the Digital Decade’ targets, as well as offering a first opportunity to examine the outcomes from WRC-23 and at what this may mean for the future connectivity environment around 5G and future technologies. By looking back at the lessons learnt to date and forward to the path towards 5G Advanced and 6G, the event will provide a comprehensive insight into all the key policy aspects that are shaping the 5G ecosystem in Europe."</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> <span class="fu">NER_extract</span>(text)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#transform output into something readable:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>extracted_NE <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(extracted_NE, data.frame)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>extracted_NE</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   entity_group     score                       word start  end
 1          MISC 0.9934977                        The    20   23
@@ -387,15 +397,15 @@ dslim/bert-large-NER is ready for ner</code></pre>
 </div>
 <p>We can do the same with a different model that is capable of treating multiple languages. The basic structure is the same. We change the links to the models, and adjust what we download (tensor or pytorch):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>multilanguage_NER <span class="ot">=</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">tokenizer =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">task =</span> <span class="st">"ner"</span>, <span class="at">aggregation_strategy=</span><span class="st">"simple"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>multilanguage_NER <span class="ot">=</span> huggingfaceR<span class="sc">::</span><span class="fu">hf_load_pipeline</span>(<span class="at">model =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">tokenizer =</span> <span class="st">"Babelscape/wikineural-multilingual-ner"</span>, <span class="at">task =</span> <span class="st">"ner"</span>, <span class="at">aggregation_strategy=</span><span class="st">"simple"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 
 Babelscape/wikineural-multilingual-ner is ready for ner</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> <span class="fu">multilanguage_NER</span>(text)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(test_multi, data.frame)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>test_multi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> <span class="fu">multilanguage_NER</span>(text)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>test_multi <span class="ot">&lt;-</span> plyr<span class="sc">::</span><span class="fu">ldply</span>(test_multi, data.frame)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>test_multi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  entity_group     score                       word start  end
 1         MISC 0.8881885 The European 5G Conference    20   46
@@ -408,25 +418,25 @@ Babelscape/wikineural-multilingual-ner is ready for ner</code></pre>
 <section id="illustration" class="level2">
 <h2 class="anchored" data-anchor-id="illustration">Illustration</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"/Users/janpieter/Desktop/Teachings/NetworkIsLife2/NetworkIsLife/LN_dataframe.rdata"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the text we want to analyse is in the "Article" column</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>safe_ner <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(NER_extract, <span class="at">otherwise =</span> <span class="fu">list</span>())</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> climate_change_speeches <span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">entities =</span> <span class="fu">map</span>(text, safe_ner)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(speech_id, entities) <span class="sc">%&gt;%</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_longer</span>(entities) <span class="sc">%&gt;%</span>                 <span class="co"># one list element per entity</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(entities) <span class="sc">%&gt;%</span>                  <span class="co"># columns like entity_group, word, score, start, end</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(speech_id)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>NER_results_climatechangespeeches <span class="ot">&lt;-</span> res</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(NER_results_climatechangespeeches, <span class="at">file =</span> <span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"/Users/janpieter/Desktop/Teachings/NetworkIsLife2/NetworkIsLife/LN_dataframe.rdata"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the text we want to analyse is in the "Article" column</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>safe_ner <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">possibly</span>(NER_extract, <span class="at">otherwise =</span> <span class="fu">list</span>())</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> climate_change_speeches <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">entities =</span> <span class="fu">map</span>(text, safe_ner)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(speech_id, entities) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_longer</span>(entities) <span class="sc">%&gt;%</span>                 <span class="co"># one list element per entity</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(entities) <span class="sc">%&gt;%</span>                  <span class="co"># columns like entity_group, word, score, start, end</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(speech_id)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>NER_results_climatechangespeeches <span class="ot">&lt;-</span> res</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(NER_results_climatechangespeeches, <span class="at">file =</span> <span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(NER_results_climatechangespeeches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"NER_results_climatechangespeeches.rdata"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(NER_results_climatechangespeeches)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  speech_id entity_group     score                  word start  end
 1         1          ORG 0.4085696                 House    29   34

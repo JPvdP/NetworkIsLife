@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rhobots — BERTopic in Pure R</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-dark:  #1a1a2e;
+      --navy-mid:   #16213e;
+      --navy:       #0f3460;
+      --red:        #e94560;
+      --bg:         #f4f6f9;
+      --surface:    #ffffff;
+      --text:       #2d3748;
+      --muted:      #6b7280;
+      --border:     #e2e8f0;
+      --code-bg:    #eef1f6;
+      --radius:     8px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 55%, var(--navy) 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 2.8rem 2.2rem 2.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.55rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 560px;
+      margin-bottom: 1.4rem;
+      line-height: 1.65;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── Pipeline ─────────────────────────────────────── */
+    .pipeline-wrap {
+      margin-bottom: 2.5rem;
+    }
+
+    .pipeline-wrap h2 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+
+    .pipe-step {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1rem;
+      text-align: center;
+      min-width: 110px;
+      flex-shrink: 0;
+    }
+
+    .pipe-step .icon  { font-size: 1.3rem; display: block; }
+    .pipe-step .label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--navy);
+      margin-top: 0.3rem;
+    }
+    .pipe-step .pkg   { font-size: 0.67rem; color: var(--muted); margin-top: 0.1rem; }
+    .pipe-arrow { font-size: 1.1rem; color: var(--red); padding: 0 0.45rem; flex-shrink: 0; }
+
+    /* ── Resource cards ───────────────────────────────── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-left: 3px solid var(--navy);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.25rem 1.25rem 1.1rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-left-color 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      border-left-color: var(--red);
+      box-shadow: 0 3px 14px rgba(15,52,96,0.12);
+    }
+
+    .card-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Install ──────────────────────────────────────── */
+    .install-section { margin-bottom: 2.5rem; }
+
+    .install-section p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.15rem;
+    }
+
+    .step-body { flex: 1; }
+
+    .step-body strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--navy-dark);
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    /* ── Citation ─────────────────────────────────────── */
+    .citation {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .citation strong { color: var(--text); }
+
+    .citation pre {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">R Package</div>
+    <h1>Rhobots</h1>
+    <p>The full BERTopic pipeline — transformer embeddings, UMAP, HDBSCAN density clustering,
+    and c-TF-IDF topic representation — running entirely in R.
+    No Python. No conda. No reticulate.</p>
+    <div class="badges">
+      <span class="badge">CRAN v0.1.6</span>
+      <span class="badge">R &ge; 4.1</span>
+      <span class="badge">MIT License</span>
+      <span class="badge">Windows &middot; macOS &middot; Linux</span>
+    </div>
+  </div>
+
+  <!-- Pipeline -->
+  <div class="pipeline-wrap">
+    <div class="section-label">The pipeline</div>
+    <div class="pipeline">
+      <div class="pipe-step">
+        <span class="icon">📝</span>
+        <div class="label">Embed</div>
+        <div class="pkg">torch · safetensors</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <span class="icon">📉</span>
+        <div class="label">Reduce</div>
+        <div class="pkg">uwot · UMAP</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <span class="icon">🔵</span>
+        <div class="label">Cluster</div>
+        <div class="pkg">Rcpp · HDBSCAN</div>
+      </div>
+      <div class="pipe-arrow">→</div>
+      <div class="pipe-step">
+        <span class="icon">🏷️</span>
+        <div class="label">Represent</div>
+        <div class="pkg">c-TF-IDF · POS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resources -->
+  <div class="section-label">Resources</div>
+  <div class="card-grid">
+
+    <a class="card" href="tutorial.html">
+      <div class="card-tag">Hands-on</div>
+      <h3>Full Tutorial</h3>
+      <p>End-to-end walkthrough on 3,328 African research abstracts — embeddings, parameter sweep,
+      topic fitting, and interactive visualisations.</p>
+    </a>
+
+    <a class="card" href="umap_explainer.html">
+      <div class="card-tag">How it works</div>
+      <h3>How UMAP Works</h3>
+      <p>Illustrated technical explainer: manifold hypothesis, fuzzy membership weights,
+      SGD optimisation, and the effect of every parameter.</p>
+    </a>
+
+    <a class="card" href="hdbscan_explainer.html">
+      <div class="card-tag">How it works</div>
+      <h3>How HDBSCAN Works</h3>
+      <p>Core distances, mutual reachability, Borůvka MST, the condensed cluster tree,
+      EOM extraction, and what every parameter controls.</p>
+    </a>
+
+  </div>
+
+  <!-- Installation -->
+  <div class="install-section">
+    <div class="section-label">Installation</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Install from CRAN</strong>
+        <pre>install.packages("Rhobots")</pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Install the torch backend (once per machine, ~560 MB)</strong>
+        <pre>library(Rhobots)
+rhobots_install()   # restart R when prompted</pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Try the built-in demo</strong>
+        <pre>rhobots_demo()   # downloads Gutenberg books, fits a model, opens a plot</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation -->
+  <div class="citation">
+    <strong>Citation</strong>
+    <pre>van der Pol, J.P.G. (2026). Rhobots: BERTopic-Style Topic Modeling Without Python.
+R package version 0.1.6. https://github.com/JPvdP/Rhobots</pre>
+  </div>
+
+</div>
+</body>
+</html>

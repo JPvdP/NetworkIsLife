@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Janpieter van der Pol">
+<meta name="description" content="Step-by-step installation guide for macOS (Apple Silicon and Intel) and Windows.">
+
+<title>Installing Rhobots – NetworkIsLife</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7c69b197886ae2a34062761d21e44731.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f1918b28de1c80740b5252e80a95a6f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles2.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="././imgs/logo5.png" alt="" class="navbar-logo light-content">
+    <img src="././imgs/logo5.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NetworkIsLife</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./rhobots.html"> 
+<span class="menu-text">Rhobots</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./package.html"> 
+<span class="menu-text">NIL Package</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./network.html"> 
+<span class="menu-text">Network Theory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-dst.html"> 
+<span class="menu-text">Data Science Track</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-esm.html"> 
+<span class="menu-text">ESM Track</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./install.html">Installing Rhobots</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rhobots_site.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Installing Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modeling with Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./umap_explainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How UMAP Works</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hdbscan_explainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How HDBSCAN Works</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Installing Rhobots</h1>
+</div>
+
+<div>
+  <div class="description">
+    Step-by-step installation guide for macOS (Apple Silicon and Intel) and Windows.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Janpieter van der Pol </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Select your operating system below to see the exact steps for your machine.</p>
+<style>
+/* ── All styles scoped under .rh to avoid Bootstrap conflicts ── */
+.rh { font-size: 15px; line-height: 1.6; }
+
+.rh *,
+.rh *::before,
+.rh *::after { box-sizing: border-box; }
+
+/* Tokens — light */
+.rh {
+  --rh-accent:      #2355C0;
+  --rh-accent-h:    #1A429A;
+  --rh-accent-fg:   #FFFFFF;
+  --rh-surface:     #FFFFFF;
+  --rh-surface-alt: #F0EEE9;
+  --rh-border:      #E0DDD6;
+  --rh-text:        #1C1A17;
+  --rh-muted:       #65615A;
+  --rh-faint:       #9C9890;
+  --rh-code-bg:     #1C1B18;
+  --rh-code-text:   #DDD9D2;
+  --rh-code-dim:    #5C5850;
+  --rh-info-bg:     #EBF0FA;
+  --rh-info-edge:   #2355C0;
+  --rh-warn-bg:     #FEF4E0;
+  --rh-warn-edge:   #B8750D;
+  --rh-radius:      8px;
+  --rh-radius-lg:   12px;
+  --rh-sh:          0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  .rh {
+    --rh-accent:      #4570E0;
+    --rh-accent-h:    #567AEE;
+    --rh-surface:     #1C1B18;
+    --rh-surface-alt: #242320;
+    --rh-border:      #2A2926;
+    --rh-text:        #EAE6DF;
+    --rh-muted:       #9C9890;
+    --rh-faint:       #5C5850;
+    --rh-code-bg:     #0E0D0B;
+    --rh-code-text:   #D9D5CE;
+    --rh-code-dim:    #5C5850;
+    --rh-info-bg:     #18213C;
+    --rh-info-edge:   #4570E0;
+    --rh-warn-bg:     #271B08;
+    --rh-warn-edge:   #C07D1E;
+    --rh-sh:          0 1px 3px rgba(0,0,0,.3);
+  }
+}
+
+[data-theme="dark"] .rh, [data-bs-theme="dark"] .rh {
+  --rh-accent:      #4570E0;
+  --rh-accent-h:    #567AEE;
+  --rh-surface:     #1C1B18;
+  --rh-surface-alt: #242320;
+  --rh-border:      #2A2926;
+  --rh-text:        #EAE6DF;
+  --rh-muted:       #9C9890;
+  --rh-faint:       #5C5850;
+  --rh-code-bg:     #0E0D0B;
+  --rh-code-text:   #D9D5CE;
+  --rh-code-dim:    #5C5850;
+  --rh-info-bg:     #18213C;
+  --rh-info-edge:   #4570E0;
+  --rh-warn-bg:     #271B08;
+  --rh-warn-edge:   #C07D1E;
+  --rh-sh:          0 1px 3px rgba(0,0,0,.3);
+}
+
+[data-theme="light"] .rh, [data-bs-theme="light"] .rh {
+  --rh-accent:      #2355C0;
+  --rh-accent-h:    #1A429A;
+  --rh-surface:     #FFFFFF;
+  --rh-surface-alt: #F0EEE9;
+  --rh-border:      #E0DDD6;
+  --rh-text:        #1C1A17;
+  --rh-muted:       #65615A;
+  --rh-faint:       #9C9890;
+  --rh-code-bg:     #1C1B18;
+  --rh-code-text:   #DDD9D2;
+  --rh-code-dim:    #5C5850;
+  --rh-info-bg:     #EBF0FA;
+  --rh-info-edge:   #2355C0;
+  --rh-warn-bg:     #FEF4E0;
+  --rh-warn-edge:   #B8750D;
+}
+
+/* Back button */
+.rh-back {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--rh-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  margin-bottom: 20px;
+  transition: color .1s;
+}
+.rh-back:hover { color: var(--rh-text); }
+.rh-back svg { width: 15px; height: 15px; fill: none; flex-shrink: 0; }
+.rh-back.show { display: flex; }
+
+/* Breadcrumb */
+.rh-bc {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--rh-faint);
+  min-height: 22px;
+  margin-bottom: 22px;
+}
+.rh-bc-item { color: var(--rh-muted); }
+.rh-bc-item.cur { color: var(--rh-text); font-weight: 600; }
+.rh-bc-sep { color: var(--rh-faint); }
+
+/* Question header */
+.rh-qlabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--rh-faint);
+  margin-bottom: 8px;
+}
+.rh-qtitle {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--rh-text);
+  text-wrap: balance;
+  margin-bottom: 6px;
+}
+.rh-qsub {
+  font-size: 14px;
+  color: var(--rh-muted);
+  line-height: 1.58;
+  margin-bottom: 24px;
+}
+
+/* Choice cards grid */
+.rh-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+@media (max-width: 480px) { .rh-choices { grid-template-columns: 1fr; } }
+
+.rh-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 18px 20px;
+  background: var(--rh-surface);
+  border: 1.5px solid var(--rh-border);
+  border-radius: var(--rh-radius-lg);
+  cursor: pointer;
+  text-align: left;
+  color: var(--rh-text);
+  font-family: inherit;
+  font-size: 15px;
+  box-shadow: var(--rh-sh);
+  transition: border-color .12s, box-shadow .12s;
+  /* Override Bootstrap button styles */
+  line-height: 1.4;
+}
+.rh-card:hover {
+  border-color: var(--rh-accent);
+  box-shadow: 0 0 0 3px rgba(35, 85, 192, .14), var(--rh-sh);
+}
+.rh-card:focus-visible { outline: 2px solid var(--rh-accent); outline-offset: 2px; }
+
+.rh-card-icon { color: var(--rh-muted); }
+.rh-card-icon svg { width: 28px; height: 28px; fill: currentColor; display: block; }
+.rh-card-name { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.rh-card-desc { font-size: 13px; color: var(--rh-muted); line-height: 1.45; }
+
+/* Info aside */
+.rh-aside {
+  background: var(--rh-info-bg);
+  border-left: 3px solid var(--rh-info-edge);
+  border-radius: 0 var(--rh-radius) var(--rh-radius) 0;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  color: var(--rh-muted);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.rh-aside strong { color: var(--rh-text); }
+.rh-aside code {
+  font-family: 'SF Mono','Fira Code','Consolas',monospace;
+  font-size: 12.5px;
+  background: rgba(35,85,192,.1);
+  color: var(--rh-accent);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* Screens */
+.rh-screen { display: none; }
+.rh-screen.on {
+  display: block;
+  animation: rh-fade .18s ease;
+}
+@keyframes rh-fade {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes rh-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Steps header */
+.rh-steps-hd { margin-bottom: 28px; }
+.rh-steps-title {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--rh-text);
+  text-wrap: balance;
+  margin-bottom: 10px;
+}
+.rh-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--rh-muted);
+}
+.rh-meta span { display: flex; align-items: center; gap: 5px; }
+.rh-meta svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+/* Step list */
+.rh-steps { display: flex; flex-direction: column; }
+
+.rh-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rh-border);
+}
+.rh-step:last-child { border-bottom: none; }
+
+.rh-step-n {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rh-accent);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.rh-step-title {
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--rh-text);
+  margin-bottom: 5px;
+}
+.rh-step-body {
+  font-size: 14px;
+  color: var(--rh-muted);
+  line-height: 1.6;
+}
+.rh-step-body p { margin-bottom: 10px; }
+.rh-step-body p:last-child { margin-bottom: 0; }
+.rh-step-body a { color: var(--rh-accent); text-decoration: none; }
+.rh-step-body a:hover { text-decoration: underline; }
+
+/* Code block */
+.rh-code {
+  background: var(--rh-code-bg);
+  border-radius: var(--rh-radius);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.rh-code-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.rh-code-lang {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--rh-code-dim);
+}
+.rh-copy {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--rh-code-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: inherit;
+  line-height: 1.4;
+  transition: color .1s, background .1s;
+}
+.rh-copy:hover {
+  color: var(--rh-code-text);
+  background: rgba(255,255,255,.07);
+}
+.rh-copy.ok { color: #5DB877 !important; }
+
+.rh-code pre {
+  padding: 13px 14px;
+  overflow-x: auto;
+  font-family: 'SF Mono','Fira Code','JetBrains Mono','Consolas',monospace;
+  font-size: 13px;
+  line-height: 1.72;
+  color: var(--rh-code-text);
+  margin: 0;
+  background: transparent;
+  border: none;
+  /* Override Quarto/Bootstrap pre styles */
+  white-space: pre;
+}
+.rh-dim { color: var(--rh-code-dim); }
+
+/* Download button — override Bootstrap .btn if present */
+.rh-dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  background: var(--rh-accent) !important;
+  color: white !important;
+  border-radius: var(--rh-radius);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none !important;
+  margin-bottom: 10px;
+  border: none;
+  transition: background .12s;
+}
+.rh-dl:hover { background: var(--rh-accent-h) !important; color: white !important; }
+.rh-dl svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+/* Callouts — using rh- prefix so they don't clash with Quarto's own callouts */
+.rh-callout {
+  border-radius: var(--rh-radius);
+  padding: 11px 13px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
+.rh-info { background: var(--rh-info-bg); border-left: 3px solid var(--rh-info-edge); color: var(--rh-muted); }
+.rh-warn { background: var(--rh-warn-bg); border-left: 3px solid var(--rh-warn-edge); color: var(--rh-muted); }
+.rh-callout strong { color: var(--rh-text); }
+.rh-callout code {
+  font-family: 'SF Mono','Fira Code','Consolas',monospace;
+  font-size: 12.5px;
+  background: rgba(0,0,0,.08);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+</style>
+
+<div class="rh">
+
+  <!-- Back + breadcrumb -->
+  <button class="rh-back" id="rhBack" onclick="rhBack()">
+    <svg viewbox="0 0 15 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 3L4 7.5 9 12"></path>
+    </svg>
+    Back
+  </button>
+  <div class="rh-bc" id="rhBc"></div>
+
+  <!-- ── OS selection ── -->
+  <div class="rh-screen on" id="rh-os">
+    <p class="rh-qlabel">Step 1 of 2</p>
+    <p class="rh-qtitle">What operating system are you using?</p>
+    <p class="rh-qsub">Rhobots runs on macOS and Windows. Your installation steps depend on your system.</p>
+    <div class="rh-choices">
+      <button class="rh-card" onclick="rhGo('mac-chip', ['macOS'])">
+        <span class="rh-card-icon">
+          <svg viewbox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path></svg>
+        </span>
+        <span class="rh-card-name">macOS</span>
+        <span class="rh-card-desc">Mac laptops and desktops, any version</span>
+      </button>
+      <button class="rh-card" onclick="rhGo('win', ['Windows'])">
+        <span class="rh-card-icon">
+          <svg viewbox="0 0 24 24"><path d="M3 12V6.75l6-1.32v6.48L3 12m17-9v8.75l-10 .15V5.21L20 3M3 13l6 .09v6.81l-6-1.15V13m17 .25V22l-10-1.91V13.1l10 .15z"></path></svg>
+        </span>
+        <span class="rh-card-name">Windows</span>
+        <span class="rh-card-desc">Windows 10 or 11, 64-bit</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Mac chip selection ── -->
+  <div class="rh-screen" id="rh-mac-chip">
+    <p class="rh-qlabel">Step 2 of 2</p>
+    <p class="rh-qtitle">What type of Mac do you have?</p>
+    <p class="rh-qsub">The steps are nearly identical, but Apple Silicon Macs can use GPU acceleration for faster embedding.</p>
+    <div class="rh-aside">
+      <strong>How to check:</strong> Click the Apple () menu in the top-left → <strong>About This Mac</strong>.<br>
+      Look for <strong>Chip: Apple M…</strong> (Apple Silicon) or <strong>Processor: Intel…</strong> (Intel).
+    </div>
+    <div class="rh-choices">
+      <button class="rh-card" onclick="rhGo('apple', ['macOS', 'Apple Silicon'])">
+        <span class="rh-card-icon">
+          <svg viewbox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path></svg>
+        </span>
+        <span class="rh-card-name">Apple Silicon</span>
+        <span class="rh-card-desc">M1, M2, M3, M4 — any Mac from late 2020 onwards</span>
+      </button>
+      <button class="rh-card" onclick="rhGo('intel', ['macOS', 'Intel'])">
+        <span class="rh-card-icon">
+          <svg viewbox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"></path></svg>
+        </span>
+        <span class="rh-card-name">Intel</span>
+        <span class="rh-card-desc">Intel Core i5 / i7 / i9 — older Mac models</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Apple Silicon steps ── -->
+  <div class="rh-screen" id="rh-apple">
+    <div class="rh-steps-hd">
+      <p class="rh-qlabel">macOS — Apple Silicon</p>
+      <p class="rh-steps-title">Installation guide for M1, M2, M3 and M4 Macs</p>
+      <div class="rh-meta">
+        <span><svg viewbox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 4a.5.5 0 01.5.5v3.793l2.354 2.353a.5.5 0 01-.708.708l-2.5-2.5A.5.5 0 017.5 8.5v-4A.5.5 0 018 4z"></path></svg> ~25 minutes</span>
+        <span><svg viewbox="0 0 16 16"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v9A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-9zm2 0v9h10v-9H3z"></path></svg> ~3 GB free space</span>
+      </div>
+    </div>
+    <div class="rh-steps">
+      <div class="rh-step">
+        <div class="rh-step-n">1</div>
+        <div>
+          <div class="rh-step-title">Install Xcode Command Line Tools</div>
+          <div class="rh-step-body"><p>R needs a C++ compiler to install packages with native code. Xcode Command Line Tools provides this — it is a small separate package (~2 GB), not the full Xcode IDE.</p><p>Open <strong>Terminal</strong> (Cmd+Space → type "Terminal") and run:</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">Terminal</span><button class="rh-copy" onclick="rhCopy(this,'xcode-select --install')">Copy</button></div><pre>xcode-select --install</pre></div>
+          <div class="rh-callout rh-info">A dialog will appear — click <strong>Install</strong> and wait (5–15 minutes). If you see "already installed", skip to step 2.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">2</div>
+        <div>
+          <div class="rh-step-title">Install R for Apple Silicon</div>
+          <div class="rh-step-body"><p>Download the <strong>arm64</strong> build of R from CRAN — this version is optimised for M-series chips.</p></div>
+          <a class="rh-dl" href="https://cran.r-project.org/bin/macosx/" target="_blank" rel="noopener"><svg viewbox="0 0 16 16"><path d="M.5 9.9a.5.5 0 01.5.5v2.5a1 1 0 001 1h12a1 1 0 001-1v-2.5a.5.5 0 011 0v2.5a2 2 0 01-2 2H2a2 2 0 01-2-2v-2.5a.5.5 0 01.5-.5z"></path><path d="M7.646 11.854a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V1.5a.5.5 0 00-1 0v8.793L5.354 8.146a.5.5 0 10-.708.708l3 3z"></path></svg>Download R for macOS (CRAN)</a>
+          <div class="rh-callout rh-info">On the CRAN page, download the file ending in <strong>-arm64.pkg</strong>. Run the installer and follow the prompts.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">3</div>
+        <div>
+          <div class="rh-step-title">Install required R packages</div>
+          <div class="rh-step-body"><p>Open R (or RStudio) and run both lines:</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'install.packages(c(\" remotes\",="" \"gutenbergr\"))\nremotes::install_github(\"jpvdp="" rhobots\")')"="">Copy</button></div><pre>install.packages(c("remotes", "gutenbergr"))
+remotes::install_github("JPvdP/RhoBots")</pre></div>
+          <div class="rh-callout rh-info">The second command compiles C++ code. Compiler output will scroll by — this is normal and takes 1–3 minutes.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">4</div>
+        <div>
+          <div class="rh-step-title">Set up the torch backend</div>
+          <div class="rh-step-body"><p>Rhobots uses PyTorch through R's <code>torch</code> package to run embedding models. The C++ backend (~560 MB) is downloaded separately:</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_install()')">Copy</button></div><pre>library(Rhobots)
+rhobots_install()</pre></div>
+          <div class="rh-callout rh-warn"><strong>Restart R when prompted.</strong> The torch backend will not load until you start a fresh session.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">5</div>
+        <div>
+          <div class="rh-step-title">Run the demo</div>
+          <div class="rh-step-body"><p>After restarting R, verify everything works. On Apple Silicon you can pass <code>device = "mps"</code> to use the GPU (2–3× faster for embedding):</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_demo()                   # CPU — works on any Mac\nrhobots_demo(device = \" mps\")="" #="" apple="" silicon="" gpu="" —="" faster')"="">Copy</button></div><pre>library(Rhobots)
+rhobots_demo()                   <span class="rh-dim"># CPU — works on any Mac</span>
+rhobots_demo(device = "mps")     <span class="rh-dim"># Apple Silicon GPU — faster</span></pre></div>
+          <div class="rh-callout rh-info">The first run downloads a small embedding model (~22 MB). Subsequent runs use the cached model and start faster.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Intel steps ── -->
+  <div class="rh-screen" id="rh-intel">
+    <div class="rh-steps-hd">
+      <p class="rh-qlabel">macOS — Intel</p>
+      <p class="rh-steps-title">Installation guide for Intel Mac</p>
+      <div class="rh-meta">
+        <span><svg viewbox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 4a.5.5 0 01.5.5v3.793l2.354 2.353a.5.5 0 01-.708.708l-2.5-2.5A.5.5 0 017.5 8.5v-4A.5.5 0 018 4z"></path></svg> ~30 minutes</span>
+        <span><svg viewbox="0 0 16 16"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v9A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-9zm2 0v9h10v-9H3z"></path></svg> ~3 GB free space</span>
+      </div>
+    </div>
+    <div class="rh-callout rh-info" style="margin-bottom:24px"><strong>CPU only.</strong> Intel Macs do not support Apple's MPS GPU backend — only <code>device = "cpu"</code> is available. Embedding ~900 paragraphs takes roughly 3–5 minutes.</div>
+    <div class="rh-steps">
+      <div class="rh-step">
+        <div class="rh-step-n">1</div>
+        <div>
+          <div class="rh-step-title">Install Xcode Command Line Tools</div>
+          <div class="rh-step-body"><p>Open <strong>Terminal</strong> and run:</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">Terminal</span><button class="rh-copy" onclick="rhCopy(this,'xcode-select --install')">Copy</button></div><pre>xcode-select --install</pre></div>
+          <div class="rh-callout rh-info">Click <strong>Install</strong> in the dialog. If it says "already installed", proceed to step 2.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">2</div>
+        <div>
+          <div class="rh-step-title">Install R for Intel Mac</div>
+          <div class="rh-step-body"><p>Download the <strong>x86_64</strong> build of R from CRAN.</p></div>
+          <a class="rh-dl" href="https://cran.r-project.org/bin/macosx/" target="_blank" rel="noopener"><svg viewbox="0 0 16 16"><path d="M.5 9.9a.5.5 0 01.5.5v2.5a1 1 0 001 1h12a1 1 0 001-1v-2.5a.5.5 0 011 0v2.5a2 2 0 01-2 2H2a2 2 0 01-2-2v-2.5a.5.5 0 01.5-.5z"></path><path d="M7.646 11.854a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V1.5a.5.5 0 00-1 0v8.793L5.354 8.146a.5.5 0 10-.708.708l3 3z"></path></svg>Download R for macOS (CRAN)</a>
+          <div class="rh-callout rh-info">On the CRAN page, download the file ending in <strong>-x86_64.pkg</strong> (not arm64).</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">3</div>
+        <div>
+          <div class="rh-step-title">Install required R packages</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'install.packages(c(\" remotes\",="" \"gutenbergr\"))\nremotes::install_github(\"jpvdp="" rhobots\")')"="">Copy</button></div><pre>install.packages(c("remotes", "gutenbergr"))
+remotes::install_github("JPvdP/RhoBots")</pre></div>
+          <div class="rh-callout rh-info">Compiler output during the second command is normal — takes 1–3 minutes.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">4</div>
+        <div>
+          <div class="rh-step-title">Set up the torch backend</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_install()')">Copy</button></div><pre>library(Rhobots)
+rhobots_install()</pre></div>
+          <div class="rh-callout rh-warn"><strong>Restart R when prompted</strong> before proceeding to step 5.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">5</div>
+        <div>
+          <div class="rh-step-title">Run the demo</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_demo()')">Copy</button></div><pre>library(Rhobots)
+rhobots_demo()</pre></div>
+          <div class="rh-callout rh-info">Embedding on CPU takes roughly 3–5 minutes on a modern Intel Mac. The model is cached after the first run.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Windows steps ── -->
+  <div class="rh-screen" id="rh-win">
+    <div class="rh-steps-hd">
+      <p class="rh-qlabel">Windows 10 / 11</p>
+      <p class="rh-steps-title">Installation guide for Windows</p>
+      <div class="rh-meta">
+        <span><svg viewbox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 4a.5.5 0 01.5.5v3.793l2.354 2.353a.5.5 0 01-.708.708l-2.5-2.5A.5.5 0 017.5 8.5v-4A.5.5 0 018 4z"></path></svg> ~40 minutes</span>
+        <span><svg viewbox="0 0 16 16"><path d="M1 3.5A1.5 1.5 0 012.5 2h11A1.5 1.5 0 0115 3.5v9A1.5 1.5 0 0113.5 14h-11A1.5 1.5 0 011 12.5v-9zm2 0v9h10v-9H3z"></path></svg> ~5 GB free space</span>
+      </div>
+    </div>
+    <div class="rh-steps">
+      <div class="rh-step">
+        <div class="rh-step-n">1</div>
+        <div>
+          <div class="rh-step-title">Install Visual C++ Redistributable 2022</div>
+          <div class="rh-step-body"><p>The torch package requires the Microsoft Visual C++ runtime to load its native libraries. This is a small installer (~25 MB) from Microsoft.</p></div>
+          <a class="rh-dl" href="https://aka.ms/vs/17/release/vc_redist.x64.exe" target="_blank" rel="noopener"><svg viewbox="0 0 16 16"><path d="M.5 9.9a.5.5 0 01.5.5v2.5a1 1 0 001 1h12a1 1 0 001-1v-2.5a.5.5 0 011 0v2.5a2 2 0 01-2 2H2a2 2 0 01-2-2v-2.5a.5.5 0 01.5-.5z"></path><path d="M7.646 11.854a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V1.5a.5.5 0 00-1 0v8.793L5.354 8.146a.5.5 0 10-.708.708l3 3z"></path></svg>Download VC++ Redistributable (Microsoft)</a>
+          <div class="rh-callout rh-info">Run <strong>vc_redist.x64.exe</strong> and click Install. Restart Windows if prompted before continuing.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">2</div>
+        <div>
+          <div class="rh-step-title">Install R</div>
+          <div class="rh-step-body"><p>Download and install the 64-bit version of R for Windows.</p></div>
+          <a class="rh-dl" href="https://cran.r-project.org/bin/windows/base/" target="_blank" rel="noopener"><svg viewbox="0 0 16 16"><path d="M.5 9.9a.5.5 0 01.5.5v2.5a1 1 0 001 1h12a1 1 0 001-1v-2.5a.5.5 0 011 0v2.5a2 2 0 01-2 2H2a2 2 0 01-2-2v-2.5a.5.5 0 01.5-.5z"></path><path d="M7.646 11.854a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V1.5a.5.5 0 00-1 0v8.793L5.354 8.146a.5.5 0 10-.708.708l3 3z"></path></svg>Download R for Windows (CRAN)</a>
+          <div class="rh-callout rh-info">Accept the default options during installation. RStudio is optional but recommended.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">3</div>
+        <div>
+          <div class="rh-step-title">Install Rtools</div>
+          <div class="rh-step-body"><p>Rtools provides the C++ compiler R uses to build packages with native code. The version number must match your R version (e.g. Rtools45 for R 4.5, Rtools46 for R 4.6).</p></div>
+          <a class="rh-dl" href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank" rel="noopener"><svg viewbox="0 0 16 16"><path d="M.5 9.9a.5.5 0 01.5.5v2.5a1 1 0 001 1h12a1 1 0 001-1v-2.5a.5.5 0 011 0v2.5a2 2 0 01-2 2H2a2 2 0 01-2-2v-2.5a.5.5 0 01.5-.5z"></path><path d="M7.646 11.854a.5.5 0 00.708 0l3-3a.5.5 0 00-.708-.708L8.5 10.293V1.5a.5.5 0 00-1 0v8.793L5.354 8.146a.5.5 0 10-.708.708l3 3z"></path></svg>Download Rtools (CRAN)</a>
+          <div class="rh-step-body" style="margin-top:8px"><p>After installing, verify it is working by running this in R — it should return a path, not an empty string:</p></div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'Sys.which(\" make\")')"="">Copy</button></div><pre>Sys.which("make")  <span class="rh-dim"># should return a path, not ""</span></pre></div>
+          <div class="rh-callout rh-info">If the result is <code>""</code>, restart R after installing Rtools and try again.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">4</div>
+        <div>
+          <div class="rh-step-title">Install required R packages</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'install.packages(c(\" remotes\",="" \"gutenbergr\"))\nremotes::install_github(\"jpvdp="" rhobots\")')"="">Copy</button></div><pre>install.packages(c("remotes", "gutenbergr"))
+remotes::install_github("JPvdP/RhoBots")</pre></div>
+          <div class="rh-callout rh-info">Compiler output during the second command is normal and takes 2–5 minutes.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">5</div>
+        <div>
+          <div class="rh-step-title">Set up the torch backend</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_install()')">Copy</button></div><pre>library(Rhobots)
+rhobots_install()</pre></div>
+          <div class="rh-callout rh-warn"><strong>Restart R when prompted</strong> before proceeding to step 6.</div>
+        </div>
+      </div>
+      <div class="rh-step">
+        <div class="rh-step-n">6</div>
+        <div>
+          <div class="rh-step-title">Run the demo</div>
+          <div class="rh-code"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'library(Rhobots)\nrhobots_demo()')">Copy</button></div><pre>library(Rhobots)
+rhobots_demo()</pre></div>
+          <div class="rh-callout rh-warn">
+            <strong>If you see a CUDA error</strong> and your machine has an NVIDIA GPU, run the following and then restart R:
+            <div class="rh-code" style="margin-top:8px"><div class="rh-code-hd"><span class="rh-code-lang">R</span><button class="rh-copy" onclick="rhCopy(this,'torch::install_torch(type = \" cpu\")')"="">Copy</button></div><pre>torch::install_torch(type = "cpu")</pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.rh -->
+
+<script>
+(function () {
+  const labels = {
+    'os': 'Start', 'mac-chip': 'macOS',
+    'apple': 'Apple Silicon', 'intel': 'Intel Mac', 'win': 'Windows'
+  };
+  let hist = [];
+
+  function current() {
+    const el = document.querySelector('.rh-screen.on');
+    return el ? el.id.replace('rh-', '') : 'os';
+  }
+
+  function show(key, path) {
+    document.querySelectorAll('.rh-screen').forEach(s => s.classList.remove('on'));
+    const t = document.getElementById('rh-' + key);
+    if (t) t.classList.add('on');
+
+    // breadcrumb
+    const bc = document.getElementById('rhBc');
+    const crumbs = (path || []).map(p =>
+      '<span class="rh-bc-item">' + p + '</span><span class="rh-bc-sep">›</span>'
+    ).join('') + (key !== 'os' ? '<span class="rh-bc-item cur">' + (labels[key] || key) + '</span>' : '');
+    bc.innerHTML = crumbs;
+
+    // back button
+    const btn = document.getElementById('rhBack');
+    if (btn) btn.className = 'rh-back' + (hist.length > 0 ? ' show' : '');
+
+    // scroll to top of wizard
+    const rh = document.querySelector('.rh');
+    if (rh) rh.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.rhGo = function (key, path) {
+    hist.push(current());
+    show(key, path);
+  };
+
+  window.rhBack = function () {
+    if (!hist.length) return;
+    const prev = hist.pop();
+    const path = hist.map(k => labels[k] || k);
+    show(prev, path);
+  };
+
+  window.rhCopy = function (btn, text) {
+    const done = () => {
+      btn.textContent = 'Copied';
+      btn.classList.add('ok');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1800);
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+    } else {
+      fallback(text, done);
+    }
+  };
+
+  function fallback(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/JPvdP\.github\.io\/NetworkIsLife\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
