@@ -325,6 +325,12 @@ tr:hover td { background: #f8f9fa; }
  <span class="menu-text">How HDBSCAN Works</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./boruvka_explainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How Borůvka MST Works in HDBSCAN</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -374,7 +380,7 @@ The full BERTopic pipeline — transformer embeddings, UMAP dimensionality reduc
 </div>
 <!-- ── PIPELINE ─────────────────────────────────────────── -->
 <h2 class="section-head anchored">
-The Pipeline
+<p>The Pipeline</p>
 </h2>
 <p>
 Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggable R objects. Each stage can be swapped out independently — use PCA instead of UMAP, k-means instead of HDBSCAN, or bring your own representation model.
@@ -386,7 +392,7 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 &lt;div class="pkg"&gt;torch · safetensors&lt;/div&gt;</code></pre>
 </div>
 <div class="pipe-arrow">
-→
+<p>→</p>
 </div>
 <div class="pipe-step">
 <pre><code>&lt;span class="icon"&gt;📉&lt;/span&gt;
@@ -394,7 +400,7 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 &lt;div class="pkg"&gt;uwot · UMAP&lt;/div&gt;</code></pre>
 </div>
 <div class="pipe-arrow">
-→
+<p>→</p>
 </div>
 <div class="pipe-step">
 <pre><code>&lt;span class="icon"&gt;🔵&lt;/span&gt;
@@ -402,7 +408,7 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 &lt;div class="pkg"&gt;Rcpp · HDBSCAN&lt;/div&gt;</code></pre>
 </div>
 <div class="pipe-arrow">
-→
+<p>→</p>
 </div>
 <div class="pipe-step">
 <pre><code>&lt;span class="icon"&gt;🏷️&lt;/span&gt;
@@ -412,15 +418,15 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 </div>
 <!-- ── RESOURCES ────────────────────────────────────────── -->
 <h2 class="section-head anchored">
-Resources
+<p>Resources</p>
 </h2>
 <div class="card-grid">
-<a class="card" href="tutorial.html">
+<p><a class="card" href="tutorial.html"></a></p><a class="card" href="tutorial.html">
 <div class="tag">
-Hands-on
+<p>Hands-on</p>
 </div>
 <div class="card-icon">
-🔬
+<p>🔬</p>
 </div>
 <h4 class="anchored">
 Full Tutorial
@@ -429,12 +435,12 @@ Full Tutorial
 A complete walkthrough on 3,328 African research abstracts — from raw text to labelled topics, quality sweep, interactive visualisations, and LLM-generated topic names.
 </p>
 </a><p><a class="card" href="tutorial.html"></a></p>
-<a class="card" href="umap_explainer.html">
+<p><a class="card" href="umap_explainer.html"></a></p><a class="card" href="umap_explainer.html">
 <div class="tag">
-How it works
+<p>How it works</p>
 </div>
 <div class="card-icon">
-📉
+<p>📉</p>
 </div>
 <h4 class="anchored">
 How UMAP Works
@@ -443,12 +449,12 @@ How UMAP Works
 Step-by-step technical explainer with illustrations: the manifold hypothesis, fuzzy membership weights, SGD optimisation, and the effect of every parameter.
 </p>
 </a><p><a class="card" href="umap_explainer.html"></a></p>
-<a class="card" href="hdbscan_explainer.html">
+<p><a class="card" href="hdbscan_explainer.html"></a></p><a class="card" href="hdbscan_explainer.html">
 <div class="tag">
-How it works
+<p>How it works</p>
 </div>
 <div class="card-icon">
-🔵
+<p>🔵</p>
 </div>
 <h4 class="anchored">
 How HDBSCAN Works
@@ -460,7 +466,7 @@ Core distances, mutual reachability distance, Borůvka MST, the condensed cluste
 </div>
 <!-- ── WHY RHOBOTS ──────────────────────────────────────── -->
 <h2 class="section-head anchored">
-Why Rhobots?
+<p>Why Rhobots?</p>
 </h2>
 <div class="feature-grid">
 <div class="feature">
@@ -496,7 +502,7 @@ k-means instead of HDBSCAN, or a custom representation model.&lt;/p&gt;</code></
 </div>
 <!-- ── COMPARISON TABLE ─────────────────────────────────── -->
 <h2 class="section-head anchored">
-How It Compares
+<p>How It Compares</p>
 </h2>
 <table class="caption-top table">
 <colgroup>
@@ -560,7 +566,7 @@ How It Compares
 </table>
 <!-- ── INSTALLATION ───────────────────────────────────────── -->
 <h2 class="section-head anchored">
-Installation
+<p>Installation</p>
 </h2>
 <p><strong>Step 1 — Install from CRAN:</strong></p>
 <div class="install-box">
@@ -592,7 +598,7 @@ Note
 <p>The demo downloads four Gutenberg books, embeds them, sweeps parameters, fits a topic model, and produces an interactive visualisation — no data files needed.</p>
 <!-- ── QUICK START ────────────────────────────────────────── -->
 <h2 class="section-head anchored">
-Quick Start
+<p>Quick Start</p>
 </h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rhobots)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -621,7 +627,7 @@ Quick Start
 <span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize_topics</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- ── CITATION ───────────────────────────────────────────── -->
 <h2 class="section-head anchored">
-Citation
+<p>Citation</p>
 </h2>
 <p>If you use Rhobots in research, please cite:</p>
 <div class="install-box">

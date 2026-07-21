@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="J.P.G. van der Pol — Utrecht University, Faculty of Geosciences">
+<meta name="dcterms.date" content="2026-07-21">
+
+<title>How Borůvka MST Works in HDBSCAN – NetworkIsLife</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-9c584ca951e49926686c986861625e9f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f0e08024c6cc30ff108db8a93ad46bcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+body { max-width: 960px; margin: auto; }
+.back-link {
+  display: inline-block;
+  background: #0f3460; color: white;
+  padding: 0.35rem 0.9rem; border-radius: 6px;
+  font-size: 0.85rem; text-decoration: none; margin-bottom: 1.5rem;
+}
+.back-link:hover { background: #e94560; }
+h1.title { color: #0f3460; }
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles2.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="././imgs/logo5.png" alt="" class="navbar-logo light-content">
+    <img src="././imgs/logo5.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">NetworkIsLife</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./rhobots.html"> 
+<span class="menu-text">Rhobots</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./package.html"> 
+<span class="menu-text">NIL Package</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./network.html"> 
+<span class="menu-text">Network Theory</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-dst.html"> 
+<span class="menu-text">Data Science Track</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dafs-esm.html"> 
+<span class="menu-text">ESM Track</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./boruvka_explainer.html">How Borůvka MST Works in HDBSCAN</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./rhobots_site.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Installing Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Topic Modeling with Rhobots</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./umap_explainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How UMAP Works</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hdbscan_explainer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How HDBSCAN Works</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./boruvka_explainer.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">How Borůvka MST Works in HDBSCAN</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#the-minimum-spanning-tree" id="toc-the-minimum-spanning-tree" class="nav-link active" data-scroll-target="#the-minimum-spanning-tree">1 The Minimum Spanning Tree</a></li>
+  <li><a href="#why-not-prims-or-kruskals" id="toc-why-not-prims-or-kruskals" class="nav-link" data-scroll-target="#why-not-prims-or-kruskals">2 Why Not Prim’s or Kruskal’s?</a></li>
+  <li><a href="#mutual-reachability-distance-recap" id="toc-mutual-reachability-distance-recap" class="nav-link" data-scroll-target="#mutual-reachability-distance-recap">3 Mutual Reachability Distance (recap)</a></li>
+  <li><a href="#borůvkas-algorithm-step-by-step" id="toc-borůvkas-algorithm-step-by-step" class="nav-link" data-scroll-target="#borůvkas-algorithm-step-by-step">4 Borůvka’s Algorithm Step by Step</a></li>
+  <li><a href="#union-find-tracking-components-in-oαn" id="toc-union-find-tracking-components-in-oαn" class="nav-link" data-scroll-target="#union-find-tracking-components-in-oαn">5 Union-Find: Tracking Components in O(α(n))</a></li>
+  <li><a href="#the-knn-approximation" id="toc-the-knn-approximation" class="nav-link" data-scroll-target="#the-knn-approximation">6 The kNN Approximation</a></li>
+  <li><a href="#dual-tree-borůvka-with-a-ball-tree" id="toc-dual-tree-borůvka-with-a-ball-tree" class="nav-link" data-scroll-target="#dual-tree-borůvka-with-a-ball-tree">7 Dual-Tree Borůvka with a Ball-tree</a>
+  <ul class="collapse">
+  <li><a href="#ball-tree-geometry" id="toc-ball-tree-geometry" class="nav-link" data-scroll-target="#ball-tree-geometry">7.1 Ball-tree geometry</a></li>
+  <li><a href="#the-pruning-condition" id="toc-the-pruning-condition" class="nav-link" data-scroll-target="#the-pruning-condition">7.2 The pruning condition</a></li>
+  <li><a href="#the-warm-up" id="toc-the-warm-up" class="nav-link" data-scroll-target="#the-warm-up">7.3 The warm-up</a></li>
+  </ul></li>
+  <li><a href="#from-mst-to-clusters-true-split-vs-noise-fallout" id="toc-from-mst-to-clusters-true-split-vs-noise-fallout" class="nav-link" data-scroll-target="#from-mst-to-clusters-true-split-vs-noise-fallout">8 From MST to Clusters: TRUE SPLIT vs Noise Fallout</a></li>
+  <li><a href="#prims-vs-borůvka-when-they-diverge" id="toc-prims-vs-borůvka-when-they-diverge" class="nav-link" data-scroll-target="#prims-vs-borůvka-when-they-diverge">9 Prim’s vs Borůvka: When They Diverge</a></li>
+  <li><a href="#allow_single_cluster-false" id="toc-allow_single_cluster-false" class="nav-link" data-scroll-target="#allow_single_cluster-false">10 <code>allow_single_cluster = FALSE</code></a></li>
+  <li><a href="#computational-complexity" id="toc-computational-complexity" class="nav-link" data-scroll-target="#computational-complexity">11 Computational Complexity</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">12 Summary</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How Borůvka MST Works in HDBSCAN</h1>
+<p class="subtitle lead">From the 1926 algorithm to dual-tree pruning — and why the MST structure drives cluster counts</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>J.P.G. van der Pol — Utrecht University, Faculty of Geosciences </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 21, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a class="back-link" href="rhobots.html">← Back to Rhobots</a></p>
+<p>HDBSCAN requires a <strong>minimum spanning tree</strong> (MST) of the mutual reachability distance graph. At small corpus sizes that MST is trivial to compute; at 10,000+ documents the naive approach requires an <span class="math inline">\(O(n^2)\)</span> distance matrix — roughly 100 GB of RAM at <span class="math inline">\(n = 100{,}000\)</span>.</p>
+<p>Rhobots solves this with the <strong>Borůvka algorithm</strong> (Otakar Borůvka, 1926), augmented with a Ball-tree or KD-tree spatial index so each round of the algorithm runs in <span class="math inline">\(O(n \log n)\)</span> instead of <span class="math inline">\(O(n^2)\)</span>.</p>
+<p>This page explains every layer: what an MST is, how Borůvka builds one in rounds, how a dual-tree spatial index prunes most of the work, and — critically — why different MST algorithms can produce structurally different trees on diffuse data, which is the root cause of cluster-count variation between implementations.</p>
+<hr>
+<section id="the-minimum-spanning-tree" class="level2">
+<h2 class="anchored" data-anchor-id="the-minimum-spanning-tree">1 The Minimum Spanning Tree</h2>
+<p>A <strong>spanning tree</strong> of <span class="math inline">\(n\)</span> points is a set of <span class="math inline">\(n - 1\)</span> edges that connects every point to every other (directly or indirectly) with no cycles. There are exponentially many spanning trees of a complete graph; the <strong>minimum</strong> spanning tree is the one with the smallest total edge weight.</p>
+<p>In the HDBSCAN context each edge weight is the <strong>mutual reachability distance</strong> (MRD) between the two endpoints (explained in Section 3). The MST of the MRD graph captures the essential density skeleton of the data: low-weight edges sit inside dense clusters; high-weight edges cross the sparse gaps between clusters.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n_toy <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X10   <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="fl">0.4</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="fl">0.4</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="dv">2</span>, <span class="fl">0.4</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="fl">0.4</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grp10 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>D10   <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X10))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Prim's MST on D10</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>prim_mst <span class="ot">&lt;-</span> <span class="cf">function</span>(W) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(W); in_mst <span class="ot">&lt;-</span> <span class="fu">logical</span>(n); in_mst[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  edges <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>L, n<span class="dv">-1</span>, <span class="dv">2</span>); ws <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n<span class="dv">-1</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  key <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">Inf</span>, n); parent <span class="ot">&lt;-</span> <span class="fu">integer</span>(n)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  key[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (step <span class="cf">in</span> <span class="fu">seq_len</span>(n<span class="dv">-1</span>)) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    u <span class="ot">&lt;-</span> <span class="fu">which.min</span>(<span class="fu">ifelse</span>(in_mst, <span class="cn">Inf</span>, key))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    in_mst[u] <span class="ot">&lt;-</span> <span class="cn">TRUE</span>; edges[step,] <span class="ot">&lt;-</span> <span class="fu">c</span>(parent[u], u); ws[step] <span class="ot">&lt;-</span> key[u]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (v <span class="cf">in</span> <span class="fu">which</span>(<span class="sc">!</span>in_mst)) <span class="cf">if</span> (W[u,v] <span class="sc">&lt;</span> key[v]) { key[v] <span class="ot">&lt;-</span> W[u,v]; parent[v] <span class="ot">&lt;-</span> u }</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">edges =</span> edges[<span class="sc">-</span><span class="dv">1</span>,,<span class="at">drop=</span><span class="cn">FALSE</span>], <span class="at">w =</span> ws[<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>mst10 <span class="ot">&lt;-</span> <span class="fu">prim_mst</span>(D10)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>all_e <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>(n_toy<span class="dv">-1</span>), <span class="cf">function</span>(i) {</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>((i<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>n_toy, <span class="cf">function</span>(j) {</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">x0=</span>X10[i,<span class="dv">1</span>],<span class="at">y0=</span>X10[i,<span class="dv">2</span>],<span class="at">x1=</span>X10[j,<span class="dv">1</span>],<span class="at">y1=</span>X10[j,<span class="dv">2</span>],<span class="at">w=</span>D10[i,j])</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>mst_e <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0 =</span> X10[mst10<span class="sc">$</span>edges[,<span class="dv">1</span>],<span class="dv">1</span>], <span class="at">y0 =</span> X10[mst10<span class="sc">$</span>edges[,<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> X10[mst10<span class="sc">$</span>edges[,<span class="dv">2</span>],<span class="dv">1</span>], <span class="at">y1 =</span> X10[mst10<span class="sc">$</span>edges[,<span class="dv">2</span>],<span class="dv">2</span>], <span class="at">w =</span> mst10<span class="sc">$</span>w</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>pts10 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X10[,<span class="dv">1</span>], <span class="at">y=</span>X10[,<span class="dv">2</span>], <span class="at">g=</span>grp10)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>p_all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>all_e, <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1), <span class="at">colour=</span><span class="st">"grey70"</span>, <span class="at">linewidth=</span><span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>pts10, <span class="fu">aes</span>(x,y,<span class="at">colour=</span>g), <span class="at">size=</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span>PAL) <span class="sc">+</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"All 45 edges (complete graph)"</span>, <span class="at">colour=</span><span class="cn">NULL</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>p_mst <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>mst_e, <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1,<span class="at">linewidth=</span>w,<span class="at">colour=</span>w)) <span class="sc">+</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>pts10, <span class="fu">aes</span>(x,y), <span class="at">colour=</span><span class="st">"grey20"</span>, <span class="at">size=</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradient</span>(<span class="at">low=</span><span class="st">"#4292C6"</span>, <span class="at">high=</span><span class="st">"#FC4E2A"</span>, <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linewidth_continuous</span>(<span class="at">range=</span><span class="fu">c</span>(<span class="fl">0.6</span>,<span class="fl">2.5</span>), <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"9-edge minimum spanning tree"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_all, p_mst, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/mst-intro-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Left: all possible edges on 10 points (complete graph, 45 edges). Right: the MST — 9 edges that connect every point with minimum total weight. Heavy edges cross the gap between the two groups.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The heaviest MST edge separates the two groups. Cutting that edge at the right <span class="math inline">\(\lambda\)</span> level is precisely how HDBSCAN identifies cluster boundaries.</p>
+<hr>
+</section>
+<section id="why-not-prims-or-kruskals" class="level2">
+<h2 class="anchored" data-anchor-id="why-not-prims-or-kruskals">2 Why Not Prim’s or Kruskal’s?</h2>
+<p>All three classical MST algorithms produce the <em>same</em> MST on a complete graph with distinct edge weights. Their differences are computational, not mathematical.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Strategy</th>
+<th>Memory</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prim’s</strong></td>
+<td>Greedy: always add cheapest edge to growing tree</td>
+<td><span class="math inline">\(O(n^2)\)</span> distances</td>
+<td><span class="math inline">\(O(n^2)\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Kruskal’s</strong></td>
+<td>Sort all edges; add if they connect different components</td>
+<td><span class="math inline">\(O(n^2)\)</span> edges</td>
+<td><span class="math inline">\(O(n^2 \log n)\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Borůvka’s</strong></td>
+<td>Parallel: every component finds its cheapest outgoing edge simultaneously</td>
+<td><span class="math inline">\(O(n \cdot k)\)</span></td>
+<td><span class="math inline">\(O(n \log n)\)</span> rounds</td>
+</tr>
+</tbody>
+</table>
+<p>The critical column is memory. Prim’s needs to compare every candidate edge against every already-selected point, which means holding all <span class="math inline">\(n^2/2\)</span> pairwise distances in RAM. At <span class="math inline">\(n = 30{,}000\)</span> and 8 bytes per <code>double</code>, that is <span class="math inline">\(\approx 3.6\)</span> GB — already beyond a typical laptop. At <span class="math inline">\(n = 100{,}000\)</span> it is <span class="math inline">\(\approx 40\)</span> GB.</p>
+<p>Borůvka avoids this because each round only ever asks: <em>“What is the cheapest edge leaving my current component?”</em> That question can be answered from a <span class="math inline">\(k\)</span>-nearest-neighbour graph, which costs only <span class="math inline">\(O(n \cdot k)\)</span> to store.</p>
+<hr>
+</section>
+<section id="mutual-reachability-distance-recap" class="level2">
+<h2 class="anchored" data-anchor-id="mutual-reachability-distance-recap">3 Mutual Reachability Distance (recap)</h2>
+<p>Before Borůvka can run, HDBSCAN defines a modified distance that rewards density. The <strong>mutual reachability distance</strong> between points <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_j\)</span> is:</p>
+<p><span class="math display">\[d_{\text{mrd}}(i, j) = \max\bigl\{\text{core}(i),\; \text{core}(j),\; d(i, j)\bigr\}\]</span></p>
+<p>where <span class="math inline">\(\text{core}(i)\)</span> is the distance from <span class="math inline">\(i\)</span> to its <code>min_pts</code>-th nearest neighbour.</p>
+<p>Three cases:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>MRD value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Both points in a dense cluster</td>
+<td><span class="math inline">\(\approx d(i,j)\)</span> — core distances small, raw distance dominates</td>
+</tr>
+<tr class="even">
+<td>One point on cluster border</td>
+<td><span class="math inline">\(\approx \text{core}(\text{border point})\)</span> — core distance of the sparse point dominates</td>
+</tr>
+<tr class="odd">
+<td>Both points in sparse region</td>
+<td><span class="math inline">\(\approx \max(\text{core}(i), \text{core}(j)) \gg d(i,j)\)</span> — MRD far exceeds raw distance</td>
+</tr>
+</tbody>
+</table>
+<p>This inflation of sparse-region edges is what causes HDBSCAN to draw sharp cluster boundaries even in the absence of a clear raw-distance gap.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>g1  <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="sc">-</span><span class="dv">3</span>,  <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>,  <span class="dv">0</span>, <span class="fl">0.3</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>g2  <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">25</span>,  <span class="dv">2</span>,  <span class="fl">0.6</span>), <span class="fu">rnorm</span>(<span class="dv">25</span>,  <span class="dv">0</span>, <span class="fl">0.6</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ns  <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">runif</span>(<span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),     <span class="fu">runif</span>(<span class="dv">6</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X_m <span class="ot">&lt;-</span> <span class="fu">rbind</span>(g1, g2, ns)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>n_m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X_m)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>D_m    <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_m))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>knn_m  <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(D_m, <span class="dv">1</span>, <span class="cf">function</span>(r) <span class="fu">order</span>(r)[<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>]))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>core_m <span class="ot">&lt;-</span> D_m[<span class="fu">cbind</span>(<span class="fu">seq_len</span>(n_m), knn_m[,<span class="dv">4</span>])]  <span class="co"># 4th NN = core(min_pts=4)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>mrd_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(i, j) <span class="fu">max</span>(core_m[i], core_m[j], D_m[i,j])</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample some edges to illustrate</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>in_edge  <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>), <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">8</span>), <span class="fu">c</span>(<span class="dv">32</span>,<span class="dv">35</span>), <span class="fu">c</span>(<span class="dv">33</span>,<span class="dv">40</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>out_edge <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="dv">58</span>,<span class="dv">59</span>), <span class="fu">c</span>(<span class="dv">57</span>,<span class="dv">60</span>), <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">37</span>), <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">34</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>draw_edge <span class="ot">&lt;-</span> <span class="cf">function</span>(e, type) {</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x0=</span>X_m[e[<span class="dv">1</span>],<span class="dv">1</span>], <span class="at">y0=</span>X_m[e[<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">x1=</span>X_m[e[<span class="dv">2</span>],<span class="dv">1</span>], <span class="at">y1=</span>X_m[e[<span class="dv">2</span>],<span class="dv">2</span>],</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>             <span class="at">raw=</span><span class="fu">round</span>(D_m[e[<span class="dv">1</span>],e[<span class="dv">2</span>]],<span class="dv">2</span>),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>             <span class="at">mrd=</span><span class="fu">round</span>(<span class="fu">mrd_fn</span>(e[<span class="dv">1</span>],e[<span class="dv">2</span>]),<span class="dv">2</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">type=</span>type)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>edge_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(in_edge,  <span class="cf">function</span>(e) <span class="fu">draw_edge</span>(e, <span class="st">"Dense interior"</span>))),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(out_edge, <span class="cf">function</span>(e) <span class="fu">draw_edge</span>(e, <span class="st">"Sparse / border"</span>)))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>pts_m <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X_m[,<span class="dv">1</span>], <span class="at">y=</span>X_m[,<span class="dv">2</span>],</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                     <span class="at">g=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"1"</span>,<span class="dv">30</span>),<span class="fu">rep</span>(<span class="st">"2"</span>,<span class="dv">25</span>),<span class="fu">rep</span>(<span class="st">"noise"</span>,<span class="dv">6</span>)))</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>pts_m, <span class="fu">aes</span>(x,y,<span class="at">colour=</span>g), <span class="at">size=</span><span class="dv">2</span>, <span class="at">alpha=</span><span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>edge_df,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1,<span class="at">colour=</span>type),</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="fl">1.6</span>, <span class="at">alpha=</span><span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">"1"</span><span class="ot">=</span><span class="st">"#AACCEE"</span>,<span class="st">"2"</span><span class="ot">=</span><span class="st">"#AADDAA"</span>,<span class="st">"noise"</span><span class="ot">=</span><span class="st">"#CCCCCC"</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Dense interior"</span><span class="ot">=</span><span class="st">"#2166AC"</span>,<span class="st">"Sparse / border"</span><span class="ot">=</span><span class="st">"#B2182B"</span>),</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">"Dense interior"</span>,<span class="st">"Sparse / border"</span>),</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">name=</span><span class="st">"Edge type"</span>) <span class="sc">+</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>edge_df,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>(x0<span class="sc">+</span>x1)<span class="sc">/</span><span class="dv">2</span>, <span class="at">y=</span>(y0<span class="sc">+</span>y1)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>                <span class="at">label=</span><span class="fu">paste0</span>(<span class="st">"raw="</span>,raw,<span class="st">"</span><span class="sc">\n</span><span class="st">mrd="</span>,mrd), <span class="at">colour=</span>type),</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">size=</span><span class="fl">2.8</span>, <span class="at">vjust=</span><span class="sc">-</span><span class="fl">0.3</span>, <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle=</span><span class="st">"MRD ≈ raw distance inside clusters; MRD ≫ raw at borders and in sparse regions"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/mrd-illustration-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Effect of MRD on edge weights. Red edges connect points in sparse regions — their MRD far exceeds the raw Euclidean distance. Blue edges connect dense-cluster interiors where MRD ≈ raw distance.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="borůvkas-algorithm-step-by-step" class="level2">
+<h2 class="anchored" data-anchor-id="borůvkas-algorithm-step-by-step">4 Borůvka’s Algorithm Step by Step</h2>
+<p>Borůvka works in <strong>rounds</strong>. Each round does two things:</p>
+<ol type="1">
+<li>Every current component independently finds the cheapest edge that leads <em>out</em> of it (a <strong>best outgoing edge</strong>).</li>
+<li>All those edges are added to the MST simultaneously, merging components.</li>
+</ol>
+<p>After each round the number of components is at least halved, so at most <span class="math inline">\(\lceil \log_2 n \rceil\)</span> rounds are needed.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n_b <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_b <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">0.4</span>), <span class="fu">rnorm</span>(<span class="dv">6</span>,  <span class="fl">1.0</span>, <span class="fl">0.4</span>)),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="fl">2.0</span>, <span class="fl">0.5</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="fl">0.8</span>, <span class="fl">0.5</span>)),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">3</span>,  <span class="fl">0.0</span>, <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">3</span>, <span class="sc">-</span><span class="fl">2.0</span>, <span class="fl">0.3</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>D_b <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_b))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Prim's MST on this graph</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>mst_b <span class="ot">&lt;-</span> <span class="fu">prim_mst</span>(D_b)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Borůvka simulation (on full distance matrix for illustration)</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>boruvka_sim <span class="ot">&lt;-</span> <span class="cf">function</span>(W) {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  n   <span class="ot">&lt;-</span> <span class="fu">nrow</span>(W)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  par <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(n)   <span class="co"># par[i] = component root of i</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  find <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="cf">while</span> (par[x] <span class="sc">!=</span> x) { par[x] <span class="ot">&lt;&lt;-</span> par[par[x]]; x <span class="ot">&lt;-</span> par[x] }; x }</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  unite <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    ra <span class="ot">&lt;-</span> <span class="fu">find</span>(a); rb <span class="ot">&lt;-</span> <span class="fu">find</span>(b)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (ra <span class="sc">==</span> rb) <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    par[rb] <span class="ot">&lt;&lt;-</span> ra; <span class="cn">TRUE</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  all_edges <span class="ot">&lt;-</span> <span class="fu">list</span>()   <span class="co"># accumulate added edges by round</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  all_comps <span class="ot">&lt;-</span> <span class="fu">list</span>()   <span class="co"># component assignment by round</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">repeat</span> {</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    comps <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(n), find)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(comps)) <span class="sc">==</span> <span class="dv">1</span>) <span class="cf">break</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    bw <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">Inf</span>, n); bu <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>L, n); bv <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>L, n)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>      ci <span class="ot">&lt;-</span> <span class="fu">find</span>(i)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) {</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        cj <span class="ot">&lt;-</span> <span class="fu">find</span>(j)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (ci <span class="sc">==</span> cj) <span class="cf">next</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (W[i,j] <span class="sc">&lt;</span> bw[ci]) { bw[ci] <span class="ot">&lt;-</span> W[i,j]; bu[ci] <span class="ot">&lt;-</span> i; bv[ci] <span class="ot">&lt;-</span> j }</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    round_edges <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (r <span class="cf">in</span> <span class="fu">unique</span>(comps)) {</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (bu[r] <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="cf">next</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">unite</span>(bu[r], bv[r])) {</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        round_edges <span class="ot">&lt;-</span> <span class="fu">c</span>(round_edges, <span class="fu">list</span>(<span class="fu">c</span>(bu[r], bv[r], bw[r])))</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    all_comps <span class="ot">&lt;-</span> <span class="fu">c</span>(all_comps, <span class="fu">list</span>(<span class="fu">sapply</span>(<span class="fu">seq_len</span>(n), find)))</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    all_edges <span class="ot">&lt;-</span> <span class="fu">c</span>(all_edges, <span class="fu">list</span>(round_edges))</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">comps =</span> all_comps, <span class="at">edges =</span> all_edges)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> <span class="fu">boruvka_sim</span>(D_b)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper: accumulated MST edges up to round r</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>cum_edges <span class="ot">&lt;-</span> <span class="cf">function</span>(r) {</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">unlist</span>(sim<span class="sc">$</span>edges[<span class="fu">seq_len</span>(r)], <span class="at">recursive=</span><span class="cn">FALSE</span>))</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Remap component IDs to sequential integers for colour mapping</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>remap_comps <span class="ot">&lt;-</span> <span class="cf">function</span>(comps) {</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">match</span>(comps, <span class="fu">sort</span>(<span class="fu">unique</span>(comps)))</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>  m</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>n_rounds <span class="ot">&lt;-</span> <span class="fu">length</span>(sim<span class="sc">$</span>comps)</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_len</span>(n_rounds), <span class="cf">function</span>(r) {</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  comp_r   <span class="ot">&lt;-</span> <span class="fu">remap_comps</span>(sim<span class="sc">$</span>comps[[r]])</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  n_comps  <span class="ot">&lt;-</span> <span class="fu">max</span>(comp_r)</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  pts_df   <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X_b[,<span class="dv">1</span>], <span class="at">y=</span>X_b[,<span class="dv">2</span>], <span class="at">comp=</span><span class="fu">factor</span>(comp_r))</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Accumulated MST edges (added in rounds 1..r)</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  mst_so_far <span class="ot">&lt;-</span> <span class="cf">if</span> (r <span class="sc">==</span> <span class="dv">1</span>) <span class="cn">NULL</span> <span class="cf">else</span> {</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">cum_edges</span>(r <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(m)) <span class="cn">NULL</span> <span class="cf">else</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(<span class="at">x0=</span>X_b[m[,<span class="dv">1</span>],<span class="dv">1</span>], <span class="at">y0=</span>X_b[m[,<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x1=</span>X_b[m[,<span class="dv">2</span>],<span class="dv">1</span>], <span class="at">y1=</span>X_b[m[,<span class="dv">2</span>],<span class="dv">2</span>])</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Edges added THIS round</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  this_round <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, sim<span class="sc">$</span>edges[[r]])</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  new_e <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(this_round))</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">x0=</span>X_b[this_round[,<span class="dv">1</span>],<span class="dv">1</span>], <span class="at">y0=</span>X_b[this_round[,<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>               <span class="at">x1=</span>X_b[this_round[,<span class="dv">2</span>],<span class="dv">1</span>], <span class="at">y1=</span>X_b[this_round[,<span class="dv">2</span>],<span class="dv">2</span>])</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cn">NULL</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>  comp_pal <span class="ot">&lt;-</span> <span class="fu">setNames</span>(</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"#2166AC"</span>,<span class="st">"#1B7837"</span>,<span class="st">"#B2182B"</span>,<span class="st">"#762A83"</span>,<span class="st">"#E08214"</span>,<span class="st">"#01665E"</span>,</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>      <span class="st">"#8C510A"</span>,<span class="st">"#4D4D4D"</span>,<span class="st">"#F6E8C3"</span>,<span class="st">"#D1E5F0"</span>,<span class="st">"#FDDBC7"</span>,<span class="st">"#D9F0A3"</span>,<span class="st">"#E7D4E8"</span>),</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.character</span>(<span class="fu">seq_len</span>(<span class="dv">13</span>))</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    { <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(mst_so_far))</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="at">data=</span>mst_so_far,</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colour=</span><span class="st">"grey50"</span>, <span class="at">linewidth=</span><span class="fl">0.8</span>) } <span class="sc">+</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    { <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(new_e))</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="at">data=</span>new_e,</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>                     <span class="at">colour=</span><span class="st">"black"</span>, <span class="at">linewidth=</span><span class="fl">1.8</span>) } <span class="sc">+</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>pts_df, <span class="fu">aes</span>(x,y,<span class="at">colour=</span>comp,<span class="at">fill=</span>comp),</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="dv">5</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">stroke=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_manual</span>(<span class="at">values=</span>comp_pal, <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>comp_pal, <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title=</span><span class="fu">sprintf</span>(<span class="st">"After round %d  (%d components)"</span>, r, n_comps),</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>         <span class="at">subtitle=</span><span class="fu">sprintf</span>(<span class="st">"%d edges added this round"</span>,</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">length</span>(sim<span class="sc">$</span>edges[[r]])),</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>         <span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="fu">do.call</span>(grid.arrange, <span class="fu">c</span>(plots, <span class="at">ncol=</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/boruvka-rounds-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Borůvka in action on 14 points. Each panel shows the state after one round. Colours identify components; solid lines are newly added MST edges; dashed lines show each component’s cheapest outgoing edge that will be added. By round 3 all points are connected.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Reading the diagram.</strong> Each colour is one component. Black edges are newly added in that round; grey edges were added earlier. Notice that in Round 1 every individual point acts alone — 14 independent searches. After Round 1 components have formed and the next search covers entire groups. By Round 3 a single component spans all 14 points: the MST is complete.</p>
+<hr>
+</section>
+<section id="union-find-tracking-components-in-oαn" class="level2">
+<h2 class="anchored" data-anchor-id="union-find-tracking-components-in-oαn">5 Union-Find: Tracking Components in O(α(n))</h2>
+<p>Borůvka needs to answer two questions millions of times per run:</p>
+<ul>
+<li><strong>Which component does point <span class="math inline">\(i\)</span> belong to?</strong> (<code>find</code>)</li>
+<li><strong>Merge the components of <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>.</strong> (<code>unite</code>)</li>
+</ul>
+<p>A naïve implementation rescans all points at each query (<span class="math inline">\(O(n)\)</span>). The <strong>Union-Find</strong> data structure answers both in effectively <span class="math inline">\(O(1)\)</span> amortised time using two tricks:</p>
+<p><strong>Path compression (in <code>find</code>).</strong> While walking up the parent-pointer chain to the root, reattach every visited node directly to the root. Future queries on those nodes skip the chain entirely.</p>
+<p><strong>Union by size (in <code>unite</code>).</strong> Always attach the smaller tree under the root of the larger tree. This bounds the tree height at <span class="math inline">\(O(\log n)\)</span>, preventing degenerate chains.</p>
+<p>Together these give amortised <span class="math inline">\(O(\alpha(n))\)</span> per operation, where <span class="math inline">\(\alpha\)</span> is the inverse Ackermann function — for all practical <span class="math inline">\(n\)</span> it is less than 5.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagram: chain of 5 nodes before/after path compression</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>node_pos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">id  =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lab =</span> <span class="fu">c</span>(<span class="st">"root"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5 (query)"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>arrows_before <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0  =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">y0 =</span> <span class="fl">0.05</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1  =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">y1 =</span> <span class="fl">0.05</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>arrows_after <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">y0 =</span> <span class="sc">-</span><span class="fl">0.05</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">y1 =</span> <span class="sc">-</span><span class="fl">0.05</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>p_before <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>arrows_before,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow=</span><span class="fu">arrow</span>(<span class="at">length=</span><span class="fu">unit</span>(<span class="fl">0.18</span>,<span class="st">"inches"</span>)),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"#2166AC"</span>) <span class="sc">+</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>node_pos, <span class="fu">aes</span>(x,y), <span class="at">size=</span><span class="dv">10</span>, <span class="at">colour=</span><span class="st">"white"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill=</span><span class="st">"#2166AC"</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">stroke=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>node_pos, <span class="fu">aes</span>(x,y,<span class="at">label=</span>id), <span class="at">colour=</span><span class="st">"white"</span>, <span class="at">fontface=</span><span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>node_pos[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>),], <span class="fu">aes</span>(x,y<span class="fl">-0.18</span>,<span class="at">label=</span>lab),</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour=</span><span class="st">"grey30"</span>, <span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span><span class="fl">0.3</span>,<span class="at">label=</span><span class="st">"Before: 4 hops to root"</span>,<span class="at">size=</span><span class="dv">4</span>,<span class="at">fontface=</span><span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.3</span>,<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Chain (no compression)"</span>, <span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>p_after <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>arrows_after,</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow=</span><span class="fu">arrow</span>(<span class="at">length=</span><span class="fu">unit</span>(<span class="fl">0.18</span>,<span class="st">"inches"</span>)),</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth=</span><span class="dv">1</span>, <span class="at">colour=</span><span class="st">"#1B7837"</span>) <span class="sc">+</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>node_pos, <span class="fu">aes</span>(x,y), <span class="at">size=</span><span class="dv">10</span>, <span class="at">colour=</span><span class="st">"white"</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill=</span><span class="st">"#1B7837"</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">stroke=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>node_pos, <span class="fu">aes</span>(x,y,<span class="at">label=</span>id), <span class="at">colour=</span><span class="st">"white"</span>, <span class="at">fontface=</span><span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>node_pos[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>),], <span class="fu">aes</span>(x,y<span class="fl">-0.18</span>,<span class="at">label=</span>lab),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour=</span><span class="st">"grey30"</span>, <span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span><span class="fl">0.3</span>,<span class="at">label=</span><span class="st">"After: 1 hop for all"</span>,<span class="at">size=</span><span class="dv">4</span>,<span class="at">fontface=</span><span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.3</span>,<span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"After path compression"</span>, <span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_before, p_after, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/union-find-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Path compression in action. Before (left): a chain of 5 nodes requires 5 hops to find the root. After one find() call with path compression (right): all nodes now point directly to the root. Future queries cost O(1).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="the-knn-approximation" class="level2">
+<h2 class="anchored" data-anchor-id="the-knn-approximation">6 The kNN Approximation</h2>
+<p>A complete MRD graph has <span class="math inline">\(n(n-1)/2\)</span> edges — the same <span class="math inline">\(O(n^2)\)</span> problem that kills Prim’s. Borůvka avoids this by restricting each point to only looking at its <span class="math inline">\(k\)</span> nearest Euclidean neighbours when searching for its component’s cheapest outgoing edge.</p>
+<p><strong>This is an approximation.</strong> The key question is whether the true MST ever requires an edge that goes to a point <em>beyond</em> the <span class="math inline">\(k\)</span>-th nearest Euclidean neighbour.</p>
+<p>For standard Euclidean data with distinct distances: <strong>no</strong>. The optimal outgoing edge from any component always connects to one of the <span class="math inline">\(k\)</span> nearest Euclidean neighbours of some component member, as long as <span class="math inline">\(k \geq \text{min\_pts}\)</span>.</p>
+<p>For MRD on diffuse embeddings: <strong>occasionally yes</strong>. A point <span class="math inline">\(j\)</span> that is the 20th Euclidean neighbour of <span class="math inline">\(i\)</span> might have a smaller MRD to <span class="math inline">\(i\)</span> than any of the 15 nearest Euclidean neighbours, if <span class="math inline">\(j\)</span> sits in a dense sub-region (small core distance) while the 15 nearest neighbours all sit in sparse areas (large core distances, inflating MRD).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dense_cl  <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>,  <span class="dv">3</span>, <span class="fl">0.25</span>), <span class="fu">rnorm</span>(<span class="dv">20</span>, <span class="dv">0</span>, <span class="fl">0.25</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sparse_cl <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">1.2</span>),  <span class="fu">rnorm</span>(<span class="dv">12</span>, <span class="dv">0</span>, <span class="fl">0.8</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X_km <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dense_cl, sparse_cl)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n_km <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X_km)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>D_km <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_km))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># min_pts = 6 → core = 6th NN</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>core_km <span class="ot">&lt;-</span> <span class="fu">apply</span>(D_km, <span class="dv">1</span>, <span class="cf">function</span>(r) <span class="fu">sort</span>(r)[<span class="dv">7</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>mrd_km  <span class="ot">&lt;-</span> <span class="cf">function</span>(i,j) <span class="fu">max</span>(core_km[i], core_km[j], D_km[i,j])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># "A" = the outer isolated point (last of sparse_cl)</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick A as the point farthest from the dense cluster among sparse</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>A_idx <span class="ot">&lt;-</span> <span class="fu">which.max</span>(D_km[, <span class="dv">1</span>])   <span class="co"># farthest from dense cluster centre (point 1)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>nn_A  <span class="ot">&lt;-</span> <span class="fu">order</span>(D_km[A_idx,])[<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>]   <span class="co"># 8 nearest Euclidean neighbours</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># True min-MRD neighbour</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>mrd_vals <span class="ot">&lt;-</span> <span class="fu">sapply</span>(nn_A, <span class="cf">function</span>(j) <span class="fu">mrd_km</span>(A_idx, j))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>best_j   <span class="ot">&lt;-</span> nn_A[<span class="fu">which.min</span>(mrd_vals)]</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>pts_km <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X_km[,<span class="dv">1</span>], <span class="at">y=</span>X_km[,<span class="dv">2</span>],</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                      <span class="at">g=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"dense"</span>,<span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"sparse"</span>,<span class="dv">12</span>)))</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>pts_km<span class="sc">$</span>role <span class="ot">&lt;-</span> <span class="st">"other"</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>pts_km<span class="sc">$</span>role[A_idx]  <span class="ot">&lt;-</span> <span class="st">"A"</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>pts_km<span class="sc">$</span>role[nn_A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]] <span class="ot">&lt;-</span> <span class="st">"5-NN"</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>pts_km<span class="sc">$</span>role[best_j] <span class="ot">&lt;-</span> <span class="st">"B (best MRD)"</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>seg_5nn <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0=</span>X_km[A_idx,<span class="dv">1</span>], <span class="at">y0=</span>X_km[A_idx,<span class="dv">2</span>],</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1=</span>X_km[nn_A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],<span class="dv">1</span>], <span class="at">y1=</span>X_km[nn_A[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],<span class="dv">2</span>]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>seg_best <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0=</span>X_km[A_idx,<span class="dv">1</span>], <span class="at">y0=</span>X_km[A_idx,<span class="dv">2</span>],</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1=</span>X_km[best_j,<span class="dv">1</span>], <span class="at">y1=</span>X_km[best_j,<span class="dv">2</span>]</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span><span class="fu">subset</span>(pts_km, role<span class="sc">==</span><span class="st">"other"</span>),</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(x,y,<span class="at">colour=</span>g), <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>seg_5nn,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour=</span><span class="st">"grey50"</span>, <span class="at">linewidth=</span><span class="dv">1</span>,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow=</span><span class="fu">arrow</span>(<span class="at">length=</span><span class="fu">unit</span>(<span class="fl">0.1</span>,<span class="st">"in"</span>)), <span class="at">linetype=</span><span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data=</span>seg_best,</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1),</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour=</span><span class="st">"#B2182B"</span>, <span class="at">linewidth=</span><span class="dv">2</span>,</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow=</span><span class="fu">arrow</span>(<span class="at">length=</span><span class="fu">unit</span>(<span class="fl">0.12</span>,<span class="st">"in"</span>))) <span class="sc">+</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span><span class="fu">subset</span>(pts_km, role<span class="sc">==</span><span class="st">"5-NN"</span>),</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(x,y), <span class="at">colour=</span><span class="st">"grey40"</span>, <span class="at">size=</span><span class="fl">3.5</span>, <span class="at">shape=</span><span class="dv">1</span>, <span class="at">stroke=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span><span class="fu">subset</span>(pts_km, role<span class="sc">==</span><span class="st">"A"</span>),</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(x,y), <span class="at">colour=</span><span class="st">"#E08214"</span>, <span class="at">size=</span><span class="dv">6</span>, <span class="at">shape=</span><span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span><span class="fu">subset</span>(pts_km, role<span class="sc">==</span><span class="st">"B (best MRD)"</span>),</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(x,y), <span class="at">colour=</span><span class="st">"#B2182B"</span>, <span class="at">size=</span><span class="dv">5</span>, <span class="at">shape=</span><span class="dv">17</span>) <span class="sc">+</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="at">dense=</span><span class="st">"#2166AC"</span>, <span class="at">sparse=</span><span class="st">"#999999"</span>),</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name=</span><span class="st">"Region"</span>) <span class="sc">+</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>X_km[A_idx,<span class="dv">1</span>]<span class="sc">-</span><span class="fl">0.3</span>, <span class="at">y=</span>X_km[A_idx,<span class="dv">2</span>]<span class="sc">+</span><span class="fl">0.25</span>,</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">"A"</span>, <span class="at">colour=</span><span class="st">"#E08214"</span>, <span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>X_km[best_j,<span class="dv">1</span>]<span class="sc">+</span><span class="fl">0.25</span>, <span class="at">y=</span>X_km[best_j,<span class="dv">2</span>],</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">"B"</span>, <span class="at">colour=</span><span class="st">"#B2182B"</span>, <span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle=</span><span class="fu">paste0</span>(<span class="st">"A's 5 Euclidean NNs are all in the sparse halo  |  "</span>,</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"Red edge (to B) has lower MRD but is not in the 5-NN graph"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/knn-miss-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Scenario where kNN misses the optimal MRD edge. Point A’s 5 nearest Euclidean neighbours (grey arrows) are all in the sparse halo. The true minimum-MRD edge (red) goes to point B — the 8th Euclidean neighbour — which sits inside a dense cluster and has a small core distance. With k=5 this edge is never considered.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Rhobots handles this with the <strong>dual-tree Borůvka</strong> approach: instead of restricting to a pre-built kNN list, it searches the entire dataset using a spatial tree and prunes only pairs whose MRD lower bound already exceeds the current best. No valid edge is missed.</p>
+<hr>
+</section>
+<section id="dual-tree-borůvka-with-a-ball-tree" class="level2">
+<h2 class="anchored" data-anchor-id="dual-tree-borůvka-with-a-ball-tree">7 Dual-Tree Borůvka with a Ball-tree</h2>
+<p>The naive Borůvka step — for every component, scan all other components — costs <span class="math inline">\(O(n^2)\)</span> per round. <strong>Dual-tree Borůvka</strong> brings this down to <span class="math inline">\(O(n \log n)\)</span> per round by running two tree traversals simultaneously and pruning entire subtree pairs that cannot improve any component’s best edge.</p>
+<section id="ball-tree-geometry" class="level3">
+<h3 class="anchored" data-anchor-id="ball-tree-geometry">7.1 Ball-tree geometry</h3>
+<p>A <strong>Ball-tree</strong> partitions points into nested bounding hyperspheres (centroid + radius). Each internal node covers the ball that encloses all its descendants. Leaf nodes contain a small block of points (≤ 10 by default in Rhobots).</p>
+<p>The key property: for two tree nodes <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span>, the <strong>Euclidean lower bound</strong> on any pair <span class="math inline">\((i \in Q,\; j \in R)\)</span> is:</p>
+<p><span class="math display">\[\text{eucl\_lb}(Q, R) = \max\bigl(0,\; \|c_Q - c_R\| - r_Q - r_R\bigr)\]</span></p>
+<p>where <span class="math inline">\(c, r\)</span> are centroid and radius. If the balls overlap, <span class="math inline">\(\text{eucl\_lb} = 0\)</span> — no pruning from geometry alone.</p>
+<p>The MRD lower bound additionally uses the minimum core distance in each subtree:</p>
+<p><span class="math display">\[\text{mrd\_lb}(Q, R) = \max\bigl(\min\_\text{core}(Q),\; \min\_\text{core}(R),\; \text{eucl\_lb}(Q, R)\bigr)\]</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Three groups of points to illustrate pruning scenarios</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Q1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">1</span>, <span class="fl">0.3</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>R1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">6</span>, <span class="dv">1</span>, <span class="fl">0.3</span>))   <span class="co"># overlapping balls</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Q2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="fl">0.2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="fl">0.2</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="dv">3</span>, <span class="fl">0.2</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="fl">0.2</span>))     <span class="co"># well-separated</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Q3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="dv">2</span>, <span class="fl">0.25</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="dv">2</span>, <span class="fl">0.25</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>R3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="dv">2</span>, <span class="fl">0.25</span>), <span class="fu">rnorm</span>(<span class="dv">5</span>,  <span class="fl">2.8</span>, <span class="fl">0.2</span>))  <span class="co"># same component (overlap)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ball_centre <span class="ot">&lt;-</span> <span class="cf">function</span>(X) <span class="fu">colMeans</span>(X)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ball_radius <span class="ot">&lt;-</span> <span class="cf">function</span>(X) {</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  c <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(<span class="fu">sqrt</span>(<span class="fu">rowSums</span>(<span class="fu">sweep</span>(X, <span class="dv">2</span>, c)<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>draw_ball <span class="ot">&lt;-</span> <span class="cf">function</span>(cx, cy, r, colour, <span class="at">label=</span><span class="cn">NULL</span>, <span class="at">label_adj=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) {</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  th <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out=</span><span class="dv">100</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="at">data=</span><span class="fu">data.frame</span>(<span class="at">x=</span>cx<span class="sc">+</span>r<span class="sc">*</span><span class="fu">cos</span>(th), <span class="at">y=</span>cy<span class="sc">+</span>r<span class="sc">*</span><span class="fu">sin</span>(th)),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">colour=</span>colour, <span class="at">linewidth=</span><span class="dv">1</span>, <span class="at">linetype=</span><span class="st">"dashed"</span>),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(label)) <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span>cx<span class="sc">+</span>label_adj[<span class="dv">1</span>]<span class="sc">*</span>r,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y=</span>cy<span class="sc">+</span>label_adj[<span class="dv">2</span>]<span class="sc">*</span>r<span class="fl">+0.15</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">label=</span>label, <span class="at">colour=</span>colour, <span class="at">fontface=</span><span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">4</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>cQ1<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(Q1); rQ1<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(Q1)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>cR1<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(R1); rR1<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(R1)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>cQ2<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(Q2); rQ2<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(Q2)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>cR2<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(R2); rR2<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(R2)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>cQ3<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(Q3); rQ3<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(Q3)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>cR3<span class="ot">&lt;-</span><span class="fu">ball_centre</span>(R3); rR3<span class="ot">&lt;-</span><span class="fu">ball_radius</span>(R3)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>all_pts <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>Q1[,<span class="dv">1</span>],<span class="at">y=</span>Q1[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q1: must recurse"</span>),</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>R1[,<span class="dv">1</span>],<span class="at">y=</span>R1[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q1: must recurse"</span>),</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>Q2[,<span class="dv">1</span>],<span class="at">y=</span>Q2[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q2: pruned"</span>),</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>R2[,<span class="dv">1</span>],<span class="at">y=</span>R2[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q2: pruned"</span>),</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>Q3[,<span class="dv">1</span>],<span class="at">y=</span>Q3[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q3: same component"</span>),</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">x=</span>R3[,<span class="dv">1</span>],<span class="at">y=</span>R3[,<span class="dv">2</span>],<span class="at">g=</span><span class="st">"Q3: same component"</span>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>all_pts, <span class="fu">aes</span>(x,y,<span class="at">colour=</span>g), <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">alpha=</span><span class="fl">0.85</span>) <span class="sc">+</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cQ1[<span class="dv">1</span>],cQ1[<span class="dv">2</span>],rQ1,<span class="st">"#B2182B"</span>,<span class="st">"Q₁"</span>,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cR1[<span class="dv">1</span>],cR1[<span class="dv">2</span>],rR1,<span class="st">"#B2182B"</span>,<span class="st">"R₁"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cQ2[<span class="dv">1</span>],cQ2[<span class="dv">2</span>],rQ2,<span class="st">"#1B7837"</span>,<span class="st">"Q₂"</span>,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cR2[<span class="dv">1</span>],cR2[<span class="dv">2</span>],rR2,<span class="st">"#1B7837"</span>,<span class="st">"R₂"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cQ3[<span class="dv">1</span>],cQ3[<span class="dv">2</span>],rQ3,<span class="st">"#E08214"</span>,<span class="st">"Q₃"</span>,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_ball</span>(cR3[<span class="dv">1</span>],cR3[<span class="dv">2</span>],rR3,<span class="st">"#E08214"</span>,<span class="st">"R₃"</span>,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">"Q1: must recurse"</span><span class="ot">=</span><span class="st">"#B2182B"</span>,</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Q2: pruned"</span><span class="ot">=</span><span class="st">"#1B7837"</span>,</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Q3: same component"</span><span class="ot">=</span><span class="st">"#E08214"</span>),</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">name=</span><span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">y=</span><span class="fl">2.1</span>,<span class="at">label=</span><span class="st">"Overlapping — recurse"</span>,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"#B2182B"</span>,<span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="dv">0</span>,<span class="at">y=</span><span class="sc">-</span><span class="fl">2.8</span>,<span class="at">label=</span><span class="st">"Far apart + current best &lt; mrd_lb — prune"</span>,</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"#1B7837"</span>,<span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>,<span class="at">x=</span><span class="dv">2</span>,<span class="at">y=</span><span class="fl">3.5</span>,<span class="at">label=</span><span class="st">"Same component — prune trivially"</span>,</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"#E08214"</span>,<span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle=</span><span class="st">"Dual-tree Borůvka recurses only when pruning cannot rule out improvement"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/balltree-prune-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Dual-tree pruning. Red pair (Q₁, R₁): the balls overlap and mrd_lb is below the current best — must recurse. Green pair (Q₂, R₂): balls are well-separated; mrd_lb already exceeds every component’s current best edge — entire pair pruned. Orange pair (Q₃, R₃): same-component — trivially pruned.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-pruning-condition" class="level3">
+<h3 class="anchored" data-anchor-id="the-pruning-condition">7.2 The pruning condition</h3>
+<p>At every recursive call on subtree pair <span class="math inline">\((Q, R)\)</span>, the algorithm checks:</p>
+<p><span class="math display">\[\text{mrd\_lb}(Q, R) \;\geq\; \max\bigl(\text{best}[Q],\; \text{best}[R]\bigr)\]</span></p>
+<p>where <span class="math inline">\(\text{best}[\cdot]\)</span> is the maximum current best outgoing edge weight across all components in that subtree.</p>
+<p>If this holds, even the cheapest possible MRD edge between <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> cannot improve any component in either subtree — the entire pair is skipped.</p>
+<p>If it fails, the algorithm recurses into children, splitting the larger subtree, until leaf nodes are reached and actual point pairs are evaluated.</p>
+</section>
+<section id="the-warm-up" class="level3">
+<h3 class="anchored" data-anchor-id="the-warm-up">7.3 The warm-up</h3>
+<p>Before the first round, <span class="math inline">\(\text{best}[\text{every node}] = \infty\)</span> — no pruning is possible and the first traversal degenerates to <span class="math inline">\(O(n^2)\)</span> leaf-pair work.</p>
+<p>Rhobots avoids this by <strong>reusing the kNN results from the core-distance pass</strong> as a warm-up. After the core-distance computation each point already knows its <span class="math inline">\(k = \text{min\_pts}+1\)</span> nearest neighbours and their MRD values. These seed finite <span class="math inline">\(\text{best}\)</span> values before Round 1, enabling tree pruning from the very first traversal.</p>
+<hr>
+</section>
+</section>
+<section id="from-mst-to-clusters-true-split-vs-noise-fallout" class="level2">
+<h2 class="anchored" data-anchor-id="from-mst-to-clusters-true-split-vs-noise-fallout">8 From MST to Clusters: TRUE SPLIT vs Noise Fallout</h2>
+<p>Once the MST is complete, HDBSCAN processes its edges in ascending MRD order (root-to-leaves), tracking two events at each merge:</p>
+<p><strong>TRUE SPLIT</strong> — both sides of the merge have <span class="math inline">\(\geq \text{min\_pts}\)</span> members. A new cluster pair is born; both children are tracked.</p>
+<p><strong>Noise fallout</strong> — one side is too small (<span class="math inline">\(&lt; \text{min\_pts}\)</span>). The small side’s points fall off as noise at this <span class="math inline">\(\lambda\)</span> level; the cluster continues through the large side unchanged.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># MST with clear splits (two well-separated blobs)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>g1_s <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">8</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">8</span>, <span class="dv">0</span>, <span class="fl">0.3</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>g2_s <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(<span class="dv">7</span>,  <span class="dv">2</span>, <span class="fl">0.3</span>), <span class="fu">rnorm</span>(<span class="dv">7</span>, <span class="dv">0</span>, <span class="fl">0.3</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>X_s  <span class="ot">&lt;-</span> <span class="fu">rbind</span>(g1_s, g2_s)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>D_s  <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_s))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>mst_s <span class="ot">&lt;-</span> <span class="fu">prim_mst</span>(D_s)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># "Spine" MST: points arranged in a line, each merge adds 1 point</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>X_sp <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out=</span><span class="dv">15</span>), <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="dv">0</span>, <span class="fl">0.05</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>D_sp <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_sp))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>mst_sp <span class="ot">&lt;-</span> <span class="fu">prim_mst</span>(D_sp)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>draw_mst <span class="ot">&lt;-</span> <span class="cf">function</span>(X, mst_obj, title_txt, subtitle_txt) {</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>edges; w <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>w</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  pts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X[,<span class="dv">1</span>], <span class="at">y=</span>X[,<span class="dv">2</span>])</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  segs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x0=</span>X[e[,<span class="dv">1</span>],<span class="dv">1</span>], <span class="at">y0=</span>X[e[,<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">x1=</span>X[e[,<span class="dv">2</span>],<span class="dv">1</span>], <span class="at">y1=</span>X[e[,<span class="dv">2</span>],<span class="dv">2</span>], <span class="at">w=</span>w)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">data=</span>segs, <span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1,<span class="at">colour=</span>w),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">linewidth=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>pts, <span class="fu">aes</span>(x,y), <span class="at">size=</span><span class="dv">4</span>, <span class="at">colour=</span><span class="st">"grey20"</span>) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradient</span>(<span class="at">low=</span><span class="st">"#4292C6"</span>, <span class="at">high=</span><span class="st">"#FC4E2A"</span>, <span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title=</span>title_txt, <span class="at">subtitle=</span>subtitle_txt, <span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>p_split <span class="ot">&lt;-</span> <span class="fu">draw_mst</span>(X_s, mst_s,</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TRUE SPLIT present"</span>,</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Both sides of the central cut have ≥ 5 points → two real clusters"</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>p_spine <span class="ot">&lt;-</span> <span class="fu">draw_mst</span>(X_sp, mst_sp,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Spine MST — no TRUE SPLIT"</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Each merge adds 1 point &lt; min_pts → all points fall off as noise; 1 root cluster"</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_split, p_spine, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/true-split-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>How the MST structure determines the condensed tree. Left: an MST with a clear TRUE SPLIT (both sides ≥ min_pts=5 at the cut). Right: a spine-shaped MST where every merge has one side &lt; min_pts — no TRUE SPLIT ever occurs, so the condensed tree collapses to a single root cluster.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Why this matters.</strong> A spine-shaped MST produces a condensed tree with no TRUE SPLIT nodes. The root cluster is a <strong>leaf</strong> in the condensed tree (no children), so EOM always selects it as the single cluster — regardless of the <code>allow_single_cluster</code> setting.</p>
+<p>The structural shape of the MST is therefore the primary determinant of the number of clusters HDBSCAN returns. This is why different MST algorithms on the same data can give radically different cluster counts.</p>
+<hr>
+</section>
+<section id="prims-vs-borůvka-when-they-diverge" class="level2">
+<h2 class="anchored" data-anchor-id="prims-vs-borůvka-when-they-diverge">9 Prim’s vs Borůvka: When They Diverge</h2>
+<p>On a complete graph with all distinct edge weights, every MST algorithm finds the same unique MST. The divergence appears in two scenarios:</p>
+<p><strong>Scenario 1 — Tied edge weights.</strong> If many pairs have exactly the same MRD (common on diffuse UMAP embeddings where <span class="math inline">\(d_{\text{mrd}}(i,j) \approx \max(\text{core}(i), \text{core}(j))\)</span> for all nearby pairs), the MST is not unique. Prim’s and Borůvka choose from the tied edges in different orders and build structurally different spanning trees.</p>
+<p><strong>Scenario 2 — Approximate search.</strong> A kNN-limited Borůvka (the <code>"adaptive"</code> and <code>"fixed"</code> modes) may not find the globally cheapest edge from a component when that edge goes beyond the <span class="math inline">\(k\)</span> nearest Euclidean neighbours. The dual-tree modes (BallTree, KDTree) avoid this by searching all pairs with pruning, not just kNN pairs.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">77</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n_diff <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>X_diff <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n_diff <span class="sc">*</span> <span class="dv">2</span>), n_diff, <span class="dv">2</span>)   <span class="co"># pure noise: diffuse, no structure</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>D_diff <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(X_diff))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>MIN_C  <span class="ot">&lt;-</span> <span class="dv">4</span>L</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>core_d <span class="ot">&lt;-</span> <span class="fu">apply</span>(D_diff, <span class="dv">1</span>, <span class="cf">function</span>(r) <span class="fu">sort</span>(r)[MIN_C <span class="sc">+</span> <span class="dv">1</span>])</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>MRD    <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, n_diff, n_diff)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(n_diff))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n_diff))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    MRD[i,j] <span class="ot">&lt;-</span> <span class="fu">max</span>(core_d[i], core_d[j], D_diff[i,j])</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Prim's on full MRD</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>mst_prim <span class="ot">&lt;-</span> <span class="fu">prim_mst</span>(MRD)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Borůvka on full MRD (simulation)</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>boruvka_mst_full <span class="ot">&lt;-</span> <span class="cf">function</span>(W) {</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  n   <span class="ot">&lt;-</span> <span class="fu">nrow</span>(W); par <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(n); sz <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>L, n)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  find <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="cf">while</span> (par[x]<span class="sc">!=</span>x) { par[x]<span class="ot">&lt;&lt;-</span>par[par[x]]; x<span class="ot">&lt;-</span>par[x] }; x }</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  unite <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b) {</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    ra<span class="ot">&lt;-</span><span class="fu">find</span>(a); rb<span class="ot">&lt;-</span><span class="fu">find</span>(b); <span class="cf">if</span>(ra<span class="sc">==</span>rb) <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(sz[ra]<span class="sc">&lt;</span>sz[rb]) { tmp<span class="ot">&lt;-</span>ra; ra<span class="ot">&lt;-</span>rb; rb<span class="ot">&lt;-</span>tmp }</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    par[rb]<span class="ot">&lt;&lt;-</span>ra; sz[ra]<span class="ot">&lt;&lt;-</span>sz[ra]<span class="sc">+</span>sz[rb]; <span class="cn">TRUE</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  edges <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>L,<span class="dv">0</span>,<span class="dv">2</span>); ws <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">0</span>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">repeat</span> {</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">unique</span>(<span class="fu">sapply</span>(<span class="fu">seq_len</span>(n),find)))<span class="sc">==</span><span class="dv">1</span>) <span class="cf">break</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    bw<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">Inf</span>,n); bu<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>L,n); bv<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="sc">-</span><span class="dv">1</span>L,n)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_len</span>(n)) { ci<span class="ot">&lt;-</span><span class="fu">find</span>(i)</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(j <span class="cf">in</span> <span class="fu">seq_len</span>(n)) { cj<span class="ot">&lt;-</span><span class="fu">find</span>(j); <span class="cf">if</span>(ci<span class="sc">==</span>cj) <span class="cf">next</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(W[i,j]<span class="sc">&lt;</span>bw[ci]){bw[ci]<span class="ot">&lt;-</span>W[i,j];bu[ci]<span class="ot">&lt;-</span>i;bv[ci]<span class="ot">&lt;-</span>j} } }</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(r <span class="cf">in</span> <span class="fu">seq_len</span>(n)) { <span class="cf">if</span>(bu[r]<span class="sc">&lt;</span><span class="dv">0</span>) <span class="cf">next</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="fu">unite</span>(bu[r],bv[r])) { edges<span class="ot">&lt;-</span><span class="fu">rbind</span>(edges,<span class="fu">c</span>(bu[r],bv[r])); ws<span class="ot">&lt;-</span><span class="fu">c</span>(ws,bw[r]) } }</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">edges=</span>edges, <span class="at">w=</span>ws)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>mst_bor <span class="ot">&lt;-</span> <span class="fu">boruvka_mst_full</span>(MRD)</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Count TRUE SPLITS (both sides ≥ min_pts)</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>count_true_splits <span class="ot">&lt;-</span> <span class="cf">function</span>(mst_obj, n, min_c) {</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>edges; w <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>w</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  ord <span class="ot">&lt;-</span> <span class="fu">order</span>(w)</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> e[ord,,drop<span class="ot">=</span><span class="cn">FALSE</span>]; w <span class="ot">&lt;-</span> w[ord]</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  comp <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(n); sz <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>L,n)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  find <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="cf">while</span>(comp[x]<span class="sc">!=</span>x){comp[x]<span class="ot">&lt;&lt;-</span>comp[comp[x]];x<span class="ot">&lt;-</span>comp[x]};x }</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  splits <span class="ot">&lt;-</span> <span class="dv">0</span>L</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(w)) {</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    ra<span class="ot">&lt;-</span><span class="fu">find</span>(e[i,<span class="dv">1</span>]); rb<span class="ot">&lt;-</span><span class="fu">find</span>(e[i,<span class="dv">2</span>])</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    sa<span class="ot">&lt;-</span>sz[ra]; sb<span class="ot">&lt;-</span>sz[rb]</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(sa<span class="sc">&gt;=</span>min_c <span class="sc">&amp;&amp;</span> sb<span class="sc">&gt;=</span>min_c) splits <span class="ot">&lt;-</span> splits<span class="sc">+</span><span class="dv">1</span>L</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># merge</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(sz[ra]<span class="sc">&gt;=</span>sz[rb]){comp[rb]<span class="ot">&lt;-</span>ra;sz[ra]<span class="ot">&lt;-</span>sz[ra]<span class="sc">+</span>sz[rb]}</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>{comp[ra]<span class="ot">&lt;-</span>rb;sz[rb]<span class="ot">&lt;-</span>sz[rb]<span class="sc">+</span>sz[ra]}</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  splits</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>sp_prim <span class="ot">&lt;-</span> <span class="fu">count_true_splits</span>(mst_prim, n_diff, MIN_C)</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>sp_bor  <span class="ot">&lt;-</span> <span class="fu">count_true_splits</span>(mst_bor,  n_diff, MIN_C)</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>draw_mst2 <span class="ot">&lt;-</span> <span class="cf">function</span>(X, mst_obj, title_txt) {</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>edges; w <span class="ot">&lt;-</span> mst_obj<span class="sc">$</span>w</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>  pts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>X[,<span class="dv">1</span>],<span class="at">y=</span>X[,<span class="dv">2</span>])</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>  segs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x0=</span>X[e[,<span class="dv">1</span>],<span class="dv">1</span>],<span class="at">y0=</span>X[e[,<span class="dv">1</span>],<span class="dv">2</span>],</span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>                     <span class="at">x1=</span>X[e[,<span class="dv">2</span>],<span class="dv">1</span>],<span class="at">y1=</span>X[e[,<span class="dv">2</span>],<span class="dv">2</span>],<span class="at">w=</span>w)</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">data=</span>segs,<span class="fu">aes</span>(<span class="at">x=</span>x0,<span class="at">y=</span>y0,<span class="at">xend=</span>x1,<span class="at">yend=</span>y1,<span class="at">colour=</span>w),<span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>pts,<span class="fu">aes</span>(x,y),<span class="at">size=</span><span class="dv">3</span>,<span class="at">colour=</span><span class="st">"grey30"</span>) <span class="sc">+</span></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradient</span>(<span class="at">low=</span><span class="st">"#4292C6"</span>,<span class="at">high=</span><span class="st">"#FC4E2A"</span>,<span class="at">guide=</span><span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title=</span>title_txt, <span class="at">x=</span><span class="cn">NULL</span>, <span class="at">y=</span><span class="cn">NULL</span>)</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>p_p <span class="ot">&lt;-</span> <span class="fu">draw_mst2</span>(X_diff, mst_prim,</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"Prim's: %d TRUE SPLITS (→ up to %d clusters)"</span>, sp_prim, sp_prim<span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>p_b <span class="ot">&lt;-</span> <span class="fu">draw_mst2</span>(X_diff, mst_bor,</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"Borůvka: %d TRUE SPLITS (→ up to %d clusters)"</span>, sp_bor, sp_bor<span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_p, p_b, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/prims-vs-boruvka-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Prim’s vs Borůvka MSTs on a diffuse dataset where many MRD values are nearly equal. Both are valid spanning trees — same total weight — but their branching structure differs. Prim’s tree (left) has more balanced splits; Borůvka’s (right) tends toward a ‘greedy local’ structure. The resulting condensed trees can produce very different cluster counts.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Both MSTs are valid — but structurally different.</strong></p>
+<p>On diffuse data where many MRD values are close to each other, the tie-breaking order (determined by which algorithm sees pairs first) produces trees with very different numbers of TRUE SPLIT nodes.</p>
+<p>This is the root cause of cluster-count differences between Rhobots’ Borůvka and Python’s Prim’s implementation on sentiment/emotion datasets: both find a minimum spanning tree, but one has more balanced branches (more TRUE SPLITS, more clusters) than the other.</p>
+<p>The <code>allow_single_cluster = FALSE</code> parameter (default since Rhobots v0.1.7) mitigates this when the condensed tree <em>has</em> children but EOM would wrongly select only the root. It cannot help when the condensed tree genuinely has no TRUE SPLIT nodes.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="allow_single_cluster-false" class="level2">
+<h2 class="anchored" data-anchor-id="allow_single_cluster-false">10 <code>allow_single_cluster = FALSE</code></h2>
+<p>Before v0.1.7, Rhobots could return a single cluster in two situations:</p>
+<ol type="1">
+<li><p><strong>Genuinely unimodal data</strong> — the condensed tree has no children at the root. One cluster is the correct answer.</p></li>
+<li><p><strong>EOM selecting the root</strong> — the condensed tree <em>has</em> children, but the root cluster’s stability score exceeds the sum of its children’s stabilities. EOM picks the root, ignoring sub-structure that really is present.</p></li>
+</ol>
+<p>The <code>allow_single_cluster = FALSE</code> option (matching Python <code>hdbscan</code>’s default) handles case 2: if EOM would select only the root and the root has children, the selection restarts from the root’s children.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Schematic illustration — base R</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Left: EOM selects root</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.new</span>(); <span class="fu">plot.window</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Vanilla EOM → 1 cluster"</span>, <span class="at">cex.main=</span><span class="fl">0.95</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"#2166AC"</span>)          <span class="co"># root</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">"grey60"</span>); <span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">"grey60"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="fl">4.4</span>,<span class="fl">1.1</span>,<span class="fl">5.6</span>,<span class="fl">3.9</span>, <span class="at">col=</span><span class="st">"#2166AC40"</span>, <span class="at">border=</span><span class="cn">NA</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="fl">1.4</span>,<span class="fl">4.1</span>,<span class="fl">2.6</span>,<span class="fl">6.9</span>, <span class="at">col=</span><span class="st">"grey80"</span>, <span class="at">border=</span><span class="cn">NA</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="fl">7.4</span>,<span class="fl">4.1</span>,<span class="fl">8.6</span>,<span class="fl">6.9</span>, <span class="at">col=</span><span class="st">"grey80"</span>, <span class="at">border=</span><span class="cn">NA</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,<span class="fl">0.5</span>,<span class="st">"ROOT selected</span><span class="sc">\n</span><span class="st">(stability = 5.2)"</span>,<span class="at">col=</span><span class="st">"#2166AC"</span>,<span class="at">cex=</span><span class="fl">0.75</span>,<span class="at">font=</span><span class="dv">2</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">2</span>,<span class="fl">7.5</span>,<span class="st">"C1 (stab=1.1)"</span>,<span class="at">col=</span><span class="st">"grey40"</span>,<span class="at">cex=</span><span class="fl">0.65</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">8</span>,<span class="fl">7.5</span>,<span class="st">"C2 (stab=0.8)"</span>,<span class="at">col=</span><span class="st">"grey40"</span>,<span class="at">cex=</span><span class="fl">0.65</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,<span class="fl">4.5</span>,<span class="st">"Children sum = 1.9 &lt; Root 5.2"</span>,<span class="at">col=</span><span class="st">"grey40"</span>,<span class="at">cex=</span><span class="fl">0.65</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Right: allow_single_cluster=FALSE overrides root</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.new</span>(); <span class="fu">plot.window</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>))</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"allow_single_cluster=FALSE → 2 clusters"</span>, <span class="at">cex.main=</span><span class="fl">0.95</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">3</span>,<span class="at">col=</span><span class="st">"grey70"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">"#1B7837"</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">col=</span><span class="st">"#B2182B"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>); <span class="fu">segments</span>(<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="fl">1.4</span>,<span class="fl">4.1</span>,<span class="fl">2.6</span>,<span class="fl">6.9</span>, <span class="at">col=</span><span class="st">"#1B783730"</span>, <span class="at">border=</span><span class="cn">NA</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rect</span>(<span class="fl">7.4</span>,<span class="fl">4.1</span>,<span class="fl">8.6</span>,<span class="fl">6.9</span>, <span class="at">col=</span><span class="st">"#B2182B30"</span>, <span class="at">border=</span><span class="cn">NA</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,<span class="fl">0.5</span>,<span class="st">"ROOT overridden</span><span class="sc">\n</span><span class="st">(children activated)"</span>,<span class="at">col=</span><span class="st">"grey50"</span>,<span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">2</span>,<span class="fl">7.5</span>,<span class="st">"C1 selected"</span>,<span class="at">col=</span><span class="st">"#1B7837"</span>,<span class="at">cex=</span><span class="fl">0.65</span>,<span class="at">font=</span><span class="dv">2</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">8</span>,<span class="fl">7.5</span>,<span class="st">"C2 selected"</span>,<span class="at">col=</span><span class="st">"#B2182B"</span>,<span class="at">cex=</span><span class="fl">0.65</span>,<span class="at">font=</span><span class="dv">2</span>)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>,<span class="fl">4.5</span>,<span class="st">"Children C1 + C2 now selected"</span>,<span class="at">col=</span><span class="st">"grey40"</span>,<span class="at">cex=</span><span class="fl">0.65</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/asc-diagram-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>How allow_single_cluster=FALSE works. In the condensed tree (left), root stability (blue bar) exceeds the sum of children’s stabilities, so vanilla EOM returns 1 cluster. With allow_single_cluster=FALSE (right), the root is overridden and children are activated — returning 3 clusters.</figcaption>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="computational-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="computational-complexity">11 Computational Complexity</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Operation</th>
+<th>Complexity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Core distances</td>
+<td>kNN search × <span class="math inline">\(n\)</span></td>
+<td><span class="math inline">\(O(n \log n)\)</span></td>
+<td>Shared with Borůvka warm-up</td>
+</tr>
+<tr class="even">
+<td>Warm-up</td>
+<td>MRD for <span class="math inline">\(k\)</span> neighbours per point</td>
+<td><span class="math inline">\(O(nk)\)</span></td>
+<td>Seeds finite <code>best</code> values</td>
+</tr>
+<tr class="odd">
+<td>Borůvka round</td>
+<td>Dual-tree traversal</td>
+<td><span class="math inline">\(O(n \log n)\)</span>¹</td>
+<td>Pruning depends on dimension</td>
+</tr>
+<tr class="even">
+<td>Rounds total</td>
+<td><span class="math inline">\(\lceil \log_2 n \rceil\)</span> rounds</td>
+<td><span class="math inline">\(O(n \log^2 n)\)</span></td>
+<td>Empirically close to linear</td>
+</tr>
+<tr class="odd">
+<td>SL tree build</td>
+<td>Sort <span class="math inline">\(n-1\)</span> edges, Union-Find</td>
+<td><span class="math inline">\(O(n \log n)\)</span></td>
+<td>Negligible</td>
+</tr>
+<tr class="even">
+<td>Condensed tree</td>
+<td>One pass over SL tree</td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td>Negligible</td>
+</tr>
+<tr class="odd">
+<td>EOM extraction</td>
+<td>Bottom-up + top-down</td>
+<td><span class="math inline">\(O(n)\)</span></td>
+<td>Negligible</td>
+</tr>
+</tbody>
+</table>
+<p>¹ The <span class="math inline">\(O(n \log n)\)</span> per-round claim holds in low dimensions (2–3-D) where ball-tree pruning is nearly perfect. In 5-D UMAP space, pruning is partial: the algorithm is faster than <span class="math inline">\(O(n^2)\)</span> but not yet <span class="math inline">\(O(n \log n)\)</span>. Empirical scaling on 5-D data is roughly <span class="math inline">\(O(n^{1.4})\)</span> to <span class="math inline">\(O(n^{1.7})\)</span>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ns_c  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">600</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="dv">3500</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">sapply</span>(ns_c, <span class="cf">function</span>(n) {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> <span class="dv">5</span>), n, <span class="dv">5</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">system.time</span>(dbscan<span class="sc">::</span><span class="fu">hdbscan</span>(X, <span class="at">minPts =</span> <span class="dv">10</span>L))[[<span class="st">"elapsed"</span>]]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>timing_c <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n =</span> ns_c, <span class="at">t =</span> times)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>fit_lm   <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(t) <span class="sc">~</span> <span class="fu">log</span>(n), <span class="at">data =</span> timing_c)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>slope    <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">coef</span>(fit_lm)[<span class="dv">2</span>], <span class="dv">2</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>ref_n  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(ns_c), <span class="fu">max</span>(ns_c))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>ref_ln <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">n      =</span> ref_n,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">t_nlogn =</span> times[<span class="dv">1</span>] <span class="sc">*</span> (ref_n <span class="sc">/</span> ns_c[<span class="dv">1</span>]) <span class="sc">*</span> <span class="fu">log</span>(ref_n) <span class="sc">/</span> <span class="fu">log</span>(ns_c[<span class="dv">1</span>]),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">t_n2    =</span> times[<span class="dv">1</span>] <span class="sc">*</span> (ref_n <span class="sc">/</span> ns_c[<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(timing_c, <span class="fu">aes</span>(n, t)) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>ref_ln, <span class="fu">aes</span>(n, t_nlogn), <span class="at">colour=</span><span class="st">"grey60"</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype=</span><span class="st">"dashed"</span>, <span class="at">linewidth=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>ref_ln, <span class="fu">aes</span>(n, t_n2), <span class="at">colour=</span><span class="st">"grey40"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype=</span><span class="st">"dotted"</span>, <span class="at">linewidth=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>, <span class="at">colour=</span><span class="st">"#2166AC"</span>) <span class="sc">+</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">colour=</span><span class="st">"#2166AC"</span>, <span class="at">linewidth=</span><span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span><span class="dv">2800</span>, <span class="at">y=</span>ref_ln<span class="sc">$</span>t_nlogn[<span class="dv">2</span>]<span class="sc">*</span><span class="fl">1.5</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">"O(n log n)"</span>, <span class="at">colour=</span><span class="st">"grey50"</span>, <span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span><span class="dv">1200</span>, <span class="at">y=</span>ref_ln<span class="sc">$</span>t_n2[<span class="dv">2</span>]<span class="sc">*</span><span class="fl">0.3</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="st">"O(n²)"</span>, <span class="at">colour=</span><span class="st">"grey40"</span>, <span class="at">size=</span><span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x=</span><span class="dv">2500</span>, <span class="at">y=</span>times[<span class="dv">3</span>]<span class="sc">*</span><span class="fl">0.7</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">label=</span><span class="fu">paste0</span>(<span class="st">"Observed slope ≈ "</span>, slope),</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">colour=</span><span class="st">"#2166AC"</span>, <span class="at">size=</span><span class="dv">4</span>, <span class="at">fontface=</span><span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels=</span>scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels=</span><span class="cf">function</span>(x) <span class="fu">paste0</span>(x,<span class="st">"s"</span>)) <span class="sc">+</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Corpus size n"</span>, <span class="at">y=</span><span class="st">"Time (seconds, log scale)"</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"5-D UMAP-like data; min_pts=10; dbscan::hdbscan() (Prim's baseline)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="boruvka_explainer_files/figure-html/complexity-plot-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Empirical HDBSCAN runtime scaling on 5-D synthetic data. Log-log scale; slope ≈ 1.5 indicates sub-quadratic but super-linear growth in 5-D. The dashed reference lines show ideal O(n log n) and quadratic O(n²) scaling.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">12 Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MST</td>
+<td><span class="math inline">\(n-1\)</span> edges connecting all points with minimum total MRD weight</td>
+</tr>
+<tr class="even">
+<td>Borůvka round</td>
+<td>Every component simultaneously finds its cheapest outgoing edge</td>
+</tr>
+<tr class="odd">
+<td>Union-Find</td>
+<td>Tracks component membership in O(α(n)) per query</td>
+</tr>
+<tr class="even">
+<td>MRD lower bound</td>
+<td>Allows pruning subtree pairs that cannot improve any component</td>
+</tr>
+<tr class="odd">
+<td>Dual-tree pruning</td>
+<td>Ball-tree geometry eliminates O(log n) subtree pairs per point</td>
+</tr>
+<tr class="even">
+<td>Warm-up</td>
+<td>Reuses kNN from core-distance pass to enable pruning in Round 1</td>
+</tr>
+<tr class="odd">
+<td>TRUE SPLIT</td>
+<td>Merge where both sides ≥ min_pts → new cluster born in condensed tree</td>
+</tr>
+<tr class="even">
+<td>Noise fallout</td>
+<td>Merge where one side &lt; min_pts → small side exits as noise</td>
+</tr>
+<tr class="odd">
+<td>allow_single_cluster=FALSE</td>
+<td>If EOM picks only root but root has children, override to children</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Three things to remember about the MST and cluster counts:</strong></p>
+<ol type="1">
+<li><p><strong>The MST structure, not just its weight, determines cluster counts.</strong> A balanced binary MST has many TRUE SPLIT nodes → many clusters. A spine-shaped MST has none → always 1 cluster from EOM.</p></li>
+<li><p><strong>On diffuse data, many MRD values are nearly equal.</strong> The MST is not unique. Prim’s (greedy global) and Borůvka (parallel local) break ties differently, producing structurally different trees and different cluster counts.</p></li>
+<li><p><strong><code>allow_single_cluster=FALSE</code> fixes EOM over-aggregation but not MST shape.</strong> It helps when the condensed tree has children that EOM ignores. It cannot create TRUE SPLITS that the MST never produced.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/JPvdP\.github\.io\/NetworkIsLife\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
