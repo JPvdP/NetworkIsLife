@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>
-body { max-width: 960px; margin: auto; }
+#quarto-content > main.content { max-width: 1140px; margin: 0 auto; }
 /* ── Hero ─────────────────────────────────────────────── */
 .hero {
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -224,10 +224,9 @@ tr:hover td { background: #f8f9fa; }
 
 
 <link rel="stylesheet" href="styles2.css">
-<link rel="stylesheet" href="rhobots_site.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed fullcontent quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -290,7 +289,7 @@ tr:hover td { background: #f8f9fa; }
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -338,7 +337,7 @@ tr:hover td { background: #f8f9fa; }
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -348,7 +347,7 @@ tr:hover td { background: #f8f9fa; }
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -387,33 +386,49 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 </p>
 <div class="pipeline">
 <div class="pipe-step">
-<pre><code>&lt;span class="icon"&gt;📝&lt;/span&gt;
-&lt;div class="label"&gt;Embed&lt;/div&gt;
-&lt;div class="pkg"&gt;torch · safetensors&lt;/div&gt;</code></pre>
+<span class="icon">📝</span>
+<div class="label">
+Embed
+</div>
+<div class="pkg">
+torch · safetensors
+</div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<pre><code>&lt;span class="icon"&gt;📉&lt;/span&gt;
-&lt;div class="label"&gt;Reduce&lt;/div&gt;
-&lt;div class="pkg"&gt;uwot · UMAP&lt;/div&gt;</code></pre>
+<span class="icon">📉</span>
+<div class="label">
+Reduce
+</div>
+<div class="pkg">
+uwot · UMAP
+</div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<pre><code>&lt;span class="icon"&gt;🔵&lt;/span&gt;
-&lt;div class="label"&gt;Cluster&lt;/div&gt;
-&lt;div class="pkg"&gt;Rcpp · HDBSCAN&lt;/div&gt;</code></pre>
+<span class="icon">🔵</span>
+<div class="label">
+Cluster
+</div>
+<div class="pkg">
+Rcpp · HDBSCAN
+</div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<pre><code>&lt;span class="icon"&gt;🏷️&lt;/span&gt;
-&lt;div class="label"&gt;Represent&lt;/div&gt;
-&lt;div class="pkg"&gt;c-TF-IDF · POS&lt;/div&gt;</code></pre>
+<span class="icon">🏷️</span>
+<div class="label">
+Represent
+</div>
+<div class="pkg">
+c-TF-IDF · POS
+</div>
 </div>
 </div>
 <!-- ── RESOURCES ────────────────────────────────────────── -->
@@ -470,34 +485,40 @@ Core distances, mutual reachability distance, Borůvka MST, the condensed cluste
 </h2>
 <div class="feature-grid">
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🐍&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;No Python dependency.&lt;/strong&gt; The entire pipeline — embeddings, UMAP, HDBSCAN,
-c-TF-IDF — runs in R through &lt;code&gt;torch&lt;/code&gt;, &lt;code&gt;uwot&lt;/code&gt;, and &lt;code&gt;dbscan&lt;/code&gt;.&lt;/p&gt;</code></pre>
+<span class="fi">🐍</span>
+<p>
+<strong>No Python dependency.</strong> The entire pipeline — embeddings, UMAP, HDBSCAN, c-TF-IDF — runs in R through <code>torch</code>, <code>uwot</code>, and <code>dbscan</code>.
+</p>
 </div>
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🤗&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;Any Hugging Face model.&lt;/strong&gt; Load BERT, SciBERT, BGE, E5, SPECTER2, or any
-BERT-architecture model directly from the Hub with &lt;code&gt;load_hf_bert()&lt;/code&gt;.&lt;/p&gt;</code></pre>
+<span class="fi">🤗</span>
+<p>
+<strong>Any Hugging Face model.</strong> Load BERT, SciBERT, BGE, E5, SPECTER2, or any BERT-architecture model directly from the Hub with <code>load_hf_bert()</code>.
+</p>
 </div>
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🔢&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;Automatic topic count.&lt;/strong&gt; HDBSCAN finds the right number of topics for your
-data — no need to pre-specify &lt;em&gt;k&lt;/em&gt;.&lt;/p&gt;</code></pre>
+<span class="fi">🔢</span>
+<p>
+<strong>Automatic topic count.</strong> HDBSCAN finds the right number of topics for your data — no need to pre-specify <em>k</em>.
+</p>
 </div>
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🔍&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;Hyperparameter sweep.&lt;/strong&gt; &lt;code&gt;sweep_topics()&lt;/code&gt; evaluates many
-parameter combinations in one call, reusing cached embeddings.&lt;/p&gt;</code></pre>
+<span class="fi">🔍</span>
+<p>
+<strong>Hyperparameter sweep.</strong> <code>sweep_topics()</code> evaluates many parameter combinations in one call, reusing cached embeddings.
+</p>
 </div>
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🌿&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;Noise-aware.&lt;/strong&gt; Documents that don't fit any topic get label &lt;em&gt;−1&lt;/em&gt;
-rather than being forced into a cluster.&lt;/p&gt;</code></pre>
+<span class="fi">🌿</span>
+<p>
+<strong>Noise-aware.</strong> Documents that don’t fit any topic get label <em>−1</em> rather than being forced into a cluster.
+</p>
 </div>
 <div class="feature">
-<pre><code>&lt;span class="fi"&gt;🔌&lt;/span&gt;
-&lt;p&gt;&lt;strong&gt;Pluggable architecture.&lt;/strong&gt; Swap any stage — use PCA instead of UMAP,
-k-means instead of HDBSCAN, or a custom representation model.&lt;/p&gt;</code></pre>
+<span class="fi">🔌</span>
+<p>
+<strong>Pluggable architecture.</strong> Swap any stage — use PCA instead of UMAP, k-means instead of HDBSCAN, or a custom representation model.
+</p>
 </div>
 </div>
 <!-- ── COMPARISON TABLE ─────────────────────────────────── -->
@@ -570,13 +591,13 @@ k-means instead of HDBSCAN, or a custom representation model.&lt;/p&gt;</code></
 </h2>
 <p><strong>Step 1 — Install from CRAN:</strong></p>
 <div class="install-box">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Rhobots"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Rhobots"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Step 2 — Install the torch backend</strong> (once per machine, ~560 MB download):</p>
 <div class="install-box">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rhobots)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rhobots_install</span>()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart your R session when prompted</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rhobots)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rhobots_install</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart your R session when prompted</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -593,38 +614,38 @@ Note
 </div>
 <p><strong>Step 3 — Try the built-in demo:</strong></p>
 <div class="install-box">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rhobots_demo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rhobots_demo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The demo downloads four Gutenberg books, embeds them, sweeps parameters, fits a topic model, and produces an interactive visualisation — no data files needed.</p>
 <!-- ── QUICK START ────────────────────────────────────────── -->
 <h2 class="section-head anchored">
 <p>Quick Start</p>
 </h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rhobots)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load a sentence encoder</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">load_hf_bert</span>(<span class="st">"sentence-transformers/all-MiniLM-L6-v2"</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Embed your documents (result cached to disk)</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>emb <span class="ot">&lt;-</span> <span class="fu">embed_texts_cached</span>(enc, docs, <span class="at">cache_file =</span> <span class="st">"emb.rds"</span>, <span class="at">normalize =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Sweep parameters to find the best combination</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>sw  <span class="ot">&lt;-</span> <span class="fu">sweep_topics</span>(docs, emb,</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n_neighbors  =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n_components =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>),</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min_pts      =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>))</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sw)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fit with the best parameters</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_bertopic</span>(docs, emb,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">umap_n_neighbors  =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_neighbors,</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">umap_n_components =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_components,</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">hdbscan_min_pts   =</span> sw<span class="sc">$</span>best<span class="sc">$</span>min_pts)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Inspect topics</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize_barchart</span>(fit)</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize_topics</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rhobots)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load a sentence encoder</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">load_hf_bert</span>(<span class="st">"sentence-transformers/all-MiniLM-L6-v2"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Embed your documents (result cached to disk)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>emb <span class="ot">&lt;-</span> <span class="fu">embed_texts_cached</span>(enc, docs, <span class="at">cache_file =</span> <span class="st">"emb.rds"</span>, <span class="at">normalize =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Sweep parameters to find the best combination</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sw  <span class="ot">&lt;-</span> <span class="fu">sweep_topics</span>(docs, emb,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n_neighbors  =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n_components =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min_pts      =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sw)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fit with the best parameters</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">fit_bertopic</span>(docs, emb,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">umap_n_neighbors  =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_neighbors,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">umap_n_components =</span> sw<span class="sc">$</span>best<span class="sc">$</span>n_components,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">hdbscan_min_pts   =</span> sw<span class="sc">$</span>best<span class="sc">$</span>min_pts)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Inspect topics</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fit)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize_barchart</span>(fit)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize_topics</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <!-- ── CITATION ───────────────────────────────────────────── -->
 <h2 class="section-head anchored">
 <p>Citation</p>
