@@ -1,119 +1,39 @@
 /* ===================================
-   SECTION-SPECIFIC COLOR SCHEMES
+   SIDEBAR SECTION COLORS
+
+   Quarto only ever renders ONE section's sidebar per page (the
+   section the current page belongs to, per _quarto.yml), and that
+   section's first item is always its landing page. So instead of
+   matching individual filenames -- which breaks the moment a page
+   is renamed, added, or capitalized differently -- we detect which
+   section is showing by its landing page and color the whole
+   sidebar from that. Every page in a section is colored
+   automatically, including ones added later.
    =================================== */
 
-/* NetWorkIsLifeR Package - Dark Purple */
-.sidebar-item:has(a[href*="Package_"]) {
-  border-left: 4px solid #6c5ce7;
-  background: linear-gradient(90deg, rgba(108, 92, 231, 0.05) 0%, transparent 100%);
+nav#quarto-sidebar:has(li.sidebar-item:first-child a[href*="package.html"]) {
+  --sb-accent: #6c5ce7; /* NetworkIsLifeR package */
+}
+nav#quarto-sidebar:has(li.sidebar-item:first-child a[href*="rhobots_site.html"]) {
+  --sb-accent: #0f3460; /* Rhobots */
+}
+nav#quarto-sidebar:has(li.sidebar-item:first-child a[href*="network.html"]) {
+  --sb-accent: #00cec9; /* Network Analysis */
+}
+nav#quarto-sidebar:has(li.sidebar-item:first-child a[href*="dafs-dst.html"]) {
+  --sb-accent: #0984e3; /* DAFS Data Science Track (R) */
+}
+nav#quarto-sidebar:has(li.sidebar-item:first-child a[href*="dafs-esm.html"]) {
+  --sb-accent: #00b894; /* DAFS ESM Track (Python) */
 }
 
-.sidebar-item:has(a[href*="Package_"]) a {
-  color: #6c5ce7 !important;
-  font-weight: 500;
+nav#quarto-sidebar .sidebar-item {
+  border-left: 4px solid var(--sb-accent, transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--sb-accent, transparent) 8%, transparent) 0%, transparent 100%);
 }
 
-/* DAFS - Data Science Track (R) - Blue */
-.sidebar-item:has(a[href*="DAFS_prog"]),
-.sidebar-item:has(a[href*="DAFS_DST"]),
-.sidebar-item:has(a[href*="DAFS_exam"]),
-.sidebar-item:has(a[href*="DAFS_TopicModel_R"]),
-.sidebar-item:has(a[href*="DAFS_LexisUni"]):not(:has(a[href*="python"])) {
-  border-left: 4px solid #0984e3;
-  background: linear-gradient(90deg, rgba(9, 132, 227, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="DAFS_prog"]) a,
-.sidebar-item:has(a[href*="DAFS_DST"]) a,
-.sidebar-item:has(a[href*="DAFS_exam"]) a {
-  color: #0984e3 !important;
-  font-weight: 500;
-}
-
-/* DAFS - ESM track (Python) - Green */
-.sidebar-item:has(a[href*="DAFS_install_Python"]),
-.sidebar-item:has(a[href*="python"]) {
-  border-left: 4px solid #00b894;
-  background: linear-gradient(90deg, rgba(0, 184, 148, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="python"]) a {
-  color: #00b894 !important;
-  font-weight: 500;
-}
-
-/* DAFS - NLP - Orange */
-.sidebar-item:has(a[href*="DAFS_NPL"]),
-.sidebar-item:has(a[href*="DAFS_NLP"]),
-.sidebar-item:has(a[href*="DAFS_Bertopic"]),
-.sidebar-item:has(a[href*="Bertopic_metrics"]) {
-  border-left: 4px solid #e17055;
-  background: linear-gradient(90deg, rgba(225, 112, 85, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="DAFS_NLP"]) a,
-.sidebar-item:has(a[href*="DAFS_Bertopic"]) a {
-  color: #e17055 !important;
-  font-weight: 500;
-}
-
-/* Network Analysis - Teal */
-.sidebar-item:has(a[href*="Network_analysis"]),
-.sidebar-item:has(a[href*="Text_networks"]):not(:has(a[href*="feature"])) {
-  border-left: 4px solid #00cec9;
-  background: linear-gradient(90deg, rgba(0, 206, 201, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="Network_analysis"]) a {
-  color: #00cec9 !important;
-  font-weight: 500;
-}
-
-/* Intro to Programming - Red */
-.sidebar-item:has(a[href*="Intro_programming"]) {
-  border-left: 4px solid #d63031;
-  background: linear-gradient(90deg, rgba(214, 48, 49, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="Intro_programming"]) a {
-  color: #d63031 !important;
-  font-weight: 500;
-}
-
-/* Text Mining - Pink/Magenta */
-.sidebar-item:has(a[href*="feature_extraction"]),
-.sidebar-item:has(a[href*="Topic_modelling_lda"]),
-.sidebar-item:has(a[href*="NER.html"]) {
-  border-left: 4px solid #fd79a8;
-  background: linear-gradient(90deg, rgba(253, 121, 168, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="feature_extraction"]) a,
-.sidebar-item:has(a[href*="Topic_modelling_lda"]) a,
-.sidebar-item:has(a[href*="NER.html"]) a {
-  color: #fd79a8 !important;
-  font-weight: 500;
-}
-
-/* State of Data - Gold */
-.sidebar-item:has(a[href*="State_of_data"]) {
-  border-left: 4px solid #fdcb6e;
-  background: linear-gradient(90deg, rgba(253, 203, 110, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="State_of_data"]) a {
-  color: #d4930f !important;
-  font-weight: 500;
-}
-
-/* Topic Modelling Workshop - Indigo */
-.sidebar-item:has(a[href*="Topic_modelling_bert"]) {
-  border-left: 4px solid #a29bfe;
-  background: linear-gradient(90deg, rgba(162, 155, 254, 0.05) 0%, transparent 100%);
-}
-
-.sidebar-item:has(a[href*="Topic_modelling_bert"]) a {
-  color: #6c5ce7 !important;
+nav#quarto-sidebar .sidebar-item a {
+  color: var(--sb-accent, inherit) !important;
   font-weight: 500;
 }
 
