@@ -160,18 +160,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   margin: 0 0 2.5rem;
 }
 .card {
+  position: relative;
   border: 1px solid #dee2e6;
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
   transition: box-shadow 0.2s;
-  text-decoration: none !important;
   color: inherit;
   display: block;
 }
 .card:hover { box-shadow: 0 4px 18px rgba(15,52,96,0.15); }
+.card .stretched-link::after { content: ""; position: absolute; inset: 0; }
 .card .card-icon  { font-size: 2rem; margin-bottom: 0.6rem; }
 .card h4 { color: #0f3460; margin: 0 0 0.5rem; font-size: 1.05rem; }
+.card h4 a { color: inherit; text-decoration: none; }
 .card p  { font-size: 0.9rem; color: #495057; margin: 0; line-height: 1.55; }
 .card .tag {
   display: inline-block;
@@ -386,48 +388,48 @@ Rhobots implements the four-stage BERTopic pipeline as a set of modular, pluggab
 </p>
 <div class="pipeline">
 <div class="pipe-step">
-<span class="icon">📝</span>
+<p><span class="icon">📝</span></p>
 <div class="label">
-Embed
+<p>Embed</p>
 </div>
 <div class="pkg">
-torch · safetensors
+<p>torch · safetensors</p>
 </div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<span class="icon">📉</span>
+<p><span class="icon">📉</span></p>
 <div class="label">
-Reduce
+<p>Reduce</p>
 </div>
 <div class="pkg">
-uwot · UMAP
+<p>uwot · UMAP</p>
 </div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<span class="icon">🔵</span>
+<p><span class="icon">🔵</span></p>
 <div class="label">
-Cluster
+<p>Cluster</p>
 </div>
 <div class="pkg">
-Rcpp · HDBSCAN
+<p>Rcpp · HDBSCAN</p>
 </div>
 </div>
 <div class="pipe-arrow">
 <p>→</p>
 </div>
 <div class="pipe-step">
-<span class="icon">🏷️</span>
+<p><span class="icon">🏷️</span></p>
 <div class="label">
-Represent
+<p>Represent</p>
 </div>
 <div class="pkg">
-c-TF-IDF · POS
+<p>c-TF-IDF · POS</p>
 </div>
 </div>
 </div>
@@ -436,48 +438,48 @@ c-TF-IDF · POS
 <p>Resources</p>
 </h2>
 <div class="card-grid">
-<p><a class="card" href="tutorial.html"></a></p><a class="card" href="tutorial.html">
+<div class="card">
 <div class="tag">
-<p>Hands-on</p>
+Hands-on
 </div>
 <div class="card-icon">
-<p>🔬</p>
+🔬
 </div>
 <h4 class="anchored">
-Full Tutorial
+<a class="stretched-link" href="tutorial.html">Full Tutorial</a>
 </h4>
 <p>
 A complete walkthrough on 3,328 African research abstracts — from raw text to labelled topics, quality sweep, interactive visualisations, and LLM-generated topic names.
 </p>
-</a><p><a class="card" href="tutorial.html"></a></p>
-<p><a class="card" href="umap_explainer.html"></a></p><a class="card" href="umap_explainer.html">
+</div>
+<div class="card">
 <div class="tag">
-<p>How it works</p>
+How it works
 </div>
 <div class="card-icon">
-<p>📉</p>
+📉
 </div>
 <h4 class="anchored">
-How UMAP Works
+<a class="stretched-link" href="umap_explainer.html">How UMAP Works</a>
 </h4>
 <p>
 Step-by-step technical explainer with illustrations: the manifold hypothesis, fuzzy membership weights, SGD optimisation, and the effect of every parameter.
 </p>
-</a><p><a class="card" href="umap_explainer.html"></a></p>
-<p><a class="card" href="hdbscan_explainer.html"></a></p><a class="card" href="hdbscan_explainer.html">
+</div>
+<div class="card">
 <div class="tag">
-<p>How it works</p>
+How it works
 </div>
 <div class="card-icon">
-<p>🔵</p>
+🔵
 </div>
 <h4 class="anchored">
-How HDBSCAN Works
+<a class="stretched-link" href="hdbscan_explainer.html">How HDBSCAN Works</a>
 </h4>
 <p>
 Core distances, mutual reachability distance, Borůvka MST, the condensed cluster tree, EOM extraction, and what every parameter actually controls.
 </p>
-</a><p><a class="card" href="hdbscan_explainer.html"></a></p>
+</div>
 </div>
 <!-- ── WHY RHOBOTS ──────────────────────────────────────── -->
 <h2 class="section-head anchored">
@@ -485,37 +487,37 @@ Core distances, mutual reachability distance, Borůvka MST, the condensed cluste
 </h2>
 <div class="feature-grid">
 <div class="feature">
-<span class="fi">🐍</span>
+<p><span class="fi">🐍</span></p>
 <p>
 <strong>No Python dependency.</strong> The entire pipeline — embeddings, UMAP, HDBSCAN, c-TF-IDF — runs in R through <code>torch</code>, <code>uwot</code>, and <code>dbscan</code>.
 </p>
 </div>
 <div class="feature">
-<span class="fi">🤗</span>
+<p><span class="fi">🤗</span></p>
 <p>
 <strong>Any Hugging Face model.</strong> Load BERT, SciBERT, BGE, E5, SPECTER2, or any BERT-architecture model directly from the Hub with <code>load_hf_bert()</code>.
 </p>
 </div>
 <div class="feature">
-<span class="fi">🔢</span>
+<p><span class="fi">🔢</span></p>
 <p>
 <strong>Automatic topic count.</strong> HDBSCAN finds the right number of topics for your data — no need to pre-specify <em>k</em>.
 </p>
 </div>
 <div class="feature">
-<span class="fi">🔍</span>
+<p><span class="fi">🔍</span></p>
 <p>
 <strong>Hyperparameter sweep.</strong> <code>sweep_topics()</code> evaluates many parameter combinations in one call, reusing cached embeddings.
 </p>
 </div>
 <div class="feature">
-<span class="fi">🌿</span>
+<p><span class="fi">🌿</span></p>
 <p>
 <strong>Noise-aware.</strong> Documents that don’t fit any topic get label <em>−1</em> rather than being forced into a cluster.
 </p>
 </div>
 <div class="feature">
-<span class="fi">🔌</span>
+<p><span class="fi">🔌</span></p>
 <p>
 <strong>Pluggable architecture.</strong> Swap any stage — use PCA instead of UMAP, k-means instead of HDBSCAN, or a custom representation model.
 </p>
